@@ -34,4 +34,5 @@
 # others
 /.vs
 /FlightInspectionDesktopApp/obj/Debug
+/FlightInspectionDesktopApp/obj/Release
 
