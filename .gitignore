@@ -35,4 +35,5 @@
 /.vs
 /FlightInspectionDesktopApp/obj/Debug
 /FlightInspectionDesktopApp/obj/Release
-
+/FlightInspectionDesktopApp/bin/Debug
+/FlightInspectionDesktopApp/bin/Release
