@@ -31,7 +31,7 @@ namespace FlightInspectionDesktopApp
 
             // input from user
             int playingSpeed = 100;            
-            string csv_file = "C:\\Users\\user\\Documents\\University\\תשפא\\סמסטר ב\\תכנות מתקדם 2\\תרגילים\\Milestone1\\reg_flight.csv";
+            string csv_file = "C:\\Users\\noamb\\Downloads\\reg_flight.csv";
 
             // connection string
             int port = 5400;

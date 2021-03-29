@@ -35,5 +35,10 @@
 /.vs
 /FlightInspectionDesktopApp/obj/Debug
 /FlightInspectionDesktopApp/obj/Release
+<<<<<<< Updated upstream
 /FlightInspectionDesktopApp/bin/Debug
 /FlightInspectionDesktopApp/bin/Release
+=======
+
+/FlightInspectionDesktopApp/bin/Debug
+>>>>>>> Stashed changes
