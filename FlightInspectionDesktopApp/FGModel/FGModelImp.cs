@@ -46,7 +46,7 @@ namespace FlightInspectionDesktopApp.FGModel
             startInfo.FileName = PathFG;
             startInfo.WindowStyle = ProcessWindowStyle.Hidden;
             // Send the simulator settings as command arguments
-            startInfo.Arguments = "--telnet=socket,bi,10,127.0.0.1,5400,tcp --generic=socket,in,10,127.0.0.1,5400,tcp," + XMLFileName + " --fdm=null";
+            startInfo.Arguments = "--telnet=socket,in,10,127.0.0.1,5400,tcp --generic=socket,in,10,127.0.0.1,5400,tcp," + XMLFileName + " --telnet=socket,out,10,127.0.0.1,6400,tcp --generic=socket,out,10,127.0.0.1,6400,tcp," + XMLFileName + " --fdm=null";
             startInfo.RedirectStandardOutput = true;
             startInfo.CreateNoWindow = true;
             try
@@ -85,8 +85,8 @@ namespace FlightInspectionDesktopApp.FGModel
                     }
                     this.telnetClient.Write(currentLine);
 
-                    this.telnetClient.Write("get /controls/flight/aileron[0]");
-                    Aileron = float.Parse(telnetClient.Read());
+                    //this.telnetClient.Write("get /controls/flight/aileron[0]");
+                    //Aileron = float.Parse(telnetClient.Read());
                     // add all properties here...
 
                     // 10 Hz:

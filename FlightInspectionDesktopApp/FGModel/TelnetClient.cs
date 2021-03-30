@@ -28,6 +28,7 @@ namespace FlightInspectionDesktopApp
         NetworkStream netSocketRead;
 
 
+
         public void Connect(int port)
         {
             string hostname = "localhost";
@@ -45,6 +46,7 @@ namespace FlightInspectionDesktopApp
                 socketRead.Connect(ipeRead);
                 netSocketRead = new NetworkStream(socketRead);
                 reader = new StreamReader(netSocketRead);
+
             }
             // maybe indicate failure to the user?
             catch { }
@@ -58,15 +60,15 @@ namespace FlightInspectionDesktopApp
             netSocketWrite.Close();
             socketWrite.Close();
             reader.Close();
-            netSocketRead.Close();
-            socketRead.Close();
+            //add more
         }
 
         public string Read()
         {
-            string line = reader.ReadLine();
-            Console.WriteLine(line);
-            return line;
+            return "";
+            //string line = reader.Read().ToString();
+            //Console.WriteLine(line);
+            //return line;
         }
 
         public void Write(string command)
