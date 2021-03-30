@@ -27,12 +27,13 @@ namespace FlightInspectionDesktopApp
     /// </summary>
     public partial class MainWindow : Window
     {
+        FGViewModel vm;
         public MainWindow()
         {
             InitializeComponent();
-
-
-        }        
+            vm = new FGViewModel(new FGModel.FGModelImp(new TelnetClient()));
+            DataContext = vm;
+        }
         private void LoadFG_Click(object sender, RoutedEventArgs e)
         {
             // Asks the user to upload an exe file
@@ -109,63 +110,12 @@ namespace FlightInspectionDesktopApp
             {
                 ErrorXML.Visibility = Visibility.Hidden;
             }
+
+
+
             if (isValid)
             {
-                
-                // Create a new ProcessInfo
-                ProcessStartInfo startInfo = new ProcessStartInfo();
-                startInfo.UseShellExecute = false;
-                // Change working directory and choose to run the exe file
-                startInfo.WorkingDirectory = binFolder;
-                startInfo.FileName = PathFG.Text;
-                startInfo.WindowStyle = ProcessWindowStyle.Hidden;
-                // Send the simulator settings as command arguments
-                startInfo.Arguments = "--telnet=socket,in,10,127.0.0.1,5400,tcp --generic=socket,in,10,127.0.0.1,5400,tcp," +XMLFileName+ " --fdm=null";
-                startInfo.RedirectStandardOutput = true;
-                startInfo.CreateNoWindow = true;
-                try
-                {
-                    // Run the process by the ProcessInfo
-                    using (Process exeProcess = Process.Start(startInfo)) { }
-                }
-                catch
-                {
-                }
-
-                // Start the process with the info we specified.
-                // Call WaitForExit and then the using statement will close.
-                Thread.Sleep(60000);
-                // input from user
-                int playingSpeed = 100;
-
-                // connection string
-                int port = 5400;
-                string hostname = "localhost";
-
-                // Socket for FlightGear
-                IPHostEntry host = Dns.GetHostEntry(hostname);
-                IPEndPoint ipe = new IPEndPoint(host.AddressList[1], port);
-                using (Socket socket = new Socket(ipe.AddressFamily, SocketType.Stream, ProtocolType.Tcp))
-                {
-                    socket.Connect(ipe);
-                    using (NetworkStream net_socket = new NetworkStream(socket))
-                    {
-                        using (StreamWriter output = new StreamWriter(net_socket))
-                        {
-                            // Reading data from csv file            
-                            using (StreamReader src = new StreamReader(PathCSV.Text))
-                            {
-                                string currentLine;
-                                // currentLine will be null when the StreamReader reaches the end of file
-                                while ((currentLine = src.ReadLine()) != null)
-                                {
-                                    output.WriteLine(currentLine);
-                                    Thread.Sleep(playingSpeed);
-                                }
-                            }
-                        }
-                    }
-                }
+                vm.Run(binFolder, PathFG.Text, XMLFileName, PathCSV.Text);
             }
         }
         private void PathFG_TextChanged(object sender, TextChangedEventArgs e)

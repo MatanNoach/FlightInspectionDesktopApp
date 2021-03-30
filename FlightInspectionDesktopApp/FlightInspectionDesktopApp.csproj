@@ -63,6 +63,10 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="FGModel\FGModelImp.cs" />
+    <Compile Include="FGModel\IFGModel.cs" />
+    <Compile Include="FGModel\TelnetClient.cs" />
+    <Compile Include="FGViewModel\FGViewModel.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
