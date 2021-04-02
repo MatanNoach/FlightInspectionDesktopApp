@@ -2,7 +2,7 @@
 
 interface IFGModel : INotifyPropertyChanged
 {
-    void Connect(int port);
+    void Connect();
     void Disconnect();
     void Start(string PathCSV);
     void RunFG(string binFolder, string PathFG, string XMLFileName);

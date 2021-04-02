@@ -26,7 +26,7 @@ namespace FlightInspectionDesktopApp
             // Update the path in the TextBox
             if (openFile.ShowDialog() == true)
             {
-                PathFG.Text = System.IO.Path.GetFullPath(openFile.FileName);
+                PathFG.Text = Path.GetFullPath(openFile.FileName);
             }
         }
 
@@ -79,7 +79,7 @@ namespace FlightInspectionDesktopApp
             {
                 String binFolder = Directory.GetParent(PathFG.Text).ToString();
                 String actualXML = Directory.GetParent(PathXML.Text).ToString();
-                String XMLFileName = System.IO.Path.GetFileNameWithoutExtension(PathXML.Text);
+                String XMLFileName = Path.GetFileNameWithoutExtension(PathXML.Text);
                 String targetXML = Directory.GetParent(binFolder).ToString() + "\\data\\Protocol";
                 // Check if the XML file is in the right location
                 if (!actualXML.Equals(targetXML))
@@ -98,7 +98,7 @@ namespace FlightInspectionDesktopApp
 
 
                 if (isValid)
-                {                    
+                {
                     vm.Run(binFolder, PathFG.Text, XMLFileName, PathCSV.Text);
                 }
             }

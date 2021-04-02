@@ -7,75 +7,102 @@ namespace FlightInspectionDesktopApp
 {
     interface ITelnetClient
     {
-        void Connect(int port);
+        void Connect();
         void Write(string command);
         string Read();
         void Disconnect();
         void Send(byte[] get);
     }
 
+    /// <summary>
+    /// Implementation of a telnet client.
+    /// </summary>
     class TelnetClient : ITelnetClient
     {
-        StreamWriter output;
-        Socket socketWrite;
+        // Vars of writing flight data to FG
+        StreamWriter writer;
+        Socket socketData;
         NetworkStream netSocketWrite;
+        // Vars of sending telnet requests and reading the response
         StreamReader reader;
-        Socket socketRead;
+        Socket socketRequests;
         NetworkStream netSocketRead;
 
 
-
-        public void Connect(int port)
+        /// <summary>
+        /// Connects to FG with the designated ports.
+        /// </summary>
+        public void Connect()
         {
             string hostname = Properties.Settings.Default.hostName;
-            // Socket for FlightGear
             IPHostEntry host = Dns.GetHostEntry(hostname);
-            IPEndPoint ipe = new IPEndPoint(host.AddressList[1], port);
-            IPEndPoint ipeRead = new IPEndPoint(host.AddressList[1], Properties.Settings.Default.portTelnet);
+            IPEndPoint ipeGen = new IPEndPoint(host.AddressList[1], Properties.Settings.Default.portGeneric);
+            IPEndPoint ipeTelnet = new IPEndPoint(host.AddressList[1], Properties.Settings.Default.portTelnet);
             try
             {
-                socketWrite = new Socket(ipe.AddressFamily, SocketType.Stream, ProtocolType.Tcp);
-                socketWrite.Connect(ipe);
-                netSocketWrite = new NetworkStream(socketWrite);
-                output = new StreamWriter(netSocketWrite);
-                socketRead = new Socket(ipeRead.AddressFamily, SocketType.Stream, ProtocolType.Tcp);
-                while (!socketRead.Connected)
+                // create a socket for sending flight data to FG and connect to it
+                socketData = new Socket(ipeGen.AddressFamily, SocketType.Stream, ProtocolType.Tcp);
+                socketData.Connect(ipeGen);
+                // create a stream writer to write the flight data
+                netSocketWrite = new NetworkStream(socketData);
+                writer = new StreamWriter(netSocketWrite);
+                // create a socket for sending and receiving telnet requests and responses
+                socketRequests = new Socket(ipeTelnet.AddressFamily, SocketType.Stream, ProtocolType.Tcp);
+                // make sure that the telnet connection is estblished before continuing
+                do
                 {
-                    socketRead.Connect(ipeRead);
+                    socketRequests.Connect(ipeTelnet);
                 }
-                netSocketRead = new NetworkStream(socketRead);
+                while (!socketRequests.Connected);
+                // create a stream reader to read the telnet responses
+                netSocketRead = new NetworkStream(socketRequests);
                 reader = new StreamReader(netSocketRead);
             }
-            //maybe indicate failure to the user?
-            catch { }
+            catch (Exception e)
+            {
+                // indicate in case of a failure in connection
+                Console.WriteLine(e.Message);
+            }
         }
 
-
-        public void Send(byte[] get)
+        /// <summary>
+        /// Sends telnet requests to FG.
+        /// </summary>
+        /// <param name="getRequest">get request</param>
+        public void Send(byte[] getRequest)
         {
-            socketRead.Send(get);
+            socketRequests.Send(getRequest);
         }
 
+        /// <summary>
+        /// Closes all open connections.
+        /// </summary>
         public void Disconnect()
         {
-            output.Close();
+            writer.Close();
             netSocketWrite.Close();
-            socketWrite.Close();
+            socketData.Close();
+            socketRequests.Close();
+            netSocketRead.Close();
             reader.Close();
-            //add more
         }
 
+        /// <summary>
+        /// Reads telnet responses from FG.
+        /// </summary>
+        /// <returns>telnet response</returns>
         public string Read()
         {
-            //return "";
-            string line = reader.ReadLine();
-            Console.WriteLine(line);
-            return line;
+            return reader.ReadLine();
         }
 
-        public void Write(string command)
+        /// <summary>
+        /// Writes flight data to FG.
+        /// </summary>
+        /// <param name="data">line from CSV file</param>
+        public void Write(string data)
         {
-            output.WriteLine(command);
+            writer.WriteLine(data);
         }
 
     }
