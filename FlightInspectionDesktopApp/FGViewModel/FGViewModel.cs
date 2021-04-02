@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading;
 using System.ComponentModel;
 
 namespace FlightInspectionDesktopApp
@@ -34,10 +35,6 @@ namespace FlightInspectionDesktopApp
         public float VMAileron { get { return model.Aileron; } }
         public float VMElevator { get { return model.Elevator; } }
 
-
-
-
-
         public float VMRudder { get { return model.Rudder; } }
         public float VMThrottle { get { return model.Throttle; } }
         public float VMAltitude { get { return model.Altitude; } }
@@ -54,8 +51,6 @@ namespace FlightInspectionDesktopApp
             model.RunFG(binFolder, PathFG, XMLFileName);
             // for timing:
             Thread.Sleep(10000);
-            model.Connect(5400);
-            //Thread.Sleep(62000);
             model.Connect(Properties.Settings.Default.portGeneric);
             model.Start(PathCSV);
         }
