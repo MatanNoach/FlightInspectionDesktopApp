@@ -9,7 +9,12 @@ namespace FlightInspectionDesktopApp
     class DataModel
     {
         private Dictionary<string, List<double>> data;
-        public Dictionary<string, List<double>> Data { get; set; }
+        public Dictionary<string, List<double>> Data { 
+            get
+            {
+                return data;
+            }
+        }
 
         public DataModel(string csvPath, string xmlPath)
         {
