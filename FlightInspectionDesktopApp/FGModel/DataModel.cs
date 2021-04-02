@@ -9,14 +9,22 @@ namespace FlightInspectionDesktopApp
     class DataModel
     {
         private Dictionary<string, List<double>> data;
-        public Dictionary<string, List<double>> Data { 
+
+        private static DataModel dataModelInstance;
+        public static DataModel Instance
+        {
             get
             {
-                return data;
+                if (dataModelInstance == null)
+                {
+                    throw new Exception("DataModel was not created");
+                }
+                return dataModelInstance;
             }
         }
 
-        public DataModel(string csvPath, string xmlPath)
+        private DataModel() { }
+        private DataModel(string csvPath, string xmlPath)
         {
             data = new Dictionary<string, List<double>>();
 
@@ -24,7 +32,7 @@ namespace FlightInspectionDesktopApp
             List<string> xmlColumns = getXmlColumns(xmlPath);
 
             // initialize dictionary's keys
-            for (int i = 0; i <xmlColumns.Count; i++)
+            for (int i = 0; i < xmlColumns.Count; i++)
             {
                 data.Add(xmlColumns[i], new List<double>());
             }
@@ -32,7 +40,7 @@ namespace FlightInspectionDesktopApp
             // parse the data from the csv file
             using (StreamReader csvReader = new StreamReader(csvPath))
             {
-                char colSeparator = getVarSeparator(xmlPath);                
+                char colSeparator = getVarSeparator(xmlPath);
                 string currentLine;
                 string[] lineCols = { };
                 int index = 0;
@@ -50,6 +58,15 @@ namespace FlightInspectionDesktopApp
             }
         }
 
+        public static void CreateModel(string csvPath, string xmlPath)
+        {
+            if (dataModelInstance != null)
+            {
+                throw new Exception("DataModel is already created");
+            }
+            dataModelInstance = new DataModel(csvPath, xmlPath);
+        }
+
         /// <summary>
         /// this function reads the given xml file and retruns all the columns' names.
         /// </summary>
@@ -60,16 +77,16 @@ namespace FlightInspectionDesktopApp
         ///     the columns' names.
         /// </returns>
         private List<String> getXmlColumns(string xmlPath)
-        {            
+        {
             FileStream fs = new FileStream(xmlPath, FileMode.Open, FileAccess.Read);
-            XmlDocument xmlDoc = new XmlDocument();            
-            
+            XmlDocument xmlDoc = new XmlDocument();
+
             xmlDoc.Load(fs);
             // get all "chunk" tags from the given xml
             XmlNodeList xmlnode = xmlDoc.SelectNodes("//input//chunk");
 
             List<string> xmlCols = new List<string>();
-            
+
             XmlNodeList childNodes;
             string digit = string.Empty;
             string colName = string.Empty;
@@ -87,7 +104,7 @@ namespace FlightInspectionDesktopApp
                     if (childNodes[j].Name == "name")
                     {
                         colName = childNodes[j].InnerText;
-                    } 
+                    }
                     else
                     {
                         if (childNodes[j].Name == "node" && childNodes[j].InnerText.Any(char.IsDigit))
@@ -131,13 +148,18 @@ namespace FlightInspectionDesktopApp
             XmlDocument xmlDoc = new XmlDocument();
 
             xmlDoc.Load(fs);
-            XmlNodeList xmlNode = xmlDoc.SelectNodes("//input//var_separator");            
+            XmlNodeList xmlNode = xmlDoc.SelectNodes("//input//var_separator");
 
             if (xmlNode.Count > 0)
             {
                 return char.Parse(xmlNode[0].InnerText);
             }
             return Properties.Settings.Default.varSeparator;
+        }
+
+        internal double getValueByKeyAndTime(string key, int time)
+        {
+            return data[key][time];
         }
     }
 }

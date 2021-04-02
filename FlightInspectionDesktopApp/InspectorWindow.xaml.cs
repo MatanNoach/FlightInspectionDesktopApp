@@ -10,6 +10,9 @@ namespace FlightInspectionDesktopApp
         public InspectorWindow()
         {
             InitializeComponent();
+            string csvPath = ((MainWindow)Application.Current.MainWindow).PathCSV.Text;
+            string xmlPath = ((MainWindow)Application.Current.MainWindow).PathXML.Text;
+            DataModel.CreateModel(csvPath, xmlPath);
         }
     }
 }

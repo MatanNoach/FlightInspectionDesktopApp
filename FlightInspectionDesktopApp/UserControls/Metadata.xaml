@@ -24,26 +24,26 @@
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
 
-                    <TextBox Name="Altitude" BorderThickness="0" Text="Altitude" Foreground="Red" HorizontalAlignment="Left" Grid.Row="0" Grid.Column="0"/>
-                    <TextBox Name="dataAltitude" BorderThickness="0" Text="..." Foreground="Black" HorizontalAlignment="Left" Grid.Row="0" Grid.Column="1"/>
+                    <TextBox Name="Altitude" BorderThickness="0" Text="Altitude" Foreground="Red" Background="AliceBlue" HorizontalAlignment="Left" Grid.Row="0" Grid.Column="0"/>
+                    <TextBox Name="dataAltitude" BorderThickness="0" Text="..." Foreground="Black" Background="AliceBlue" HorizontalAlignment="Left" Grid.Row="0" Grid.Column="1"/>
 
-                    <TextBox Name="AirSpeed" BorderThickness="0" Text="Air-Speed" Foreground="Red" HorizontalAlignment="Left" Grid.Row="1" Grid.Column="0"/>
-                    <TextBox Name="dataAirSpeed" BorderThickness="0" Text="..." Foreground="Black" HorizontalAlignment="Left" Grid.Row="1" Grid.Column="1"/>
+                    <TextBox Name="AirSpeed" BorderThickness="0" Text="Air-Speed" Foreground="Red" Background="AliceBlue" HorizontalAlignment="Left" Grid.Row="1" Grid.Column="0"/>
+                    <TextBox Name="dataAirSpeed" BorderThickness="0" Text="..." Foreground="Black" Background="AliceBlue" HorizontalAlignment="Left" Grid.Row="1" Grid.Column="1"/>
 
-                    <TextBox Name="Heading" BorderThickness="0" Text="Heading" Foreground="Red" HorizontalAlignment="Left" Grid.Row="2" Grid.Column="0"/>
-                    <TextBox Name="dataHeading" BorderThickness="0" Text="..." Foreground="Black" HorizontalAlignment="Left" Grid.Row="2" Grid.Column="1"/>
+                    <TextBox Name="Heading" BorderThickness="0" Text="Heading" Foreground="Red" Background="AliceBlue" HorizontalAlignment="Left" Grid.Row="2" Grid.Column="0"/>
+                    <TextBox Name="dataHeading" BorderThickness="0" Text="..." Foreground="Black" Background="AliceBlue" HorizontalAlignment="Left" Grid.Row="2" Grid.Column="1"/>
 
-                    <TextBox Name="Pitch" BorderThickness="0" Text="Pitch" Foreground="Red" HorizontalAlignment="Left" Grid.Row="3" Grid.Column="0"/>
-                    <TextBox Name="dataPitch" BorderThickness="0" Text="..." Foreground="Black" HorizontalAlignment="Left" Grid.Row="3" Grid.Column="1"/>
+                    <TextBox Name="Pitch" BorderThickness="0" Text="Pitch" Foreground="Red" Background="AliceBlue" HorizontalAlignment="Left" Grid.Row="3" Grid.Column="0"/>
+                    <TextBox Name="dataPitch" BorderThickness="0" Text="..." Foreground="Black" Background="AliceBlue" HorizontalAlignment="Left" Grid.Row="3" Grid.Column="1"/>
 
-                    <TextBox Name="Roll" BorderThickness="0" Text="Roll" Foreground="Red" HorizontalAlignment="Left" Grid.Row="4" Grid.Column="0"/>
-                    <TextBox Name="dataRoll" BorderThickness="0" Text="..." Foreground="Black" HorizontalAlignment="Left" Grid.Row="4" Grid.Column="1"/>
+                    <TextBox Name="Roll" BorderThickness="0" Text="Roll" Foreground="Red" Background="AliceBlue" HorizontalAlignment="Left" Grid.Row="4" Grid.Column="0"/>
+                    <TextBox Name="dataRoll" BorderThickness="0" Text="..." Foreground="Black" Background="AliceBlue" HorizontalAlignment="Left" Grid.Row="4" Grid.Column="1"/>
 
-                    <TextBox Name="SideSlip" BorderThickness="0" Text="Yaw" Foreground="Red" HorizontalAlignment="Left" Grid.Row="5" Grid.Column="0"/>
-                    <TextBox Name="dataSideSlip" BorderThickness="0" Text="..." Foreground="Black" HorizontalAlignment="Left" Grid.Row="5" Grid.Column="1"/>
+                    <TextBox Name="SideSlip" BorderThickness="0" Text="Yaw" Foreground="Red" Background="AliceBlue" HorizontalAlignment="Left" Grid.Row="5" Grid.Column="0"/>
+                    <TextBox Name="dataSideSlip" BorderThickness="0" Text="..." Foreground="Black" Background="AliceBlue" HorizontalAlignment="Left" Grid.Row="5" Grid.Column="1"/>
 
                 </Grid>
-            </Border>            
-        </StackPanel>        
+            </Border>
+        </StackPanel>
     </Grid>
 </UserControl>
