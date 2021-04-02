@@ -37,6 +37,7 @@ namespace FlightInspectionDesktopApp
             IPHostEntry host = Dns.GetHostEntry(hostname);
             IPEndPoint ipe = new IPEndPoint(host.AddressList[1], port);
             IPEndPoint ipeRead = new IPEndPoint(host.AddressList[1], 6400);
+
             try
             {
                 socketWrite = new Socket(ipe.AddressFamily, SocketType.Stream, ProtocolType.Tcp);
@@ -44,14 +45,17 @@ namespace FlightInspectionDesktopApp
                 netSocketWrite = new NetworkStream(socketWrite);
                 output = new StreamWriter(netSocketWrite);
                 socketRead = new Socket(ipeRead.AddressFamily, SocketType.Stream, ProtocolType.Tcp);
-                socketRead.Connect(ipeRead);
+                while (!socketRead.Connected)
+                {
+                    socketRead.Connect(ipeRead);
+                }
                 netSocketRead = new NetworkStream(socketRead);
                 reader = new StreamReader(netSocketRead);
-
             }
             //maybe indicate failure to the user?
             catch { }
         }
+
 
         public void Send(byte[] get)
         {

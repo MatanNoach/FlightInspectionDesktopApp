@@ -62,6 +62,22 @@ namespace FlightInspectionDesktopApp.FGModel
         public void Connect(int port)
         {
             this.telnetClient.Connect(port);
+            string response;
+            int first, last;
+            do
+            {
+                Send(Encoding.ASCII.GetBytes("get /sim/sceneryloaded\r\n"));
+                response = telnetClient.Read();
+                first = response.IndexOf("'");
+                last = response.LastIndexOf("'");
+                Thread.Sleep(1000);
+            }
+            while (response.Substring(first + 1, last - first - 1).Equals("false"));
+        }
+
+        public void Send(byte[] get)
+        {
+            this.telnetClient.Send(get);
         }
 
         public void Disconnect()
@@ -84,13 +100,6 @@ namespace FlightInspectionDesktopApp.FGModel
                         Disconnect();
                     }
                     this.telnetClient.Write(currentLine);
-                    this.telnetClient.Send(Encoding.ASCII.GetBytes("get /controls/flight/aileron[0]\r\n"));
-                    //this.telnetClient.Write("get /controls/flight/aileron[0]\r\n");
-                    string response = telnetClient.Read();
-                    int first = response.IndexOf("'");
-                    int last = response.LastIndexOf("'");
-                    Aileron = float.Parse(response.Substring(first + 1, last - first - 1));
-                    // add all properties here...
 
                     // 10 Hz:
                     Thread.Sleep(PlayingSpeed);

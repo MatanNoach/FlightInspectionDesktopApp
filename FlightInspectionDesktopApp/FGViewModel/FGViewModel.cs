@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel;
+using System.Text;
 using System.Threading;
 
 namespace FlightInspectionDesktopApp
@@ -54,7 +55,7 @@ namespace FlightInspectionDesktopApp
         {
             model.RunFG(binFolder, PathFG, XMLFileName);
             // for timing:
-            //Thread.Sleep(62000);
+            Thread.Sleep(10000);
             model.Connect(5400);
             model.Start(PathCSV);
         }
