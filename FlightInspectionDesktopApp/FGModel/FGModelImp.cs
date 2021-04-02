@@ -42,17 +42,20 @@ namespace FlightInspectionDesktopApp.FGModel
             startInfo.WorkingDirectory = binFolder;
             startInfo.FileName = PathFG;
             startInfo.WindowStyle = ProcessWindowStyle.Hidden;
+            
             // Send the simulator settings as command arguments
-            // TODO @Yuval:
-            string[] genericArgs = {
-                Properties.Settings.Default.cmdGeneric,
-                Properties.Settings.Default.hostIP,
-                Properties.Settings.Default.portGeneric.ToString(),
-                Properties.Settings.Default.protocolType,
-                XMLFileName
+            
+            // set the generic flag
+            string[] genericArgs = { 
+                Properties.Settings.Default.cmdGeneric, 
+                Properties.Settings.Default.hostIP, 
+                Properties.Settings.Default.portGeneric.ToString(), 
+                Properties.Settings.Default.protocolType, 
+                XMLFileName 
             };
             string genericCMD = string.Join(",", genericArgs);
 
+            // set the telnet flag
             string[] telnetArgs = {
                 Properties.Settings.Default.cmdTelnet,
                 Properties.Settings.Default.hostIP,
@@ -161,9 +164,19 @@ namespace FlightInspectionDesktopApp.FGModel
             }
         }
 
-        private float aileron;
-        public float Aileron
-        {
+        private double aileron;
+        private double elevator;
+        private double rudder;
+        private double throttle;
+        private double altitude;
+        private double airSpeed;
+        private double position;
+        private double heading;
+        private double pitch;
+        private double roll;
+        private double sideSlip;
+
+        public double Aileron {
             get
             {
                 return aileron;
@@ -174,15 +187,115 @@ namespace FlightInspectionDesktopApp.FGModel
                 NotifyPropertyChanged("Aileron");
             }
         }
-        public float Elevator { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public float Rudder { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public float Throttle { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public float Altitude { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public float AirSpeed { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public double Position { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public float Heading { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public float Pitch { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public float Roll { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public float SideSlip { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public double Elevator {
+            get
+            {
+                return elevator;
+            }
+            set
+            {
+                elevator = value;
+                NotifyPropertyChanged("Elevator");
+            }
+        }
+        public double Rudder {
+            get
+            {
+                return rudder;
+            }
+            set
+            {
+                rudder = value;
+                NotifyPropertyChanged("Rudder");
+            }
+        }
+        public double Throttle {
+            get
+            {
+                return throttle;
+            }
+            set
+            {
+                throttle = value;
+                NotifyPropertyChanged("Throttle");
+            }
+        }
+        public double Altitude {
+            get
+            {
+                return altitude;
+            }
+            set
+            {
+                altitude = value;
+                NotifyPropertyChanged("Altitude");
+            }
+        }
+        public double AirSpeed {
+            get
+            {
+                return airSpeed;
+            }
+            set
+            {
+                airSpeed = value;
+                NotifyPropertyChanged("AirSpeed");
+            }
+        }
+        public double Position {
+            get
+            {
+                return position;
+            }
+            set
+            {
+                position = value;
+                NotifyPropertyChanged("Position");
+            }
+        }
+        public double Heading {
+            get
+            {
+                return heading;
+            }
+            set
+            {
+                heading = value;
+                NotifyPropertyChanged("Heading");
+            }
+        }
+        public double Pitch {
+            get
+            {
+                return pitch;
+            }
+            set
+            {
+                pitch = value;
+                NotifyPropertyChanged("Pitch");
+            }
+        }
+        public double Roll {
+            get
+            {
+                return roll;
+            }
+            set
+            {
+                roll = value;
+                NotifyPropertyChanged("Roll");
+            }
+        }
+        public double SideSlip {
+            get
+            {
+                return sideSlip; ;
+            }
+            set
+            {
+                sideSlip = value;
+                NotifyPropertyChanged("SideSlip");
+            }
+        }
     }
 }

@@ -32,17 +32,18 @@ namespace FlightInspectionDesktopApp
         }
 
         // Properties:
-        public float VMAileron { get { return model.Aileron; } }
-        public float VMElevator { get { return model.Elevator; } }
-        public float VMRudder { get { return model.Rudder; } }
-        public float VMThrottle { get { return model.Throttle; } }
-        public float VMAltitude { get { return model.Altitude; } }
-        public float VMAirSpeed { get { return model.AirSpeed; } }
+        public double VMAileron { get { return model.Aileron; } }
+        public double VMElevator { get { return model.Elevator; } }
+
+        public double VMRudder { get { return model.Rudder; } }
+        public double VMThrottle { get { return model.Throttle; } }
+        public double VMAltitude { get { return model.Altitude; } }
+        public double VMAirSpeed { get { return model.AirSpeed; } }
         public double VMPosition { get { return model.Position; } }
-        public float VMHeading { get { return model.Heading; } }
-        public float VMPitch { get { return model.Pitch; } }
-        public float VMRoll { get { return model.Roll; } }
-        public float VMSideSlip { get { return model.SideSlip; } }
+        public double VMHeading { get { return model.Heading; } }
+        public double VMPitch { get { return model.Pitch; } }
+        public double VMRoll { get { return model.Roll; } }
+        public double VMSideSlip { get { return model.SideSlip; } }
 
 
         public void Run(string binFolder, string PathFG, string XMLFileName, string PathCSV)

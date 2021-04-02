@@ -8,16 +8,15 @@ interface IFGModel : INotifyPropertyChanged
     void RunFG(string binFolder, string PathFG, string XMLFileName);
 
     // Properties:
-    float Aileron { set; get; }
-    float Elevator { set; get; }
-    float Rudder { get; set; }
-    float Throttle { get; set; }
-    float Altitude { get; set; }
-    float AirSpeed { get; set; }
+    double Aileron { set; get; }
+    double Elevator { set; get; }
+    double Rudder { get; set; }
+    double Throttle { get; set; }
+    double Altitude { get; set; }
+    double AirSpeed { get; set; }
     double Position { get; set; }
-    float Heading { get; set; }
-    float Pitch { get; set; }
-    float Roll { get; set; }
-    float SideSlip { get; set; }
-
+    double Heading { get; set; }
+    double Pitch { get; set; }
+    double Roll { get; set; }
+    double SideSlip { get; set; }
 }
