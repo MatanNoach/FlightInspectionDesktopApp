@@ -8,7 +8,22 @@ namespace FlightInspectionDesktopApp
 {
     class DataModel
     {
-        private Dictionary<string, List<double>> data;
+        private Dictionary<string, List<double>> dictData;
+        private List<string> rawData;
+        private int currentLineIndex;
+
+        public int CurrentLineIndex
+        {
+            get
+            {
+                return currentLineIndex;
+            }
+
+            set
+            {
+                currentLineIndex = value;
+            }
+        }
 
         private static DataModel dataModelInstance;
         public static DataModel Instance
@@ -26,7 +41,9 @@ namespace FlightInspectionDesktopApp
         private DataModel() { }
         private DataModel(string csvPath, string xmlPath)
         {
-            data = new Dictionary<string, List<double>>();
+            currentLineIndex = 0;
+            rawData = new List<string>();
+            dictData = new Dictionary<string, List<double>>();
 
             // get the chunks' names from the given xml file
             List<string> xmlColumns = getXmlColumns(xmlPath);
@@ -34,7 +51,7 @@ namespace FlightInspectionDesktopApp
             // initialize dictionary's keys
             for (int i = 0; i < xmlColumns.Count; i++)
             {
-                data.Add(xmlColumns[i], new List<double>());
+                dictData.Add(xmlColumns[i], new List<double>());
             }
 
             // parse the data from the csv file
@@ -51,9 +68,11 @@ namespace FlightInspectionDesktopApp
                     lineCols = currentLine.Split(colSeparator);
                     foreach (string value in lineCols)
                     {
-                        data[xmlColumns[index]].Add(double.Parse(value));
+                        dictData[xmlColumns[index]].Add(double.Parse(value));
                         index += 1;
                     }
+
+                    rawData.Add(currentLine);
                 }
             }
         }
@@ -159,7 +178,17 @@ namespace FlightInspectionDesktopApp
 
         internal double getValueByKeyAndTime(string key, int time)
         {
-            return data[key][time];
+            return dictData[key][time];
+        }
+
+        internal string getLineByIndex(int index)
+        {
+            return rawData[index];
+        }
+
+        internal int getDataSize()
+        {
+            return rawData.Count;
         }
     }
 }

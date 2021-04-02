@@ -12,11 +12,5 @@ interface IFGModel : INotifyPropertyChanged
     double Elevator { set; get; }
     double Rudder { get; set; }
     double Throttle { get; set; }
-    double Altitude { get; set; }
-    double AirSpeed { get; set; }
-    double Position { get; set; }
-    double Heading { get; set; }
-    double Pitch { get; set; }
-    double Roll { get; set; }
-    double SideSlip { get; set; }
+    double Position { get; set; }    
 }

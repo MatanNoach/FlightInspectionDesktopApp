@@ -117,10 +117,11 @@ namespace FlightInspectionDesktopApp
                 if (isValid)
                 {
                     // run the view model
-                    vm.Run(binFolder, PathFG.Text, XMLFileName, PathCSV.Text);
+                    DataModel.CreateModel(PathCSV.Text, PathXML.Text);
                     InspectorWindow inspector = new InspectorWindow();
                     inspector.Show();
                     Close();
+                    vm.Run(binFolder, PathFG.Text, XMLFileName, PathCSV.Text);
                 }
             }
         }

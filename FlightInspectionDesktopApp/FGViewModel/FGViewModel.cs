@@ -34,16 +34,9 @@ namespace FlightInspectionDesktopApp
         // Properties:
         public double VMAileron { get { return model.Aileron; } }
         public double VMElevator { get { return model.Elevator; } }
-
         public double VMRudder { get { return model.Rudder; } }
         public double VMThrottle { get { return model.Throttle; } }
-        public double VMAltitude { get { return model.Altitude; } }
-        public double VMAirSpeed { get { return model.AirSpeed; } }
         public double VMPosition { get { return model.Position; } }
-        public double VMHeading { get { return model.Heading; } }
-        public double VMPitch { get { return model.Pitch; } }
-        public double VMRoll { get { return model.Roll; } }
-        public double VMSideSlip { get { return model.SideSlip; } }
 
 
         public void Run(string binFolder, string PathFG, string XMLFileName, string PathCSV)

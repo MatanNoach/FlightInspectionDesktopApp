@@ -42,16 +42,16 @@ namespace FlightInspectionDesktopApp.FGModel
             startInfo.WorkingDirectory = binFolder;
             startInfo.FileName = PathFG;
             startInfo.WindowStyle = ProcessWindowStyle.Hidden;
-            
+
             // Send the simulator settings as command arguments
-            
+
             // set the generic flag
-            string[] genericArgs = { 
-                Properties.Settings.Default.cmdGeneric, 
-                Properties.Settings.Default.hostIP, 
-                Properties.Settings.Default.portGeneric.ToString(), 
-                Properties.Settings.Default.protocolType, 
-                XMLFileName 
+            string[] genericArgs = {
+                Properties.Settings.Default.cmdGeneric,
+                Properties.Settings.Default.hostIP,
+                Properties.Settings.Default.portGeneric.ToString(),
+                Properties.Settings.Default.protocolType,
+                XMLFileName
             };
             string genericCMD = string.Join(",", genericArgs);
 
@@ -135,17 +135,18 @@ namespace FlightInspectionDesktopApp.FGModel
         {
             new Thread(delegate ()
             {
-                StreamReader src = new StreamReader(PathCSV);
-                string currentLine;
+                DataModel model = DataModel.Instance;
+
                 while (!shouldStop)
                 {
                     // currentLine will be null when the StreamReader reaches the end of file
-                    if ((currentLine = src.ReadLine()) == null)
+                    if (model.CurrentLineIndex > model.getDataSize())
                     {
                         //? not the final logic
                         Disconnect();
                     }
-                    this.telnetClient.Write(currentLine);
+                    this.telnetClient.Write(model.getLineByIndex(model.CurrentLineIndex));
+                    model.CurrentLineIndex++;
                     // play in 10 Hz:
                     Thread.Sleep(PlayingSpeed);
                 }
@@ -168,15 +169,10 @@ namespace FlightInspectionDesktopApp.FGModel
         private double elevator;
         private double rudder;
         private double throttle;
-        private double altitude;
-        private double airSpeed;
-        private double position;
-        private double heading;
-        private double pitch;
-        private double roll;
-        private double sideSlip;
+        private double position;        
 
-        public double Aileron {
+        public double Aileron
+        {
             get
             {
                 return aileron;
@@ -187,7 +183,8 @@ namespace FlightInspectionDesktopApp.FGModel
                 NotifyPropertyChanged("Aileron");
             }
         }
-        public double Elevator {
+        public double Elevator
+        {
             get
             {
                 return elevator;
@@ -198,7 +195,8 @@ namespace FlightInspectionDesktopApp.FGModel
                 NotifyPropertyChanged("Elevator");
             }
         }
-        public double Rudder {
+        public double Rudder
+        {
             get
             {
                 return rudder;
@@ -209,7 +207,8 @@ namespace FlightInspectionDesktopApp.FGModel
                 NotifyPropertyChanged("Rudder");
             }
         }
-        public double Throttle {
+        public double Throttle
+        {
             get
             {
                 return throttle;
@@ -220,29 +219,8 @@ namespace FlightInspectionDesktopApp.FGModel
                 NotifyPropertyChanged("Throttle");
             }
         }
-        public double Altitude {
-            get
-            {
-                return altitude;
-            }
-            set
-            {
-                altitude = value;
-                NotifyPropertyChanged("Altitude");
-            }
-        }
-        public double AirSpeed {
-            get
-            {
-                return airSpeed;
-            }
-            set
-            {
-                airSpeed = value;
-                NotifyPropertyChanged("AirSpeed");
-            }
-        }
-        public double Position {
+        public double Position
+        {
             get
             {
                 return position;
@@ -253,49 +231,6 @@ namespace FlightInspectionDesktopApp.FGModel
                 NotifyPropertyChanged("Position");
             }
         }
-        public double Heading {
-            get
-            {
-                return heading;
-            }
-            set
-            {
-                heading = value;
-                NotifyPropertyChanged("Heading");
-            }
-        }
-        public double Pitch {
-            get
-            {
-                return pitch;
-            }
-            set
-            {
-                pitch = value;
-                NotifyPropertyChanged("Pitch");
-            }
-        }
-        public double Roll {
-            get
-            {
-                return roll;
-            }
-            set
-            {
-                roll = value;
-                NotifyPropertyChanged("Roll");
-            }
-        }
-        public double SideSlip {
-            get
-            {
-                return sideSlip; ;
-            }
-            set
-            {
-                sideSlip = value;
-                NotifyPropertyChanged("SideSlip");
-            }
-        }
+
     }
 }
