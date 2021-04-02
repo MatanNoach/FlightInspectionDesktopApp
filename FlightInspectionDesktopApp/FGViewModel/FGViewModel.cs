@@ -26,9 +26,19 @@ namespace FlightInspectionDesktopApp
             }
         }
 
+        public void Disconnect()
+        {
+            model.Disconnect();
+        }
+
         // Properties:
         public float VMAileron { get { return model.Aileron; } }
         public float VMElevator { get { return model.Elevator; } }
+
+
+
+
+
         public float VMRudder { get { return model.Rudder; } }
         public float VMThrottle { get { return model.Throttle; } }
         public float VMAltitude { get { return model.Altitude; } }

@@ -93,29 +93,32 @@ namespace FlightInspectionDesktopApp
                 ErrorCSV.Visibility = Visibility.Visible;
                 isValid = false;
             }
-            String binFolder = Directory.GetParent(PathFG.Text).ToString();
-            String actualXML = Directory.GetParent(PathXML.Text).ToString();
-            String XMLFileName = System.IO.Path.GetFileNameWithoutExtension(PathXML.Text);
-            String targetXML = Directory.GetParent(binFolder).ToString() + "\\data\\Protocol";
-            // Check if the XML file is in the right location
-            if (!actualXML.Equals(targetXML))
-            {
-                // if not, ask him to move it
-                ErrorXML.Text = "Please move XML file to " + targetXML;
-                ErrorXML.Visibility = Visibility.Visible;
-                isValid = false;
-
-            }
-            else
-            {
-                ErrorXML.Visibility = Visibility.Hidden;
-            }
-
-
-
             if (isValid)
             {
-                vm.Run(binFolder, PathFG.Text, XMLFileName, PathCSV.Text);
+                String binFolder = Directory.GetParent(PathFG.Text).ToString();
+                String actualXML = Directory.GetParent(PathXML.Text).ToString();
+                String XMLFileName = System.IO.Path.GetFileNameWithoutExtension(PathXML.Text);
+                String targetXML = Directory.GetParent(binFolder).ToString() + "\\data\\Protocol";
+                // Check if the XML file is in the right location
+                if (!actualXML.Equals(targetXML))
+                {
+                    // if not, ask him to move it
+                    ErrorXML.Text = "Please move XML file to " + targetXML;
+                    ErrorXML.Visibility = Visibility.Visible;
+                    isValid = false;
+
+                }
+                else
+                {
+                    ErrorXML.Visibility = Visibility.Hidden;
+                }
+
+
+
+                if (isValid)
+                {
+                    vm.Run(binFolder, PathFG.Text, XMLFileName, PathCSV.Text);
+                }
             }
         }
         private void PathFG_TextChanged(object sender, TextChangedEventArgs e)
@@ -145,6 +148,11 @@ namespace FlightInspectionDesktopApp
                 ErrorCSV.Visibility = Visibility.Hidden;
             }
 
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            vm.Disconnect();
         }
     }
 }

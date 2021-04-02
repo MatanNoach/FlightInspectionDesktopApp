@@ -37,5 +37,6 @@
 
     </Grid>
     <Button Name="Submit" Content="Start Inspection!" VerticalAlignment="Bottom" Margin="0,25,0,0" HorizontalAlignment="Center" Click="Submit_Click" />
+        <Button Content="Disconnect" Margin="701,0,0.2,0" Height="34" Click="Button_Click"/>
     </StackPanel>
 </Window>

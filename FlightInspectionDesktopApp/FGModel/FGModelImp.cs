@@ -46,7 +46,7 @@ namespace FlightInspectionDesktopApp.FGModel
             startInfo.FileName = PathFG;
             startInfo.WindowStyle = ProcessWindowStyle.Hidden;
             // Send the simulator settings as command arguments
-            startInfo.Arguments = "--telnet=socket,in,10,127.0.0.1,5400,tcp --generic=socket,in,10,127.0.0.1,5400,tcp," + XMLFileName + " --telnet=socket,out,10,127.0.0.1,6400,tcp --generic=socket,out,10,127.0.0.1,6400,tcp," + XMLFileName + " --fdm=null";
+            startInfo.Arguments = "--generic=socket,in,10,127.0.0.1,5400,tcp," + XMLFileName + " --telnet=socket,in,10,127.0.0.1,6400,tcp --fdm=null";
             startInfo.RedirectStandardOutput = true;
             startInfo.CreateNoWindow = true;
             try
@@ -84,9 +84,12 @@ namespace FlightInspectionDesktopApp.FGModel
                         Disconnect();
                     }
                     this.telnetClient.Write(currentLine);
-
-                    //this.telnetClient.Write("get /controls/flight/aileron[0]");
-                    //Aileron = float.Parse(telnetClient.Read());
+                    this.telnetClient.Send(Encoding.ASCII.GetBytes("get /controls/flight/aileron[0]\r\n"));
+                    //this.telnetClient.Write("get /controls/flight/aileron[0]\r\n");
+                    string response = telnetClient.Read();
+                    int first = response.IndexOf("'");
+                    int last = response.LastIndexOf("'");
+                    Aileron = float.Parse(response.Substring(first + 1, last - first - 1));
                     // add all properties here...
 
                     // 10 Hz:
@@ -102,16 +105,16 @@ namespace FlightInspectionDesktopApp.FGModel
                 this.PropertyChanged(this, new PropertyChangedEventArgs(propName));
             }
         }
-
+        private float aileron;
         public float Aileron
         {
             get
             {
-                return Aileron;
+                return aileron;
             }
             set
             {
-                Aileron = value;
+                aileron = value;
                 NotifyPropertyChanged("Aileron");
             }
         }

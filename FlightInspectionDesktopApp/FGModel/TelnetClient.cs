@@ -16,6 +16,7 @@ namespace FlightInspectionDesktopApp
         void Write(string command);
         string Read();
         void Disconnect();
+        void Send(byte[] get);
     }
 
     class TelnetClient : ITelnetClient
@@ -48,11 +49,14 @@ namespace FlightInspectionDesktopApp
                 reader = new StreamReader(netSocketRead);
 
             }
-            // maybe indicate failure to the user?
+            //maybe indicate failure to the user?
             catch { }
         }
 
-
+        public void Send(byte[] get)
+        {
+            socketRead.Send(get);
+        }
 
         public void Disconnect()
         {
@@ -65,15 +69,16 @@ namespace FlightInspectionDesktopApp
 
         public string Read()
         {
-            return "";
-            //string line = reader.Read().ToString();
-            //Console.WriteLine(line);
-            //return line;
+            //return "";
+            string line = reader.ReadLine();
+            Console.WriteLine(line);
+            return line;
         }
 
         public void Write(string command)
         {
             output.WriteLine(command);
         }
+
     }
 }
