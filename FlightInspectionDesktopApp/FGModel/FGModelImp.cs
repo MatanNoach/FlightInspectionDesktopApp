@@ -1,24 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
 using System.IO;
-using System.Linq;
-using System.Net;
-using System.Net.Sockets;
 using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-using Microsoft.Win32;
+using System.Diagnostics;
 using System.ComponentModel;
+
 namespace FlightInspectionDesktopApp.FGModel
 {
     class FGModelImp : IFGModel
@@ -46,7 +32,32 @@ namespace FlightInspectionDesktopApp.FGModel
             startInfo.FileName = PathFG;
             startInfo.WindowStyle = ProcessWindowStyle.Hidden;
             // Send the simulator settings as command arguments
-            startInfo.Arguments = "--generic=socket,in,10,127.0.0.1,5400,tcp," + XMLFileName + " --telnet=socket,in,10,127.0.0.1,6400,tcp --fdm=null";
+
+            string[] genericArgs = { 
+                Properties.Settings.Default.cmdGeneric, 
+                Properties.Settings.Default.hostIP, 
+                Properties.Settings.Default.portGeneric.ToString(), 
+                Properties.Settings.Default.protocolType, 
+                XMLFileName 
+            };
+            string genericCMD = string.Join(",", genericArgs);
+
+            string[] telnetArgs = {
+                Properties.Settings.Default.cmdTelnet,
+                Properties.Settings.Default.hostIP,
+                Properties.Settings.Default.portTelnet.ToString(),
+                Properties.Settings.Default.protocolType
+            };
+            string telnetCMD = string.Join(",", telnetArgs);
+
+            string[] processArgs =
+            {
+                genericCMD,
+                telnetCMD,
+                Properties.Settings.Default.cmdFDM
+            };
+
+            startInfo.Arguments = string.Join(" ", processArgs);
             startInfo.RedirectStandardOutput = true;
             startInfo.CreateNoWindow = true;
             try

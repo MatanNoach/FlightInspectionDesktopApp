@@ -1,7 +1,5 @@
 ﻿using System;
 using System.ComponentModel;
-using System.Text;
-using System.Threading;
 
 namespace FlightInspectionDesktopApp
 {
@@ -57,6 +55,8 @@ namespace FlightInspectionDesktopApp
             // for timing:
             Thread.Sleep(10000);
             model.Connect(5400);
+            //Thread.Sleep(62000);
+            model.Connect(Properties.Settings.Default.portGeneric);
             model.Start(PathCSV);
         }
     }

@@ -1,12 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Net;
 using System.Net.Sockets;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
 
 namespace FlightInspectionDesktopApp
 {
@@ -32,12 +27,11 @@ namespace FlightInspectionDesktopApp
 
         public void Connect(int port)
         {
-            string hostname = "localhost";
+            string hostname = Properties.Settings.Default.hostName;
             // Socket for FlightGear
             IPHostEntry host = Dns.GetHostEntry(hostname);
             IPEndPoint ipe = new IPEndPoint(host.AddressList[1], port);
-            IPEndPoint ipeRead = new IPEndPoint(host.AddressList[1], 6400);
-
+            IPEndPoint ipeRead = new IPEndPoint(host.AddressList[1], Properties.Settings.Default.portTelnet);
             try
             {
                 socketWrite = new Socket(ipe.AddressFamily, SocketType.Stream, ProtocolType.Tcp);

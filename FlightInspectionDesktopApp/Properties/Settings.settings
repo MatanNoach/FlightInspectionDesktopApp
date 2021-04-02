@@ -1,7 +1,33 @@
 ﻿<?xml version='1.0' encoding='utf-8'?>
-<SettingsFile xmlns="uri:settings" CurrentProfile="(Default)">
-  <Profiles>
-    <Profile Name="(Default)" />
-  </Profiles>
-  <Settings />
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="FlightInspectionDesktopApp.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="portGeneric" Type="System.Int32" Scope="Application">
+      <Value Profile="(Default)">5400</Value>
+    </Setting>
+    <Setting Name="portTelnet" Type="System.Int32" Scope="Application">
+      <Value Profile="(Default)">6400</Value>
+    </Setting>
+    <Setting Name="hostName" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">localhost</Value>
+    </Setting>
+    <Setting Name="hostIP" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">127.0.0.1</Value>
+    </Setting>
+    <Setting Name="cmdGeneric" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">--generic=socket,in,10</Value>
+    </Setting>
+    <Setting Name="cmdTelnet" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">--telnet=socket,in,10</Value>
+    </Setting>
+    <Setting Name="protocolType" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">tcp</Value>
+    </Setting>
+    <Setting Name="cmdFDM" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">--fdm=null</Value>
+    </Setting>
+    <Setting Name="varSeparator" Type="System.Char" Scope="Application">
+      <Value Profile="(Default)">,</Value>
+    </Setting>
+  </Settings>
 </SettingsFile>
