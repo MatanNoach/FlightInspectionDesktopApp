@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:FlightInspectionDesktopApp"        
         mc:Ignorable="d"
-        Title="Flight Inspection Start Wizard" Height="450" Width="800">
+        Title="Flight Inspection Start Wizard" Height="450" Width="800" Background="#FFC1D3CF" FontFamily="Microsoft JhengHei UI">
     <StackPanel TextElement.FontSize="14" Orientation="Vertical" VerticalAlignment="Center" >
         <TextBlock Text="Welcome! Please insert valid file paths as required:" HorizontalAlignment="Center" Padding="0,0,0,25">
 
@@ -22,21 +22,43 @@
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
 
-            <TextBox Name="ErrorFG" BorderThickness="0" Visibility="Hidden" Text="Required Field!" Foreground="Red" Grid.Row="0" Grid.Column="2"/>
-            <TextBox Name ="ErrorXML" BorderThickness="0" Visibility="Hidden" Text="Required Field!" Foreground="Red" Grid.Row="1" Grid.Column="2"/>
-            <TextBox Name ="ErrorCSV" BorderThickness="0" Visibility="Hidden" Text="Required Field!" Foreground="Red" Grid.Row="2" Grid.Column="2"/>
+            <TextBox Name="ErrorFG" BorderThickness="0" Visibility="Hidden" Text="Required Field!" Foreground="Red" Grid.Row="0" Grid.Column="0"/>
+            <TextBox Name ="ErrorXML" BorderThickness="0" Visibility="Hidden" Text="Required Field!" Foreground="Red" Grid.Row="1" Grid.Column="0"/>
+            <TextBox Name ="ErrorCSV" BorderThickness="0" Visibility="Hidden" Text="Required Field!" Foreground="Red" Grid.Row="2" Grid.Column="0"/>
 
-            <TextBox x:Name="PathFG" TextWrapping="NoWrap" IsReadOnly="True" BorderThickness="0"  Text="" Grid.Row="0" Grid.Column="1" HorizontalAlignment="Center" TextChanged="PathFG_TextChanged"/>
-            <Button Name="LoadFG" Margin="0,0,3,3" Content="Open flight gear" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Click="LoadFG_Click" Grid.Row="0" Grid.Column="0" />
+            <TextBox x:Name="PathFG" Margin="0,0,3,3" TextWrapping="NoWrap" IsReadOnly="True" Text="" Grid.Row="0" Grid.Column="2" HorizontalAlignment="Center" TextChanged="PathFG_TextChanged" Width="220" FontSize="11" VerticalContentAlignment="Center"/>
+            <Button Name="LoadFG" Margin="0,0,3,3" Content="Open flight gear" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Click="LoadFG_Click" Grid.Row="0" Grid.Column="1" >
+                <Button.Effect>
+                    <DropShadowEffect ShadowDepth="2" Opacity="0.5" BlurRadius="17"/>
+                </Button.Effect>
+            </Button>
 
-            <TextBox x:Name="PathXML" IsReadOnly="True" BorderThickness="0" TextWrapping="NoWrap" Text="" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Center" TextChanged="PathXML_TextChanged"/>
-            <Button Name="LoadXML" Margin="0,0,3,3" Content="Open Playback XML" Grid.Row="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.Column="0" Click="LoadXML_Click"/>
+            <TextBox x:Name="PathXML" Margin="0,0,3,3" IsReadOnly="True" TextWrapping="NoWrap" Text="" Grid.Row="1" Grid.Column="2" HorizontalAlignment="Center" TextChanged="PathXML_TextChanged" Width="220" FontSize="11" VerticalContentAlignment="Center"/>
+            <Button Name="LoadXML" Margin="0,0,3,3" Content="Open Playback XML" Grid.Row="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.Column="1" Click="LoadXML_Click">
+                <Button.Effect>
+                    <DropShadowEffect BlurRadius="2" ShadowDepth="2" Opacity="0.5"/>
+                </Button.Effect>
+            </Button>
 
-            <TextBox x:Name="PathCSV" IsReadOnly="True" BorderThickness="0" TextWrapping="NoWrap" Text="" Grid.Row="2" Grid.Column="1" HorizontalAlignment="Center" TextChanged="PathCSV_TextChanged"/>
-            <Button Name="LoadCSV" Margin="0,0,3,3" Content="Open CSV"  HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Click="LoadCSV_Click" Grid.Row="2" Grid.Column="0" />
+            <TextBox x:Name="PathCSV" Margin="0,0,3,3" IsReadOnly="True" TextWrapping="NoWrap" Text="" Grid.Row="2" Grid.Column="2" HorizontalAlignment="Center" TextChanged="PathCSV_TextChanged" Width="220" FontSize="11" VerticalContentAlignment="Center"/>
+            <Button Name="LoadCSV" Margin="0,0,3,3" Content="Open CSV"  HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Click="LoadCSV_Click" Grid.Row="2" Grid.Column="1" >
+                <Button.Effect>
+                    <DropShadowEffect Opacity="0.5" BlurRadius="2" ShadowDepth="2"/>
+                </Button.Effect>
+            </Button>
 
         </Grid>
-        <Button Name="Submit" Content="Start Inspection!" VerticalAlignment="Bottom" Margin="0,25,0,0" HorizontalAlignment="Center" Click="Submit_Click" />
+        <Button Name="Submit" Content="Start Inspection!" VerticalAlignment="Bottom" Margin="0,25,0,0" HorizontalAlignment="Center" Click="Submit_Click" Foreground="Black" BorderBrush="Black" FontFamily="Microsoft YaHei UI" >
+            <Button.Effect>
+                <DropShadowEffect BlurRadius="2" Opacity="0.5" ShadowDepth="2"/>
+            </Button.Effect>
+            <Button.Background>
+                <LinearGradientBrush EndPoint="0.5,1" MappingMode="RelativeToBoundingBox" StartPoint="0.5,0">
+                    <GradientStop Color="#FF97C5C1" Offset="1"/>
+                    <GradientStop Color="#FF42978F"/>
+                </LinearGradientBrush>
+            </Button.Background>
+        </Button>
         <Button Content="Disconnect" Margin="701,0,0.2,0" Height="34" Click="Button_Click"/>
     </StackPanel>
 </Window>
