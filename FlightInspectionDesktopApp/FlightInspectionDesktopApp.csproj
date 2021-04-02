@@ -72,11 +72,11 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="FGModel\DataModel.cs" />
-    <Compile Include="FGModel\FGModelImp.cs" />
-    <Compile Include="FGModel\IFGModel.cs" />
-    <Compile Include="FGModel\TelnetClient.cs" />
-    <Compile Include="FGViewModel\FGViewModel.cs" />
+    <Compile Include="DataModel.cs" />
+    <Compile Include="FG\FGModelImp.cs" />
+    <Compile Include="FG\IFGModel.cs" />
+    <Compile Include="FG\TelnetClient.cs" />
+    <Compile Include="FG\FGViewModel.cs" />
     <Compile Include="InspectorWindow.xaml.cs">
       <DependentUpon>InspectorWindow.xaml</DependentUpon>
     </Compile>
@@ -115,8 +115,6 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="UserControls\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

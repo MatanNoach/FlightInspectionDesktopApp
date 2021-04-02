@@ -6,9 +6,17 @@ namespace FlightInspectionDesktopApp.Metadata
     class MetadataModel : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
-
         private static MetadataModel metadataModelIns;
+        private double altitude;
+        private double airSpeed;
+        private double heading;
+        private double pitch;
+        private double roll;
+        private double sideSlip;
 
+        /// <summary>
+        /// Private CTOR for singleton implementation.
+        /// </summary>
         private MetadataModel() { }
 
         public static MetadataModel Instance
@@ -17,21 +25,28 @@ namespace FlightInspectionDesktopApp.Metadata
             {
                 if (metadataModelIns == null)
                 {
-                    throw new Exception("DataModel was not created");
+                    throw new Exception("MetadataModel was not created");
                 }
                 return metadataModelIns;
             }
         }
 
+        /// <summary>
+        /// Creates a MetadataModel.
+        /// </summary>
         public static void CreateModel()
         {
             if (metadataModelIns != null)
             {
-                throw new Exception("DataModel is already created");
+                throw new Exception("MetadataModel is already created");
             }
             metadataModelIns = new MetadataModel();
         }
 
+        /// <summary>
+        /// Evokes all subscribed methods of PropertyChanged.
+        /// </summary>
+        /// <param name="propName">name of the property that's been changed</param>
         public void NotifyPropertyChanged(string propName)
         {
             if (this.PropertyChanged != null)
@@ -40,13 +55,7 @@ namespace FlightInspectionDesktopApp.Metadata
             }
         }
 
-        private double altitude;
-        private double airSpeed;
-        private double heading;
-        private double pitch;
-        private double roll;
-        private double sideSlip;
-
+        // properties
         public double Altitude
         {
             get

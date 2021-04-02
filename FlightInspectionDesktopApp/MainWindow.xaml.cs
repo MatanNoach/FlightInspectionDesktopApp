@@ -163,12 +163,6 @@ namespace FlightInspectionDesktopApp
             {
                 ErrorCSV.Visibility = Visibility.Hidden;
             }
-
-        }
-        // The function disconnects from the simulator on button click
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            vm.Disconnect();
         }
     }
 }

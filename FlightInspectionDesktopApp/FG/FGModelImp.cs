@@ -1,5 +1,4 @@
 ﻿using System;
-using System.IO;
 using System.Text;
 using System.Threading;
 using System.Diagnostics;
@@ -14,7 +13,7 @@ namespace FlightInspectionDesktopApp
         public event PropertyChangedEventHandler PropertyChanged;
         ITelnetClient telnetClient;
         volatile bool shouldStop;
-
+        // set the default playing speed to 10 Hz
         public int PlayingSpeed { get; set; } = 100;
 
         /// <summary>
@@ -146,8 +145,15 @@ namespace FlightInspectionDesktopApp
                         //? not the final logic
                         Disconnect();
                     }
+                    // send a line from the CSV to FG
                     this.telnetClient.Write(model.getLineByIndex(model.CurrentLineIndex));
+                    // store each value from the current line in MetadataModel properties 
                     metaModel.Altitude = model.getValueByKeyAndTime("altitude-ft", model.CurrentLineIndex);
+                    metaModel.AirSpeed = model.getValueByKeyAndTime("airspeed-kt", model.CurrentLineIndex);
+                    metaModel.Heading = model.getValueByKeyAndTime("heading-deg", model.CurrentLineIndex);
+                    metaModel.Pitch = model.getValueByKeyAndTime("pitch-deg", model.CurrentLineIndex);
+                    metaModel.Roll = model.getValueByKeyAndTime("roll-deg", model.CurrentLineIndex);
+                    metaModel.SideSlip = model.getValueByKeyAndTime("side-slip-deg", model.CurrentLineIndex);
                     model.CurrentLineIndex++;
                     // play in 10 Hz:
                     Thread.Sleep(PlayingSpeed);
@@ -155,6 +161,7 @@ namespace FlightInspectionDesktopApp
             }).Start();
         }
 
+        //? All from here and under should be handled in other components
         /// <summary>
         /// Evokes all subscribed methods of PropertyChanged.
         /// </summary>
