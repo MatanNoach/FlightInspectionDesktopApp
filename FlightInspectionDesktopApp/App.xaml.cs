@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Data;
-using System.Linq;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using System.Windows;
 
 namespace FlightInspectionDesktopApp
 {
@@ -13,5 +7,12 @@ namespace FlightInspectionDesktopApp
     /// </summary>
     public partial class App : Application
     {
+        private void Start_App(object sender, StartupEventArgs e)
+        {
+            InspectorWindow inspector = new InspectorWindow();
+            MainWindow main = new MainWindow();
+            inspector.Show();
+            main.Show();
+        }
     }
 }
