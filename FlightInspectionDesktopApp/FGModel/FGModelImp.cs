@@ -5,7 +5,7 @@ using System.Threading;
 using System.Diagnostics;
 using System.ComponentModel;
 
-namespace FlightInspectionDesktopApp.FGModel
+namespace FlightInspectionDesktopApp
 {/// <summary>
 /// Implementation of the main model.
 /// </summary>
@@ -136,6 +136,7 @@ namespace FlightInspectionDesktopApp.FGModel
             new Thread(delegate ()
             {
                 DataModel model = DataModel.Instance;
+                Metadata.MetadataModel metaModel = Metadata.MetadataModel.Instance;
 
                 while (!shouldStop)
                 {
@@ -146,6 +147,7 @@ namespace FlightInspectionDesktopApp.FGModel
                         Disconnect();
                     }
                     this.telnetClient.Write(model.getLineByIndex(model.CurrentLineIndex));
+                    metaModel.Altitude = model.getValueByKeyAndTime("altitude-ft", model.CurrentLineIndex);
                     model.CurrentLineIndex++;
                     // play in 10 Hz:
                     Thread.Sleep(PlayingSpeed);
@@ -169,7 +171,7 @@ namespace FlightInspectionDesktopApp.FGModel
         private double elevator;
         private double rudder;
         private double throttle;
-        private double position;        
+        private double position;
 
         public double Aileron
         {

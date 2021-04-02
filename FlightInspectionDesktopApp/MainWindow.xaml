@@ -25,7 +25,7 @@
             <TextBox Name ="ErrorCSV" BorderThickness="0" Visibility="Hidden" Text="Required Field!" Foreground="Red" Grid.Row="2" Grid.Column="2"/>
 
             <TextBox x:Name="PathFG" Margin="0,0,3,3" TextWrapping="NoWrap" IsReadOnly="True" Text="" Grid.Row="0" Grid.Column="2" HorizontalAlignment="Center" TextChanged="PathFG_TextChanged" Width="220" FontSize="11" VerticalContentAlignment="Center"/>
-            <Button Name="LoadFG" Margin="0,0,3,3" Content="Open flight gear" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Click="LoadFG_Click" Grid.Row="0" Grid.Column="1" >
+            <Button Name="LoadFG" Margin="0,0,3,3" Content="Open Flight Gear" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Click="LoadFG_Click" Grid.Row="0" Grid.Column="1" >
                 <Button.Effect>
                     <DropShadowEffect ShadowDepth="2" Opacity="0.5" BlurRadius="17"/>
                 </Button.Effect>

@@ -13,7 +13,8 @@ namespace FlightInspectionDesktopApp.UserControls
         public Metadata()
         {
             InitializeComponent();
-            vm = new MetadataViewModel(new MetadataModel());
+            MetadataModel.CreateModel();
+            vm = new MetadataViewModel(MetadataModel.Instance);
             this.DataContext = vm;
             /*
             dataAltitude.Text = model.getValueByKeyAndTime("altitude-ft", model.CurrentLineIndex).ToString();

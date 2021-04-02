@@ -17,8 +17,8 @@ namespace FlightInspectionDesktopApp
         {
             InitializeComponent();
             // create a new view model, with flight gear model and telnet client
-            vm = new FGViewModel(new FGModel.FGModelImp(new TelnetClient()));
-            DataContext = vm;
+            vm = new FGViewModel(new FGModelImp(new TelnetClient()));
+            //DataContext = vm;
         }
         /// <summary>
         /// The function opens the file explorer window for the FlightGear executable

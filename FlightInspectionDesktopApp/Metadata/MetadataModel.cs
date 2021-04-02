@@ -1,10 +1,36 @@
-﻿using System.ComponentModel;
+﻿using System;
+using System.ComponentModel;
 
 namespace FlightInspectionDesktopApp.Metadata
 {
     class MetadataModel : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
+
+        private static MetadataModel metadataModelIns;
+
+        private MetadataModel() { }
+
+        public static MetadataModel Instance
+        {
+            get
+            {
+                if (metadataModelIns == null)
+                {
+                    throw new Exception("DataModel was not created");
+                }
+                return metadataModelIns;
+            }
+        }
+
+        public static void CreateModel()
+        {
+            if (metadataModelIns != null)
+            {
+                throw new Exception("DataModel is already created");
+            }
+            metadataModelIns = new MetadataModel();
+        }
 
         public void NotifyPropertyChanged(string propName)
         {

@@ -57,7 +57,7 @@
     </ApplicationDefinition>
     <Compile Include="Metadata\MetadataModel.cs" />
     <Compile Include="Metadata\MetadataViewModel.cs" />
-    <Compile Include="UserControls\Metadata.xaml.cs">
+    <Compile Include="Metadata\Metadata.xaml.cs">
       <DependentUpon>Metadata.xaml</DependentUpon>
     </Compile>
     <Page Include="InspectorWindow.xaml">
@@ -84,7 +84,7 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="UserControls\Metadata.xaml">
+    <Page Include="Metadata\Metadata.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -115,6 +115,8 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="UserControls\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
