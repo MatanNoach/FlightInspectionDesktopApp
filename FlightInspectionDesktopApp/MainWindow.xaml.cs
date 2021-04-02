@@ -1,8 +1,8 @@
-﻿using System;
+﻿using Microsoft.Win32;
+using System;
 using System.IO;
 using System.Windows;
 using System.Windows.Controls;
-using Microsoft.Win32;
 
 namespace FlightInspectionDesktopApp
 {
@@ -11,13 +11,20 @@ namespace FlightInspectionDesktopApp
     /// </summary>
     public partial class MainWindow : Window
     {
+        // The view model for the simulator
         FGViewModel vm;
         public MainWindow()
         {
             InitializeComponent();
+            // create a new view model, with flight gear model and telnet client
             vm = new FGViewModel(new FGModel.FGModelImp(new TelnetClient()));
             DataContext = vm;
         }
+        /// <summary>
+        /// The function opens the file explorer window for the FlightGear executable
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void LoadFG_Click(object sender, RoutedEventArgs e)
         {
             // Asks the user to upload an exe file
@@ -29,7 +36,11 @@ namespace FlightInspectionDesktopApp
                 PathFG.Text = System.IO.Path.GetFullPath(openFile.FileName);
             }
         }
-
+        /// <summary>
+        /// The function opens the file explorer window for the XML document
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void LoadXML_Click(object sender, RoutedEventArgs e)
         {
             // Asks the user to upload an XML document
@@ -39,10 +50,13 @@ namespace FlightInspectionDesktopApp
             if (openFile.ShowDialog() == true)
             {
                 PathXML.Text = System.IO.Path.GetFullPath(openFile.FileName);
-
             }
         }
-
+        /// <summary>
+        /// The function opens the file explorer window for the CSV file
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void LoadCSV_Click(object sender, RoutedEventArgs e)
         {
             // Asks the user to upload a CSV file
@@ -54,6 +68,11 @@ namespace FlightInspectionDesktopApp
                 PathCSV.Text = System.IO.Path.GetFullPath(openFile.FileName);
             }
         }
+        /// <summary>
+        /// The function verifies the user input
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Submit_Click(object sender, RoutedEventArgs e)
         {
             bool isValid = true;
@@ -75,11 +94,13 @@ namespace FlightInspectionDesktopApp
                 ErrorCSV.Visibility = Visibility.Visible;
                 isValid = false;
             }
+            // if all the data is valid
             if (isValid)
             {
+                // get the binFolder, actual xml file location, xml file name and the real location the xml file needs to be placed
                 String binFolder = Directory.GetParent(PathFG.Text).ToString();
                 String actualXML = Directory.GetParent(PathXML.Text).ToString();
-                String XMLFileName = System.IO.Path.GetFileNameWithoutExtension(PathXML.Text);
+                String XMLFileName = Path.GetFileNameWithoutExtension(PathXML.Text);
                 String targetXML = Directory.GetParent(binFolder).ToString() + "\\data\\Protocol";
                 // Check if the XML file is in the right location
                 if (!actualXML.Equals(targetXML))
@@ -88,31 +109,36 @@ namespace FlightInspectionDesktopApp
                     ErrorXML.Text = "Please move XML file to " + targetXML;
                     ErrorXML.Visibility = Visibility.Visible;
                     isValid = false;
-
                 }
                 else
                 {
                     ErrorXML.Visibility = Visibility.Hidden;
                 }
-
-
-
                 if (isValid)
-                {                    
+                {
+                    // run the view model
                     vm.Run(binFolder, PathFG.Text, XMLFileName, PathCSV.Text);
                 }
             }
         }
+        /// <summary>
+        /// The function checks if the user uploaded a FlightGear executable, and hides an error message if exists
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void PathFG_TextChanged(object sender, TextChangedEventArgs e)
         {
             // If the user uploaded an exe file, hide the error message
             if (PathFG.Text.Length > 0)
             {
                 ErrorFG.Visibility = Visibility.Hidden;
-
             }
         }
-
+        /// <summary>
+        /// The function checks if the user uploaded an XML document, and hides an error message if exists
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void PathXML_TextChanged(object sender, TextChangedEventArgs e)
         {
             // If the user uploaded an XML file, hide the error message
@@ -121,7 +147,11 @@ namespace FlightInspectionDesktopApp
                 ErrorXML.Visibility = Visibility.Hidden;
             }
         }
-
+        /// <summary>
+        /// The function checks if the user uploaded a CSV file, and hides an error message if exists
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void PathCSV_TextChanged(object sender, TextChangedEventArgs e)
         {
             // If the user uploaded an CSV file, hide the error message
@@ -131,7 +161,7 @@ namespace FlightInspectionDesktopApp
             }
 
         }
-
+        // The function disconnects from the simulator on button click
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             vm.Disconnect();
