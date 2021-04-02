@@ -33,7 +33,7 @@ namespace FlightInspectionDesktopApp
             // Update the path in the TextBox
             if (openFile.ShowDialog() == true)
             {
-                PathFG.Text = System.IO.Path.GetFullPath(openFile.FileName);
+                PathFG.Text = Path.GetFullPath(openFile.FileName);
             }
         }
         /// <summary>
