@@ -14,7 +14,6 @@ namespace FlightInspectionDesktopApp.UserControls
             InitializeComponent();
             MetadataModel.CreateModel();
             vm = new MetadataViewModel(MetadataModel.Instance);
-            //? we're not sure if it's doing anything
             this.DataContext = vm;
         }
     }

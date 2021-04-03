@@ -57,9 +57,14 @@
     </ApplicationDefinition>
     <Compile Include="Metadata\MetadataModel.cs" />
     <Compile Include="Metadata\MetadataViewModel.cs" />
-    <Compile Include="Metadata\Metadata.xaml.cs">
+    <Compile Include="UserControls\Metadata.xaml.cs">
       <DependentUpon>Metadata.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UserControls\Steering.xaml.cs">
+      <DependentUpon>Steering.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Steering\SteeringModel.cs" />
+    <Compile Include="Steering\SteeringViewModel.cs" />
     <Page Include="InspectorWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -84,7 +89,11 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="Metadata\Metadata.xaml">
+    <Page Include="UserControls\Metadata.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\Steering.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

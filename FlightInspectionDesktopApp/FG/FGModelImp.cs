@@ -136,6 +136,7 @@ namespace FlightInspectionDesktopApp
             {
                 DataModel model = DataModel.Instance;
                 Metadata.MetadataModel metaModel = Metadata.MetadataModel.Instance;
+                Steering.SteeringModel steeringModel = Steering.SteeringModel.Instance;
 
                 while (!shouldStop)
                 {
@@ -154,6 +155,11 @@ namespace FlightInspectionDesktopApp
                     metaModel.Pitch = model.getValueByKeyAndTime("pitch-deg", model.CurrentLineIndex);
                     metaModel.Roll = model.getValueByKeyAndTime("roll-deg", model.CurrentLineIndex);
                     metaModel.SideSlip = model.getValueByKeyAndTime("side-slip-deg", model.CurrentLineIndex);
+                    // store each value from the current line in SteeringModel properties 
+                    steeringModel.Throttle = model.getValueByKeyAndTime("throttle_0", model.CurrentLineIndex);
+                    steeringModel.Rudder = model.getValueByKeyAndTime("rudder", model.CurrentLineIndex);
+                    steeringModel.Elevator = model.getValueByKeyAndTime("elevator", model.CurrentLineIndex);
+                    steeringModel.Aileron = model.getValueByKeyAndTime("aileron_0", model.CurrentLineIndex);
                     model.CurrentLineIndex++;
                     // play in 10 Hz:
                     Thread.Sleep(PlayingSpeed);
