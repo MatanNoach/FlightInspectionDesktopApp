@@ -205,7 +205,7 @@ namespace FlightInspectionDesktopApp
         /// <returns> a value from the csv file</returns>
         internal double getValueByKeyAndTime(string key, int time)
         {
-            if (dictData.ContainsKey(key) && dictData[key].Count <= time)
+            if (dictData.ContainsKey(key) && dictData[key].Count > time)
             {
                 return dictData[key][time];
             }
@@ -219,7 +219,7 @@ namespace FlightInspectionDesktopApp
         /// <returns> a string which represents a line in the csv file </returns>
         internal string getLineByIndex(int index)
         {
-            if (rawData.Count <= index)
+            if (rawData.Count > index)
             {
                 return rawData[index];
             }
