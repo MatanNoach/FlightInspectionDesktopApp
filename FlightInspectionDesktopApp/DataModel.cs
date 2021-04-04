@@ -33,7 +33,7 @@ namespace FlightInspectionDesktopApp
             set
             {
                 currentLineIndex = value;
-                NotifyPropertyChanged("VMCurrentLine");
+                NotifyPropertyChanged("CurrentLineIndex");
             }
         }
         public int NextLine
@@ -45,13 +45,6 @@ namespace FlightInspectionDesktopApp
             set
             {
                 nextLine = value;
-            }
-        }
-        public int MaxLine
-        {
-            get
-            {
-                return rawData.Count;
             }
         }
 
@@ -228,9 +221,13 @@ namespace FlightInspectionDesktopApp
         {
             return rawData.Count;
         }
+        /// <summary>
+        /// The function moves the simulator another line
+        /// </summary>
         public void moveNextLine()
         {
-            if (!((currentLineIndex == 0 && nextLine < 0) || (currentLineIndex == rawData.Count && nextLine > 0)))
+            // if the line is not zero in reverse or not max line in forward, read the next line
+            if (!((currentLineIndex == 0 && nextLine < 0) || (currentLineIndex == (rawData.Count - 1) && nextLine > 0)))
             {
                 CurrentLineIndex += nextLine;
             }

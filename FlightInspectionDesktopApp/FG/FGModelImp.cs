@@ -1,9 +1,9 @@
 ﻿using System;
+using System.ComponentModel;
+using System.Diagnostics;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading;
-using System.Diagnostics;
-using System.ComponentModel;
-using System.Runtime.InteropServices;
 
 namespace FlightInspectionDesktopApp
 {/// <summary>
@@ -35,8 +35,7 @@ namespace FlightInspectionDesktopApp
             }
             fgModel = new FGModelImp(telnetClient);
         }
-        // set the default playing speed to 10 Hz
-        public int PlayingSpeed { get; set; } = 100;
+
         /// <summary>
         /// FGModelImp constructor.
         /// </summary>
@@ -115,7 +114,7 @@ namespace FlightInspectionDesktopApp
                 Process exeProcess = Process.Start(startInfo);
 
                 // set the process's window at the left side of the screen
-                Thread.Sleep(2000);
+                Thread.Sleep(5000);
                 IntPtr handle = exeProcess.MainWindowHandle;
                 const short SWP_NOZORDER = 0X4;
                 const int SWP_SHOWWINDOW = 0x0040;
@@ -183,9 +182,7 @@ namespace FlightInspectionDesktopApp
             {
                 Metadata.MetadataModel metaModel = Metadata.MetadataModel.Instance;
                 Steering.SteeringModel steeringModel = Steering.SteeringModel.Instance;
-
-                int dataSize = dataModel.getDataSize() - 1;
-
+                Player.PlayerModel playerModel = Player.PlayerModel.Instance;
                 while (!shouldStop)
                 {
                     // send a line from the CSV to FG
@@ -202,10 +199,10 @@ namespace FlightInspectionDesktopApp
                     steeringModel.Rudder = dataModel.getValueByKeyAndTime("rudder", dataModel.CurrentLineIndex);
                     steeringModel.Elevator = dataModel.getValueByKeyAndTime("elevator", dataModel.CurrentLineIndex);
                     steeringModel.Aileron = dataModel.getValueByKeyAndTime("aileron_0", dataModel.CurrentLineIndex);
-
-                    dataModel.moveNextLine();
+                    // read another line from the data model
+                    playerModel.DataModel.moveNextLine();
                     // play in 10 Hz:
-                    Thread.Sleep(PlayingSpeed);
+                    Thread.Sleep(playerModel.PlayingSpeed);
                 }
             }).Start();
         }
@@ -289,7 +286,6 @@ namespace FlightInspectionDesktopApp
                 NotifyPropertyChanged("Position");
             }
         }
-
         public DataModel DataModel
         {
             get

@@ -37,7 +37,7 @@
             </Button>
         </StackPanel>
         <Slider x:Name="TimeSlider" Grid.Row="1" HorizontalAlignment="Center" 
-            Width="{Binding ElementName=PlayerPanel, Path=ActualWidth}" Value="{Binding VMCurrentLine,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+            Width="{Binding ElementName=PlayerPanel, Path=ActualWidth}" Value="{Binding VMCurrentLineIndex,Mode=TwoWay}"
             Minimum="0" Maximum="{Binding VMMaxLine, Mode=OneWay}"/>
 
     </Grid>
