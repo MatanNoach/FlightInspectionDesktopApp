@@ -122,7 +122,7 @@ namespace FlightInspectionDesktopApp
 
                 if (handle != IntPtr.Zero)
                 {
-                    SetWindowPos(handle, 0, 0, 0, (int)(Properties.Settings.Default.windowWidth * 1.3), (int)(Properties.Settings.Default.windowHeight * 1.3), SWP_NOZORDER | SWP_SHOWWINDOW);
+                    SetWindowPos(handle, 0, 0, 0, (int)(Properties.Settings.Default.windowWidth * 1.25), (int)(Properties.Settings.Default.windowHeight * 1.25), SWP_NOZORDER | SWP_SHOWWINDOW);
                 }
             }
             catch (Exception e)
@@ -184,28 +184,28 @@ namespace FlightInspectionDesktopApp
                 Metadata.MetadataModel metaModel = Metadata.MetadataModel.Instance;
                 Steering.SteeringModel steeringModel = Steering.SteeringModel.Instance;
 
-                int dataSize = model.getDataSize() - 1;
+                int dataSize = dataModel.getDataSize() - 1;
 
                 while (!shouldStop)
                 {
                     // send a line from the CSV to FG
-                    this.telnetClient.Write(model.getLineByIndex(model.CurrentLineIndex));
+                    this.telnetClient.Write(dataModel.getLineByIndex(dataModel.CurrentLineIndex));
                     // store each value from the current line in MetadataModel properties 
-                    metaModel.Altitude = model.getValueByKeyAndTime("altimeter_indicated-altitude-ft", model.CurrentLineIndex);
-                    metaModel.AirSpeed = model.getValueByKeyAndTime("airspeed-kt", model.CurrentLineIndex);
-                    metaModel.Heading = model.getValueByKeyAndTime("heading-deg", model.CurrentLineIndex);
-                    metaModel.Pitch = model.getValueByKeyAndTime("pitch-deg", model.CurrentLineIndex);
-                    metaModel.Roll = model.getValueByKeyAndTime("roll-deg", model.CurrentLineIndex);
-                    metaModel.SideSlip = model.getValueByKeyAndTime("side-slip-deg", model.CurrentLineIndex);
+                    metaModel.Altitude = dataModel.getValueByKeyAndTime("altimeter_indicated-altitude-ft", dataModel.CurrentLineIndex);
+                    metaModel.AirSpeed = dataModel.getValueByKeyAndTime("airspeed-kt", dataModel.CurrentLineIndex);
+                    metaModel.Heading = dataModel.getValueByKeyAndTime("heading-deg", dataModel.CurrentLineIndex);
+                    metaModel.Pitch = dataModel.getValueByKeyAndTime("pitch-deg", dataModel.CurrentLineIndex);
+                    metaModel.Roll = dataModel.getValueByKeyAndTime("roll-deg", dataModel.CurrentLineIndex);
+                    metaModel.SideSlip = dataModel.getValueByKeyAndTime("side-slip-deg", dataModel.CurrentLineIndex);
                     // store each value from the current line in SteeringModel properties 
-                    steeringModel.Throttle = model.getValueByKeyAndTime("throttle_0", model.CurrentLineIndex);
-                    steeringModel.Rudder = model.getValueByKeyAndTime("rudder", model.CurrentLineIndex);
-                    steeringModel.Elevator = model.getValueByKeyAndTime("elevator", model.CurrentLineIndex);
-                    steeringModel.Aileron = model.getValueByKeyAndTime("aileron_0", model.CurrentLineIndex);
+                    steeringModel.Throttle = dataModel.getValueByKeyAndTime("throttle_0", dataModel.CurrentLineIndex);
+                    steeringModel.Rudder = dataModel.getValueByKeyAndTime("rudder", dataModel.CurrentLineIndex);
+                    steeringModel.Elevator = dataModel.getValueByKeyAndTime("elevator", dataModel.CurrentLineIndex);
+                    steeringModel.Aileron = dataModel.getValueByKeyAndTime("aileron_0", dataModel.CurrentLineIndex);
 
-                    if (model.CurrentLineIndex < dataSize)
+                    if (dataModel.CurrentLineIndex < dataSize)
                     {
-                        model.CurrentLineIndex++;
+                        dataModel.CurrentLineIndex++;
                         // play in 10 Hz:
                         Thread.Sleep(PlayingSpeed);
                     }
