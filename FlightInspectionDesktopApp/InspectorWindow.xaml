@@ -4,8 +4,12 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:FlightInspectionDesktopApp" xmlns:control="clr-namespace:FlightInspectionDesktopApp.UserControls"
+        xmlns:properties="clr-namespace:FlightInspectionDesktopApp.Properties"
         mc:Ignorable="d"
-        Title="InspectorWindow" Height="450" Width="800">
+        Title="InspectorWindow" Height="{Binding Source={x:Static properties:Settings.Default}, Path=windowHeight}" Width="{Binding Source={x:Static properties:Settings.Default}, Path=windowWidth}"
+        WindowStartupLocation="Manual"
+        Left="{Binding Source={x:Static properties:Settings.Default}, Path=windowWidth}"
+        Top="0">
     <Grid Background="Gray">
         <control:Metadata HorizontalAlignment="Right" Padding="0,0,20,0"/>
         <control:Steering HorizontalAlignment="Left" Padding="0,0,20,0"/>

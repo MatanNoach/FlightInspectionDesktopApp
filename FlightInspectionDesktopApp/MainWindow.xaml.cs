@@ -1,7 +1,7 @@
-﻿using Microsoft.Win32;
-using System;
+﻿using System;
 using System.IO;
 using System.Windows;
+using Microsoft.Win32;
 using System.Windows.Controls;
 
 namespace FlightInspectionDesktopApp
@@ -16,7 +16,9 @@ namespace FlightInspectionDesktopApp
         public MainWindow()
         {
             InitializeComponent();
-            //DataContext = vm;
+            // create a new view model, with flight gear model and telnet client
+            vm = new FGViewModel(new FGModelImp(new TelnetClient()));
+            this.DataContext = vm;
         }
         /// <summary>
         /// The function opens the file explorer window for the FlightGear executable
