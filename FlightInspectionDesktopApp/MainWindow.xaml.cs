@@ -72,6 +72,29 @@ namespace FlightInspectionDesktopApp
         /// <param name="e"></param>
         private void Submit_Click(object sender, RoutedEventArgs e)
         {
+            if (!validateTextboxes() && !validateFiles())
+            {
+                // run the view model
+                string binFolder = Directory.GetParent(PathFG.Text).ToString();
+                string XMLFileName = Path.GetFileNameWithoutExtension(PathXML.Text);
+
+                DataModel.CreateModel(PathCSV.Text, PathXML.Text);
+                FGModelImp.CreateModel(new TelnetClient());
+                // create a new view model, with flight gear model and telnet client
+                vm = new FGViewModel(FGModelImp.Instance);
+                InspectorWindow inspector = new InspectorWindow();
+                inspector.Show();
+                Close();
+                vm.Run(binFolder, PathFG.Text, XMLFileName, PathCSV.Text);
+            }
+        }
+
+        /// <summary>
+        /// validate that all the TextBox fields have data.
+        /// </summary>
+        /// <returns> True if does, and False if not </returns>
+        private bool validateTextboxes()
+        {
             bool isValid = true;
             // Check if the user uploaded an exe file
             if (PathFG.Text.Length == 0)
@@ -91,40 +114,55 @@ namespace FlightInspectionDesktopApp
                 ErrorCSV.Visibility = Visibility.Visible;
                 isValid = false;
             }
-            // if all the data is valid
-            if (isValid)
+
+            return isValid;
+        }
+
+        /// <summary>
+        /// validate that:
+        ///     1. the xml file is in the right directory.
+        ///     2. the csv file is not open.
+        /// </summary>
+        /// <returns> True if does, False if not </returns>
+        private bool validateFiles()
+        {
+            bool isValid = true;
+
+            // get the binFolder, actual xml file location, xml file name and the real location the xml file needs to be placed
+            string binFolder = Directory.GetParent(PathFG.Text).ToString();
+            string actualXML = Directory.GetParent(PathXML.Text).ToString();
+            string targetXML = Directory.GetParent(binFolder).ToString() + "\\data\\Protocol";
+            // Check if the XML file is in the right location
+            if (!actualXML.Equals(targetXML))
             {
-                // get the binFolder, actual xml file location, xml file name and the real location the xml file needs to be placed
-                String binFolder = Directory.GetParent(PathFG.Text).ToString();
-                String actualXML = Directory.GetParent(PathXML.Text).ToString();
-                String XMLFileName = Path.GetFileNameWithoutExtension(PathXML.Text);
-                String targetXML = Directory.GetParent(binFolder).ToString() + "\\data\\Protocol";
-                // Check if the XML file is in the right location
-                if (!actualXML.Equals(targetXML))
+                // if not, ask him to move it
+                ErrorXML.Text = "Please move XML file to " + targetXML;
+                ErrorXML.Visibility = Visibility.Visible;
+                isValid = false;
+            }
+            else
+            {
+                ErrorXML.Visibility = Visibility.Hidden;
+            }
+
+            // validate that the csv file is not open
+            try
+            {
+                using (FileStream stream = File.Open(PathCSV.Text, FileMode.Open))
                 {
-                    // if not, ask him to move it
-                    ErrorXML.Text = "Please move XML file to " + targetXML;
-                    ErrorXML.Visibility = Visibility.Visible;
-                    isValid = false;
-                }
-                else
-                {
-                    ErrorXML.Visibility = Visibility.Hidden;
-                }
-                if (isValid)
-                {
-                    // run the view model
-                    DataModel.CreateModel(PathCSV.Text, PathXML.Text);
-                    FGModelImp.CreateModel(new TelnetClient());
-                    // create a new view model, with flight gear model and telnet client
-                    vm = new FGViewModel(FGModelImp.Instance);
-                    InspectorWindow inspector = new InspectorWindow();
-                    inspector.Show();
-                    Close();
-                    vm.Run(binFolder, PathFG.Text, XMLFileName, PathCSV.Text);
+                    stream.Close();
+                    ErrorCSV.Visibility = Visibility.Hidden;
                 }
             }
+            catch (IOException)
+            {
+                ErrorCSV.Text = "Please close the file before inspecting it";
+                ErrorCSV.Visibility = Visibility.Visible;
+                isValid = false;
+            }
+            return isValid;
         }
+
         /// <summary>
         /// The function checks if the user uploaded a FlightGear executable, and hides an error message if exists
         /// </summary>

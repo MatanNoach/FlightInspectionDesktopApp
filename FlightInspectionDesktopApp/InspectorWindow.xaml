@@ -12,6 +12,7 @@
         Top="0">
     <Grid Background="Gray">
         <control:Metadata HorizontalAlignment="Right" Padding="0,0,20,0"/>
+        <control:Speedometer HorizontalAlignment="Right" VerticalAlignment="Bottom" Padding="0,0,40,0" />
         <control:Steering HorizontalAlignment="Left" Padding="0,0,20,0"/>
         <control:Player VerticalAlignment="Bottom" Padding="0,0,0,0"/>
     </Grid>

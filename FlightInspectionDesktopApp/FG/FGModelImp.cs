@@ -183,6 +183,8 @@ namespace FlightInspectionDesktopApp
                 Metadata.MetadataModel metaModel = Metadata.MetadataModel.Instance;
                 Steering.SteeringModel steeringModel = Steering.SteeringModel.Instance;
                 Player.PlayerModel playerModel = Player.PlayerModel.Instance;
+                Speedometer.SpeedometerModel speedometerModel = Speedometer.SpeedometerModel.Instance;
+
                 while (!shouldStop)
                 {
                     // send a line from the CSV to FG
@@ -199,6 +201,10 @@ namespace FlightInspectionDesktopApp
                     steeringModel.Rudder = dataModel.getValueByKeyAndTime("rudder", dataModel.CurrentLineIndex);
                     steeringModel.Elevator = dataModel.getValueByKeyAndTime("elevator", dataModel.CurrentLineIndex);
                     steeringModel.Aileron = dataModel.getValueByKeyAndTime("aileron_0", dataModel.CurrentLineIndex);
+
+                    speedometerModel.AirSpeed = dataModel.getValueByKeyAndTime("airspeed-kt", dataModel.CurrentLineIndex);
+                    speedometerModel.SpeedometerAngle = speedometerModel.calculateSpeedometerAngle(speedometerModel.AirSpeed);
+
                     // read another line from the data model
                     playerModel.DataModel.moveNextLine();
                     // play in 10 Hz:
