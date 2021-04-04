@@ -103,5 +103,32 @@ namespace FlightInspectionDesktopApp.Properties {
                 return ((char)(this["varSeparator"]));
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("250")]
+        public int bigCircle {
+            get {
+                return ((int)(this["bigCircle"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("100")]
+        public int smallCircle {
+            get {
+                return ((int)(this["smallCircle"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("--httpd=8080")]
+        public string httpd {
+            get {
+                return ((string)(this["httpd"]));
+            }
+        }
     }
 }

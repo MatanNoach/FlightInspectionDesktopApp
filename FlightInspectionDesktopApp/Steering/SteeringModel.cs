@@ -23,7 +23,7 @@ namespace FlightInspectionDesktopApp.Steering
             {
                 if (steeringModelIns == null)
                 {
-                    throw new Exception("MetadataModel was not created");
+                    throw new Exception("SteeringModel was not created");
                 }
                 return steeringModelIns;
             }
@@ -36,7 +36,7 @@ namespace FlightInspectionDesktopApp.Steering
         {
             if (steeringModelIns != null)
             {
-                throw new Exception("MetadataModel is already created");
+                throw new Exception("SteeringModel is already created");
             }
             steeringModelIns = new SteeringModel();
         }

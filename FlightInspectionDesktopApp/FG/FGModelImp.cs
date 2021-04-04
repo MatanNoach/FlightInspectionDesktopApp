@@ -68,6 +68,7 @@ namespace FlightInspectionDesktopApp
                 genericCMD,
                 telnetCMD,
                 Properties.Settings.Default.cmdFDM
+                //Properties.Settings.Default.httpd
             };
 
             startInfo.Arguments = string.Join(" ", processArgs);
@@ -149,7 +150,7 @@ namespace FlightInspectionDesktopApp
                     // send a line from the CSV to FG
                     this.telnetClient.Write(model.getLineByIndex(model.CurrentLineIndex));
                     // store each value from the current line in MetadataModel properties 
-                    metaModel.Altitude = model.getValueByKeyAndTime("altitude-ft", model.CurrentLineIndex);
+                    metaModel.Altitude = model.getValueByKeyAndTime("altimeter_indicated-altitude-ft", model.CurrentLineIndex);
                     metaModel.AirSpeed = model.getValueByKeyAndTime("airspeed-kt", model.CurrentLineIndex);
                     metaModel.Heading = model.getValueByKeyAndTime("heading-deg", model.CurrentLineIndex);
                     metaModel.Pitch = model.getValueByKeyAndTime("pitch-deg", model.CurrentLineIndex);

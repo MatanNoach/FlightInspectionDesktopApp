@@ -1,6 +1,7 @@
 ﻿using FlightInspectionDesktopApp.Steering;
 using System;
 using System.Globalization;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Shapes;
@@ -22,10 +23,10 @@ namespace FlightInspectionDesktopApp.UserControls
         }
     }
 
-    class ActualValueToJoystickConverter : IValueConverter
+    class AileronValueToJoystickConverter : IValueConverter
     {
         /// <summary>
-        /// Converts Aileron [-1,1] and Elevator [-1,1] values to Joystick values.
+        /// Converts Aileron [-1,1] values to Joystick values.
         /// </summary>
         /// <param name="value">value that we're binded to</param>
         /// <param name="targetType">none</param>
@@ -34,9 +35,38 @@ namespace FlightInspectionDesktopApp.UserControls
         /// <returns></returns>
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            Ellipse e = (Ellipse)parameter;
-            double size = e.Height / (10.0 / 3.0);
+            double size = (Properties.Settings.Default.bigCircle / 2) - (Properties.Settings.Default.smallCircle / 2);
             return (double)value * size + size;
+        }
+
+        /// <summary>
+        /// Not implemented.
+        /// </summary>
+        /// <param name="value"></param>
+        /// <param name="targetType"></param>
+        /// <param name="parameter"></param>
+        /// <param name="culture"></param>
+        /// <returns></returns>
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            throw new NotImplementedException();
+        }
+    }
+
+    class ElevatorValueToJoystickConverter : IValueConverter
+    {
+        /// <summary>
+        /// Converts Elevator [-1,1] values to Joystick values.
+        /// </summary>
+        /// <param name="value">value that we're binded to</param>
+        /// <param name="targetType">none</param>
+        /// <param name="parameter">JoystickBoundries Ellipse</param>
+        /// <param name="culture">none</param>
+        /// <returns></returns>
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            double size = (Properties.Settings.Default.bigCircle / 2) - (Properties.Settings.Default.smallCircle / 2);
+            return (double)value * -size + size;
         }
 
         /// <summary>
