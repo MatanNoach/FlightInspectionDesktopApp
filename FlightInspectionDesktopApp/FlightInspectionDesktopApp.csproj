@@ -34,6 +34,9 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>FlightInspection.ico</ApplicationIcon>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -144,6 +147,9 @@
     <Resource Include="Player\ButtonPics\pause.png" />
     <Resource Include="Player\ButtonPics\play.png" />
     <Resource Include="Player\ButtonPics\stop.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="FlightInspection.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
