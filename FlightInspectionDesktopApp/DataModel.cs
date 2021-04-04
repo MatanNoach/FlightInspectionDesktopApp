@@ -234,6 +234,34 @@ namespace FlightInspectionDesktopApp
         {
             return rawData.Count;
         }
+
+        /// <summary>
+        /// get the min value of the given key.
+        /// </summary>
+        /// <param name="key"> a column name </param>
+        /// <returns> the minimal value </returns>
+        internal double getMinValueByKey(string key)
+        {
+            if (dictData.ContainsKey(key))
+            {
+                return dictData[key].Min();
+            }
+            return -9999;
+        }
+
+        /// <summary>
+        /// get the max value of the given key.
+        /// </summary>
+        /// <param name="key"> a column name </param>
+        /// <returns> the maximal value </returns>
+        internal double getMaxValueByKey(string key)
+        {
+            if (dictData.ContainsKey(key))
+            {
+                return dictData[key].Max();
+            }
+            return 9999;
+        }
         public void moveNextLine()
         {
             if (!((currentLineIndex == 0 && nextLine < 0) || (currentLineIndex == rawData.Count && nextLine > 0)))

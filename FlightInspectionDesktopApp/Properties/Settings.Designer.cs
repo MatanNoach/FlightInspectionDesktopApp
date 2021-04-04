@@ -154,5 +154,23 @@ namespace FlightInspectionDesktopApp.Properties {
                 this["windowWidth"] = value;
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("-90")]
+        public double speedometerStartAngle {
+            get {
+                return ((double)(this["speedometerStartAngle"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("90")]
+        public double speedometerEndAngle {
+            get {
+                return ((double)(this["speedometerEndAngle"]));
+            }
+        }
     }
 }
