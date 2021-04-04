@@ -10,6 +10,10 @@ namespace FlightInspectionDesktopApp
         public InspectorWindow()
         {
             InitializeComponent();
+
+            // set the user's main screen size, in order to use it while displaying FG and InspectorWindow
+            Properties.Settings.Default.windowWidth = (int)(SystemParameters.PrimaryScreenWidth) / 2;
+            Properties.Settings.Default.windowHeight = (int)(SystemParameters.PrimaryScreenHeight);
         }
     }
 }

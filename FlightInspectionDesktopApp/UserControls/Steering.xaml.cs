@@ -1,10 +1,8 @@
-﻿using FlightInspectionDesktopApp.Steering;
-using System;
-using System.Globalization;
-using System.Windows;
-using System.Windows.Controls;
+﻿using System;
 using System.Windows.Data;
-using System.Windows.Shapes;
+using System.Globalization;
+using System.Windows.Controls;
+using FlightInspectionDesktopApp.Steering;
 
 namespace FlightInspectionDesktopApp.UserControls
 {

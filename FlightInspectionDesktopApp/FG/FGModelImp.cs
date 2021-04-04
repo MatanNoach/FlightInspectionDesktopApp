@@ -3,6 +3,7 @@ using System.Text;
 using System.Threading;
 using System.Diagnostics;
 using System.ComponentModel;
+using System.Runtime.InteropServices;
 
 namespace FlightInspectionDesktopApp
 {/// <summary>
@@ -27,6 +28,20 @@ namespace FlightInspectionDesktopApp
         }
 
         /// <summary>
+        /// import SetWindowsPos function from user32 API, in ordet to set the window's size of FG
+        /// </summary>
+        /// <param name="hWnd"> the handler of the main window of the process </param>
+        /// <param name="hWndInsertAfter"> always 0 </param>
+        /// <param name="x"> the starting point from the left of the screen </param>
+        /// <param name="Y"> the starting point from the top side of the screen </param>
+        /// <param name="cx"> the new width of the process's window </param>
+        /// <param name="cy"> the new height of the process's window </param>
+        /// <param name="wFlags"> flags for the api function </param>
+        /// <returns></returns>
+        [DllImport("user32.dll", EntryPoint = "SetWindowPos")]
+        public static extern IntPtr SetWindowPos(IntPtr hWnd, int hWndInsertAfter, int x, int Y, int cx, int cy, int wFlags);
+
+        /// <summary>
         /// Starts up FlightGear Simulator.
         /// </summary>
         /// <param name="binFolder">location of fgfs.exe file</param>
@@ -43,7 +58,6 @@ namespace FlightInspectionDesktopApp
             startInfo.WindowStyle = ProcessWindowStyle.Hidden;
 
             // Send the simulator settings as command arguments
-
             // set the generic flag
             string[] genericArgs = {
                 Properties.Settings.Default.cmdGeneric,
@@ -73,11 +87,22 @@ namespace FlightInspectionDesktopApp
 
             startInfo.Arguments = string.Join(" ", processArgs);
             startInfo.RedirectStandardOutput = true;
-            startInfo.CreateNoWindow = true;
+
             try
             {
                 // Run the process by the ProcessInfo
-                using (Process exeProcess = Process.Start(startInfo)) { }
+                Process exeProcess = Process.Start(startInfo);
+
+                // set the process's window at the left side of the screen
+                Thread.Sleep(2000);
+                IntPtr handle = exeProcess.MainWindowHandle;
+                const short SWP_NOZORDER = 0X4;
+                const int SWP_SHOWWINDOW = 0x0040;
+
+                if (handle != IntPtr.Zero)
+                {
+                    SetWindowPos(handle, 0, 0, 0, (int)(Properties.Settings.Default.windowWidth * 1.3), (int)(Properties.Settings.Default.windowHeight * 1.3), SWP_NOZORDER | SWP_SHOWWINDOW);
+                }
             }
             catch (Exception e)
             {
@@ -139,14 +164,10 @@ namespace FlightInspectionDesktopApp
                 Metadata.MetadataModel metaModel = Metadata.MetadataModel.Instance;
                 Steering.SteeringModel steeringModel = Steering.SteeringModel.Instance;
 
+                int dataSize = model.getDataSize() - 1;
+
                 while (!shouldStop)
                 {
-                    // currentLine will be null when the StreamReader reaches the end of file
-                    if (model.CurrentLineIndex > model.getDataSize())
-                    {
-                        //? not the final logic
-                        Disconnect();
-                    }
                     // send a line from the CSV to FG
                     this.telnetClient.Write(model.getLineByIndex(model.CurrentLineIndex));
                     // store each value from the current line in MetadataModel properties 
@@ -161,9 +182,13 @@ namespace FlightInspectionDesktopApp
                     steeringModel.Rudder = model.getValueByKeyAndTime("rudder", model.CurrentLineIndex);
                     steeringModel.Elevator = model.getValueByKeyAndTime("elevator", model.CurrentLineIndex);
                     steeringModel.Aileron = model.getValueByKeyAndTime("aileron_0", model.CurrentLineIndex);
-                    model.CurrentLineIndex++;
-                    // play in 10 Hz:
-                    Thread.Sleep(PlayingSpeed);
+
+                    if (model.CurrentLineIndex < dataSize)
+                    {
+                        model.CurrentLineIndex++;
+                        // play in 10 Hz:
+                        Thread.Sleep(PlayingSpeed);
+                    }
                 }
             }).Start();
         }

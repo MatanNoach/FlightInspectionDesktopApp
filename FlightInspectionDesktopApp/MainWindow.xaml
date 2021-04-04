@@ -5,7 +5,13 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:FlightInspectionDesktopApp"        
         mc:Ignorable="d"
-        Title="Flight Inspection Start Wizard" Height="450" Width="800" Background="#FFC1D3CF" FontFamily="Microsoft JhengHei UI">
+        Title="Flight Inspection Start Wizard"
+        Height="450"
+        Width="800" 
+        Background="#FFC1D3CF" 
+        FontFamily="Microsoft JhengHei UI"
+        WindowStartupLocation="CenterScreen"
+        >
     <StackPanel TextElement.FontSize="14" Orientation="Vertical" VerticalAlignment="Center" >
         <TextBlock Text="Welcome! Please insert valid file paths as required:" HorizontalAlignment="Center" Padding="0,0,0,25"/>
         <Grid HorizontalAlignment="Center" VerticalAlignment="Center" >
