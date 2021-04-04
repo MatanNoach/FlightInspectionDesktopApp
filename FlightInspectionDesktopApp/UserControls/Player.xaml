@@ -3,28 +3,29 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-      xmlns:local="clr-namespace:FlightInspectionDesktopApp.Player"
+      xmlns:local="clr-namespace:FlightInspectionDesktopApp.UserControls"
+      xmlns:player ="clr-namespace:FlightInspectionDesktopApp.Player"
+      d:DataContext="{d:DesignInstance Type=player:PlayerViewModel}"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800">
-
-    <StackPanel VerticalAlignment="Bottom" Orientation="Horizontal"  Height="100">
+    <StackPanel VerticalAlignment="Bottom" Orientation="Horizontal"  Height="100" Margin="0,0,200,0.0">
         <Button x:Name="x2Back">
-            <Image Source="ButtonPics/x2Back.png"/>
+            <Image Source="../Player/ButtonPics/x2Back.png"/>
         </Button>
         <Button x:Name="Reverse">
-            <Image Source="ButtonPics/reverse.png"/>
+            <Image Source="../Player/ButtonPics/reverse.png"/>
         </Button>
         <Button x:Name="Pause">
-            <Image Source="ButtonPics/pause.png"/>
+            <Image Source="../Player/ButtonPics/pause.png"/>
         </Button>
         <Button x:Name="Stop">
-            <Image Source="ButtonPics/Stop.png"/>
+            <Image Source="../Player/ButtonPics/Stop.png"/>
         </Button>
         <Button x:Name="Play">
-            <Image Source="ButtonPics/play.png"/>
+            <Image Source="../Player/ButtonPics/play.png"/>
         </Button>
         <Button x:Name="x2Forward">
-            <Image Source="ButtonPics/x2Forward.png"/>
+            <Image Source="../Player/ButtonPics/x2Forward.png"/>
         </Button>
     </StackPanel>
 </UserControl>

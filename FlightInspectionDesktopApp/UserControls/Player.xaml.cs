@@ -18,7 +18,7 @@ namespace FlightInspectionDesktopApp.Player
     /// <summary>
     /// Interaction logic for Player.xaml
     /// </summary>
-    public partial class Player : Page
+    public partial class Player : UserControl
     {
         public Player()
         {
