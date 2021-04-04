@@ -48,9 +48,9 @@ namespace FlightInspectionDesktopApp
         }
 
         /// <summary>
-        /// import SetWindowsPos function from user32 API, in ordet to set the window's size of FG
+        /// import SetWindowsPos function from user32 API, in order to set the window's size of FG
         /// </summary>
-        /// <param name="hWnd"> the handler of the main window of the process </param>
+        /// <param name="hWnd"> the main window handler of the process </param>
         /// <param name="hWndInsertAfter"> always 0 </param>
         /// <param name="x"> the starting point from the left of the screen </param>
         /// <param name="Y"> the starting point from the top side of the screen </param>

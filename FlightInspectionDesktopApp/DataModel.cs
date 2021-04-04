@@ -207,16 +207,39 @@ namespace FlightInspectionDesktopApp
             return Properties.Settings.Default.varSeparator;
         }
 
+        /// <summary>
+        /// get a value from the csv file by the column name (key) and the row (time).
+        /// </summary>
+        /// <param name="key"> the column name in the xml file, corresponding the columns in the csv file </param>
+        /// <param name="time"> the row in the csv file </param>
+        /// <returns> a value from the csv file</returns>
         internal double getValueByKeyAndTime(string key, int time)
         {
-            return dictData[key][time];
+            if (dictData.ContainsKey(key) && dictData[key].Count > time)
+            {
+                return dictData[key][time];
+            }
+            return 0;
         }
 
+        /// <summary>
+        /// get a line from the csv file by the row index.
+        /// </summary>
+        /// <param name="index"> the row index </param>
+        /// <returns> a string which represents a line in the csv file </returns>
         internal string getLineByIndex(int index)
         {
-            return rawData[index];
+            if (rawData.Count > index)
+            {
+                return rawData[index];
+            }
+            return string.Empty;
         }
 
+        /// <summary>
+        /// get the number of rows which were processed from the csv file.
+        /// </summary>
+        /// <returns> the number of the rows of the csv file </returns>
         internal int getDataSize()
         {
             return rawData.Count;
