@@ -172,5 +172,47 @@ namespace FlightInspectionDesktopApp.Properties {
                 return ((double)(this["speedometerEndAngle"]));
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public double altimeterLow {
+            get {
+                return ((double)(this["altimeterLow"]));
+            }
+            set {
+                this["altimeterLow"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public double altimeterHigh {
+            get {
+                return ((double)(this["altimeterHigh"]));
+            }
+            set {
+                this["altimeterHigh"] = value;
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("altimeter_indicated-altitude-ft")]
+        public string altimeter {
+            get {
+                return ((string)(this["altimeter"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("airspeed-kt")]
+        public string airspeed {
+            get {
+                return ((string)(this["airspeed"]));
+            }
+        }
     }
 }

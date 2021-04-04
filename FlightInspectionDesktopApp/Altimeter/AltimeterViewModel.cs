@@ -1,18 +1,18 @@
 ﻿using System;
 using System.ComponentModel;
 
-namespace FlightInspectionDesktopApp.Speedometer
+namespace FlightInspectionDesktopApp.Altimeter
 {
-    class SpeedometerViewModel : INotifyPropertyChanged
+    class AltimeterViewModel : INotifyPropertyChanged
     {
-        private SpeedometerModel model;
+        private AltimeterModel model;
         public event PropertyChangedEventHandler PropertyChanged;
 
         /// <summary>
-        /// SpeedometerViewModel constructor.
+        /// AltimeterViewModel constructor.
         /// </summary>
         /// <param name="model">MetadataModel</param>
-        public SpeedometerViewModel(SpeedometerModel model)
+        public AltimeterViewModel(AltimeterModel model)
         {
             this.model = model;
             // when a property in MetadataModel changes, indicate it changed in MetadataViewModel as well
@@ -34,8 +34,6 @@ namespace FlightInspectionDesktopApp.Speedometer
             }
         }
 
-        public double VMAirSpeed { get { return model.AirSpeed; } }
-
-        public double VMSpeedometerAngle { get { return model.SpeedometerAngle; } }
+        public double VMAltimeter { get { return model.Altimeter; } }
     }
 }

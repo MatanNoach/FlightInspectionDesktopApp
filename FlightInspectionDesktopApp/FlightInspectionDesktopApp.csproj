@@ -64,10 +64,15 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Altimeter\AltimeterModel.cs" />
+    <Compile Include="Altimeter\AltimeterViewModel.cs" />
     <Compile Include="Metadata\MetadataModel.cs" />
     <Compile Include="Metadata\MetadataViewModel.cs" />
     <Compile Include="Speedometer\SpeedometerModel.cs" />
     <Compile Include="Speedometer\SpeedometerViewModel.cs" />
+    <Compile Include="UserControls\Altimeter.xaml.cs">
+      <DependentUpon>Altimeter.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UserControls\Metadata.xaml.cs">
       <DependentUpon>Metadata.xaml</DependentUpon>
     </Compile>
@@ -106,6 +111,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="UserControls\Altimeter.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="UserControls\Metadata.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

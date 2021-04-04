@@ -6,14 +6,19 @@
         xmlns:local="clr-namespace:FlightInspectionDesktopApp" xmlns:control="clr-namespace:FlightInspectionDesktopApp.UserControls"
         xmlns:properties="clr-namespace:FlightInspectionDesktopApp.Properties"
         mc:Ignorable="d"
-        Title="Flight Inspector" Height="{Binding Source={x:Static properties:Settings.Default}, Path=windowHeight}" Width="{Binding Source={x:Static properties:Settings.Default}, Path=windowWidth}"
+        Title="Flight Inspector" 
+        Height="{Binding Source={x:Static properties:Settings.Default}, Path=windowHeight}" 
+        Width="{Binding Source={x:Static properties:Settings.Default}, Path=windowWidth}"
         WindowStartupLocation="Manual"
         Left="{Binding Source={x:Static properties:Settings.Default}, Path=windowWidth}"
-        Top="0">
-    <Grid Background="Gray">
-        <control:Metadata HorizontalAlignment="Right" Padding="0,0,20,0"/>
-        <control:Speedometer HorizontalAlignment="Right" VerticalAlignment="Bottom" Padding="0,0,40,0" />
-        <control:Steering HorizontalAlignment="Left" Padding="0,0,20,0"/>
-        <control:Player VerticalAlignment="Bottom" Padding="0,0,0,0"/>
+        Top="0"
+        Background="#FFC1D3CF" 
+        FontFamily="Microsoft JhengHei UI">
+    <Grid>
+        <control:Speedometer VerticalAlignment="Top" HorizontalAlignment="Right" />
+        <control:Metadata VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0,0,100,0" />
+        <control:Altimeter VerticalAlignment="Top" HorizontalAlignment="Left" />
+        <control:Player VerticalAlignment="Center" HorizontalAlignment="Center" />
+        <control:Steering VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0, 500, 0, 200"/>
     </Grid>
 </Window>

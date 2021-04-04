@@ -72,7 +72,7 @@ namespace FlightInspectionDesktopApp
         /// <param name="e"></param>
         private void Submit_Click(object sender, RoutedEventArgs e)
         {
-            if (!validateTextboxes() && !validateFiles())
+            if (validateTextboxes() && validateFiles())
             {
                 // run the view model
                 string binFolder = Directory.GetParent(PathFG.Text).ToString();

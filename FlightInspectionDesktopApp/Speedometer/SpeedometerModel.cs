@@ -1,9 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace FlightInspectionDesktopApp.Speedometer
 {
@@ -15,7 +11,8 @@ namespace FlightInspectionDesktopApp.Speedometer
         private double speedometerAngle;
 
         private static double angleDiff = Properties.Settings.Default.speedometerEndAngle - Properties.Settings.Default.speedometerStartAngle;
-        private static double airSpeedDiff = DataModel.Instance.getMaxValueByKey("airspeed-kt") - DataModel.Instance.getMinValueByKey("airspeed-kt");
+        private static double airSpeedDiff = DataModel.Instance.getMaxValueByKey(Properties.Settings.Default.airspeed) -
+            DataModel.Instance.getMinValueByKey(Properties.Settings.Default.airspeed);
         private static double part = angleDiff / airSpeedDiff;
 
         private SpeedometerModel() { }

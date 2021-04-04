@@ -184,14 +184,15 @@ namespace FlightInspectionDesktopApp
                 Steering.SteeringModel steeringModel = Steering.SteeringModel.Instance;
                 Player.PlayerModel playerModel = Player.PlayerModel.Instance;
                 Speedometer.SpeedometerModel speedometerModel = Speedometer.SpeedometerModel.Instance;
+                Altimeter.AltimeterModel altimeterModel = Altimeter.AltimeterModel.Instance;
 
                 while (!shouldStop)
                 {
                     // send a line from the CSV to FG
                     this.telnetClient.Write(dataModel.getLineByIndex(dataModel.CurrentLineIndex));
                     // store each value from the current line in MetadataModel properties 
-                    metaModel.Altitude = dataModel.getValueByKeyAndTime("altimeter_indicated-altitude-ft", dataModel.CurrentLineIndex);
-                    metaModel.AirSpeed = dataModel.getValueByKeyAndTime("airspeed-kt", dataModel.CurrentLineIndex);
+                    metaModel.Altitude = dataModel.getValueByKeyAndTime(Properties.Settings.Default.altimeter, dataModel.CurrentLineIndex);
+                    metaModel.AirSpeed = dataModel.getValueByKeyAndTime(Properties.Settings.Default.airspeed, dataModel.CurrentLineIndex);
                     metaModel.Heading = dataModel.getValueByKeyAndTime("heading-deg", dataModel.CurrentLineIndex);
                     metaModel.Pitch = dataModel.getValueByKeyAndTime("pitch-deg", dataModel.CurrentLineIndex);
                     metaModel.Roll = dataModel.getValueByKeyAndTime("roll-deg", dataModel.CurrentLineIndex);
@@ -202,8 +203,10 @@ namespace FlightInspectionDesktopApp
                     steeringModel.Elevator = dataModel.getValueByKeyAndTime("elevator", dataModel.CurrentLineIndex);
                     steeringModel.Aileron = dataModel.getValueByKeyAndTime("aileron_0", dataModel.CurrentLineIndex);
 
-                    speedometerModel.AirSpeed = dataModel.getValueByKeyAndTime("airspeed-kt", dataModel.CurrentLineIndex);
+                    speedometerModel.AirSpeed = dataModel.getValueByKeyAndTime(Properties.Settings.Default.airspeed, dataModel.CurrentLineIndex);
                     speedometerModel.SpeedometerAngle = speedometerModel.calculateSpeedometerAngle(speedometerModel.AirSpeed);
+
+                    altimeterModel.Altimeter = dataModel.getValueByKeyAndTime(Properties.Settings.Default.altimeter, dataModel.CurrentLineIndex);
 
                     // read another line from the data model
                     playerModel.DataModel.moveNextLine();
