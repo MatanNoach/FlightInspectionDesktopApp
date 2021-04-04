@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:FlightInspectionDesktopApp" xmlns:control="clr-namespace:FlightInspectionDesktopApp.UserControls"
         xmlns:properties="clr-namespace:FlightInspectionDesktopApp.Properties"
         mc:Ignorable="d"
-        Title="InspectorWindow" Height="{Binding Source={x:Static properties:Settings.Default}, Path=windowHeight}" Width="{Binding Source={x:Static properties:Settings.Default}, Path=windowWidth}"
+        Title="Flight Inspector" Height="{Binding Source={x:Static properties:Settings.Default}, Path=windowHeight}" Width="{Binding Source={x:Static properties:Settings.Default}, Path=windowWidth}"
         WindowStartupLocation="Manual"
         Left="{Binding Source={x:Static properties:Settings.Default}, Path=windowWidth}"
         Top="0">

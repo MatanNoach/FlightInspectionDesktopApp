@@ -104,6 +104,5 @@ namespace FlightInspectionDesktopApp
         {
             writer.WriteLine(data);
         }
-
     }
 }
