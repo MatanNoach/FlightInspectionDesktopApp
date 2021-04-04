@@ -1,8 +1,8 @@
 ﻿using System;
+using System.ComponentModel;
+using System.Diagnostics;
 using System.Text;
 using System.Threading;
-using System.Diagnostics;
-using System.ComponentModel;
 
 namespace FlightInspectionDesktopApp
 {/// <summary>
@@ -13,17 +13,38 @@ namespace FlightInspectionDesktopApp
         public event PropertyChangedEventHandler PropertyChanged;
         ITelnetClient telnetClient;
         volatile bool shouldStop;
+        private DataModel dataModel;
+        private static FGModelImp fgModel;
+        public static FGModelImp Instance
+        {
+            get
+            {
+                if (fgModel == null)
+                {
+                    throw new Exception("FGModel was not created");
+                }
+                return fgModel;
+            }
+        }
+        public static void CreateModel(ITelnetClient telnetClient)
+        {
+            if (fgModel != null)
+            {
+                throw new Exception("FGModel was created");
+            }
+            fgModel = new FGModelImp(telnetClient);
+        }
         // set the default playing speed to 10 Hz
         public int PlayingSpeed { get; set; } = 100;
-
         /// <summary>
         /// FGModelImp constructor.
         /// </summary>
         /// <param name="telnetClient">telnet client to initialize</param>
-        public FGModelImp(ITelnetClient telnetClient)
+        private FGModelImp(ITelnetClient telnetClient)
         {
             this.telnetClient = telnetClient;
             this.shouldStop = false;
+            dataModel = DataModel.Instance;
         }
 
         /// <summary>
@@ -135,33 +156,32 @@ namespace FlightInspectionDesktopApp
         {
             new Thread(delegate ()
             {
-                DataModel model = DataModel.Instance;
                 Metadata.MetadataModel metaModel = Metadata.MetadataModel.Instance;
                 Steering.SteeringModel steeringModel = Steering.SteeringModel.Instance;
 
                 while (!shouldStop)
                 {
                     // currentLine will be null when the StreamReader reaches the end of file
-                    if (model.CurrentLineIndex > model.getDataSize())
+                    if (dataModel.CurrentLineIndex > dataModel.getDataSize())
                     {
                         //? not the final logic
                         Disconnect();
                     }
                     // send a line from the CSV to FG
-                    this.telnetClient.Write(model.getLineByIndex(model.CurrentLineIndex));
+                    this.telnetClient.Write(dataModel.getLineByIndex(dataModel.CurrentLineIndex));
                     // store each value from the current line in MetadataModel properties 
-                    metaModel.Altitude = model.getValueByKeyAndTime("altimeter_indicated-altitude-ft", model.CurrentLineIndex);
-                    metaModel.AirSpeed = model.getValueByKeyAndTime("airspeed-kt", model.CurrentLineIndex);
-                    metaModel.Heading = model.getValueByKeyAndTime("heading-deg", model.CurrentLineIndex);
-                    metaModel.Pitch = model.getValueByKeyAndTime("pitch-deg", model.CurrentLineIndex);
-                    metaModel.Roll = model.getValueByKeyAndTime("roll-deg", model.CurrentLineIndex);
-                    metaModel.SideSlip = model.getValueByKeyAndTime("side-slip-deg", model.CurrentLineIndex);
+                    metaModel.Altitude = dataModel.getValueByKeyAndTime("altitude-ft", dataModel.CurrentLineIndex);
+                    metaModel.AirSpeed = dataModel.getValueByKeyAndTime("airspeed-kt", dataModel.CurrentLineIndex);
+                    metaModel.Heading = dataModel.getValueByKeyAndTime("heading-deg", dataModel.CurrentLineIndex);
+                    metaModel.Pitch = dataModel.getValueByKeyAndTime("pitch-deg", dataModel.CurrentLineIndex);
+                    metaModel.Roll = dataModel.getValueByKeyAndTime("roll-deg", dataModel.CurrentLineIndex);
+                    metaModel.SideSlip = dataModel.getValueByKeyAndTime("side-slip-deg", dataModel.CurrentLineIndex);
                     // store each value from the current line in SteeringModel properties 
-                    steeringModel.Throttle = model.getValueByKeyAndTime("throttle_0", model.CurrentLineIndex);
-                    steeringModel.Rudder = model.getValueByKeyAndTime("rudder", model.CurrentLineIndex);
-                    steeringModel.Elevator = model.getValueByKeyAndTime("elevator", model.CurrentLineIndex);
-                    steeringModel.Aileron = model.getValueByKeyAndTime("aileron_0", model.CurrentLineIndex);
-                    model.CurrentLineIndex++;
+                    steeringModel.Throttle = dataModel.getValueByKeyAndTime("throttle_0", dataModel.CurrentLineIndex);
+                    steeringModel.Rudder = dataModel.getValueByKeyAndTime("rudder", dataModel.CurrentLineIndex);
+                    steeringModel.Elevator = dataModel.getValueByKeyAndTime("elevator", dataModel.CurrentLineIndex);
+                    steeringModel.Aileron = dataModel.getValueByKeyAndTime("aileron_0", dataModel.CurrentLineIndex);
+                    dataModel.moveNextLine();
                     // play in 10 Hz:
                     Thread.Sleep(PlayingSpeed);
                 }
@@ -245,6 +265,13 @@ namespace FlightInspectionDesktopApp
             {
                 position = value;
                 NotifyPropertyChanged("Position");
+            }
+        }
+        public DataModel DataModel
+        {
+            get
+            {
+                return dataModel;
             }
         }
 

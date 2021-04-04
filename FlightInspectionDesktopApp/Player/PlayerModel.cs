@@ -6,8 +6,9 @@ namespace FlightInspectionDesktopApp.Player
     {
         private static PlayerModel playerModelInst;
         private FGModelImp fgModel;
-        private PlayerModel()
+        private PlayerModel(FGModelImp model)
         {
+            this.fgModel = model;
         }
         public static PlayerModel Instance
         {
@@ -20,17 +21,42 @@ namespace FlightInspectionDesktopApp.Player
                 return playerModelInst;
             }
         }
-        public void CreateModel()
+        public static void CreateModel(FGModelImp model)
         {
             if (playerModelInst != null)
             {
                 throw new Exception("PlayerModel was already created");
             }
-            playerModelInst = new PlayerModel();
+            playerModelInst = new PlayerModel(model);
         }
         public void Play()
         {
-            dataModel
+            fgModel.PlayingSpeed = 100;
+            fgModel.DataModel.NextLine = 1;
+        }
+        public void fastForward()
+        {
+            fgModel.PlayingSpeed = 50;
+            fgModel.DataModel.NextLine = 1;
+        }
+        public void Pause()
+        {
+            fgModel.DataModel.NextLine = 0;
+        }
+        public void Stop()
+        {
+            fgModel.DataModel.CurrentLineIndex = 0;
+            fgModel.DataModel.NextLine = 0;
+        }
+        public void Reverse()
+        {
+            fgModel.PlayingSpeed = 100;
+            fgModel.DataModel.NextLine = -1;
+        }
+        public void FastReverse()
+        {
+            fgModel.PlayingSpeed = 50;
+            fgModel.DataModel.NextLine = -1;
         }
     }
 }

@@ -1,8 +1,8 @@
 ﻿using System;
-using System.IO;
-using System.Xml;
-using System.Linq;
 using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Xml;
 
 namespace FlightInspectionDesktopApp
 {
@@ -11,6 +11,8 @@ namespace FlightInspectionDesktopApp
         private Dictionary<string, List<double>> dictData;
         private List<string> rawData;
         private int currentLineIndex;
+        private static DataModel dataModelInstance;
+        private int nextLine = 1;
 
         public int CurrentLineIndex
         {
@@ -24,8 +26,18 @@ namespace FlightInspectionDesktopApp
                 currentLineIndex = value;
             }
         }
+        public int NextLine
+        {
+            get
+            {
+                return nextLine;
+            }
+            set
+            {
+                nextLine = value;
+            }
+        }
 
-        private static DataModel dataModelInstance;
         public static DataModel Instance
         {
             get
@@ -36,6 +48,15 @@ namespace FlightInspectionDesktopApp
                 }
                 return dataModelInstance;
             }
+        }
+        public static void CreateModel()
+        {
+
+            if (dataModelInstance != null)
+            {
+                throw new Exception("DataModel was created");
+            }
+            dataModelInstance = new DataModel();
         }
 
         private DataModel() { }
@@ -189,6 +210,13 @@ namespace FlightInspectionDesktopApp
         internal int getDataSize()
         {
             return rawData.Count;
+        }
+        public void moveNextLine()
+        {
+            if (!((currentLineIndex == 0 && nextLine < 0) || (currentLineIndex == rawData.Count && nextLine > 0)))
+            {
+                currentLineIndex += nextLine;
+            }
         }
     }
 }

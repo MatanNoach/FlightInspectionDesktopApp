@@ -16,8 +16,6 @@ namespace FlightInspectionDesktopApp
         public MainWindow()
         {
             InitializeComponent();
-            // create a new view model, with flight gear model and telnet client
-            vm = new FGViewModel(new FGModelImp(new TelnetClient()));
             //DataContext = vm;
         }
         /// <summary>
@@ -118,6 +116,9 @@ namespace FlightInspectionDesktopApp
                 {
                     // run the view model
                     DataModel.CreateModel(PathCSV.Text, PathXML.Text);
+                    FGModelImp.CreateModel(new TelnetClient());
+                    // create a new view model, with flight gear model and telnet client
+                    vm = new FGViewModel(FGModelImp.Instance);
                     InspectorWindow inspector = new InspectorWindow();
                     inspector.Show();
                     Close();

@@ -62,6 +62,9 @@
     <Compile Include="UserControls\Metadata.xaml.cs">
       <DependentUpon>Metadata.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UserControls\Player.xaml.cs">
+      <DependentUpon>Player.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UserControls\Steering.xaml.cs">
       <DependentUpon>Steering.xaml</DependentUpon>
     </Compile>
@@ -95,19 +98,16 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="UserControls\Steering.xaml">
+    <Page Include="UserControls\Player.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Player\Player.xaml">
+    <Page Include="UserControls\Steering.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Player\Player.xaml.cs">
-      <DependentUpon>Player.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Player\PlayerModel.cs" />
     <Compile Include="Player\PlayerViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">

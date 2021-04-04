@@ -1,28 +1,48 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using FlightInspectionDesktopApp.Player;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-
-namespace FlightInspectionDesktopApp.Player
+namespace FlightInspectionDesktopApp.UserControls
 {
     /// <summary>
     /// Interaction logic for Player.xaml
     /// </summary>
     public partial class Player : UserControl
     {
+        PlayerViewModel viewModel;
         public Player()
         {
             InitializeComponent();
+            PlayerModel.CreateModel(FGModelImp.Instance);
+            viewModel = new PlayerViewModel(PlayerModel.Instance);
+        }
+
+
+        private void Play_Click(object sender, System.Windows.RoutedEventArgs e)
+        {
+            viewModel.Play();
+        }
+
+        private void FastForward_Click(object sender, System.Windows.RoutedEventArgs e)
+        {
+            viewModel.FastForward();
+        }
+        private void Pause_Click(object sender, System.Windows.RoutedEventArgs e)
+        {
+            viewModel.Pause();
+        }
+
+        private void FastReverse_Click(object sender, System.Windows.RoutedEventArgs e)
+        {
+            viewModel.FastReverse();
+        }
+
+        private void Reverse_Click(object sender, System.Windows.RoutedEventArgs e)
+        {
+            viewModel.Reverse();
+        }
+
+        private void Stop_Click(object sender, System.Windows.RoutedEventArgs e)
+        {
+            viewModel.Stop();
         }
     }
 }
