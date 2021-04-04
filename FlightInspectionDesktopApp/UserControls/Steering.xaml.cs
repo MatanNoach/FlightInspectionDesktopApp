@@ -2,6 +2,7 @@
 using System.Windows.Data;
 using System.Globalization;
 using System.Windows.Controls;
+using System.Windows.Data;
 using FlightInspectionDesktopApp.Steering;
 
 namespace FlightInspectionDesktopApp.UserControls

@@ -1,14 +1,37 @@
 ﻿using System;
+using System.ComponentModel;
 
 namespace FlightInspectionDesktopApp.Player
 {
-    class PlayerModel
+    class PlayerModel : INotifyPropertyChanged
     {
         private static PlayerModel playerModelInst;
         private FGModelImp fgModel;
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
         private PlayerModel(FGModelImp model)
         {
             this.fgModel = model;
+        }
+        public int CurrentLine
+        {
+            get
+            {
+                return fgModel.DataModel.CurrentLineIndex;
+            }
+            set
+            {
+                fgModel.DataModel.CurrentLineIndex = value;
+                NotifyPropertyChanged("CurrentLine");
+            }
+        }
+        public int MaxLine
+        {
+            get
+            {
+                return fgModel.DataModel.MaxLine;
+            }
         }
         public static PlayerModel Instance
         {
@@ -28,6 +51,13 @@ namespace FlightInspectionDesktopApp.Player
                 throw new Exception("PlayerModel was already created");
             }
             playerModelInst = new PlayerModel(model);
+        }
+        public void NotifyPropertyChanged(string propName)
+        {
+            if (this.PropertyChanged != null)
+            {
+                this.PropertyChanged(this, new PropertyChangedEventArgs(propName));
+            }
         }
         public void Play()
         {

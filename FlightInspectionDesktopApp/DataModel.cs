@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.IO;
 using System.Linq;
 using System.Xml;
 
 namespace FlightInspectionDesktopApp
 {
-    class DataModel
+    class DataModel : INotifyPropertyChanged
     {
         private Dictionary<string, List<double>> dictData;
         private List<string> rawData;
@@ -14,6 +15,14 @@ namespace FlightInspectionDesktopApp
         private static DataModel dataModelInstance;
         private int nextLine = 1;
 
+        public event PropertyChangedEventHandler PropertyChanged;
+        public void NotifyPropertyChanged(string propName)
+        {
+            if (this.PropertyChanged != null)
+            {
+                this.PropertyChanged(this, new PropertyChangedEventArgs(propName));
+            }
+        }
         public int CurrentLineIndex
         {
             get
@@ -24,6 +33,7 @@ namespace FlightInspectionDesktopApp
             set
             {
                 currentLineIndex = value;
+                NotifyPropertyChanged("VMCurrentLine");
             }
         }
         public int NextLine
@@ -35,6 +45,13 @@ namespace FlightInspectionDesktopApp
             set
             {
                 nextLine = value;
+            }
+        }
+        public int MaxLine
+        {
+            get
+            {
+                return rawData.Count;
             }
         }
 
@@ -215,7 +232,7 @@ namespace FlightInspectionDesktopApp
         {
             if (!((currentLineIndex == 0 && nextLine < 0) || (currentLineIndex == rawData.Count && nextLine > 0)))
             {
-                currentLineIndex += nextLine;
+                CurrentLineIndex += nextLine;
             }
         }
     }

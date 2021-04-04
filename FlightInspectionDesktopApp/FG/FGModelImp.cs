@@ -203,12 +203,9 @@ namespace FlightInspectionDesktopApp
                     steeringModel.Elevator = dataModel.getValueByKeyAndTime("elevator", dataModel.CurrentLineIndex);
                     steeringModel.Aileron = dataModel.getValueByKeyAndTime("aileron_0", dataModel.CurrentLineIndex);
 
-                    if (dataModel.CurrentLineIndex < dataSize)
-                    {
-                        dataModel.CurrentLineIndex++;
-                        // play in 10 Hz:
-                        Thread.Sleep(PlayingSpeed);
-                    }
+                    dataModel.moveNextLine();
+                    // play in 10 Hz:
+                    Thread.Sleep(PlayingSpeed);
                 }
             }).Start();
         }
@@ -292,6 +289,7 @@ namespace FlightInspectionDesktopApp
                 NotifyPropertyChanged("Position");
             }
         }
+
         public DataModel DataModel
         {
             get

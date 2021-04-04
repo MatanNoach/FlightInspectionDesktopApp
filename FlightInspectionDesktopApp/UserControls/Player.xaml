@@ -4,26 +4,41 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:FlightInspectionDesktopApp.UserControls"
+             xmlns:player="clr-namespace:FlightInspectionDesktopApp.Player"
+             d:DataContext="{d:DesignInstance Type=player:PlayerViewModel}"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <StackPanel VerticalAlignment="Bottom" Orientation="Horizontal"  Height="100" Margin="0,0,200,0.0">
-        <Button x:Name="FastReverse" Click="FastReverse_Click">
-            <Image Source="../Player/ButtonPics/x2Back.png"/>
-        </Button>
-        <Button x:Name="Reverse" Click="Reverse_Click">
-            <Image Source="../Player/ButtonPics/reverse.png"/>
-        </Button>
-        <Button x:Name="Pause" Click="Pause_Click">
-            <Image Source="../Player/ButtonPics/pause.png"/>
-        </Button>
-        <Button x:Name="Stop" Click="Stop_Click">
-            <Image Source="../Player/ButtonPics/Stop.png"/>
-        </Button>
-        <Button x:Name="Play" Click="Play_Click" >
-            <Image Source="../Player/ButtonPics/play.png"/>
-        </Button>
-        <Button x:Name="FastForward" Click="FastForward_Click">
-            <Image Source="../Player/ButtonPics/x2Forward.png"/>
-        </Button>
-    </StackPanel>
+    <Grid VerticalAlignment="Bottom" HorizontalAlignment="Center">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="{Binding ElementName=PlayerPanel, Path=Height}"/>
+            <RowDefinition Height="{Binding ElementName=TimeSlider, Path=Height}"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="{Binding ElementName=PlayerPanel, Path=Width}"/>
+        </Grid.ColumnDefinitions>
+        <StackPanel x:Name="PlayerPanel" VerticalAlignment="Bottom" HorizontalAlignment="Center" Orientation="Horizontal"  Height="100" Grid.Row="0">
+            <Button x:Name="FastReverse" Click="FastReverse_Click">
+                <Image Source="../Player/ButtonPics/x2Back.png"/>
+            </Button>
+            <Button x:Name="Reverse" Click="Reverse_Click">
+                <Image Source="../Player/ButtonPics/reverse.png"/>
+            </Button>
+            <Button x:Name="Pause" Click="Pause_Click">
+                <Image Source="../Player/ButtonPics/pause.png"/>
+            </Button>
+            <Button x:Name="Stop" Click="Stop_Click">
+                <Image Source="../Player/ButtonPics/Stop.png"/>
+            </Button>
+            <Button x:Name="Play" Click="Play_Click" >
+                <Image Source="../Player/ButtonPics/play.png"/>
+            </Button>
+            <Button x:Name="FastForward" Click="FastForward_Click">
+                <Image Source="../Player/ButtonPics/x2Forward.png"/>
+            </Button>
+        </StackPanel>
+        <Slider x:Name="TimeSlider" Grid.Row="1" HorizontalAlignment="Center" 
+            Width="{Binding ElementName=PlayerPanel, Path=ActualWidth}" Value="{Binding VMCurrentLine,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+            Minimum="0" Maximum="{Binding VMMaxLine, Mode=OneWay}"/>
+
+    </Grid>
 </UserControl>

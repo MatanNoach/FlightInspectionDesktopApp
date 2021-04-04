@@ -13,6 +13,7 @@ namespace FlightInspectionDesktopApp.UserControls
             InitializeComponent();
             PlayerModel.CreateModel(FGModelImp.Instance);
             viewModel = new PlayerViewModel(PlayerModel.Instance);
+            DataContext = viewModel;
         }
 
 
