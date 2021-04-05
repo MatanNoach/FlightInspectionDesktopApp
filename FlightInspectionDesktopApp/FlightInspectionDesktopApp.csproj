@@ -185,5 +185,8 @@
     <Resource Include="FlightInspection.ico" />
   </ItemGroup>
   <ItemGroup />
+  <ItemGroup>
+    <Content Include="Plugins\LinearRegressionDLL.dll" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
