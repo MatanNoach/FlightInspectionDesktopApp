@@ -4,12 +4,15 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:FlightInspectionDesktopApp.UserControls"
-             xmlns:properties="clr-namespace:FlightInspectionDesktopApp.Properties"
+             xmlns:properties="clr-namespace:FlightInspectionDesktopApp.Properties" xmlns:altimeter="clr-namespace:FlightInspectionDesktopApp.Altimeter" d:DataContext="{d:DesignInstance Type=altimeter:AltimeterViewModel}"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
+             d:DesignHeight="450" d:DesignWidth="150">
+    <UserControl.Resources>
+        <local:FlooringConverter x:Key="FlooringConverter"/>
+    </UserControl.Resources>
     <Grid>
         <TextBlock Text="Altimeter" Foreground="White" HorizontalAlignment="Center" FontSize="18"/>
-        <TextBlock Text="{Binding VMAltimeter, Mode=OneWay}" Foreground="White" HorizontalAlignment="Center" FontSize="40" FontWeight="Light" Margin="0, 20, 0, 0"/>
+        <TextBlock Text="{Binding VMAltimeter, Mode=OneWay, Converter={StaticResource FlooringConverter}}" Foreground="White" HorizontalAlignment="Center" FontSize="40" FontWeight="Light" Margin="0, 20, 0, 0"/>
         <Slider x:Name="altimeterSlider" Orientation="Vertical" Width="40" Height="150" 
                 Background="#FF5C6066" 
                 BorderBrush="Black" 

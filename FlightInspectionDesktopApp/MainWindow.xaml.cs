@@ -3,6 +3,7 @@ using System.IO;
 using System.Windows;
 using Microsoft.Win32;
 using System.Windows.Controls;
+using System.Threading;
 
 namespace FlightInspectionDesktopApp
 {
