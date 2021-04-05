@@ -9,7 +9,7 @@ namespace FlightInspectionDesktopApp.Steering
         private SteeringModel model;
 
         /// <summary>
-        /// MetadataViewModel constructor.
+        /// SteeringViewModel constructor.
         /// </summary>
         /// <param name="model">MetadataModel</param>
         public SteeringViewModel(SteeringModel model)

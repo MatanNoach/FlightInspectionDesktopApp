@@ -20,5 +20,6 @@
         <control:Altimeter VerticalAlignment="Top" HorizontalAlignment="Left" />
         <control:Player VerticalAlignment="Center" HorizontalAlignment="Center" />
         <control:Steering VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0, 500, 0, 200"/>
+         <control:Graph VerticalAlignment="Top" Padding="0,0,0,0"/>
     </Grid>
 </Window>
