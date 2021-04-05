@@ -10,6 +10,8 @@ namespace FlightInspectionDesktopApp
     class DataModel : INotifyPropertyChanged
     {
         private Dictionary<string, List<double>> dictData;
+        private Dictionary<string, string> corrData;
+
         private List<string> rawData;
         private int currentLineIndex;
         private static DataModel dataModelInstance;
@@ -69,11 +71,21 @@ namespace FlightInspectionDesktopApp
             dataModelInstance = new DataModel();
         }
 
+        public static void CreateModel(string csvPath, string xmlPath)
+        {
+            if (dataModelInstance != null)
+            {
+                throw new Exception("DataModel is already created");
+            }
+            dataModelInstance = new DataModel(csvPath, xmlPath);
+        }
+
         private DataModel() { }
         private DataModel(string csvPath, string xmlPath)
         {
             currentLineIndex = 0;
             rawData = new List<string>();
+            corrData = new Dictionary<string, string>();
             dictData = new Dictionary<string, List<double>>();
 
             // get the chunks' names from the given xml file
@@ -106,15 +118,100 @@ namespace FlightInspectionDesktopApp
                     rawData.Add(currentLine);
                 }
             }
+
+            // calculate most correlative column for each column by pearson
+            foreach (string key in dictData.Keys)
+            {
+                corrData.Add(key, mostCorrelativeKey(key));
+            }
         }
 
-        public static void CreateModel(string csvPath, string xmlPath)
+        /// <summary>
+        /// find the most correlative column for a given key.
+        /// </summary>
+        /// <param name="key"> the key which the function should find the most correlative column </param>
+        /// <returns> the most correlative column name </returns>
+        private string mostCorrelativeKey(string key)
         {
-            if (dataModelInstance != null)
+            string corrKey = string.Empty;
+            double biggestPearsonVal = 0;
+            double val = 0;
+
+            foreach (string currKey in dictData.Keys)
             {
-                throw new Exception("DataModel is already created");
+                if (currKey != key)
+                {
+                    val = pearson(dictData[key], dictData[currKey], dictData.Count);
+
+                    // if the calculated pearson's values is Nan (as a result of dividing by 0) and there is not previous correlated column
+                    if (Double.IsNaN(val) && biggestPearsonVal == 0)
+                    {
+                        corrKey = currKey;
+                    }
+
+                    // if the calculated pearson's value is not Nan and is bigger than the previous correlated column
+                    else if (val > biggestPearsonVal)
+                    {
+                        biggestPearsonVal = val;
+                        corrKey = currKey;
+                    }
+                }
             }
-            dataModelInstance = new DataModel(csvPath, xmlPath);
+
+            return corrKey;
+        }
+
+        /// <summary>
+        ///  this function returns the Pearson correlation coefficient of X and Y.
+        /// </summary>
+        /// <param name="firstKeyValues"> first array of values </param>
+        /// <param name="secondKeyValues"> second array of values </param>
+        /// <param name="arrSize"> the size of both of the arrays </param>
+        /// <returns> the Pearson correlation coefficient of the given arrays </returns>
+        private double pearson(List<double> firstKeyValues, List<double> secondKeyValues, int arrSize)
+        {
+            return cov(firstKeyValues, secondKeyValues, arrSize) / Math.Sqrt(var(firstKeyValues, arrSize)) * Math.Sqrt(var(secondKeyValues, arrSize));
+        }
+
+        /// <summary>
+        ///  this function returns the covariance of X and Y.
+        /// </summary>
+        /// <param name="firstKeyValues"> first array of values </param>
+        /// <param name="secondKeyValues"> second array of values </param>
+        /// <param name="arrSize"> the size of both of the arrays </param>
+        /// <returns> the covariance of the given arrays </returns>
+        private double cov(List<double> firstKeyValues, List<double> secondKeyValues, int arrSize)
+        {
+            double result = 0;
+            double firstKeyAvg = firstKeyValues.Average();
+            double secondKeyAvg = secondKeyValues.Average();
+
+            for (int i = 0; i < arrSize; i++)
+            {
+                result += (firstKeyValues[i] - firstKeyAvg) * (secondKeyValues[i] - secondKeyAvg);
+            }
+
+            return result / arrSize;
+        }
+
+        /// <summary>
+        ///  this function returns the variance of X.
+        /// </summary>
+        /// <param name="values"> array of doubles </param>
+        /// <param name="arrSize"> the size of the array </param>
+        /// <returns> the variance of the array </returns>
+        private double var(List<double> values, int arrSize)
+        {
+            double coefficient = 1 / (double)arrSize;
+            double sum = 0;
+
+            for (int i = 0; i < arrSize; i++)
+            {
+                sum += Math.Pow(values[i], 2);
+            }
+
+            return (coefficient * sum) - Math.Pow(values.Average(), 2);
+
         }
 
         /// <summary>
