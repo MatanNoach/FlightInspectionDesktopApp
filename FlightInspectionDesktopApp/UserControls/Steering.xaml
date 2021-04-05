@@ -6,12 +6,12 @@
              xmlns:local="clr-namespace:FlightInspectionDesktopApp.UserControls" xmlns:steering="clr-namespace:FlightInspectionDesktopApp.Steering" d:DataContext="{d:DesignInstance Type=steering:SteeringViewModel}"
              xmlns:properties="clr-namespace:FlightInspectionDesktopApp.Properties"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
+             d:DesignHeight="300" d:DesignWidth="400">
     <UserControl.Resources>
         <local:AileronValueToJoystickConverter x:Key="AileronValueToJoystickConverter"/>
         <local:ElevatorValueToJoystickConverter x:Key="ElevatorValueToJoystickConverter"/>
     </UserControl.Resources>
-    <Canvas HorizontalAlignment="Left" Height="450" VerticalAlignment="Top" Width="800">
+    <Canvas HorizontalAlignment="Left" Height="300" VerticalAlignment="Top" Width="400">
         <Ellipse x:Name="JoystickBoundries" Height="{Binding Source={x:Static properties:Settings.Default}, Path=bigCircle}" Width="{Binding Source={x:Static properties:Settings.Default}, Path=bigCircle}" Stroke="Black" Margin="100,0,0,0">
             <Ellipse.Fill>
                 <RadialGradientBrush>

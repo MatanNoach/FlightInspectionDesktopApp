@@ -64,10 +64,15 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Graph\GraphModel.cs" />
+    <Compile Include="Graph\GraphViewModel.cs" />
     <Compile Include="Altimeter\AltimeterModel.cs" />
     <Compile Include="Altimeter\AltimeterViewModel.cs" />
     <Compile Include="Metadata\MetadataModel.cs" />
     <Compile Include="Metadata\MetadataViewModel.cs" />
+    <Compile Include="UserControls\Graph.xaml.cs">
+      <DependentUpon>Graph.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Speedometer\SpeedometerModel.cs" />
     <Compile Include="Speedometer\SpeedometerViewModel.cs" />
     <Compile Include="UserControls\Altimeter.xaml.cs">
@@ -115,6 +120,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="UserControls\Graph.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="UserControls\Metadata.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -152,6 +161,7 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="ClassDiagram.cd" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

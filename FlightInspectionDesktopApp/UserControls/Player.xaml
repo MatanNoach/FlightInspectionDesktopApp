@@ -7,7 +7,7 @@
              xmlns:player="clr-namespace:FlightInspectionDesktopApp.Player"
              d:DataContext="{d:DesignInstance Type=player:PlayerViewModel}"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
+             d:DesignHeight="100" d:DesignWidth="400">
     <Grid VerticalAlignment="Bottom" HorizontalAlignment="Center">
         <Grid.RowDefinitions>
             <RowDefinition Height="{Binding ElementName=PlayerPanel, Path=Height}"/>
@@ -16,7 +16,7 @@
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="{Binding ElementName=PlayerPanel, Path=Width}"/>
         </Grid.ColumnDefinitions>
-        <StackPanel x:Name="PlayerPanel" VerticalAlignment="Bottom" HorizontalAlignment="Center" Orientation="Horizontal"  Height="100" Grid.Row="0">
+        <StackPanel x:Name="PlayerPanel" VerticalAlignment="Bottom" HorizontalAlignment="Center" Orientation="Horizontal"  Height="50" Grid.Row="0">
             <Button x:Name="FastReverse" Click="FastReverse_Click">
                 <Image Source="../Player/ButtonPics/x2Back.png"/>
             </Button>

@@ -5,9 +5,12 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:ed="http://schemas.microsoft.com/expression/2010/drawing"
              xmlns:properties="clr-namespace:FlightInspectionDesktopApp.Properties"
-             xmlns:local="clr-namespace:FlightInspectionDesktopApp.UserControls"
+             xmlns:local="clr-namespace:FlightInspectionDesktopApp.UserControls" xmlns:speedometer="clr-namespace:FlightInspectionDesktopApp.Speedometer" d:DataContext="{d:DesignInstance Type=speedometer:SpeedometerViewModel}"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
+             d:DesignHeight="250" d:DesignWidth="500">
+    <UserControl.Resources>
+        <local:FlooringConverter x:Key="FlooringConverter"/>
+    </UserControl.Resources>
     <Grid>
         <ed:Arc StartAngle="{Binding Source={x:Static properties:Settings.Default}, Path=speedometerStartAngle}" EndAngle="{Binding Source={x:Static properties:Settings.Default}, Path=speedometerEndAngle}" Stretch="None" Height="300" Width="300" StrokeThickness="20" StrokeDashArray=".25" Stroke="White"/>
         <ed:Arc StartAngle="{Binding Source={x:Static properties:Settings.Default}, Path=speedometerStartAngle}" EndAngle="{Binding VMSpeedometerAngle, Mode=OneWay}" Stretch="None" Height="300" Width="300" StrokeThickness="20" StrokeDashArray=".25" Stroke="Turquoise"/>
@@ -15,7 +18,7 @@
                     Margin="0,0,0,100">
             <TextBlock Text="Air-Speed" Foreground="White" HorizontalAlignment="Center"
                         FontSize="18"/>
-            <TextBlock Text="{Binding VMAirSpeed, Mode=OneWay}" Foreground="White" HorizontalAlignment="Center" FontSize="40" FontWeight="Light"/>
+            <TextBlock Text="{Binding VMAirSpeed, Mode=OneWay, Converter={StaticResource FlooringConverter}}" Foreground="White" HorizontalAlignment="Center" FontSize="40" FontWeight="Light"/>
         </StackPanel>
     </Grid>
 </UserControl>

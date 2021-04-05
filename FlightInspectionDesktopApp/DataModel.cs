@@ -5,6 +5,7 @@ using System.IO;
 using System.Linq;
 using System.Xml;
 
+
 namespace FlightInspectionDesktopApp
 {
     class DataModel : INotifyPropertyChanged
@@ -16,6 +17,8 @@ namespace FlightInspectionDesktopApp
         private int currentLineIndex;
         private static DataModel dataModelInstance;
         private int nextLine = 1;
+        private List<string> colNames;
+        private Dictionary<string, List<double>> minMaxVals;
 
         public event PropertyChangedEventHandler PropertyChanged;
         public void NotifyPropertyChanged(string propName)
@@ -48,6 +51,19 @@ namespace FlightInspectionDesktopApp
             {
                 nextLine = value;
             }
+        }
+
+        public List<string> ColNames
+        {
+            get
+            {
+                return colNames;
+            }
+        }
+
+        public Dictionary<string, List<double>> MinMaxVals
+        {
+            get { return this.minMaxVals; }
         }
 
         public static DataModel Instance
@@ -124,6 +140,7 @@ namespace FlightInspectionDesktopApp
             {
                 corrData.Add(key, mostCorrelativeKey(key));
             }
+            CalcMinMax();
         }
 
         /// <summary>
@@ -275,7 +292,7 @@ namespace FlightInspectionDesktopApp
 
                 xmlCols.Add(colName);
             }
-
+            this.colNames = xmlCols;
             return xmlCols;
         }
 
@@ -375,6 +392,20 @@ namespace FlightInspectionDesktopApp
             if (!((currentLineIndex == 0 && nextLine < 0) || (currentLineIndex == (rawData.Count - 1) && nextLine > 0)))
             {
                 CurrentLineIndex += nextLine;
+            }
+        }
+
+        /// <summary>
+        /// Calculate the minimal & maximal values of each propery.
+        /// </summary>
+        public void CalcMinMax()
+        {
+            minMaxVals = new Dictionary<string, List<double>>();
+            foreach (string key in dictData.Keys)
+            {
+                minMaxVals[key] = new List<double>();
+                minMaxVals[key].Add(dictData[key].Min());
+                minMaxVals[key].Add(dictData[key].Max());
             }
         }
     }
