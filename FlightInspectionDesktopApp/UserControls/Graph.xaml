@@ -5,9 +5,12 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:FlightInspectionDesktopApp.UserControls" xmlns:flightinspectiondesktopapp="clr-namespace:FlightInspectionDesktopApp.Graph" d:DataContext="{d:DesignInstance Type=flightinspectiondesktopapp:GraphViewModel}"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
+             d:DesignHeight="450" d:DesignWidth="1200">
     <Grid>
-        <Canvas Name="canGraph" Background="White" Width="500" Height="400" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="180,10,120,40"/>
+        <Canvas Name="canGraph" Background="White" Width="500" Height="400" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="179,25,521,25"/>
+        <TextBlock x:Name="CorrFeature" Text="{Binding VMCorrCol, Mode=OneWay}" FontSize="22" HorizontalAlignment="Right" Margin="0,0,250,0"></TextBlock>
+        <TextBlock x:Name="CurrFeature" Text="{Binding ElementName=ColNames, Path=SelectedItem}" FontSize="22" HorizontalAlignment="Right" Margin="0,0,780,0"></TextBlock>
+        <Canvas Name="corrGraph" Background="White" Width="500" Height="400" VerticalAlignment="Center" HorizontalAlignment="Right"/>
         <ListView x:Name="ColNames" HorizontalAlignment="Left" Height="250" Margin="10,10,0,0" VerticalAlignment="Top" Width="150" ItemsSource="{Binding ColNames, Mode=OneWay}" SelectedIndex="0" SelectionChanged="ColNames_SelectionChanged">
         </ListView>
     </Grid>

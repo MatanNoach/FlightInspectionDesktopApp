@@ -77,6 +77,7 @@ namespace FlightInspectionDesktopApp
                 return dataModelInstance;
             }
         }
+        public Dictionary<string, string> CorrData { get { return this.corrData; } }
         public static void CreateModel()
         {
 

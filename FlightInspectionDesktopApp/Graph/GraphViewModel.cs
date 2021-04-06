@@ -49,5 +49,9 @@ namespace FlightInspectionDesktopApp.Graph
         public Dictionary<string, List<double>> MinMaxVals { get { return this.model.MinMaxVals; } }
 
         public int VMCurrentLineIndex { get { return model.CurrentLineIndex; } }
+
+        public Dictionary<string, string> CorrData { get { return model.CorrData; } }
+
+        public string VMCorrCol { get { return model.CorrCol; } set { model.CorrCol = value; } }
     }
 }

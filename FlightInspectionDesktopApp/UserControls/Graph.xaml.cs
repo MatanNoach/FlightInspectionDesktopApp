@@ -16,6 +16,7 @@ namespace FlightInspectionDesktopApp.UserControls
         bool start = true;
         GraphViewModel vm;
         int nextLine;
+        double margin = 2;
 
         /// <summary>
         /// Graph CTOR.
@@ -23,32 +24,41 @@ namespace FlightInspectionDesktopApp.UserControls
         public Graph()
         {
             InitializeComponent();
-            vm = new GraphViewModel(new GraphModel(canGraph.Height, canGraph.Width, DataModel.Instance));
+            vm = new GraphViewModel(new GraphModel(canGraph.Height, canGraph.Width, margin, DataModel.Instance));
             this.DataContext = vm;
             this.nextLine = vm.VMCurrentLineIndex;
 
-            // Create the X axis
+
+            // Create the axises of both graphs:
+            Path xAxisPath1 = CreateAxis(new Point(0, canGraph.Height / 2), new Point(canGraph.Width, canGraph.Height / 2));
+            canGraph.Children.Add(xAxisPath1);
+            Path xAxisPath2 = CreateAxis(new Point(0, corrGraph.Height / 2), new Point(corrGraph.Width, canGraph.Height / 2));
+            corrGraph.Children.Add(xAxisPath2);
+            Path yAxisPath1 = CreateAxis(new Point(margin, canGraph.Height), new Point(margin, 0));
+            canGraph.Children.Add(yAxisPath1);
+            Path yAxisPath2 = CreateAxis(new Point(margin, corrGraph.Height), new Point(margin, 0));
+            corrGraph.Children.Add(yAxisPath2);
+
+            DispatcherLoop();
+        }
+
+        /// <summary>
+        /// Draws x & y axis for both graphs.
+        /// </summary>
+        /// <param name="p1">point of axis line</param>
+        /// <param name="p2">point of axis line</param>
+        /// <returns></returns>
+        private Path CreateAxis(Point p1, Point p2)
+        {
             GeometryGroup xAxis = new GeometryGroup();
-            xAxis.Children.Add(new LineGeometry(new Point(0, canGraph.Height / 2), new Point(canGraph.Width, canGraph.Height / 2)));
-            Path xAxisPath = new Path
+            xAxis.Children.Add(new LineGeometry(p1, p2));
+            Path axisPath = new Path
             {
                 StrokeThickness = 1,
                 Stroke = Brushes.Black,
                 Data = xAxis
             };
-            canGraph.Children.Add(xAxisPath);
-
-            // Create the Y axis
-            GeometryGroup yAxis = new GeometryGroup();
-            yAxis.Children.Add(new LineGeometry(new Point(2, canGraph.Height), new Point(2, 0)));
-            Path yAxisPath = new Path
-            {
-                StrokeThickness = 1,
-                Stroke = Brushes.Black,
-                Data = yAxis
-            };
-            canGraph.Children.Add(yAxisPath);
-            DispatcherLoop();
+            return axisPath;
         }
 
         /// <summary>
@@ -59,20 +69,29 @@ namespace FlightInspectionDesktopApp.UserControls
             DispatcherTimer dispatcher = new DispatcherTimer { Interval = TimeSpan.FromSeconds(1) };
             dispatcher.Tick += (s, e) =>
             {
-                // create all points of the column up to this "time"
+                // create all points of the column up to this "time" for both feature & correlated feature
                 PointCollection points = vm.GetPointsByCol((string)ColNames.SelectedItem);
+                PointCollection pointsCorr = vm.GetPointsByCol(vm.CorrData[(string)ColNames.SelectedItem]);
                 // connect them with a line
                 Polyline polyline = new Polyline
                 {
                     StrokeThickness = 1,
-                    Stroke = Brushes.BlueViolet,
+                    Stroke = Brushes.LightCoral,
                     Points = points
                 };
                 canGraph.Children.Add(polyline);
-                // delete the already-drawn graph if user goes backwards
+                Polyline polyline1 = new Polyline
+                {
+                    StrokeThickness = 1,
+                    Stroke = Brushes.LightSkyBlue,
+                    Points = pointsCorr
+                };
+                corrGraph.Children.Add(polyline1);
+                // delete the already-drawn graphs if user goes backwards
                 if (nextLine > vm.VMCurrentLineIndex)
                 {
                     canGraph.Children.RemoveRange(2, canGraph.Children.Count - 2);
+                    corrGraph.Children.RemoveRange(2, corrGraph.Children.Count - 2);
                 }
                 nextLine = vm.VMCurrentLineIndex;
             };
@@ -86,13 +105,20 @@ namespace FlightInspectionDesktopApp.UserControls
         /// <param name="e"></param>
         private void ColNames_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            // delete everything from th graph except for axises
             if (!start)
             {
+                // delete everything from th graph except for axises
                 canGraph.Children.RemoveRange(2, canGraph.Children.Count - 2);
+                corrGraph.Children.RemoveRange(2, corrGraph.Children.Count - 2);
+                // update the correlated feature
+                vm.VMCorrCol = vm.CorrData[(string)ColNames.SelectedItem];
 
             }
-            start = false;
+            else
+            {
+                start = false;
+                vm.VMCorrCol = vm.CorrData[(string)ColNames.SelectedItem];
+            }
         }
     }
 }

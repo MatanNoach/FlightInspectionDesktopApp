@@ -14,6 +14,7 @@ namespace FlightInspectionDesktopApp.Graph
         double width;
         double stepX;
         double stepY;
+        double margin;
         public event PropertyChangedEventHandler PropertyChanged;
 
         /// <summary>
@@ -22,11 +23,12 @@ namespace FlightInspectionDesktopApp.Graph
         /// <param name="height">canvas height</param>
         /// <param name="width">canvas width</param>
         /// <param name="dataModel">datamodel instance</param>
-        public GraphModel(double height, double width, DataModel dataModel)
+        public GraphModel(double height, double width, double margin, DataModel dataModel)
         {
             this.height = height;
             this.width = width;
-            this.stepX = this.width / dm.getDataSize();
+            this.margin = margin;
+            this.stepX = (this.width - margin) / dm.getDataSize();
             this.dm = dataModel;
             // when a property in GraphModel changes, indicate it
             dm.PropertyChanged += delegate (Object sender, PropertyChangedEventArgs e)
@@ -49,7 +51,7 @@ namespace FlightInspectionDesktopApp.Graph
             for (int x = 0; x <= dm.CurrentLineIndex; x++)
             {
                 // create points in the ratios of the canvas
-                points.Add(new Point(x * stepX, (this.height / 2) - (dm.getValueByKeyAndTime(col, x) * stepY)));
+                points.Add(new Point(x * stepX + margin, (this.height / 2) - (dm.getValueByKeyAndTime(col, x) * stepY)));
             }
             return points;
         }
@@ -70,7 +72,11 @@ namespace FlightInspectionDesktopApp.Graph
 
         public Dictionary<string, List<double>> MinMaxVals { get { return dm.MinMaxVals; } }
 
-        public int CurrentLineIndex
-        { get { return dm.CurrentLineIndex; } }
+        public int CurrentLineIndex { get { return dm.CurrentLineIndex; } }
+
+        public Dictionary<string, string> CorrData { get { return dm.CorrData; } }
+
+        private string corrCol;
+        public string CorrCol { get { return corrCol; } set { corrCol = value; NotifyPropertyChanged("CorrCol"); } }
     }
 }
