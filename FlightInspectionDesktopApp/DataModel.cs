@@ -41,6 +41,7 @@ namespace FlightInspectionDesktopApp
                 NotifyPropertyChanged("CurrentLineIndex");
             }
         }
+
         public int NextLine
         {
             get
@@ -159,7 +160,7 @@ namespace FlightInspectionDesktopApp
             {
                 if (currKey != key)
                 {
-                    val = pearson(dictData[key], dictData[currKey], dictData.Count);
+                    val = pearson(dictData[key], dictData[currKey], dictData[currKey].Count);
 
                     // if the calculated pearson's values is Nan (as a result of dividing by 0) and there is not previous correlated column
                     if (Double.IsNaN(val) && biggestPearsonVal == 0)
@@ -168,7 +169,7 @@ namespace FlightInspectionDesktopApp
                     }
 
                     // if the calculated pearson's value is not Nan and is bigger than the previous correlated column
-                    else if (val > biggestPearsonVal)
+                    else if (Math.Abs(val) > Math.Abs(biggestPearsonVal))
                     {
                         biggestPearsonVal = val;
                         corrKey = currKey;
@@ -186,9 +187,9 @@ namespace FlightInspectionDesktopApp
         /// <param name="secondKeyValues"> second array of values </param>
         /// <param name="arrSize"> the size of both of the arrays </param>
         /// <returns> the Pearson correlation coefficient of the given arrays </returns>
-        private double pearson(List<double> firstKeyValues, List<double> secondKeyValues, int arrSize)
+        private double pearson(List<double> firstKeyValues, List<double> secondKeyValues, double arrSize)
         {
-            return cov(firstKeyValues, secondKeyValues, arrSize) / Math.Sqrt(var(firstKeyValues, arrSize)) * Math.Sqrt(var(secondKeyValues, arrSize));
+            return cov(firstKeyValues, secondKeyValues, arrSize) / (Math.Sqrt(var(firstKeyValues, arrSize)) * Math.Sqrt(var(secondKeyValues, arrSize)));
         }
 
         /// <summary>
@@ -198,7 +199,7 @@ namespace FlightInspectionDesktopApp
         /// <param name="secondKeyValues"> second array of values </param>
         /// <param name="arrSize"> the size of both of the arrays </param>
         /// <returns> the covariance of the given arrays </returns>
-        private double cov(List<double> firstKeyValues, List<double> secondKeyValues, int arrSize)
+        private double cov(List<double> firstKeyValues, List<double> secondKeyValues, double arrSize)
         {
             double result = 0;
             double firstKeyAvg = firstKeyValues.Average();
@@ -206,10 +207,10 @@ namespace FlightInspectionDesktopApp
 
             for (int i = 0; i < arrSize; i++)
             {
-                result += (firstKeyValues[i] - firstKeyAvg) * (secondKeyValues[i] - secondKeyAvg);
+                result += (firstKeyValues[i]) * (secondKeyValues[i]);
             }
 
-            return result / arrSize;
+            return (result / arrSize) - firstKeyAvg * secondKeyAvg;
         }
 
         /// <summary>
@@ -218,7 +219,7 @@ namespace FlightInspectionDesktopApp
         /// <param name="values"> array of doubles </param>
         /// <param name="arrSize"> the size of the array </param>
         /// <returns> the variance of the array </returns>
-        private double var(List<double> values, int arrSize)
+        private double var(List<double> values, double arrSize)
         {
             double coefficient = 1 / (double)arrSize;
             double sum = 0;

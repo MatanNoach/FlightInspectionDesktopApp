@@ -50,18 +50,18 @@ namespace FlightInspectionDesktopApp.UserControls
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void FastReverse_Click(object sender, System.Windows.RoutedEventArgs e)
+        private void MuchSlower_Click(object sender, System.Windows.RoutedEventArgs e)
         {
-            viewModel.FastReverse();
+            viewModel.MuchSlower();
         }
         /// <summary>
         /// The function runs the simulator in reverse the simualtor on reverse button click
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void Reverse_Click(object sender, System.Windows.RoutedEventArgs e)
+        private void Slower_Click(object sender, System.Windows.RoutedEventArgs e)
         {
-            viewModel.Reverse();
+            viewModel.Slower();
         }
         /// <summary>
         /// The function stops the simualtor on stop button click

@@ -75,14 +75,14 @@ namespace FlightInspectionDesktopApp.UserControls
                 // connect them with a line
                 Polyline polyline = new Polyline
                 {
-                    StrokeThickness = 1,
-                    Stroke = Brushes.LightCoral,
+                    StrokeThickness = 0.5,
+                    Stroke = Brushes.LightSkyBlue,
                     Points = points
                 };
                 canGraph.Children.Add(polyline);
                 Polyline polyline1 = new Polyline
                 {
-                    StrokeThickness = 1,
+                    StrokeThickness = 0.5,
                     Stroke = Brushes.LightSkyBlue,
                     Points = pointsCorr
                 };

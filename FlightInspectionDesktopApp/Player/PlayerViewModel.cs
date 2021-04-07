@@ -46,6 +46,13 @@ namespace FlightInspectionDesktopApp.Player
                 return playerModel.MaxLine;
             }
         }
+
+        public double VMCurrTime
+        {
+            get { return playerModel.CurrTime; }
+            set { playerModel.CurrTime = value; }
+        }
+
         /// <summary>
         /// The fucntion notify change in a property by it's name
         /// </summary>
@@ -88,16 +95,16 @@ namespace FlightInspectionDesktopApp.Player
         /// <summary>
         /// The function playes the simualator in reverse
         /// </summary>
-        public void Reverse()
+        public void Slower()
         {
-            playerModel.Reverse();
+            playerModel.Slower();
         }
         /// <summary>
         /// The function playes the simulator in fast reverse
         /// </summary>
-        public void FastReverse()
+        public void MuchSlower()
         {
-            playerModel.FastReverse();
+            playerModel.MuchSlower();
         }
     }
 }

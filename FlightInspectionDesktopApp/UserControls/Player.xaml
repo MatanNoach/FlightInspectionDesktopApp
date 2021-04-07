@@ -8,19 +8,20 @@
              d:DataContext="{d:DesignInstance Type=player:PlayerViewModel}"
              mc:Ignorable="d" 
              d:DesignHeight="100" d:DesignWidth="400">
-    <Grid VerticalAlignment="Bottom" HorizontalAlignment="Center">
+    <Grid VerticalAlignment="Bottom" HorizontalAlignment="Center" Margin="50,0,10,0" Width="340">
         <Grid.RowDefinitions>
             <RowDefinition Height="{Binding ElementName=PlayerPanel, Path=Height}"/>
             <RowDefinition Height="{Binding ElementName=TimeSlider, Path=Height}"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="{Binding ElementName=PlayerPanel, Path=Width}"/>
+            <ColumnDefinition Width="159.4"/>
+            <ColumnDefinition Width="140.6"/>
         </Grid.ColumnDefinitions>
-        <StackPanel x:Name="PlayerPanel" VerticalAlignment="Bottom" HorizontalAlignment="Center" Orientation="Horizontal"  Height="50" Grid.Row="0">
-            <Button x:Name="FastReverse" Click="FastReverse_Click">
+        <StackPanel x:Name="PlayerPanel" VerticalAlignment="Bottom" HorizontalAlignment="Center" Orientation="Horizontal"  Height="50" Grid.Row="0" Grid.ColumnSpan="2">
+            <Button x:Name="MuchSlower" Click="MuchSlower_Click">
                 <Image Source="../Player/ButtonPics/x2Back.png"/>
             </Button>
-            <Button x:Name="Reverse" Click="Reverse_Click">
+            <Button x:Name="Slower" Click="Slower_Click">
                 <Image Source="../Player/ButtonPics/reverse.png"/>
             </Button>
             <Button x:Name="Pause" Click="Pause_Click">
@@ -38,7 +39,7 @@
         </StackPanel>
         <Slider x:Name="TimeSlider" Grid.Row="1" HorizontalAlignment="Center" 
             Width="{Binding ElementName=PlayerPanel, Path=ActualWidth}" Value="{Binding VMCurrentLineIndex,Mode=TwoWay}"
-            Minimum="0" Maximum="{Binding VMMaxLine, Mode=OneWay}"/>
-
+            Minimum="0" Maximum="{Binding VMMaxLine, Mode=OneWay}" Grid.ColumnSpan="2"/>
+        <TextBlock x:Name="TimeWatch" Text="{Binding VMCurrTime, Mode=TwoWay}" HorizontalAlignment="Right" FontSize="14" Margin="0,0,-42,0" Grid.Column="1"/>
     </Grid>
 </UserControl>

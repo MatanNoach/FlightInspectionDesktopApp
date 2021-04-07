@@ -6,7 +6,7 @@ namespace FlightInspectionDesktopApp.Player
 
     class PlayerModel : INotifyPropertyChanged
     {
-
+        private double currTime = 0;
         private static PlayerModel playerModelInst;
         private DataModel dataModel;
         // set the default playing speed to 10 Hz
@@ -34,14 +34,31 @@ namespace FlightInspectionDesktopApp.Player
         {
             get
             {
+                if (this != null)
+                {
+                    CurrTime = dataModel.CurrentLineIndex / (1000 / 100);
+                }
                 return dataModel.CurrentLineIndex;
             }
             set
             {
                 dataModel.CurrentLineIndex = value;
                 NotifyPropertyChanged("CurrentLineIndex");
+
             }
         }
+
+
+        public double CurrTime
+        {
+            get { return currTime; }
+            set
+            {
+                currTime = value;
+                NotifyPropertyChanged("CurrTime");
+            }
+        }
+
         /// <summary>
         /// Property for the max line number in the csv file
         /// </summary>
@@ -112,7 +129,7 @@ namespace FlightInspectionDesktopApp.Player
         /// </summary>
         public void fastForward()
         {
-            PlayingSpeed = 50;
+            PlayingSpeed /= 2;
             dataModel.NextLine = 1;
         }
         /// <summary>
@@ -133,18 +150,18 @@ namespace FlightInspectionDesktopApp.Player
         /// <summary>
         /// The function playes the simulator in revserse in regular speed
         /// </summary>
-        public void Reverse()
+        public void Slower()
         {
-            PlayingSpeed = 100;
-            dataModel.NextLine = -1;
+            PlayingSpeed = (int)(PlayingSpeed * 1.25);
+            dataModel.NextLine = 1;
         }
         /// <summary>
         /// The function playes the simulator in reverse double's it's regular speed
         /// </summary>
-        public void FastReverse()
+        public void MuchSlower()
         {
-            PlayingSpeed = 50;
-            dataModel.NextLine = -1;
+            PlayingSpeed = (int)(PlayingSpeed * 1.5);
+            dataModel.NextLine = 1;
         }
     }
 }
