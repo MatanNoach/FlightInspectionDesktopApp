@@ -1,10 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.IO;
-using System.Linq;
 using System.Xml;
-
+using System.Linq;
+using System.ComponentModel;
+using System.Collections.Generic;
+using LinearRegressionDLL;
 
 namespace FlightInspectionDesktopApp
 {
@@ -19,6 +19,7 @@ namespace FlightInspectionDesktopApp
         private int nextLine = 1;
         private List<string> colNames;
         private Dictionary<string, List<double>> minMaxVals;
+
 
         public event PropertyChangedEventHandler PropertyChanged;
         public void NotifyPropertyChanged(string propName)
@@ -96,6 +97,9 @@ namespace FlightInspectionDesktopApp
                 throw new Exception("DataModel is already created");
             }
             dataModelInstance = new DataModel(csvPath, xmlPath);
+
+            LinearRegressionDetector detector = new LinearRegressionDetector(csvPath);
+            List<DrawPoint> points = detector.getPointsToDraw("airspeed-kt");
         }
 
         private DataModel() { }
@@ -119,7 +123,7 @@ namespace FlightInspectionDesktopApp
             using (StreamReader csvReader = new StreamReader(csvPath))
             {
                 char colSeparator = getVarSeparator(xmlPath);
-                string currentLine;
+                string currentLine = csvReader.ReadLine();
                 string[] lineCols = { };
                 int index = 0;
 
