@@ -12,7 +12,7 @@ namespace FlightInspectionDesktopApp
     {
         private Dictionary<string, List<double>> dictData;
         private Dictionary<string, string> corrData;
-
+        private Dictionary<string, List<double>> linRegData;
         private List<string> rawData;
         private int currentLineIndex;
         private static DataModel dataModelInstance;
@@ -89,6 +89,8 @@ namespace FlightInspectionDesktopApp
             dataModelInstance = new DataModel();
         }
 
+        public Dictionary<string, List<double>> LinRegData { get { return this.linRegData; } }
+
         public static void CreateModel(string csvPath, string xmlPath)
         {
             if (dataModelInstance != null)
@@ -105,6 +107,7 @@ namespace FlightInspectionDesktopApp
             rawData = new List<string>();
             corrData = new Dictionary<string, string>();
             dictData = new Dictionary<string, List<double>>();
+            linRegData = new Dictionary<string, List<double>>();
 
             // get the chunks' names from the given xml file
             List<string> xmlColumns = getXmlColumns(xmlPath);
@@ -141,6 +144,7 @@ namespace FlightInspectionDesktopApp
             foreach (string key in dictData.Keys)
             {
                 corrData.Add(key, mostCorrelativeKey(key));
+                linRegData.Add(key, LinearReg(dictData[key], dictData[corrData[key]], dictData[key].Count));
             }
             CalcMinMax();
         }
@@ -232,6 +236,19 @@ namespace FlightInspectionDesktopApp
             return (coefficient * sum) - Math.Pow(values.Average(), 2);
 
         }
+
+        // performs a linear regression and returns the line equation
+        private List<double> LinearReg(List<double> firstKeyValues, List<double> secondKeyValues, double arrSize)
+        {
+            double a = cov(firstKeyValues, secondKeyValues, arrSize) / var(firstKeyValues, arrSize);
+            double b = secondKeyValues.Average() - a * firstKeyValues.Average();
+            return new List<double>
+            {
+                a,
+                b
+            };
+        }
+
 
         /// <summary>
         /// this function reads the given xml file and retruns all the columns' names.

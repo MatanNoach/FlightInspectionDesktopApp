@@ -44,6 +44,9 @@ namespace FlightInspectionDesktopApp.Graph
         /// <returns></returns>
         public PointCollection GetPointsByCol(string colName) { return this.model.GetPointsByCol(colName); }
 
+        public PointCollection GetRegPoints(string col, double margin, double height, double width) { return model.GetRegPoints(col, margin, height, width); }
+        public PointCollection GetCorrelatedRegPoints(string col1, string col2) { model.GetCorrelatedRegPoints(col1, col2); return VMCorrelatedPoints; }
+
         public List<string> ColNames { get { return this.model.ColNames; } }
 
         public Dictionary<string, List<double>> MinMaxVals { get { return this.model.MinMaxVals; } }
@@ -53,5 +56,9 @@ namespace FlightInspectionDesktopApp.Graph
         public Dictionary<string, string> CorrData { get { return model.CorrData; } }
 
         public string VMCorrCol { get { return model.CorrCol; } set { model.CorrCol = value; } }
+
+        public Dictionary<string, List<double>> LinRegData { get { return model.LinRegData; } }
+
+        public PointCollection VMCorrelatedPoints { get { return model.CorrelatedPoints; } }
     }
 }
