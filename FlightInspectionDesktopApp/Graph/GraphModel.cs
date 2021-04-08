@@ -72,18 +72,9 @@ namespace FlightInspectionDesktopApp.Graph
             PointCollection points = new PointCollection();
             for (int x = 0; x <= dm.CurrentLineIndex; x++)
             {
-                if (x == 1129)
-                {
-                    int g = 2;
-
-                }
-                double test1 = dm.getValueByKeyAndTime(col1, x);
-                double test2 = dm.getValueByKeyAndTime(col2, x);
-
                 // create points in the ratios of the canvas
-                Point p = new Point((width / 2) + test1 * xRegRatio, (this.height / 2) - (test2 * yRegRatio));
+                Point p = new Point((width / 2) + dm.getValueByKeyAndTime(col1, x) * xRegRatio, (this.height / 2) - (dm.getValueByKeyAndTime(col2, x) * yRegRatio));
                 points.Add(p);
-                Console.WriteLine("X - " + p.X + " Y - " + p.Y);
             }
             CorrelatedPoints = points;
             return points;
@@ -117,42 +108,35 @@ namespace FlightInspectionDesktopApp.Graph
             }
             if (minXVal > minYVal)
             {
-                double something = minXVal * xRegRatio;
-                Point p = new Point(something + (width / 2), CalcY(height, something, l));
-
+                Point p = new Point(minXVal * xRegRatio + (width / 2), (height / 2) - CalcY(height, minXVal, l) * yRegRatio);
                 points.Add(p);
-                Console.WriteLine("GetRegPoints(1): X - " + p.X + " Y - " + p.Y);
             }
             else
             {
-                Point p = new Point(CalcX(width, minYVal, l), minYVal * yRegRatio);
+                Point p = new Point((width / 2) + CalcX(width, minYVal, l) * xRegRatio, (height / 2) - minYVal * yRegRatio);
                 points.Add(p);
-                Console.WriteLine("GetRegPoints(2): X - " + p.X + " Y - " + p.Y);
             }
             if (maxXVal < maxYVal)
             {
-                double something = maxXVal * xRegRatio;
-                Point p = new Point(something + (width / 2), CalcY(height, something, l));
+                Point p = new Point(maxXVal * xRegRatio + (width / 2), (height / 2) - CalcY(height, maxXVal, l) * yRegRatio);
                 points.Add(p);
-                Console.WriteLine("GetRegPoints(3): X - " + p.X + " Y - " + p.Y);
             }
             else
             {
-                Point p = new Point(CalcX(width, maxYVal, l), maxYVal * yRegRatio);
+                Point p = new Point((width / 2) + CalcX(width, maxYVal, l) * xRegRatio, (height / 2) - maxYVal * yRegRatio);
                 points.Add(p);
-                Console.WriteLine("GetRegPoints(4): X - " + p.X + " Y - " + p.Y);
             }
             return points;
         }
 
         private double CalcX(double width, double y, List<double> l)
         {
-            return (width / 2) + ((y - l[1]) / l[0]);
+            return ((y - l[1]) / l[0]);
         }
 
         private double CalcY(double height, double x, List<double> l)
         {
-            return (height / 2) - ((l[0] * x + l[1]));
+            return ((l[0] * x + l[1]));
         }
 
         /// <summary>
