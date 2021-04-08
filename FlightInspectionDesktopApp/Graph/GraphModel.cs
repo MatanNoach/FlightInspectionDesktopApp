@@ -69,8 +69,9 @@ namespace FlightInspectionDesktopApp.Graph
 
         public PointCollection GetCorrelatedRegPoints(string col1, string col2)
         {
+            //int currentTime = dm.CurrentLineIndex / 10;
             PointCollection points = new PointCollection();
-            for (int x = 0; x <= dm.CurrentLineIndex; x++)
+            for (int x = Max(dm.CurrentLineIndex - 300, 0); x <= dm.CurrentLineIndex; x++)
             {
                 // create points in the ratios of the canvas
                 Point p = new Point((width / 2) + dm.getValueByKeyAndTime(col1, x) * xRegRatio, (this.height / 2) - (dm.getValueByKeyAndTime(col2, x) * yRegRatio));
