@@ -33,7 +33,9 @@
 
 # others
 /.vs
+/FlightInspectionDesktopApp/obj
 /FlightInspectionDesktopApp/obj/Debug
 /FlightInspectionDesktopApp/obj/Release
 /FlightInspectionDesktopApp/bin
 /UpgradeLog.htm
+FlightInspectionDesktopApp/FlightInspectionDesktopApp.csproj.user
