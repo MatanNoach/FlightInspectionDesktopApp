@@ -108,7 +108,9 @@ namespace FlightInspectionDesktopApp.Graph
             }
             if (minXVal > minYVal)
             {
-                Point p = new Point(minXVal * xRegRatio + (width / 2), (height / 2) - CalcY(height, minXVal, l) * yRegRatio);
+                double something = minXVal;
+                Point p = new Point(something * xRegRatio + (width / 2), (height / 2) - CalcY(height, something, l) * yRegRatio);
+
                 points.Add(p);
             }
             else
@@ -118,7 +120,8 @@ namespace FlightInspectionDesktopApp.Graph
             }
             if (maxXVal < maxYVal)
             {
-                Point p = new Point(maxXVal * xRegRatio + (width / 2), (height / 2) - CalcY(height, maxXVal, l) * yRegRatio);
+                double something = maxXVal;
+                Point p = new Point(something * xRegRatio + (width / 2), (height / 2) - CalcY(height, something, l) * yRegRatio);
                 points.Add(p);
             }
             else
