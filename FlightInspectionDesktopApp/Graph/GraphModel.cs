@@ -117,28 +117,28 @@ namespace FlightInspectionDesktopApp.Graph
             }
             if (minXVal > minYVal)
             {
-                double something = minXVal * xRegRatio;
-                Point p = new Point(something + (width / 2), CalcY(height, something, l));
+                double something = minXVal;
+                Point p = new Point(something * xRegRatio + (width / 2), (height / 2) - CalcY(height, something, l) * yRegRatio);
 
                 points.Add(p);
                 Console.WriteLine("GetRegPoints(1): X - " + p.X + " Y - " + p.Y);
             }
             else
             {
-                Point p = new Point(CalcX(width, minYVal, l), minYVal * yRegRatio);
+                Point p = new Point((width / 2) + CalcX(width, minYVal, l) * xRegRatio, (height / 2) - minYVal * yRegRatio);
                 points.Add(p);
                 Console.WriteLine("GetRegPoints(2): X - " + p.X + " Y - " + p.Y);
             }
             if (maxXVal < maxYVal)
             {
-                double something = maxXVal * xRegRatio;
-                Point p = new Point(something + (width / 2), CalcY(height, something, l));
+                double something = maxXVal;
+                Point p = new Point(something * xRegRatio + (width / 2), (height / 2) - CalcY(height, something, l) * yRegRatio);
                 points.Add(p);
                 Console.WriteLine("GetRegPoints(3): X - " + p.X + " Y - " + p.Y);
             }
             else
             {
-                Point p = new Point(CalcX(width, maxYVal, l), maxYVal * yRegRatio);
+                Point p = new Point((width / 2) + CalcX(width, maxYVal, l) * xRegRatio, (height / 2) - maxYVal * yRegRatio);
                 points.Add(p);
                 Console.WriteLine("GetRegPoints(4): X - " + p.X + " Y - " + p.Y);
             }
@@ -147,12 +147,12 @@ namespace FlightInspectionDesktopApp.Graph
 
         private double CalcX(double width, double y, List<double> l)
         {
-            return (width / 2) + ((y - l[1]) / l[0]);
+            return ((y - l[1]) / l[0]);
         }
 
         private double CalcY(double height, double x, List<double> l)
         {
-            return (height / 2) - ((l[0] * x + l[1]));
+            return ((l[0] * x + l[1]));
         }
 
         /// <summary>

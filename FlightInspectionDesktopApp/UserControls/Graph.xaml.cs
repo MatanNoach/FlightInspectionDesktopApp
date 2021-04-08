@@ -129,6 +129,7 @@ namespace FlightInspectionDesktopApp.UserControls
                 // delete everything from th graph except for axises
                 canGraph.Children.RemoveRange(3, canGraph.Children.Count - 3);
                 corrGraph.Children.RemoveRange(3, corrGraph.Children.Count - 3);
+                LinReg.Children.RemoveRange(3, LinReg.Children.Count - 3);
                 // update the correlated feature
                 vm.VMCorrCol = vm.CorrData[(string)ColNames.SelectedItem];
 
