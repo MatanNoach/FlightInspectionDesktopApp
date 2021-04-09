@@ -6,7 +6,7 @@ namespace FlightInspectionDesktopApp.Player
 
     class PlayerModel : INotifyPropertyChanged
     {
-        private double currTime = 0;
+        private string currTime = "0:00";
         private static PlayerModel playerModelInst;
         private DataModel dataModel;
         // set the default playing speed to 10 Hz
@@ -36,7 +36,16 @@ namespace FlightInspectionDesktopApp.Player
             {
                 if (this != null)
                 {
-                    CurrTime = dataModel.CurrentLineIndex / (1000 / 100);
+                    int minutes = dataModel.CurrentLineIndex / 600;
+                    int seconds = (dataModel.CurrentLineIndex / 10) % 60;
+                    if (seconds > 9)
+                    {
+                        CurrTime = minutes.ToString() + ":" + seconds.ToString();
+                    }
+                    else
+                    {
+                        CurrTime = minutes.ToString() + ":0" + seconds.ToString();
+                    }
                 }
                 return dataModel.CurrentLineIndex;
             }
@@ -49,7 +58,7 @@ namespace FlightInspectionDesktopApp.Player
         }
 
 
-        public double CurrTime
+        public string CurrTime
         {
             get { return currTime; }
             set

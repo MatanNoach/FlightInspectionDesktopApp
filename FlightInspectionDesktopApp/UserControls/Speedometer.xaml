@@ -5,7 +5,9 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:ed="http://schemas.microsoft.com/expression/2010/drawing"
              xmlns:properties="clr-namespace:FlightInspectionDesktopApp.Properties"
-             xmlns:local="clr-namespace:FlightInspectionDesktopApp.UserControls" xmlns:speedometer="clr-namespace:FlightInspectionDesktopApp.Speedometer" d:DataContext="{d:DesignInstance Type=speedometer:SpeedometerViewModel}"
+             xmlns:local="clr-namespace:FlightInspectionDesktopApp.UserControls" 
+             xmlns:speedometer="clr-namespace:FlightInspectionDesktopApp.Speedometer" 
+             d:DataContext="{d:DesignInstance Type=speedometer:SpeedometerViewModel}"
              mc:Ignorable="d" 
              d:DesignHeight="250" d:DesignWidth="500">
     <UserControl.Resources>

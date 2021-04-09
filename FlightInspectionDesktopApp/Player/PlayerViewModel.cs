@@ -47,7 +47,7 @@ namespace FlightInspectionDesktopApp.Player
             }
         }
 
-        public double VMCurrTime
+        public string VMCurrTime
         {
             get { return playerModel.CurrTime; }
             set { playerModel.CurrTime = value; }
