@@ -34,8 +34,12 @@
 # others
 /.vs
 /FlightInspectionDesktopApp/obj
-/FlightInspectionDesktopApp/obj/Debug
-/FlightInspectionDesktopApp/obj/Release
 /FlightInspectionDesktopApp/bin
-/UpgradeLog.htm
 FlightInspectionDesktopApp/FlightInspectionDesktopApp.csproj.user
+/UpgradeLog.htm
+LinearRegressionDLL/obj
+LinearRegressionDLL/bin
+LinearRegressionDLL/obj/Debug
+MinCircleDLL/obj
+MinCircleDLL/bin
+LinearRegressionDLL/obj/Debug/LinearRegressionDLL.csprojAssemblyReference.cache
