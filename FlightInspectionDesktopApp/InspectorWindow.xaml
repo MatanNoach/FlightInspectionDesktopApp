@@ -13,7 +13,7 @@
         Left="{Binding Source={x:Static properties:Settings.Default}, Path=windowWidth}"
         Top="0"
         Background="#FFC1D3CF" 
-        FontFamily="Microsoft JhengHei UI">
+        FontFamily="Microsoft JhengHei UI" Closing="Window_Closing">
     <Grid>
         <control:Speedometer VerticalAlignment="Top" HorizontalAlignment="Center" />
         <control:Metadata VerticalAlignment="Top" HorizontalAlignment="Right" Margin="0,0,100,0" />

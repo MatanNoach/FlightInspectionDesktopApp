@@ -16,6 +16,7 @@ namespace FlightInspectionDesktopApp
         volatile bool shouldStop;
         private DataModel dataModel;
         private static FGModelImp fgModel;
+        Process exeProcess;
         public static FGModelImp Instance
         {
             get
@@ -111,7 +112,7 @@ namespace FlightInspectionDesktopApp
             try
             {
                 // Run the process by the ProcessInfo
-                Process exeProcess = Process.Start(startInfo);
+                this.exeProcess = Process.Start(startInfo);
 
                 // set the process's window at the left side of the screen
                 Thread.Sleep(5000);
@@ -170,6 +171,7 @@ namespace FlightInspectionDesktopApp
         {
             shouldStop = true;
             this.telnetClient.Disconnect();
+            this.exeProcess.Kill();
         }
 
         /// <summary>
