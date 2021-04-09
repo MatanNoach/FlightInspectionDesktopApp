@@ -148,7 +148,7 @@ namespace FlightInspectionDesktopApp.Player
             dataModel.NextLine = 0;
         }
         /// <summary>
-        /// The function playes the simulator in revserse in regular speed
+        /// The function playes the simulator in a slow speed
         /// </summary>
         public void Slower()
         {
@@ -156,7 +156,7 @@ namespace FlightInspectionDesktopApp.Player
             dataModel.NextLine = 1;
         }
         /// <summary>
-        /// The function playes the simulator in reverse double's it's regular speed
+        /// The function playes the simulator in extra slow speed
         /// </summary>
         public void MuchSlower()
         {
