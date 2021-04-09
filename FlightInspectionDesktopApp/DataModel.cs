@@ -100,8 +100,8 @@ namespace FlightInspectionDesktopApp
             }
             dataModelInstance = new DataModel(csvPath, xmlPath);
 
-            LinearRegressionDetector detector = new LinearRegressionDetector(csvPath);
-            List<DrawPoint> points = detector.getPointsToDraw("airspeed-kt");
+            //LinearRegressionDetector detector = new LinearRegressionDetector(csvPath);
+            //List<DrawPoint> points = detector.getPointsToDraw("airspeed-kt");
         }
 
         private DataModel() { }

@@ -4,7 +4,7 @@ using System.ComponentModel;
 
 namespace FlightInspectionDesktopApp
 {
-    class FGViewModel : INotifyPropertyChanged
+    public class FGViewModel : INotifyPropertyChanged
     {
         private IFGModel model;
         public event PropertyChangedEventHandler PropertyChanged;
@@ -44,19 +44,20 @@ namespace FlightInspectionDesktopApp
         /// <param name="PathCSV">path of CSV file</param>
         public void Run(string binFolder, string PathFG, string XMLFileName, string PathCSV)
         {
-            //model.RunFG(binFolder, PathFG, XMLFileName);
+            model.RunFG(binFolder, PathFG, XMLFileName);
             // wait 10 seconds before trying to connect to FG
-            //Thread.Sleep(10000);
+            Thread.Sleep(10000);
             model.Connect();
 
             model.Start(PathCSV);
         }
 
-        // Properties:
-        public double VMAileron { get { return model.Aileron; } }
-        public double VMElevator { get { return model.Elevator; } }
-        public double VMRudder { get { return model.Rudder; } }
-        public double VMThrottle { get { return model.Throttle; } }
-        public double VMPosition { get { return model.Position; } }
+        /// <summary>
+        /// Disconnects all connections.
+        /// </summary>
+        public void Disconnect()
+        {
+            model.Disconnect();
+        }
     }
 }
