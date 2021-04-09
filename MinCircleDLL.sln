@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31129.286
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MinCircleDLL", "MinCircleDLL\MinCircleDLL.csproj", "{BEAAF6BC-BA05-48E8-8F5F-6F597C1CE725}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{BEAAF6BC-BA05-48E8-8F5F-6F597C1CE725}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BEAAF6BC-BA05-48E8-8F5F-6F597C1CE725}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BEAAF6BC-BA05-48E8-8F5F-6F597C1CE725}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BEAAF6BC-BA05-48E8-8F5F-6F597C1CE725}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {D5C105A7-2D71-429C-87A2-700E0A9E094F}
+	EndGlobalSection
+EndGlobal

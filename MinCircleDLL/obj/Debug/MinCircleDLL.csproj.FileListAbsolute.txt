@@ -1,0 +1,6 @@
+C:\Users\user\Documents\University\תשפא\סמסטר ב\תכנות מתקדם 2\תרגילים\Milestone1\MinCircleDLL\MinCircleDLL\bin\Debug\MinCircleDLL.dll
+C:\Users\user\Documents\University\תשפא\סמסטר ב\תכנות מתקדם 2\תרגילים\Milestone1\MinCircleDLL\MinCircleDLL\bin\Debug\MinCircleDLL.pdb
+C:\Users\user\Documents\University\תשפא\סמסטר ב\תכנות מתקדם 2\תרגילים\Milestone1\MinCircleDLL\MinCircleDLL\obj\Debug\MinCircleDLL.csprojAssemblyReference.cache
+C:\Users\user\Documents\University\תשפא\סמסטר ב\תכנות מתקדם 2\תרגילים\Milestone1\MinCircleDLL\MinCircleDLL\obj\Debug\MinCircleDLL.csproj.CoreCompileInputs.cache
+C:\Users\user\Documents\University\תשפא\סמסטר ב\תכנות מתקדם 2\תרגילים\Milestone1\MinCircleDLL\MinCircleDLL\obj\Debug\MinCircleDLL.dll
+C:\Users\user\Documents\University\תשפא\סמסטר ב\תכנות מתקדם 2\תרגילים\Milestone1\MinCircleDLL\MinCircleDLL\obj\Debug\MinCircleDLL.pdb
