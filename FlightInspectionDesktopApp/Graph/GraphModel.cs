@@ -37,7 +37,6 @@ namespace FlightInspectionDesktopApp.Graph
             {
                 NotifyPropertyChanged(e.PropertyName);
             };
-
         }
 
         /// <summary>
@@ -66,11 +65,16 @@ namespace FlightInspectionDesktopApp.Graph
             return points;
         }
 
-
+        /// <summary>
+        /// Returns points of both correlated features from the last 30 seconds.
+        /// </summary>
+        /// <param name="col1">first feature</param>
+        /// <param name="col2">second feature</param>
+        /// <returns>point collection</returns>
         public PointCollection GetCorrelatedRegPoints(string col1, string col2)
         {
-            //int currentTime = dm.CurrentLineIndex / 10;
             PointCollection points = new PointCollection();
+            // add points from the last 30 seconds
             for (int x = Max(dm.CurrentLineIndex - 300, 0); x <= dm.CurrentLineIndex; x++)
             {
                 // create points in the ratios of the canvas
@@ -81,8 +85,16 @@ namespace FlightInspectionDesktopApp.Graph
             return points;
         }
 
+        /// <summary>
+        /// Returns two-points defining the linear regression line.
+        /// </summary>
+        /// <param name="col">chosen column</param>
+        /// <param name="height">size of the canvas</param>
+        /// <param name="width">size of the canvas</param>
+        /// <returns></returns>
         public PointCollection GetLineRegPoints(string col, double height, double width)
         {
+            // calculate min & max values of correlated features
             double minXVal = MinMaxVals[col][0];
             double maxXVal = MinMaxVals[col][1];
             double absMaxXVal = Max(Abs(minXVal), Abs(maxXVal));
@@ -91,6 +103,7 @@ namespace FlightInspectionDesktopApp.Graph
             double absMaxYVal = Max(Abs(maxYVal), Abs(minYVal));
             List<double> l = dm.LinRegData[col];
             PointCollection points = new PointCollection();
+            // calculate the desirable ratios of x & y axes
             if (absMaxXVal == 0)
             {
                 xRegRatio = 0;
@@ -107,38 +120,49 @@ namespace FlightInspectionDesktopApp.Graph
             {
                 yRegRatio = (height / 2) / absMaxYVal;
             }
+            // create two points defining the linear regression line, trying to draw in the scope of the canvas
             if (minXVal > minYVal)
             {
-                double something = minXVal;
-                Point p = new Point(something * xRegRatio + (width / 2), (height / 2) - CalcY(height, something, l) * yRegRatio);
+                Point p = new Point(minXVal * xRegRatio + (width / 2), (height / 2) - CalcY(minXVal, l) * yRegRatio);
 
                 points.Add(p);
             }
             else
             {
-                Point p = new Point((width / 2) + CalcX(width, minYVal, l) * xRegRatio, (height / 2) - minYVal * yRegRatio);
+                Point p = new Point((width / 2) + CalcX(minYVal, l) * xRegRatio, (height / 2) - minYVal * yRegRatio);
                 points.Add(p);
             }
             if (maxXVal < maxYVal)
             {
-                double something = maxXVal;
-                Point p = new Point(something * xRegRatio + (width / 2), (height / 2) - CalcY(height, something, l) * yRegRatio);
+                Point p = new Point(maxXVal * xRegRatio + (width / 2), (height / 2) - CalcY(maxXVal, l) * yRegRatio);
                 points.Add(p);
             }
             else
             {
-                Point p = new Point((width / 2) + CalcX(width, maxYVal, l) * xRegRatio, (height / 2) - maxYVal * yRegRatio);
+                Point p = new Point((width / 2) + CalcX(maxYVal, l) * xRegRatio, (height / 2) - maxYVal * yRegRatio);
                 points.Add(p);
             }
             return points;
         }
 
-        private double CalcX(double width, double y, List<double> l)
+        /// <summary>
+        /// Calculate the value of x given y.
+        /// </summary>
+        /// <param name="y">value of y</param>
+        /// <param name="l"></param>
+        /// <returns></returns>
+        private double CalcX(double y, List<double> l)
         {
             return ((y - l[1]) / l[0]);
         }
 
-        private double CalcY(double height, double x, List<double> l)
+        /// <summary>
+        /// Calculate the value of y given x.
+        /// </summary>
+        /// <param name="x">value of x</param>
+        /// <param name="l">line equasion</param>
+        /// <returns></returns>
+        private double CalcY(double x, List<double> l)
         {
             return ((l[0] * x + l[1]));
         }
