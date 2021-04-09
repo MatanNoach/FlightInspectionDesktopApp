@@ -44,9 +44,24 @@ namespace FlightInspectionDesktopApp.Graph
         /// <returns></returns>
         public PointCollection GetPointsByCol(string colName) { return this.model.GetPointsByCol(colName); }
 
-        public PointCollection GetRegPoints(string col, double margin, double height, double width) { return model.GetRegPoints(col, margin, height, width); }
+        /// <summary>
+        /// Returns two-points defining the linear regression line.
+        /// </summary>
+        /// <param name="col">chosen column</param>
+        /// <param name="height">size of the canvas</param>
+        /// <param name="width">size of the canvas</param>
+        /// <returns></returns>
+        public PointCollection GetLineRegPoints(string col, double height, double width) { return model.GetLineRegPoints(col, height, width); }
+
+        /// <summary>
+        /// Returns points of both correlated features from the last 30 seconds.
+        /// </summary>
+        /// <param name="col1">first feature</param>
+        /// <param name="col2">second feature</param>
+        /// <returns>point collection</returns>
         public PointCollection GetCorrelatedRegPoints(string col1, string col2) { model.GetCorrelatedRegPoints(col1, col2); return VMCorrelatedPoints; }
 
+        // properties:
         public List<string> ColNames { get { return this.model.ColNames; } }
 
         public Dictionary<string, List<double>> MinMaxVals { get { return this.model.MinMaxVals; } }

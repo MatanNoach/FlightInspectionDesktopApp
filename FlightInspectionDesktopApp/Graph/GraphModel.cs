@@ -81,7 +81,7 @@ namespace FlightInspectionDesktopApp.Graph
             return points;
         }
 
-        public PointCollection GetRegPoints(string col, double margin, double height, double width)
+        public PointCollection GetLineRegPoints(string col, double height, double width)
         {
             double minXVal = MinMaxVals[col][0];
             double maxXVal = MinMaxVals[col][1];

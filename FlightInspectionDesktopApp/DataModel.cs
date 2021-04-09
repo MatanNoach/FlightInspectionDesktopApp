@@ -236,8 +236,14 @@ namespace FlightInspectionDesktopApp
             return (coefficient * sum) - Math.Pow(values.Average(), 2);
 
         }
-
-        // performs a linear regression and returns the line equation
+        /// <summary>
+        /// Performs linear regression and returns the line equation represented by a & b, where: y = ax + b.
+        /// </summary>
+        /// <param name="firstKeyValues">values of the first feature</param>
+        /// <param name="secondKeyValues">values of the second feature</param>
+        /// <param name="arrSize">amount of values</param>
+        /// <returns>List where a is the first item and b is the second</returns>
+        // 
         private List<double> LinearReg(List<double> firstKeyValues, List<double> secondKeyValues, double arrSize)
         {
             double a = cov(firstKeyValues, secondKeyValues, arrSize) / var(firstKeyValues, arrSize);

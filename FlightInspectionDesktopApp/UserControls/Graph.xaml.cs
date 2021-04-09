@@ -33,7 +33,7 @@ namespace FlightInspectionDesktopApp.UserControls
             this.nextLine = vm.VMCurrentLineIndex;
 
 
-            // Create the axises of both graphs:
+            // Create the axises of all graphs:
             Path xAxisPath1 = CreateAxis(new Point(margin, canGraph.Height / 2), new Point(canGraph.Width, canGraph.Height / 2));
             canGraph.Children.Add(xAxisPath1);
             Path xAxisPath2 = CreateAxis(new Point(margin, corrGraph.Height / 2), new Point(corrGraph.Width, canGraph.Height / 2));
@@ -51,7 +51,7 @@ namespace FlightInspectionDesktopApp.UserControls
         }
 
         /// <summary>
-        /// Draws x & y axis for both graphs.
+        /// Draws x & y axis for all graphs.
         /// </summary>
         /// <param name="p1">point of axis line</param>
         /// <param name="p2">point of axis line</param>
@@ -96,14 +96,16 @@ namespace FlightInspectionDesktopApp.UserControls
                 };
                 corrGraph.Children.Add(polyline1);
 
+                // create the regression line:
                 Polyline polylineCorr = new Polyline
                 {
                     StrokeThickness = 1,
                     Stroke = Brushes.IndianRed,
-                    Points = vm.GetRegPoints((string)ColNames.SelectedItem, margin, LinReg.Height, LinReg.Width)
+                    Points = vm.GetLineRegPoints((string)ColNames.SelectedItem, LinReg.Height, LinReg.Width)
                 };
                 LinReg.Children.Add(polylineCorr);
 
+                // draw the correlates features' points on the regression graph:
                 PointCollection points1 = vm.GetCorrelatedRegPoints((string)ColNames.SelectedItem, vm.CorrData[(string)ColNames.SelectedItem]);
 
                 // delete the already-drawn graphs if user goes backwards
@@ -126,7 +128,7 @@ namespace FlightInspectionDesktopApp.UserControls
         {
             if (!start)
             {
-                // delete everything from th graph except for axises
+                // delete everything from the graphs except for the axises
                 canGraph.Children.RemoveRange(3, canGraph.Children.Count - 3);
                 corrGraph.Children.RemoveRange(3, corrGraph.Children.Count - 3);
                 LinReg.Children.RemoveRange(3, LinReg.Children.Count - 3);
@@ -143,15 +145,22 @@ namespace FlightInspectionDesktopApp.UserControls
 
 
     }
+
     public class LinePointsConverter : IValueConverter
     {
+        /// <summary>
+        /// Converts PointCollection into points that can be drawn on canvas.
+        /// </summary>
+        /// <param name="value">VMCorrelatedPoints</param>
+        /// <param name="targetType">none</param>
+        /// <param name="parameter">none</param>
+        /// <param name="culture">none</param>
+        /// <returns>StreamGeometry that can be drawn using Path on canvas</returns>
         public object Convert(
             object value, Type targetType, object parameter, CultureInfo culture)
         {
             var geometry = new StreamGeometry();
-            var points = value as IEnumerable<Point>;
-
-            if (points != null && points.Any())
+            if (value is IEnumerable<Point> points && points.Any())
             {
                 using (var sgc = geometry.Open())
                 {
@@ -162,10 +171,17 @@ namespace FlightInspectionDesktopApp.UserControls
                     }
                 }
             }
-
             return geometry;
         }
 
+        /// <summary>
+        /// Not implemented.
+        /// </summary>
+        /// <param name="value">none</param>
+        /// <param name="targetType">none</param>
+        /// <param name="parameter">none</param>
+        /// <param name="culture">none</param>
+        /// <returns></returns>
         public object ConvertBack(
             object value, Type targetType, object parameter, CultureInfo culture)
         {
