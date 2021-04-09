@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FlightInspectionDesktopApp.Graph;
+using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
@@ -8,7 +9,6 @@ using System.Windows.Data;
 using System.Windows.Media;
 using System.Windows.Shapes;
 using System.Windows.Threading;
-using FlightInspectionDesktopApp.Graph;
 
 namespace FlightInspectionDesktopApp.UserControls
 {
@@ -31,7 +31,8 @@ namespace FlightInspectionDesktopApp.UserControls
             vm = new GraphViewModel(new GraphModel(canGraph.Height, canGraph.Width, margin, DataModel.Instance));
             this.DataContext = vm;
             this.nextLine = vm.VMCurrentLineIndex;
-
+            LinearRegressionDLL.LinearRegressionGraph graph = new LinearRegressionDLL.LinearRegressionGraph(@"D:\Users\Matan\Downloads\anomaly_flight.csv", "airspeed-kt");
+            graphsGrid.Children.Add(graph);
 
             // Create the axises of all graphs:
             Path xAxisPath1 = CreateAxis(new Point(margin, canGraph.Height / 2), new Point(canGraph.Width, canGraph.Height / 2));
@@ -189,4 +190,3 @@ namespace FlightInspectionDesktopApp.UserControls
         }
     }
 }
-

@@ -1,10 +1,9 @@
 ﻿using System;
-using System.IO;
-using System.Xml;
-using System.Linq;
-using System.ComponentModel;
 using System.Collections.Generic;
-using LinearRegressionDLL;
+using System.ComponentModel;
+using System.IO;
+using System.Linq;
+using System.Xml;
 
 namespace FlightInspectionDesktopApp
 {
@@ -100,8 +99,8 @@ namespace FlightInspectionDesktopApp
             }
             dataModelInstance = new DataModel(csvPath, xmlPath);
 
-            LinearRegressionDetector detector = new LinearRegressionDetector(csvPath);
-            List<DrawPoint> points = detector.getPointsToDraw("airspeed-kt");
+            //LinearRegressionDetector detector = new LinearRegressionDetector(csvPath);
+            //List<DrawPoint> points = detector.getPointsToDraw("airspeed-kt");
         }
 
         private DataModel() { }

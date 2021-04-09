@@ -124,7 +124,6 @@ namespace FlightInspectionDesktopApp.Graph
             if (minXVal > minYVal)
             {
                 Point p = new Point(minXVal * xRegRatio + (width / 2), (height / 2) - CalcY(minXVal, l) * yRegRatio);
-
                 points.Add(p);
             }
             else

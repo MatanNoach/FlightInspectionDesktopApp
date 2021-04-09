@@ -1,15 +1,17 @@
-﻿<UserControl x:Class="FlightInspectionDesktopApp.UserControls.Graph"
+﻿<UserControl xmlns:LinearRegressionDLL="clr-namespace:LinearRegressionDLL;assembly=LinearRegressionDLL"  x:Class="FlightInspectionDesktopApp.UserControls.Graph"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:FlightInspectionDesktopApp.UserControls" xmlns:flightinspectiondesktopapp="clr-namespace:FlightInspectionDesktopApp.Graph" d:DataContext="{d:DesignInstance Type=flightinspectiondesktopapp:GraphViewModel}"
-             mc:Ignorable="d" 
+             xmlns:linear="clr-namespace:LinearRegressionDLL;assembly=LinearRegressionDLL"
+             
+             mc:Ignorable="d"
              d:DesignHeight="450" d:DesignWidth="1200">
     <UserControl.Resources>
         <local:LinePointsConverter x:Key="LinePointsConverter"/>
     </UserControl.Resources>
-    <Grid>
+    <Grid Name="graphsGrid">
         <Canvas Name="canGraph" Background="White" Width="200" Height="200" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="165,13,835,237">
             <TextBlock x:Name="CurrFeature" Text="{Binding ElementName=ColNames, Path=SelectedItem}" FontSize="11" Margin="6,1,0,0"></TextBlock>
         </Canvas>

@@ -1,7 +1,6 @@
-﻿using System;
+﻿using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Collections.Generic;
 using System.Reflection;
 
 namespace LinearRegressionDLL
@@ -85,6 +84,35 @@ namespace LinearRegressionDLL
             this.y = y;
             this.isDeviated = status;
         }
+        public double X
+        {
+            get
+            {
+                return this.x;
+            }
+            set
+            {
+                this.x = value;
+            }
+        }
+        public double Y
+        {
+            get
+            {
+                return this.y;
+            }
+            set
+            {
+                this.y = value;
+            }
+        }
+        public bool IsDeviated
+        {
+            get
+            {
+                return this.isDeviated;
+            }
+        }
     }
 
     public class LinearRegressionDetector
@@ -93,12 +121,14 @@ namespace LinearRegressionDLL
         List<correlatedFeatures> cf;
         List<AnomalyReport> anomalies;
         private const double significantCorrelation = 0.8;
+        static LinearRegressionDetector instance;
+        Dictionary<string, List<double>> minMaxVals;
 
         /// <summary>
         /// CTOR of LinearRegressionDetector
         /// </summary>
         /// <param name="dataFile"> a csv file with the data of the current flight </param>
-        public LinearRegressionDetector(string dataFile)
+        private LinearRegressionDetector(string dataFile)
         {
             this.flightData = new Timeseries(dataFile);
             this.cf = new List<correlatedFeatures>();
@@ -106,8 +136,31 @@ namespace LinearRegressionDLL
 
             this.learnNormal();
             this.anomalies = this.detect();
+            this.minMaxVals = flightData.CalcMinMax();
         }
-
+        public static void CreateLinearRegressionDetector(string csvFilePath)
+        {
+            if (instance != null)
+            {
+                throw new System.Exception("Instance already created");
+            }
+            instance = new LinearRegressionDetector(csvFilePath);
+        }
+        public static LinearRegressionDetector GetInstance()
+        {
+            if (instance == null)
+            {
+                throw new System.Exception("Instance was not created");
+            }
+            return instance;
+        }
+        public Dictionary<string, List<double>> MinMaxVals
+        {
+            get
+            {
+                return minMaxVals;
+            }
+        }
         /// <summary>
         /// Parse resource csv file in order to set list of CorrelatedFeatures.
         /// </summary>
@@ -242,7 +295,7 @@ namespace LinearRegressionDLL
         /// </summary>
         /// <param name="feature"> a feature name </param>
         /// <returns> the name of the correalted feature </returns>
-        string getCorrelatedFeatureByFeature(string feature)
+        public string getCorrelatedFeatureByFeature(string feature)
         {
             return this.cf[getIndexByFeature(feature)].feature2;
         }
@@ -262,6 +315,19 @@ namespace LinearRegressionDLL
                 }
             }
             return 0;
+        }
+        /// <summary>
+        /// The function get a regression line's equation by feature name
+        /// </summary>
+        /// <param name="feature">The feature to get it's line</param>
+        /// <returns>The line as a list of a and b when y=ax+b</returns>
+        public List<double> GetLineByFeature(string feature)
+        {
+            List<double> lineEquation = new List<double>();
+            Line line = this.cf[getIndexByFeature(feature)].regression_line;
+            lineEquation.Add(line.a);
+            lineEquation.Add(line.b);
+            return lineEquation;
         }
     }
 }
