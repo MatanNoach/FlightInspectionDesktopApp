@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ClassDiagram MajorVersion="1" MinorVersion="1" MembersFormat="NameAndType">
   <Class Name="FlightInspectionDesktopApp.DataModel" BaseTypeListCollapsed="true">
-    <Position X="10.75" Y="10" Width="3.5" />
+    <Position X="14.25" Y="12.25" Width="3.5" />
     <Members>
       <Method Name="CreateModel" Hidden="true" />
       <Field Name="currentLineIndex" Hidden="true" />
@@ -18,7 +18,7 @@
       <Field Name="rawData" Hidden="true" />
     </Members>
     <TypeIdentifier>
-      <HashCode>AAAAAAQAAAAEAIQgAAUBAAAAggAAAQEAQAgBAAAAAAA=</HashCode>
+      <HashCode>QAAAAIQBQAAEAIQgAAUBFYAAggAAIQEIQAgBHAAIBAA=</HashCode>
       <FileName>DataModel.cs</FileName>
     </TypeIdentifier>
     <ShowAsAssociation>
@@ -28,7 +28,7 @@
     <Lollipop Position="0.2" Collapsed="true" />
   </Class>
   <Class Name="FlightInspectionDesktopApp.FGModelImp" BaseTypeListCollapsed="true">
-    <Position X="6" Y="10.5" Width="3.5" />
+    <Position X="14.25" Y="8" Width="3.5" />
     <Members>
       <Field Name="aileron" Hidden="true" />
       <Property Name="Aileron" Hidden="true" />
@@ -50,40 +50,27 @@
       <Field Name="throttle" Hidden="true" />
       <Property Name="Throttle" Hidden="true" />
     </Members>
-    <AssociationLine Name="fgModel" Type="FlightInspectionDesktopApp.FGModelImp" FixedFromPoint="true" FixedToPoint="true">
-      <Path>
-        <Point X="7.219" Y="10.5" />
-        <Point X="7.219" Y="10.25" />
-        <Point X="8.375" Y="10.25" />
-        <Point X="8.375" Y="10.5" />
-      </Path>
-    </AssociationLine>
     <TypeIdentifier>
-      <HashCode>AQSAACUAACggAIAoBEAAIIQAggAAAAAAUAAAEBQAAAA=</HashCode>
+      <HashCode>AQSAACUAACggAIAoBEAAIIQAhgAAAAAAUAAAEBQAAAA=</HashCode>
       <FileName>FG\FGModelImp.cs</FileName>
     </TypeIdentifier>
     <ShowAsAssociation>
-      <Field Name="dataModel" />
       <Field Name="telnetClient" />
+      <Field Name="dataModel" />
       <Field Name="fgModel" />
       <Property Name="Instance" />
       <Property Name="DataModel" />
     </ShowAsAssociation>
-    <Lollipop Position="2.603" />
+    <Lollipop Position="1.166" />
   </Class>
   <Class Name="FlightInspectionDesktopApp.FGViewModel" BaseTypeListCollapsed="true">
-    <Position X="3.5" Y="8.25" Width="3.5" />
+    <Position X="28.25" Y="27.25" Width="3.5" />
     <Members>
       <Method Name="FGViewModel" Hidden="true" />
       <Method Name="NotifyPropertyChanged" Hidden="true" />
-      <Property Name="VMAileron" Hidden="true" />
-      <Property Name="VMElevator" Hidden="true" />
-      <Property Name="VMPosition" Hidden="true" />
-      <Property Name="VMRudder" Hidden="true" />
-      <Property Name="VMThrottle" Hidden="true" />
     </Members>
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAIAAAIAAAAAAAAAAgAAAAAEAgQAAAAAIAAI=</HashCode>
+      <HashCode>AAQAAAAAAAAAAIAAAAAAAAAAgAAAAAAAAAAAAAAIAAI=</HashCode>
       <FileName>FG\FGViewModel.cs</FileName>
     </TypeIdentifier>
     <ShowAsAssociation>
@@ -91,24 +78,22 @@
     </ShowAsAssociation>
     <Lollipop Position="0.2" Collapsed="true" />
   </Class>
-  <Class Name="FlightInspectionDesktopApp.TelnetClient" Collapsed="true" BaseTypeListCollapsed="true">
-    <Position X="13" Y="13" Width="1.5" />
+  <Class Name="FlightInspectionDesktopApp.InspectorWindow" BaseTypeListCollapsed="true">
+    <Position X="28.5" Y="30.5" Width="2.75" />
+    <Members>
+      <Method Name="InspectorWindow" Hidden="true" />
+    </Members>
     <TypeIdentifier>
-      <HashCode>QAQAgAAAAAAAAAAAAEAAAIAgAAAAAAFAAQAAAAEQAAA=</HashCode>
-      <FileName>FG\TelnetClient.cs</FileName>
-    </TypeIdentifier>
-    <Lollipop Orientation="Left" Position="0.362" />
-  </Class>
-  <Class Name="FlightInspectionDesktopApp.InspectorWindow" Collapsed="true" BaseTypeListCollapsed="true">
-    <Position X="0.75" Y="19.5" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAAAAAAAAAgAAAAABAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>InspectorWindow.xaml.cs</FileName>
     </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="vm" />
+    </ShowAsAssociation>
     <Lollipop Position="0.2" Collapsed="true" />
   </Class>
   <Class Name="FlightInspectionDesktopApp.MainWindow" Collapsed="true" BaseTypeListCollapsed="true">
-    <Position X="0.75" Y="8.25" Width="2.25" />
+    <Position X="29.25" Y="26" Width="1.5" />
     <Members>
       <Method Name="LoadCSV_Click" Hidden="true" />
       <Method Name="LoadFG_Click" Hidden="true" />
@@ -120,7 +105,7 @@
       <Method Name="Submit_Click" Hidden="true" />
     </Members>
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAiAgAEAAJAAAAAAAAAIAAAAEAAAAAAAAA=</HashCode>
+      <HashCode>AAAAAACAAAAiAgAEAAJAAAAAAAAAIAAAAEAAAAIAAAA=</HashCode>
       <FileName>MainWindow.xaml.cs</FileName>
     </TypeIdentifier>
     <ShowAsAssociation>
@@ -128,15 +113,8 @@
     </ShowAsAssociation>
     <Lollipop Position="0.2" Collapsed="true" />
   </Class>
-  <Class Name="FlightInspectionDesktopApp.Graph.Graph" Collapsed="true">
-    <Position X="2.25" Y="1.5" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>Graph\Graph.cs</FileName>
-    </TypeIdentifier>
-  </Class>
   <Class Name="FlightInspectionDesktopApp.Metadata.MetadataModel" BaseTypeListCollapsed="true">
-    <Position X="10.5" Y="22.5" Width="3.75" />
+    <Position X="14.25" Y="21" Width="3.5" />
     <Members>
       <Method Name="CreateModel" Hidden="true" />
       <Method Name="MetadataModel" Hidden="true" />
@@ -153,7 +131,7 @@
     <Lollipop Position="0.2" Collapsed="true" />
   </Class>
   <Class Name="FlightInspectionDesktopApp.Metadata.MetadataViewModel" BaseTypeListCollapsed="true">
-    <Position X="5.75" Y="22.5" Width="3.5" />
+    <Position X="14.25" Y="25.5" Width="3.5" />
     <Members>
       <Method Name="MetadataViewModel" Hidden="true" />
       <Method Name="NotifyPropertyChanged" Hidden="true" />
@@ -168,44 +146,40 @@
     <Lollipop Position="0.2" Collapsed="true" />
   </Class>
   <Class Name="FlightInspectionDesktopApp.Player.PlayerModel" BaseTypeListCollapsed="true">
-    <Position X="10.5" Y="15.5" Width="2.5" />
+    <Position X="19.25" Y="13.25" Width="3.5" />
     <Members>
       <Method Name="CreateModel" Hidden="true" />
       <Method Name="fastForward" Hidden="true" />
-      <Method Name="FastReverse" Hidden="true" />
       <Method Name="NotifyPropertyChanged" Hidden="true" />
       <Method Name="Pause" Hidden="true" />
       <Method Name="Play" Hidden="true" />
       <Method Name="PlayerModel" Hidden="true" />
-      <Method Name="Reverse" Hidden="true" />
       <Method Name="Stop" Hidden="true" />
     </Members>
     <TypeIdentifier>
-      <HashCode>EQAgAAEEAAAAAIAAABAAAAEAggAAAAEA4AACAAAAAEA=</HashCode>
+      <HashCode>GQAgAAMEAAAAAIBAABAAQAAAggAAAAEA4AAAAAAAAEA=</HashCode>
       <FileName>Player\PlayerModel.cs</FileName>
     </TypeIdentifier>
     <ShowAsAssociation>
-      <Field Name="dataModel" />
       <Field Name="playerModelInst" />
+      <Field Name="dataModel" />
       <Property Name="DataModel" />
       <Property Name="Instance" />
     </ShowAsAssociation>
     <Lollipop Position="0.2" Collapsed="true" />
   </Class>
   <Class Name="FlightInspectionDesktopApp.Player.PlayerViewModel" BaseTypeListCollapsed="true">
-    <Position X="6" Y="15.5" Width="3.5" />
+    <Position X="19.25" Y="9.75" Width="3.5" />
     <Members>
       <Method Name="FastForward" Hidden="true" />
-      <Method Name="FastReverse" Hidden="true" />
       <Method Name="NotifyPropertyChanged" Hidden="true" />
       <Method Name="Pause" Hidden="true" />
       <Method Name="Play" Hidden="true" />
       <Method Name="PlayerViewModel" Hidden="true" />
-      <Method Name="Reverse" Hidden="true" />
       <Method Name="Stop" Hidden="true" />
     </Members>
     <TypeIdentifier>
-      <HashCode>AAAgAAAAAAAAEIIAAAACAAEAgAAAAAAgoAACAAAAAAA=</HashCode>
+      <HashCode>CAAgAAIAAAAAEIIAAAACAAAAgAAAAAAgoAQAAAAAAAA=</HashCode>
       <FileName>Player\PlayerViewModel.cs</FileName>
     </TypeIdentifier>
     <ShowAsAssociation>
@@ -214,7 +188,7 @@
     <Lollipop Position="0.2" Collapsed="true" />
   </Class>
   <Class Name="FlightInspectionDesktopApp.Steering.SteeringModel" BaseTypeListCollapsed="true">
-    <Position X="9.75" Y="18" Width="2.75" />
+    <Position X="21.25" Y="19.75" Width="3.5" />
     <Members>
       <Method Name="CreateModel" Hidden="true" />
       <Method Name="NotifyPropertyChanged" Hidden="true" />
@@ -231,7 +205,7 @@
     <Lollipop Position="0.2" Collapsed="true" />
   </Class>
   <Class Name="FlightInspectionDesktopApp.Steering.SteeringViewModel" BaseTypeListCollapsed="true">
-    <Position X="5.5" Y="18" Width="3.5" />
+    <Position X="21.25" Y="24.25" Width="3.5" />
     <Members>
       <Method Name="NotifyPropertyChanged" Hidden="true" />
       <Method Name="SteeringViewModel" Hidden="true" />
@@ -245,16 +219,25 @@
     </ShowAsAssociation>
     <Lollipop Position="0.2" Collapsed="true" />
   </Class>
-  <Class Name="FlightInspectionDesktopApp.UserControls.Graph" Collapsed="true" BaseTypeListCollapsed="true">
-    <Position X="4" Y="1.5" Width="1.5" />
+  <Class Name="FlightInspectionDesktopApp.UserControls.Graph" BaseTypeListCollapsed="true">
+    <Position X="1" Y="12.75" Width="2.75" />
+    <Members>
+      <Method Name="DispatcherLoop" Hidden="true" />
+      <Field Name="margin" Hidden="true" />
+      <Field Name="nextLine" Hidden="true" />
+      <Field Name="start" Hidden="true" />
+    </Members>
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAAAAAAAAA0EAAgAAAAAAAAAwAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>UserControls\Graph.xaml.cs</FileName>
     </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="vm" />
+    </ShowAsAssociation>
     <Lollipop Position="0.2" Collapsed="true" />
   </Class>
   <Class Name="FlightInspectionDesktopApp.UserControls.Metadata" Collapsed="true" BaseTypeListCollapsed="true">
-    <Position X="2.5" Y="22.5" Width="2.25" />
+    <Position X="15.25" Y="29" Width="1.5" />
     <Members>
       <Method Name="Metadata" Hidden="true" />
     </Members>
@@ -268,12 +251,12 @@
     <Lollipop Position="0.2" Collapsed="true" />
   </Class>
   <Class Name="FlightInspectionDesktopApp.UserControls.Player" BaseTypeListCollapsed="true">
-    <Position X="2.75" Y="15.5" Width="2" />
+    <Position X="20" Y="6.25" Width="2" />
     <Members>
       <Method Name="Player" Hidden="true" />
     </Members>
     <TypeIdentifier>
-      <HashCode>gAAAAAAAAAAQAAAEEAAQAAAAAAAAAAAIAAAAAAAAABA=</HashCode>
+      <HashCode>AAAIAAAAAAAAAAAEEAAQAAAAAAAAAAAIEAAAAAAAABA=</HashCode>
       <FileName>UserControls\Player.xaml.cs</FileName>
     </TypeIdentifier>
     <ShowAsAssociation>
@@ -282,7 +265,7 @@
     <Lollipop Position="0.2" Collapsed="true" />
   </Class>
   <Class Name="FlightInspectionDesktopApp.UserControls.Steering" Collapsed="true" BaseTypeListCollapsed="true">
-    <Position X="3" Y="18.75" Width="2" />
+    <Position X="22.25" Y="27.5" Width="1.5" />
     <Members>
       <Method Name="Steering" Hidden="true" />
     </Members>
@@ -295,46 +278,141 @@
     </ShowAsAssociation>
     <Lollipop Position="0.2" Collapsed="true" />
   </Class>
-  <Class Name="FlightInspectionDesktopApp.UserControls.AileronValueToJoystickConverter" BaseTypeListCollapsed="true">
-    <Position X="2.5" Y="20.5" Width="2.5" />
+  <Class Name="FlightInspectionDesktopApp.Graph.GraphViewModel">
+    <Position X="4.25" Y="12.75" Width="3.5" />
     <Members>
-      <Method Name="ConvertBack" Hidden="true" />
+      <Method Name="GraphViewModel" Hidden="true" />
+      <Method Name="NotifyPropertyChanged" Hidden="true" />
     </Members>
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAIAAAAAAAAgAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>UserControls\Steering.xaml.cs</FileName>
+      <HashCode>AAAAAAAAgAgAAIAAAAECBAAAgAAAAAAgAAAAGAAIAAg=</HashCode>
+      <FileName>Graph\GraphViewModel.cs</FileName>
     </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="model" />
+    </ShowAsAssociation>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="FlightInspectionDesktopApp.Graph.GraphModel">
+    <Position X="6.75" Y="12.75" Width="3.5" />
+    <Members>
+      <Method Name="GraphModel" Hidden="true" />
+      <Field Name="height" Hidden="true" />
+      <Field Name="margin" Hidden="true" />
+      <Method Name="NotifyPropertyChanged" Hidden="true" />
+      <Field Name="stepX" Hidden="true" />
+      <Field Name="stepY" Hidden="true" />
+      <Field Name="width" Hidden="true" />
+      <Field Name="xRegRatio" Hidden="true" />
+      <Field Name="yRegRatio" Hidden="true" />
+    </Members>
+    <TypeIdentifier>
+      <HashCode>EAAgCBDAwAgAAIQAQAACBAAAiQAAAAEAAABAGAAIAAg=</HashCode>
+      <FileName>Graph\GraphModel.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="dm" />
+    </ShowAsAssociation>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="FlightInspectionDesktopApp.Altimeter.AltimeterModel">
+    <Position X="28.25" Y="18.5" Width="3.5" />
+    <Members>
+      <Method Name="AltimeterModel" Hidden="true" />
+      <Method Name="NotifyPropertyChanged" Hidden="true" />
+    </Members>
+    <TypeIdentifier>
+      <HashCode>AAAAQAAAAAAAAIAAABAAAAAAggAAAAAAQAAAAAAAAEA=</HashCode>
+      <FileName>Altimeter\AltimeterModel.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Instance" />
+    </ShowAsAssociation>
     <Lollipop Position="0.2" Collapsed="true" />
   </Class>
-  <Class Name="FlightInspectionDesktopApp.UserControls.ElevatorValueToJoystickConverter" BaseTypeListCollapsed="true">
-    <Position X="5.5" Y="20.5" Width="2.5" />
+  <Class Name="FlightInspectionDesktopApp.Altimeter.AltimeterViewModel">
+    <Position X="28.25" Y="22.5" Width="3.5" />
     <Members>
-      <Method Name="ConvertBack" Hidden="true" />
+      <Method Name="AltimeterViewModel" Hidden="true" />
     </Members>
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAIAAAAAAAAgAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>UserControls\Steering.xaml.cs</FileName>
+      <HashCode>AAAAAAAAAAAAAIAAAAAAAABAgAAAAAAAAAAAAAAIAAA=</HashCode>
+      <FileName>Altimeter\AltimeterViewModel.cs</FileName>
     </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="model" />
+    </ShowAsAssociation>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="FlightInspectionDesktopApp.Speedometer.SpeedometerModel">
+    <Position X="26.25" Y="12" Width="3.5" />
+    <Members>
+      <Method Name="NotifyPropertyChanged" Hidden="true" />
+      <Method Name="SpeedometerModel" Hidden="true" />
+    </Members>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAiOAAAAAAAAAAokAABIAAQAQAAAAAAAA=</HashCode>
+      <FileName>Speedometer\SpeedometerModel.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Instance" />
+    </ShowAsAssociation>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="FlightInspectionDesktopApp.Speedometer.SpeedometerViewModel">
+    <Position X="26.25" Y="9" Width="3.5" />
+    <Members>
+      <Method Name="NotifyPropertyChanged" Hidden="true" />
+      <Method Name="SpeedometerViewModel" Hidden="true" />
+    </Members>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAEAIAAAAAAAAACgAAAAAAAAAAAAAAIAAA=</HashCode>
+      <FileName>Speedometer\SpeedometerViewModel.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="model" />
+    </ShowAsAssociation>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="FlightInspectionDesktopApp.UserControls.Altimeter" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="26" Y="25.5" Width="2" />
+    <Members>
+      <Method Name="Altimeter" Hidden="true" />
+    </Members>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>UserControls\Altimeter.xaml.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="vm" />
+    </ShowAsAssociation>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="FlightInspectionDesktopApp.UserControls.Speedometer" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="26.75" Y="7.5" Width="2.25" />
+    <Members>
+      <Method Name="Speedometer" Hidden="true" />
+    </Members>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>UserControls\Speedometer.xaml.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="vm" />
+    </ShowAsAssociation>
     <Lollipop Position="0.2" Collapsed="true" />
   </Class>
   <Interface Name="FlightInspectionDesktopApp.ITelnetClient">
-    <Position X="10.5" Y="12.5" Width="1.5" />
+    <Position X="15" Y="4.5" Width="1.75" />
     <TypeIdentifier>
       <HashCode>AAQAAAAAAAAAAAAAAEAAAIAgAAAAAAAAAAAAAAEAAAA=</HashCode>
       <FileName>FG\TelnetClient.cs</FileName>
     </TypeIdentifier>
   </Interface>
   <Interface Name="IFGModel">
-    <Position X="7.75" Y="8.25" Width="1.5" />
-    <Members>
-      <Property Name="Aileron" Hidden="true" />
-      <Property Name="Elevator" Hidden="true" />
-      <Property Name="Position" Hidden="true" />
-      <Property Name="Rudder" Hidden="true" />
-      <Property Name="Throttle" Hidden="true" />
-    </Members>
+    <Position X="25" Y="27.25" Width="1.75" />
     <TypeIdentifier>
-      <HashCode>AAQAACAAACgAAAAgBAAAAIAAAAAAAAAAAAAAEBAAAAA=</HashCode>
+      <HashCode>AAQAAAAAACAAAAAAAAAAAIAAAAAAAAAAAAAAEAAAAAA=</HashCode>
       <FileName>FG\IFGModel.cs</FileName>
     </TypeIdentifier>
   </Interface>

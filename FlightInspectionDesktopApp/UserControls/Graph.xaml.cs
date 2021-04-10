@@ -134,7 +134,6 @@ namespace FlightInspectionDesktopApp.UserControls
                 LinReg.Children.RemoveRange(3, LinReg.Children.Count - 3);
                 // update the correlated feature
                 vm.VMCorrCol = vm.CorrData[(string)ColNames.SelectedItem];
-
             }
             else
             {
