@@ -66,6 +66,17 @@ namespace FlightInspectionDesktopApp
                 PathCSV.Text = System.IO.Path.GetFullPath(openFile.FileName);
             }
         }
+        private void LoadDLL_Click(object sender, RoutedEventArgs e)
+        {
+            // Asks the user to upload a CSV DLL file
+            OpenFileDialog openFile = new OpenFileDialog();
+            openFile.Filter = "Dynamic Linking Library File (*.dll)|*.dll";
+            // Update the path in the TextBox
+            if (openFile.ShowDialog() == true)
+            {
+                PathDLL.Text = System.IO.Path.GetFullPath(openFile.FileName);
+            }
+        }
         /// <summary>
         /// The function verifies the user input
         /// </summary>
@@ -113,6 +124,11 @@ namespace FlightInspectionDesktopApp
             if (PathCSV.Text.Length == 0)
             {
                 ErrorCSV.Visibility = Visibility.Visible;
+                isValid = false;
+            }
+            if (PathDLL.Text.Length == 0)
+            {
+                ErrorDLL.Visibility = Visibility.Visible;
                 isValid = false;
             }
 
@@ -201,6 +217,15 @@ namespace FlightInspectionDesktopApp
             if (PathCSV.Text.Length > 0)
             {
                 ErrorCSV.Visibility = Visibility.Hidden;
+            }
+        }
+
+        private void PathDLL_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            // If the user uploaded an DLL file, hide the error message
+            if (PathDLL.Text.Length > 0)
+            {
+                ErrorDLL.Visibility = Visibility.Hidden;
             }
         }
     }

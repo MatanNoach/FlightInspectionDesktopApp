@@ -19,8 +19,10 @@
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
@@ -49,6 +51,14 @@
                 </Button.Effect>
             </Button>
             <TextBox Name ="ErrorCSV" BorderThickness="0" Visibility="Hidden" Text="Required Field!" Foreground="Red" Grid.Row="2" Grid.Column="2"/>
+
+            <TextBox x:Name="PathDLL" Margin="0,0,3,3" IsReadOnly="True" TextWrapping="NoWrap" Text="" Grid.Row="3" Grid.Column="2" HorizontalAlignment="Center"  TextChanged="PathDLL_TextChanged" Width="220" FontSize="11" VerticalContentAlignment="Center"/>
+            <Button Name="LoadDLL" Margin="0,0,3,3" Content="Load DLL" Grid.Row="3" Grid.Column="1" Click="LoadDLL_Click">
+                <Button.Effect>
+                    <DropShadowEffect Opacity="0.5" BlurRadius="2" ShadowDepth="2"/>
+                </Button.Effect>
+            </Button>
+            <TextBox Name ="ErrorDLL" BorderThickness="0" Visibility="Hidden" Text="Required Field!" Foreground="Red" Grid.Row="3" Grid.Column="2"/>
 
         </Grid>
         <Button Name="Submit" Content="Start Inspection!" VerticalAlignment="Bottom" Margin="0,25,0,0" HorizontalAlignment="Center" Click="Submit_Click" Foreground="Black" BorderBrush="Black" FontFamily="Microsoft YaHei UI" >

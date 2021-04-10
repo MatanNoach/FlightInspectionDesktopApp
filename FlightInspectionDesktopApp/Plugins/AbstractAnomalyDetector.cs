@@ -20,15 +20,22 @@ namespace FlightInspectionDesktopApp.Plugins
             // for each type found in the dll
             foreach (Type type in DLL.GetExportedTypes())
             {
+                // if the type implements IAbstractDetector interface
                 if (type.GetInterface("IAbstractDetector") != null)
                 {
-                    // try to create an instance of the type object, and send csvFilePath to the constructor
-                    var c = Activator.CreateInstance(type, new Object[] { csvFilePath });
-                    //try to  run GetUserControl function on object c, and send csvFilePath as argument
-                    detector = (UserControl)type.InvokeMember("GetUserControl", BindingFlags.InvokeMethod, null, c, new object[] { csvFilePath });
-                    // set the type
-                    this.type = type;
-                    break;
+                    try
+                    {
+                        // try to create an instance of the type object, and send csvFilePath to the constructor
+                        var c = Activator.CreateInstance(type, new Object[] { csvFilePath });
+                        //try to run GetUserControl function on object c, and send csvFilePath as argument
+                        detector = (UserControl)type.InvokeMember("GetUserControl", BindingFlags.InvokeMethod, null, c, new object[] { csvFilePath });
+                        // set the type
+                        this.type = type;
+                        // if everything succedded, break the loop
+                        break;
+                    }
+                    catch { }
+
                 }
             }
         }
