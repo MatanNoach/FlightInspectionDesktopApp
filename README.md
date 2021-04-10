@@ -8,6 +8,7 @@ It detects anomalies based on dynamically-loaded anomaly-detection algorithms an
 - FlightGear window and the program's Inspector open automatically side by side, matching the user's screen size.
 - ...
 ## 2) Project Hierarchy
+To view the detailed hierarchy, expand the sections below:
 <details>
 <summary>FlightInspectionDesktopApp</summary>
 <p>
@@ -62,6 +63,29 @@ It detects anomalies based on dynamically-loaded anomaly-detection algorithms an
 
 </p>
 </details>
+<details>
+<summary>LinearRegressionDLL</summary>
+<p>
+
+```
+
+```
+
+</p>
+</details>
+
+</p>
+</details>
+<details>
+<summary>MinCircleDLL</summary>
+<p>
+
+```
+
+```
+
+</p>
+</details>
 
 Each component has its own folder, and implements the MVVM architecture approach.
 The main components of the product are:
@@ -74,7 +98,6 @@ The main components of the product are:
 - **UserControls** contains all user defined controls.
 - **InspectorWindow** displays all UserControls.
 - **Plugins** for the anomaly-detection algorithms DLLs.
-
 
 ## 3) Technical Requirements
 ...
