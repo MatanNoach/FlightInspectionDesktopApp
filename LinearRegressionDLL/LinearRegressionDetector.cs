@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.IO;
 using System.Linq;
@@ -121,7 +122,7 @@ namespace LinearRegressionDLL
         Timeseries flightData;
         List<correlatedFeatures> cf;
         List<AnomalyReport> anomalies;
-        private const double significantCorrelation = 0.8;
+        private const double significantCorrelation = 0.9;
         static LinearRegressionDetector instance;
         Dictionary<string, List<double>> minMaxVals;
 
@@ -162,6 +163,66 @@ namespace LinearRegressionDLL
                 return minMaxVals;
             }
         }
+
+        /// <summary>
+        /// learn the model in order to write the csv
+        /// </summary>
+        void learnNormalToCsv()
+        {
+            Dictionary<string, List<double>> data = this.flightData.getData();
+            List<string> features = this.flightData.getFeatures();
+            int dataSize = this.flightData.getSizeOfLines();
+
+            foreach (string feature in features)
+            {
+                string feature2 = string.Empty;
+                double correlation = 0;
+                double threashold = 0;
+                Line reg_line;
+
+                foreach (string corrFeature in features)
+                {
+                    if (feature != corrFeature)
+                    {
+                        double featuresCorr = AnomalyDetectionUtil.pearson(data[feature], data[corrFeature]);
+
+                        if (Math.Abs(featuresCorr) > Math.Abs(correlation) && Math.Abs(featuresCorr) > significantCorrelation)
+                        {
+                            feature2 = corrFeature;
+                            correlation = featuresCorr;
+                        }
+
+                        else if (correlation == 0)
+                        {
+                            feature2 = corrFeature;
+                        }
+                    }
+                }
+
+                double maxDev = 0, currDev = 0;
+                reg_line = AnomalyDetectionUtil.linear_reg(data[feature], data[feature2]);
+
+                for (int i = 0; i < dataSize; i++)
+                {
+                    currDev = AnomalyDetectionUtil.dev(new Point(data[feature][i], data[feature2][i]), reg_line);
+                    if (currDev > maxDev)
+                    {
+                        maxDev = currDev;
+                    }
+                }
+
+                threashold = maxDev;
+
+                Console.WriteLine(feature);
+                Console.WriteLine(feature2);
+                Console.WriteLine(correlation);
+                Console.WriteLine(threashold);
+                Console.WriteLine(reg_line.a);
+                Console.WriteLine(reg_line.b);
+                Console.WriteLine("-----------------");
+            }
+        }
+
         /// <summary>
         /// Parse resource csv file in order to set list of CorrelatedFeatures.
         /// </summary>

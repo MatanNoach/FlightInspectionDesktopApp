@@ -1,9 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.IO;
-using System.Linq;
 using System.Xml;
+using System.Linq;
+using System.ComponentModel;
+using System.Collections.Generic;
 
 namespace FlightInspectionDesktopApp
 {
@@ -98,9 +98,6 @@ namespace FlightInspectionDesktopApp
                 throw new Exception("DataModel is already created");
             }
             dataModelInstance = new DataModel(csvPath, xmlPath);
-
-            //LinearRegressionDetector detector = new LinearRegressionDetector(csvPath);
-            //List<DrawPoint> points = detector.getPointsToDraw("airspeed-kt");
         }
 
         private DataModel() { }
