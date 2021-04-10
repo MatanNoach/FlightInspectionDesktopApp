@@ -157,5 +157,19 @@ namespace MinCircleDLL
         {
             return this.data;
         }
+        /// <summary>
+        /// Calculate the minimal & maximal values of each propery.
+        /// </summary>
+        public Dictionary<string, List<double>> CalcMinMax()
+        {
+            Dictionary<string, List<double>> minMaxVals = new Dictionary<string, List<double>>();
+            foreach (string key in data.Keys)
+            {
+                minMaxVals[key] = new List<double>();
+                minMaxVals[key].Add(data[key].Min());
+                minMaxVals[key].Add(data[key].Max());
+            }
+            return minMaxVals;
+        }
     }
 }
