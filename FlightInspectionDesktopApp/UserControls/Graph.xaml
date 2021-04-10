@@ -5,22 +5,31 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:FlightInspectionDesktopApp.UserControls" xmlns:flightinspectiondesktopapp="clr-namespace:FlightInspectionDesktopApp.Graph" d:DataContext="{d:DesignInstance Type=flightinspectiondesktopapp:GraphViewModel}"
              xmlns:linear="clr-namespace:LinearRegressionDLL;assembly=LinearRegressionDLL"
-             
              mc:Ignorable="d"
              d:DesignHeight="450" d:DesignWidth="1200">
     <UserControl.Resources>
         <local:LinePointsConverter x:Key="LinePointsConverter"/>
     </UserControl.Resources>
     <Grid Name="graphsGrid">
-        <Canvas Name="canGraph" Background="White" Width="200" Height="200" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="165,13,835,237">
-            <TextBlock x:Name="CurrFeature" Text="{Binding ElementName=ColNames, Path=SelectedItem}" FontSize="11" Margin="6,1,0,0"></TextBlock>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="230"/>
+            <RowDefinition Height="230"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="230"/>
+            <ColumnDefinition Width="230"/>
+            <ColumnDefinition Width="230"/>
+        </Grid.ColumnDefinitions>
+        <Canvas Name="canGraph" Grid.Row="0" Grid.Column="1" Background="White" Width="200" Height="200" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="10">
+            <TextBlock x:Name="CurrFeature" Text="{Binding ElementName=ColNames, Path=SelectedItem}" FontSize="11" Margin="6,1,0,0">
+            </TextBlock>
         </Canvas>
-        <Canvas Name="corrGraph" Background="White" Width="200" Height="200" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,13,630,237">
+        <Canvas Name="corrGraph" Grid.Row="0" Grid.Column="2" Background="White" Width="200" Height="200" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="10">
             <TextBlock x:Name="CorrFeature" Text="{Binding VMCorrCol, Mode=OneWay}" FontSize="11" Margin="6,1,0,0"></TextBlock>
         </Canvas>
-        <ListView x:Name="ColNames" HorizontalAlignment="Left" Height="250" Margin="10,10,0,0" VerticalAlignment="Top" Width="150" ItemsSource="{Binding ColNames, Mode=OneWay}" SelectedIndex="0" SelectionChanged="ColNames_SelectionChanged">
+        <ListView x:Name="ColNames" Grid.Row="0" Grid.Column="0" HorizontalAlignment="Left" Height="250" Margin="10,10,0,0" VerticalAlignment="Top" Width="150" ItemsSource="{Binding ColNames, Mode=OneWay}" SelectedIndex="0" SelectionChanged="ColNames_SelectionChanged">
         </ListView>
-        <Canvas Name="LinReg" Background="White" Width="200" Height="200" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,218,735,32">
+        <Canvas Name="LinReg" Grid.Row="1" Grid.Column="2" Background="White" Width="200" Height="200" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="10">
             <Path Data="{Binding VMCorrelatedPoints, Converter={StaticResource LinePointsConverter}, Mode=OneWay}"
             Stroke="CadetBlue" StrokeThickness="3.5" 
             StrokeStartLineCap="Round" StrokeEndLineCap="Round"/>

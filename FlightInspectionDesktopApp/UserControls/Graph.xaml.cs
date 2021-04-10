@@ -21,7 +21,9 @@ namespace FlightInspectionDesktopApp.UserControls
         GraphViewModel vm;
         int nextLine;
         double margin = 5;
-
+        UserControl anomalyGraph;
+        //[DllImport(@"D:\Users\Matan\Documents\source\repos\FlightInspectionDesktopApp\LinearRegressionDLL\bin\Debug\LinearRegression.dll")]
+        //public static extern UserControl GetUserControl(string feature, string csvFilePath);
         /// <summary>
         /// Graph CTOR.
         /// </summary>
@@ -31,9 +33,10 @@ namespace FlightInspectionDesktopApp.UserControls
             vm = new GraphViewModel(new GraphModel(canGraph.Height, canGraph.Width, margin, DataModel.Instance));
             this.DataContext = vm;
             this.nextLine = vm.VMCurrentLineIndex;
-            LinearRegressionDLL.LinearRegressionGraph graph = new LinearRegressionDLL.LinearRegressionGraph(@"D:\Users\Matan\Downloads\anomaly_flight.csv", "airspeed-kt");
-            graphsGrid.Children.Add(graph);
-
+            anomalyGraph = new LinearRegressionDLL.LinearRegressionGraph(@"D:\Users\Matan\Downloads\anomaly_flight.csv", "airspeed-kt");
+            graphsGrid.Children.Add(anomalyGraph);
+            Grid.SetRow(anomalyGraph, 1);
+            Grid.SetColumn(anomalyGraph, 1);
             // Create the axises of all graphs:
             Path xAxisPath1 = CreateAxis(new Point(margin, canGraph.Height / 2), new Point(canGraph.Width, canGraph.Height / 2));
             canGraph.Children.Add(xAxisPath1);
@@ -135,7 +138,7 @@ namespace FlightInspectionDesktopApp.UserControls
                 LinReg.Children.RemoveRange(3, LinReg.Children.Count - 3);
                 // update the correlated feature
                 vm.VMCorrCol = vm.CorrData[(string)ColNames.SelectedItem];
-
+                (anomalyGraph as LinearRegressionDLL.LinearRegressionGraph).Feature = (string)ColNames.SelectedItem;
             }
             else
             {

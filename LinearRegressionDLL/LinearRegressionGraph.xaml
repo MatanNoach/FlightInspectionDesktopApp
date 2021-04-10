@@ -7,15 +7,18 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <UserControl.Resources>
-        <local:LinePointsConverter x:Key="LinePointsConverter"/>
-        <local:ColorConverter x:Key="ColorConverter"/>
-        <local:ThicknessConverter x:Key="ThicknessConverter"/>
+        <local:RegLinePointsConverter x:Key="RegLinePointsConverter"/>
+        <local:AnLinePointsConverter x:Key="AnLinePointsConverter"/>
     </UserControl.Resources>
     <Grid>
-        <Canvas>
-            <Canvas Name="LinearGraph" Background="White" Width="200" Height="200" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-            <Path Data="{Binding VMCorrelatedPoints, Converter={StaticResource LinePointsConverter}, Mode=OneWay}"
-            Stroke="{Binding VMCorrelatedPoints, Converter={StaticResource ColorConverter}, Mode=OneWay}" StrokeThickness="{Binding VMCorrelatedPoints, Converter={StaticResource ThicknessConverter}, Mode=OneWay}"
+        <Canvas Name="LinearGraph" Background="White" Width="200" Height="200" VerticalAlignment="Center" HorizontalAlignment="Center">
+
+            <Path Data="{Binding VMCorrelatedPoints, Converter={StaticResource RegLinePointsConverter}, Mode=OneWay}"
+            Stroke="Blue" StrokeThickness="3.5"
+            StrokeStartLineCap="Round" StrokeEndLineCap="Round"/>
+
+            <Path Data="{Binding VMCorrelatedPoints, Converter={StaticResource AnLinePointsConverter}, Mode=OneWay}"
+            Stroke="Red" StrokeThickness="3.5"
             StrokeStartLineCap="Round" StrokeEndLineCap="Round"/>
         </Canvas>
     </Grid>

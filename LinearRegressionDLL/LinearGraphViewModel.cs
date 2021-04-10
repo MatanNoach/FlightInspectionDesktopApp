@@ -1,17 +1,33 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
 using System.Windows.Media;
 using static System.Math;
 
 namespace LinearRegressionDLL
 {
-    class LinearGraphViewModel
+    class LinearGraphViewModel : INotifyPropertyChanged
     {
         LinearRegressionDetector model;
         List<DrawPoint> correlatedPoints;
         double xRegRatio, yRegRatio;
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
         public LinearGraphViewModel(LinearRegressionDetector model)
         {
             this.model = model;
+        }
+        /// <summary>
+        /// The function notifes a certain property change by it's name
+        /// </summary>
+        /// <param name="propName">The properite's name</param>
+        public void NotifyPropertyChanged(string propName)
+        {
+            if (this.PropertyChanged != null)
+            {
+                this.PropertyChanged(this, new PropertyChangedEventArgs(propName));
+            }
         }
         public List<DrawPoint> VMCorrelatedPoints
         {
@@ -28,6 +44,7 @@ namespace LinearRegressionDLL
                 point.X = (width / 2) + point.X * xRegRatio;
                 point.Y = (height / 2) - point.Y * yRegRatio;
             }
+            NotifyPropertyChanged("VMCorrelatedPoints");
         }
         public Dictionary<string, List<double>> MinMaxVals
         {

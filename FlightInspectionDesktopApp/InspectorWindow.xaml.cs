@@ -19,7 +19,7 @@ namespace FlightInspectionDesktopApp
 
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            vm.Disconnect();
+            //vm.Disconnect();
         }
     }
 }
