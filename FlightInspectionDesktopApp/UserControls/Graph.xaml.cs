@@ -22,20 +22,18 @@ namespace FlightInspectionDesktopApp.UserControls
         int nextLine;
         double margin = 5;
         UserControl anomalyGraph;
-        FlightInspectionDesktopApp.Plugins.AbstractAnomalyDetector abstractDetector;
+        Plugins.AbstractAnomalyDetector abstractDetector;
         /// <summary>
         /// Graph CTOR.
         /// </summary>
-        public Graph(string csvFilePath)
+        public Graph(string csvFilePath, string dllPath)
         {
             InitializeComponent();
             vm = new GraphViewModel(new GraphModel(canGraph.Height, canGraph.Width, margin, DataModel.Instance));
             this.DataContext = vm;
             this.nextLine = vm.VMCurrentLineIndex;
             // create an new abstract detector by dll path
-            //TODO: add the dll path dynamically
-            abstractDetector = new FlightInspectionDesktopApp.Plugins.AbstractAnomalyDetector(csvFilePath,
-                @"D:\Users\Matan\Documents\source\repos\FlightInspectionDesktopApp\LinearRegressionDLL\bin\Debug\LinearRegressionDLL.dll");
+            abstractDetector = new Plugins.AbstractAnomalyDetector(csvFilePath, dllPath);
             // set the anomaly graph as the one gain by the detector
             anomalyGraph = abstractDetector.Detector;
             // add the anomaly graph to the graphsGrid
