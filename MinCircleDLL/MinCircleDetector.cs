@@ -111,6 +111,35 @@ namespace MinCircleDLL
             this.y = y;
             this.isDeviated = status;
         }
+        public double X
+        {
+            get
+            {
+                return this.x;
+            }
+            set
+            {
+                this.x = value;
+            }
+        }
+        public double Y
+        {
+            get
+            {
+                return this.y;
+            }
+            set
+            {
+                this.y = value;
+            }
+        }
+        public bool IsDeviated
+        {
+            get
+            {
+                return this.isDeviated;
+            }
+        }
     }
 
     public class MinCircleDetector
@@ -118,14 +147,38 @@ namespace MinCircleDLL
         Timeseries flightData;
         List<correlatedFeatures> cf;
         List<AnomalyReport> anomalies;
-
-        public MinCircleDetector(string dataFile)
+        static MinCircleDetector instance;
+        Dictionary<string, List<double>> minMaxVals;
+        private MinCircleDetector(string dataFile)
         {
             this.flightData = new Timeseries(dataFile);
             this.cf = new List<correlatedFeatures>();
             this.anomalies = new List<AnomalyReport>();
+            this.minMaxVals = this.flightData.CalcMinMax();
         }
-
+        public static void CreateMinCircleDetector(string csvFilePath)
+        {
+            if (instance != null)
+            {
+                throw new Exception("instance already created");
+            }
+            instance = new MinCircleDetector(csvFilePath);
+        }
+        public static MinCircleDetector GetInstance()
+        {
+            if (instance == null)
+            {
+                throw new Exception("instance not created");
+            }
+            return instance;
+        }
+        public Dictionary<string, List<double>> MinMaxVals
+        {
+            get
+            {
+                return this.minMaxVals;
+            }
+        }
         void learnNormal()
         {
 
@@ -308,6 +361,87 @@ namespace MinCircleDLL
         double getLineSlope(Point p1, Point p2)
         {
             return ((p2.y - p1.y) / (p2.x - p1.x));
+        }
+
+        /// <summary>
+        ///  get anomalies timesteps of the given correlated features.
+        /// </summary>
+        /// <param name="feature"> the first feature </param>
+        /// <param name="corrFeature"> the second feature </param>
+        /// <returns> a list of timesteps </returns>
+        List<long> getCorrelatedFeaturesAnomalies(string feature, string corrFeature)
+        {
+            List<long> indexes = new List<long>();
+
+            for (int i = 0; i < this.anomalies.Count; i++)
+            {
+                if (this.anomalies[i].getFeature1() == feature && this.anomalies[i].getFeature2() == corrFeature)
+                {
+                    indexes.Add(this.anomalies[i].getTimestep());
+                }
+            }
+            return indexes;
+        }
+
+        /// <summary>
+        ///  get the correlated feature of the given feature.
+        /// </summary>
+        /// <param name="feature"> a feature name </param>
+        /// <returns> the name of the correalted feature </returns>
+        public string getCorrelatedFeatureByFeature(string feature)
+        {
+            return this.cf[getIndexByFeature(feature)].feature2;
+        }
+
+        /// <summary>
+        ///  get the index of the feature in the cf list
+        /// </summary>
+        /// <param name="feature"> a feature name </param>
+        /// <returns> an index of the feature in the cf list </returns>
+        int getIndexByFeature(string feature)
+        {
+            for (int i = 0; i < this.cf.Count; i++)
+            {
+                if (this.cf[i].feature1 == feature)
+                {
+                    return i;
+                }
+            }
+            return 0;
+        }
+        /// <summary>
+        /// The function get a regression line's equation by feature name
+        /// </summary>
+        /// <param name="feature">The feature to get it's line</param>
+        /// <returns>The line as a list of a and b when y=ax+b</returns>
+        public List<double> GetLineByFeature(string feature)
+        {
+            List<double> lineEquation = new List<double>();
+            Line line = this.cf[getIndexByFeature(feature)].regression_line;
+            lineEquation.Add(line.a);
+            lineEquation.Add(line.b);
+            return lineEquation;
+        }
+        /// <summary>
+        ///  get the points which should be drawn for the given feature and it's correlated feature.
+        /// </summary>
+        /// <param name="feature"> a feature name </param>
+        /// <returns> a list of points which should be drawn </returns>
+        public List<DrawPoint> getPointsToDraw(string feature)
+        {
+            string corrFeature = this.getCorrelatedFeatureByFeature(feature);
+            List<long> anomaliesIndexes = this.getCorrelatedFeaturesAnomalies(feature, corrFeature);
+
+            List<DrawPoint> points = new List<DrawPoint>();
+            Dictionary<string, List<double>> data = this.flightData.getData();
+            int dataSize = this.flightData.getSizeOfLines();
+
+            for (int i = 0; i < dataSize; i++)
+            {
+                points.Add(new DrawPoint(data[feature][i], data[corrFeature][i], anomaliesIndexes.Contains(i)));
+            }
+
+            return points;
         }
     }
 }

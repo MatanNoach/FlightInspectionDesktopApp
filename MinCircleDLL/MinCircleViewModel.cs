@@ -1,24 +1,25 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using System.Windows.Media;
 using static System.Math;
 
-namespace LinearRegressionDLL
+namespace MinCircleDLL
 {
-    class LinearGraphViewModel : INotifyPropertyChanged
+    class MinCircleViewModel : INotifyPropertyChanged
     {
-        LinearRegressionDetector model;
+        MinCircleDetector model;
         List<DrawPoint> correlatedPoints;
         double xRegRatio, yRegRatio;
         int currentLineIndex;
-
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        public LinearGraphViewModel(LinearRegressionDetector model)
+        public MinCircleViewModel(MinCircleDetector model)
         {
             this.model = model;
         }
+
         /// <summary>
         /// The function notifes a certain property change by it's name
         /// </summary>
@@ -30,6 +31,7 @@ namespace LinearRegressionDLL
                 this.PropertyChanged(this, new PropertyChangedEventArgs(propName));
             }
         }
+        public event PropertyChangedEventHandler PropertyChanged;
         public List<DrawPoint> VMCorrelatedPoints
         {
             get

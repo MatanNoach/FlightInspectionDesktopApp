@@ -2,84 +2,50 @@
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
-using System.Runtime.InteropServices;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
+using System.Windows.Documents;
+using System.Windows.Input;
 using System.Windows.Media;
+using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace LinearRegressionDLL
+namespace MinCircleDLL
 {
-
     /// <summary>
-    /// Interaction logic for LinearRegressionGraph.xaml
+    /// Interaction logic for MinCircleGraph.xaml
     /// </summary>
-    public partial class LinearRegressionGraph : UserControl, IAbstractDetector
+    public partial class MinCircleGraph : UserControl, IAbstractDetector
     {
-        LinearGraphViewModel vm;
-        double margin = 5;
         string feature;
-
-        /// <summary>
-        /// A constructor for the user control
-        /// </summary>
-        /// <param name="csvFilePath">The csv file path to detect anomalies</param>
-        /// <param name="feature">The feature to start presenting it's correlation and anomalies</param>
-        public LinearRegressionGraph(string csvFilePath)
+        MinCircleViewModel vm;
+        double margin = 5;
+        public MinCircleGraph(string csvFilePath)
         {
             InitializeComponent();
+            // try use the MinCircleDetector instance in the vm constuctor
             try
             {
-                // try use the LinearRegressionDetector instance in the vm constuctor
-                try
-                {
-                    vm = new LinearGraphViewModel(LinearRegressionDetector.GetInstance());
-                }
-                // in case of a failure, create the instance, and try to set it again
-                catch
-                {
-                    LinearRegressionDetector.CreateLinearRegressionDetector(csvFilePath);
-                    vm = new LinearGraphViewModel(LinearRegressionDetector.GetInstance());
-                }
-                this.DataContext = vm;
-                // draw x and y axis on the canvas
-                Path xAxis = CreateAxis(new System.Windows.Point(margin, LinearGraph.Height / 2), new System.Windows.Point(LinearGraph.Width, LinearGraph.Height / 2));
-                LinearGraph.Children.Add(xAxis);
-                Path yAxis = CreateAxis(new System.Windows.Point(LinearGraph.Width / 2, LinearGraph.Height), new System.Windows.Point(LinearGraph.Width / 2, 0));
-                LinearGraph.Children.Add(yAxis);
+                vm = new MinCircleViewModel(MinCircleDetector.GetInstance());
             }
-            catch { }
-        }
-        /// <summary>
-        /// The function draws the regression line and real data line
-        /// </summary>
-        public void DrawLines()
-        {
-            // create the regression line:
-            Polyline polylineCorr = new Polyline
+            // in case of a failure, create the instance, and try to set it again
+            catch
             {
-                StrokeThickness = 1,
-                Stroke = Brushes.IndianRed,
-                Points = vm.GetLineRegPoints(Feature, LinearGraph.Height, LinearGraph.Width)
-            };
-            LinearGraph.Children.Add(polylineCorr);
-            // get the correlated features points' to draw
-            vm.LoadPointsByFeature(Feature, LinearGraph.Height, LinearGraph.Width);
-        }
-        /// <summary>
-        /// The funcion deletes the regression line
-        /// </summary>
-        public void DeleteLine()
-        {
-            LinearGraph.Children.RemoveAt(4);
-        }
-        public int CurrentLineIndex
-        {
-            set
-            {
-                vm.UpdateCurrentLineIndex(value, Feature, LinearGraph.Height, LinearGraph.Width);
+                MinCircleDetector.CreateMinCircleDetector(csvFilePath);
+                vm = new MinCircleViewModel(MinCircleDetector.GetInstance());
             }
+            this.DataContext = vm;
+            // draw x and y axis on the canvas
+            Path xAxis = CreateAxis(new System.Windows.Point(margin, CircleGraph.Height / 2), new System.Windows.Point(CircleGraph.Width, CircleGraph.Height / 2));
+            CircleGraph.Children.Add(xAxis);
+            Path yAxis = CreateAxis(new System.Windows.Point(CircleGraph.Width / 2, CircleGraph.Height), new System.Windows.Point(CircleGraph.Width / 2, 0));
+            CircleGraph.Children.Add(yAxis);
         }
+
         public string Feature
         {
             get
@@ -88,30 +54,18 @@ namespace LinearRegressionDLL
             }
             set
             {
-                string oldFeature = this.feature;
                 this.feature = value;
-                // if there is a new feature to present
-                if (oldFeature != this.feature)
-                {
-                    // if it is not the startup page, delete the old lines
-                    if (oldFeature != null)
-                    {
-                        DeleteLine();
-                    }
-                    // draw the regression line and data
-                    DrawLines();
-                }
             }
         }
-        // The functio returns the user control
+        public int CurrentLineIndex { set => throw new NotImplementedException(); }
+
+        // The function returns the user control
         public UserControl GetUserControl(string csvFilePath)
         {
-            LinearRegressionGraph graph = new LinearRegressionGraph(csvFilePath);
+            MinCircleGraph graph = new MinCircleGraph(csvFilePath);
 
             return graph;
         }
-
-
         /// <summary>
         /// Draws x & y axis for all graphs.
         /// </summary>
@@ -177,6 +131,7 @@ namespace LinearRegressionDLL
         {
             throw new NotSupportedException();
         }
+
     }
     public class AnLinePointsConverter : IValueConverter
     {
