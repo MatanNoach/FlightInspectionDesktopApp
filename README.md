@@ -69,7 +69,16 @@ To view the detailed hierarchy, expand the sections below:
 <p>
 
 ```
-
+├── AnomalyDetectionUtil.cs
+├── IAbstractDetector.cs
+├── LinearGraphViewModel.cs
+├── LinearRegressionDLL.csproj
+├── LinearRegressionDetector.cs
+├── LinearRegressionGraph.xaml
+├── LinearRegressionGraph.xaml.cs
+├── Resources
+│   └── reg_flight_model.csv
+└── Timeseries.cs
 ```
 
 </p>
