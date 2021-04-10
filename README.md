@@ -103,7 +103,7 @@ The main components of the product are:
 ## 🔧 Technical Requirements
 ...
 ## 📋 Installation Guide for Clean Environment
-1. Download FlightGear from https://www.flightgear.org/download/
+1. Download & install FlightGear from https://www.flightgear.org/download/
 2. ...
 ## 📚 Further Documentation
 For more info regarding the main classes of the project, information flow and UML diagrams, please refer to our [wiki site](https://github.com/MatanNoach/FlightInspectionDesktopApp/wiki).
