@@ -168,7 +168,6 @@ namespace LinearRegressionDLL
         void learnNormal()
         {
             // read correlatedFeatures from resource csv
-
             using (var stream = Assembly
             .GetExecutingAssembly()
             .GetManifestResourceStream("LinearRegressionDLL.regFlightModelCsv.resources"))

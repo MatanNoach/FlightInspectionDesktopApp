@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -36,7 +38,7 @@ namespace MinCircleDLL
     {
         public string feature1;
         public string feature2;
-        public Line regression_line;
+        public Circle minCircle;
         public double corrlation;
         public double threshold;
 
@@ -152,6 +154,7 @@ namespace MinCircleDLL
         private MinCircleDetector(string dataFile)
         {
             this.flightData = new Timeseries(dataFile);
+            this.modelData = data;
             this.cf = new List<correlatedFeatures>();
             this.anomalies = new List<AnomalyReport>();
             this.minMaxVals = this.flightData.CalcMinMax();
@@ -181,7 +184,49 @@ namespace MinCircleDLL
         }
         void learnNormal()
         {
+            // read correlatedFeatures from resource csv
+            using (var stream = Assembly
+            .GetExecutingAssembly()
+            .GetManifestResourceStream("MinCircleDLL.regFlightCsvModel.resources"))
+            using (StreamReader csvReader = new StreamReader(stream))
+            {
+                // skip the first row, where the columns names are mentioned.
+                string currLine = csvReader.ReadLine();
+                string[] columns = { };
+                List<string> lineData = new List<string>();
+                char colSeparator = ',';
 
+                // for each row in the csv file
+                while ((currLine = csvReader.ReadLine()) != null)
+                {
+                    lineData = currLine.Split(colSeparator).Select(x => x.ToString()).ToList();
+
+                    // if the new line is empty
+                    if (lineData[0] == "")
+                    {
+                        break;
+                    }
+
+                    // parse the row into a correlatedFeatures object
+                    correlatedFeatures corrFeature = new correlatedFeatures();
+                    corrFeature.feature1 = lineData[0];
+                    corrFeature.feature2 = lineData[1];
+                    corrFeature.corrlation = double.Parse(lineData[2]);
+                    corrFeature.threshold = double.Parse(lineData[3]);
+                    corrFeature.minCircle = findMinCircle(this.modelData[corrFeature.feature1], this.modelData[corrFeature.feature2]);
+
+                    Console.WriteLine(corrFeature.feature1);
+                    Console.WriteLine(corrFeature.feature2);
+                    Console.WriteLine(corrFeature.corrlation);
+                    Console.WriteLine(corrFeature.threshold);
+                    Console.WriteLine(corrFeature.minCircle.center.x);
+                    Console.WriteLine(corrFeature.minCircle.center.y);
+                    Console.WriteLine(corrFeature.minCircle.radius);
+                    Console.WriteLine("----------");
+
+                    this.cf.Add(corrFeature);
+                }
+            }
         }
 
         /// <summary>
@@ -191,9 +236,10 @@ namespace MinCircleDLL
         /// <param name="y"> the second list of doubles </param>
         /// <param name="size"> the size of the lists </param>
         /// <returns> the minimal circle which can be drawn from the given points </returns>
-        Circle findMinCircle(List<double> x, List<double> y, int size)
+        Circle findMinCircle(List<double> x, List<double> y)
         {
             List<Point> points = new List<Point>();
+            int size = x.Count;
 
             for (int i = 0; i < size; i++)
             {
