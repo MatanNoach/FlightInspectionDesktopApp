@@ -47,6 +47,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AnomalyDetectionUtil.cs" />
+    <Compile Include="IAbstractDetector.cs" />
     <Compile Include="LinearGraphViewModel.cs" />
     <Compile Include="LinearRegressionDetector.cs" />
     <Compile Include="LinearRegressionGraph.xaml.cs">

@@ -14,7 +14,7 @@ namespace LinearRegressionDLL
     /// <summary>
     /// Interaction logic for LinearRegressionGraph.xaml
     /// </summary>
-    public partial class LinearRegressionGraph : UserControl
+    public partial class LinearRegressionGraph : UserControl, IAbstractDetector
     {
         LinearGraphViewModel vm;
         double margin = 5;
