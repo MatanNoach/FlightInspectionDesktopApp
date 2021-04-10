@@ -129,6 +129,7 @@
     <Compile Include="Altimeter\AltimeterViewModel.cs" />
     <Compile Include="Metadata\MetadataModel.cs" />
     <Compile Include="Metadata\MetadataViewModel.cs" />
+    <Compile Include="Plugins\AbstractAnomalyDetector.cs" />
     <Compile Include="UserControls\Graph.xaml.cs">
       <DependentUpon>Graph.xaml</DependentUpon>
     </Compile>

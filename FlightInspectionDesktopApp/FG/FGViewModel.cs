@@ -46,7 +46,7 @@ namespace FlightInspectionDesktopApp
         {
             //model.RunFG(binFolder, PathFG, XMLFileName);
             // wait 10 seconds before trying to connect to FG
-            Thread.Sleep(10000);
+            //Thread.Sleep(10000);
             model.Connect();
 
             model.Start(PathCSV);

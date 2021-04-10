@@ -11,6 +11,7 @@ namespace LinearRegressionDLL
         LinearRegressionDetector model;
         List<DrawPoint> correlatedPoints;
         double xRegRatio, yRegRatio;
+        int currentLineIndex;
 
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -35,16 +36,23 @@ namespace LinearRegressionDLL
             {
                 return this.correlatedPoints;
             }
-        }
-        public void GetPointsByFeature(string feature, double height, double width)
-        {
-            this.correlatedPoints = model.getPointsToDraw(feature);
-            foreach (DrawPoint point in correlatedPoints)
+            set
             {
-                point.X = (width / 2) + point.X * xRegRatio;
-                point.Y = (height / 2) - point.Y * yRegRatio;
+                this.correlatedPoints = value;
+                NotifyPropertyChanged("VMCorrelatedPoints");
             }
-            NotifyPropertyChanged("VMCorrelatedPoints");
+        }
+        public void LoadPointsByFeature(string feature, double height, double width)
+        {
+            List<DrawPoint> allPoints = model.getPointsToDraw(feature);
+            List<DrawPoint> pointsToShow = new List<DrawPoint>();
+            for (int i = 0; i <= this.currentLineIndex; i++)
+            {
+                allPoints[i].X = (width / 2) + allPoints[i].X * xRegRatio;
+                allPoints[i].Y = (height / 2) - allPoints[i].Y * yRegRatio;
+                pointsToShow.Add(allPoints[i]);
+            }
+            VMCorrelatedPoints = pointsToShow;
         }
         public Dictionary<string, List<double>> MinMaxVals
         {
@@ -62,7 +70,8 @@ namespace LinearRegressionDLL
         /// <returns></returns>
         public PointCollection GetLineRegPoints(string col, double height, double width)
         {
-
+            Console.WriteLine(col);
+            Console.WriteLine(model.getCorrelatedFeatureByFeature(col));
             // calculate min & max values of correlated features
             double minXVal = MinMaxVals[col][0];
             double maxXVal = MinMaxVals[col][1];
@@ -133,6 +142,11 @@ namespace LinearRegressionDLL
         private double CalcY(double x, List<double> l)
         {
             return ((l[0] * x + l[1]));
+        }
+        public void UpdateCurrentLineIndex(int newLine, string feature, double height, double width)
+        {
+            this.currentLineIndex = newLine;
+            LoadPointsByFeature(feature, height, width);
         }
     }
 }

@@ -22,18 +22,23 @@ namespace FlightInspectionDesktopApp.UserControls
         int nextLine;
         double margin = 5;
         UserControl anomalyGraph;
-        //[DllImport(@"D:\Users\Matan\Documents\source\repos\FlightInspectionDesktopApp\LinearRegressionDLL\bin\Debug\LinearRegression.dll")]
-        //public static extern UserControl GetUserControl(string feature, string csvFilePath);
+        FlightInspectionDesktopApp.Plugins.AbstractAnomalyDetector abstractDetector;
         /// <summary>
         /// Graph CTOR.
         /// </summary>
-        public Graph()
+        public Graph(string csvFilePath)
         {
             InitializeComponent();
             vm = new GraphViewModel(new GraphModel(canGraph.Height, canGraph.Width, margin, DataModel.Instance));
             this.DataContext = vm;
             this.nextLine = vm.VMCurrentLineIndex;
-            anomalyGraph = new LinearRegressionDLL.LinearRegressionGraph(@"D:\Users\Matan\Downloads\anomaly_flight.csv", "airspeed-kt");
+            // create an new abstract detector by dll path
+            //TODO: add the dll path dynamically
+            abstractDetector = new FlightInspectionDesktopApp.Plugins.AbstractAnomalyDetector(csvFilePath,
+                @"D:\Users\Matan\Documents\source\repos\FlightInspectionDesktopApp\LinearRegressionDLL\bin\Debug\LinearRegressionDLL.dll");
+            // set the anomaly graph as the one gain by the detector
+            anomalyGraph = abstractDetector.Detector;
+            // add the anomaly graph to the graphsGrid
             graphsGrid.Children.Add(anomalyGraph);
             Grid.SetRow(anomalyGraph, 1);
             Grid.SetColumn(anomalyGraph, 1);
@@ -50,10 +55,9 @@ namespace FlightInspectionDesktopApp.UserControls
             corrGraph.Children.Add(yAxisPath2);
             Path yAxisPath3 = CreateAxis(new Point(LinReg.Width / 2, LinReg.Height), new Point(LinReg.Width / 2, 0));
             LinReg.Children.Add(yAxisPath3);
-
+            // run dispatcher loop
             DispatcherLoop();
         }
-
         /// <summary>
         /// Draws x & y axis for all graphs.
         /// </summary>
@@ -118,6 +122,8 @@ namespace FlightInspectionDesktopApp.UserControls
                     canGraph.Children.RemoveRange(3, canGraph.Children.Count - 3);
                     corrGraph.Children.RemoveRange(3, corrGraph.Children.Count - 3);
                 }
+                // update the next line in the detector and in the vm
+                abstractDetector.CurrentLineIndex = vm.VMCurrentLineIndex;
                 nextLine = vm.VMCurrentLineIndex;
             };
             dispatcher.Start();
@@ -138,12 +144,13 @@ namespace FlightInspectionDesktopApp.UserControls
                 LinReg.Children.RemoveRange(3, LinReg.Children.Count - 3);
                 // update the correlated feature
                 vm.VMCorrCol = vm.CorrData[(string)ColNames.SelectedItem];
-                (anomalyGraph as LinearRegressionDLL.LinearRegressionGraph).Feature = (string)ColNames.SelectedItem;
+                abstractDetector.Feature = (string)ColNames.SelectedItem;
             }
             else
             {
                 start = false;
                 vm.VMCorrCol = vm.CorrData[(string)ColNames.SelectedItem];
+                abstractDetector.Feature = (string)ColNames.SelectedItem;
             }
         }
 

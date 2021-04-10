@@ -8,15 +8,19 @@ namespace FlightInspectionDesktopApp
     public partial class InspectorWindow : Window
     {
         private FGViewModel vm;
-        public InspectorWindow(FGViewModel vm)
+        public InspectorWindow(FGViewModel vm, string csvFilePath)
         {
             InitializeComponent();
             this.vm = vm;
+            // add a new graphs user control
+            FlightInspectionDesktopApp.UserControls.Graph graphs = new FlightInspectionDesktopApp.UserControls.Graph(csvFilePath);
+            graphs.VerticalAlignment = VerticalAlignment.Center;
+            graphs.HorizontalAlignment = HorizontalAlignment.Center;
+            UserControls.Children.Add(graphs);
             // set the user's main screen size, in order to use it while displaying FG and InspectorWindow
             Properties.Settings.Default.windowWidth = (int)(SystemParameters.PrimaryScreenWidth) / 2;
             Properties.Settings.Default.windowHeight = (int)(SystemParameters.PrimaryScreenHeight);
         }
-
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             //vm.Disconnect();

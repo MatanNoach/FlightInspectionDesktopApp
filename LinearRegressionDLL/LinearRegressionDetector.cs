@@ -272,7 +272,7 @@ namespace LinearRegressionDLL
         }
 
         /// <summary>
-        ///  get anomalies timesteps of the fiven correlated features.
+        ///  get anomalies timesteps of the given correlated features.
         /// </summary>
         /// <param name="feature"> the first feature </param>
         /// <param name="corrFeature"> the second feature </param>

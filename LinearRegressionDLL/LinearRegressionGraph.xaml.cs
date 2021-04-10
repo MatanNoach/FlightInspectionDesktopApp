@@ -10,6 +10,7 @@ using System.Windows.Shapes;
 
 namespace LinearRegressionDLL
 {
+
     /// <summary>
     /// Interaction logic for LinearRegressionGraph.xaml
     /// </summary>
@@ -18,28 +19,44 @@ namespace LinearRegressionDLL
         LinearGraphViewModel vm;
         double margin = 5;
         string feature;
-        public LinearRegressionGraph(string csvFilePath, string feature)
+
+        /// <summary>
+        /// A constructor for the user control
+        /// </summary>
+        /// <param name="csvFilePath">The csv file path to detect anomalies</param>
+        /// <param name="feature">The feature to start presenting it's correlation and anomalies</param>
+        public LinearRegressionGraph(string csvFilePath)
         {
             InitializeComponent();
             try
             {
-                LinearRegressionDetector.CreateLinearRegressionDetector(csvFilePath);
-                vm = new LinearGraphViewModel(LinearRegressionDetector.GetInstance());
+                // try use the LinearRegressionDetector instance in the vm constuctor
+                try
+                {
+                    vm = new LinearGraphViewModel(LinearRegressionDetector.GetInstance());
+                }
+                // in case of a failure, create the instance, and try to set it again
+                catch (Exception e)
+                {
+                    LinearRegressionDetector.CreateLinearRegressionDetector(csvFilePath);
+                    vm = new LinearGraphViewModel(LinearRegressionDetector.GetInstance());
+                }
                 this.DataContext = vm;
-                // create the x and y axis
+                // draw x and y axis on the canvas
                 Path xAxis = CreateAxis(new System.Windows.Point(margin, LinearGraph.Height / 2), new System.Windows.Point(LinearGraph.Width, LinearGraph.Height / 2));
                 LinearGraph.Children.Add(xAxis);
                 Path yAxis = CreateAxis(new System.Windows.Point(LinearGraph.Width / 2, LinearGraph.Height), new System.Windows.Point(LinearGraph.Width / 2, 0));
                 LinearGraph.Children.Add(yAxis);
-                this.feature = feature;
-                DrawLine();
             }
             catch
             {
 
             }
         }
-        public void DrawLine()
+        /// <summary>
+        /// The function draws the regression line and real data line
+        /// </summary>
+        public void DrawLines()
         {
             // create the regression line:
             Polyline polylineCorr = new Polyline
@@ -50,12 +67,21 @@ namespace LinearRegressionDLL
             };
             LinearGraph.Children.Add(polylineCorr);
             // get the correlated features points' to draw
-            vm.GetPointsByFeature(Feature, LinearGraph.Height, LinearGraph.Width);
+            vm.LoadPointsByFeature(Feature, LinearGraph.Height, LinearGraph.Width);
         }
-
+        /// <summary>
+        /// The funcion deletes the regression line
+        /// </summary>
         public void DeleteLine()
         {
             LinearGraph.Children.RemoveAt(4);
+        }
+        public int CurrentLineIndex
+        {
+            set
+            {
+                vm.UpdateCurrentLineIndex(value, Feature, LinearGraph.Height, LinearGraph.Width);
+            }
         }
         public string Feature
         {
@@ -65,18 +91,26 @@ namespace LinearRegressionDLL
             }
             set
             {
-                string oldFeatre = this.feature;
+                string oldFeature = this.feature;
                 this.feature = value;
-                if (oldFeatre != this.feature)
+                // if there is a new feature to present
+                if (oldFeature != this.feature)
                 {
-                    DeleteLine();
-                    DrawLine();
+                    // if it is not the startup page, delete the old lines
+                    if (oldFeature != null)
+                    {
+                        DeleteLine();
+                    }
+                    // draw the regression line and data
+                    DrawLines();
                 }
             }
         }
-        public static UserControl GetUserControl(string feature, string csvFilePath)
+        // The functio returns the user control
+        public UserControl GetUserControl(string csvFilePath)
         {
-            LinearRegressionGraph graph = new LinearRegressionGraph(csvFilePath, feature);
+            LinearRegressionGraph graph = new LinearRegressionGraph(csvFilePath);
+
             return graph;
         }
 
@@ -103,7 +137,7 @@ namespace LinearRegressionDLL
     public class RegLinePointsConverter : IValueConverter
     {
         /// <summary>
-        /// Converts PointCollection into points that can be drawn on canvas.
+        /// Converts PointCollection into data points that can be drawn on canvas.
         /// </summary>
         /// <param name="value">VMCorrelatedPoints</param>
         /// <param name="targetType">none</param>
@@ -119,6 +153,7 @@ namespace LinearRegressionDLL
                 {
                     foreach (var point in points)
                     {
+                        // if the points is regular, draw it on the canvas
                         if (!point.IsDeviated)
                         {
                             System.Windows.Point realPoint = new System.Windows.Point();
@@ -149,7 +184,7 @@ namespace LinearRegressionDLL
     public class AnLinePointsConverter : IValueConverter
     {
         /// <summary>
-        /// Converts PointCollection into points that can be drawn on canvas.
+        /// Converts PointCollection into anomalies points that can be drawn on canvas.
         /// </summary>
         /// <param name="value">VMCorrelatedPoints</param>
         /// <param name="targetType">none</param>
@@ -165,6 +200,7 @@ namespace LinearRegressionDLL
                 {
                     foreach (var point in points)
                     {
+                        // if the points is anomaly, draw it on the canvas
                         if (point.IsDeviated)
                         {
                             System.Windows.Point realPoint = new System.Windows.Point();

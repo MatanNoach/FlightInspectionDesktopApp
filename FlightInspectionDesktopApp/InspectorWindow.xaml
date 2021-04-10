@@ -14,12 +14,11 @@
         Top="0"
         Background="#FFC1D3CF" 
         FontFamily="Microsoft JhengHei UI" Closing="Window_Closing">
-    <Grid>
+    <Grid x:Name="UserControls">
         <control:Speedometer VerticalAlignment="Top" HorizontalAlignment="Center" />
         <control:Metadata VerticalAlignment="Top" HorizontalAlignment="Right" Margin="0,0,100,0" />
         <control:Altimeter VerticalAlignment="Top" HorizontalAlignment="Left" />
         <control:Player VerticalAlignment="Bottom" HorizontalAlignment="Center" />
         <control:Steering VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="0, 500, 0, 200"/>
-        <control:Graph VerticalAlignment="Center" HorizontalAlignment="Center" Padding="0,0,0,0"/>
     </Grid>
 </Window>

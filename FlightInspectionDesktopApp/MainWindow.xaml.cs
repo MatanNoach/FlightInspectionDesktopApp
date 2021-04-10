@@ -83,7 +83,7 @@ namespace FlightInspectionDesktopApp
                 FGModelImp.CreateModel(new TelnetClient());
                 // create a new view model, with flight gear model and telnet client
                 vm = new FGViewModel(FGModelImp.Instance);
-                InspectorWindow inspector = new InspectorWindow(vm);
+                InspectorWindow inspector = new InspectorWindow(vm, PathCSV.Text);
                 inspector.Show();
                 Close();
                 vm.Run(binFolder, PathFG.Text, XMLFileName, PathCSV.Text);
