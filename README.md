@@ -1,5 +1,6 @@
-# FlightInspectionDesktopApp
-## 1) Overview
+# ✈️ FlightInspectionDesktopApp
+
+## 🔎 Overview
 FlightInspectionDesktopApp connects to FlightGear and displays given flight data in a nice graphic way.
 It detects anomalies based on dynamically-loaded anomaly-detection algorithms and displays them.
 ### Special Features
@@ -7,7 +8,7 @@ It detects anomalies based on dynamically-loaded anomaly-detection algorithms an
 - FlightGear starts up on its own and start flying, without the user having to configure any settings. Closing the Inspector window closes FlightGear automatically.
 - FlightGear window and the program's Inspector open automatically side by side, matching the user's screen size.
 - ...
-## 2) Project Hierarchy
+## 👪 Project Hierarchy
 To view the detailed hierarchy, expand the sections below:
 <details>
 <summary>FlightInspectionDesktopApp</summary>
@@ -99,12 +100,12 @@ The main components of the product are:
 - **InspectorWindow** displays all UserControls.
 - **Plugins** for the anomaly-detection algorithms DLLs.
 
-## 3) Technical Requirements
+## 🔧 Technical Requirements
 ...
-## 4) Installation Guide for Clean Environment
+## 📋 Installation Guide for Clean Environment
 1. Download FlightGear from https://www.flightgear.org/download/
 2. ...
-## 5) Further Documentation
-...
-## 6) Demo
+## 📚 Further Documentation
+For more info regarding the main classes of the project, information flow and UML diagrams, please refer to our [wiki site](https://github.com/MatanNoach/FlightInspectionDesktopApp/wiki).
+## 🎥 Demo
 ...
