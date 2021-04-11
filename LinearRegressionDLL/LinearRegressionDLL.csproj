@@ -62,6 +62,7 @@
     <Compile Include="Timeseries.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="ClassDiagram1.cd" />
     <None Include="Resources\reg_flight_model.csv" />
   </ItemGroup>
   <ItemGroup>

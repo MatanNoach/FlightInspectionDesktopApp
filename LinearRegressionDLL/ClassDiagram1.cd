@@ -1,0 +1,55 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1" MembersFormat="NameAndType">
+  <Class Name="LinearRegressionDLL.LinearGraphViewModel" BaseTypeListCollapsed="true">
+    <Position X="7" Y="3.25" Width="3.5" />
+    <Members>
+      <Method Name="LinearGraphViewModel" Hidden="true" />
+      <Method Name="NotifyPropertyChanged" Hidden="true" />
+    </Members>
+    <TypeIdentifier>
+      <HashCode>AAAgABCAQAEAAIAAAAACAAQAgAAAAAAAAABBEAAIAAg=</HashCode>
+      <FileName>LinearGraphViewModel.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="model" />
+    </ShowAsAssociation>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="LinearRegressionDLL.LinearRegressionDetector">
+    <Position X="11.25" Y="3.25" Width="3.25" />
+    <Members>
+      <Method Name="CreateLinearRegressionDetector" Hidden="true" />
+      <Method Name="GetInstance" Hidden="true" />
+      <Method Name="LinearRegressionDetector" Hidden="true" />
+    </Members>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAgAAAACQCACAgAEACAhABAAAAAiAAAGAAAAgA=</HashCode>
+      <FileName>LinearRegressionDetector.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="instance" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="LinearRegressionDLL.LinearRegressionGraph" BaseTypeListCollapsed="true">
+    <Position X="4.25" Y="4.25" Width="2.25" />
+    <Members>
+      <Method Name="LinearRegressionGraph" Hidden="true" />
+    </Members>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAwEAAAAAAAAAQAAQAAAAEIAEAACAAAAAA=</HashCode>
+      <FileName>LinearRegressionGraph.xaml.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="vm" />
+    </ShowAsAssociation>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Interface Name="LinearRegressionDLL.IAbstractDetector">
+    <Position X="4.25" Y="2" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAEAAAAAAAAAAAAAAAAAEAAAAACAAAAAA=</HashCode>
+      <FileName>IAbstractDetector.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

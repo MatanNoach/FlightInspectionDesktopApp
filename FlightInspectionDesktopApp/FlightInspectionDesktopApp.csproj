@@ -130,6 +130,9 @@
     <Compile Include="Metadata\MetadataModel.cs" />
     <Compile Include="Metadata\MetadataViewModel.cs" />
     <Compile Include="Plugins\AbstractAnomalyDetector.cs" />
+    <Compile Include="UserControls\Compass.xaml.cs">
+      <DependentUpon>Compass.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UserControls\Graph.xaml.cs">
       <DependentUpon>Graph.xaml</DependentUpon>
     </Compile>
@@ -177,6 +180,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="UserControls\Altimeter.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\Compass.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -255,6 +262,9 @@
       <ProductName>.NET Framework 3.5 SP1</ProductName>
       <Install>false</Install>
     </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Metadata\compass.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
