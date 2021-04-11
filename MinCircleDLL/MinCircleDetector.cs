@@ -1,26 +1,16 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
+using System.Collections.Generic;
 
 namespace MinCircleDLL
 {
     public class Circle
     {
+        // fields of Circle object
         public Point center;
         public double radius;
-
-        /// <summary>
-        /// default CTOR of Circle
-        /// </summary>
-        public Circle()
-        {
-            this.center = new Point(0, 0);
-            this.radius = 0;
-        }
 
         /// <summary>
         /// CTOR of circle
@@ -34,8 +24,9 @@ namespace MinCircleDLL
         }
     }
 
-    class correlatedFeatures
+    class CorrelatedFeatures
     {
+        // fields of CorrelatedFeatures object
         public string feature1;
         public string feature2;
         public Circle minCircle;
@@ -43,13 +34,14 @@ namespace MinCircleDLL
         public double threshold;
 
         /// <summary>
-        /// CTOR of correlatedFeatures
+        /// CTOR of CorrelatedFeatures
         /// </summary>
-        public correlatedFeatures() { }
+        public CorrelatedFeatures() { }
     }
 
     class AnomalyReport
     {
+        // fields of AnomalyReport object
         string feature1;
         string feature2;
         long timestep;
@@ -97,6 +89,7 @@ namespace MinCircleDLL
 
     public class DrawPoint
     {
+        // fields of DrawPoint object
         double x;
         double y;
         bool isDeviated;
@@ -113,28 +106,46 @@ namespace MinCircleDLL
             this.y = y;
             this.isDeviated = status;
         }
+
+        /// <summary>
+        /// Property that represenets field x
+        /// </summary>
         public double X
         {
+            // getter of x
             get
             {
                 return this.x;
             }
+
+            // setter of x
             set
             {
                 this.x = value;
             }
         }
+
+        /// <summary>
+        /// Property that represents field y
+        /// </summary>
         public double Y
         {
+            // getter of y
             get
             {
                 return this.y;
             }
+
+            // setter of y
             set
             {
                 this.y = value;
             }
         }
+
+        /// <summary>
+        /// Property that represents field isDeviated
+        /// </summary>
         public bool IsDeviated
         {
             get
@@ -146,16 +157,21 @@ namespace MinCircleDLL
 
     public class MinCircleDetector
     {
+        // fields of MinCircleDetector object
         Timeseries flightData;
-        List<correlatedFeatures> cf;
+        List<CorrelatedFeatures> cf;
         List<AnomalyReport> anomalies;
         static MinCircleDetector instance;
         Dictionary<string, List<double>> minMaxVals;
 
+        /// <summary>
+        /// private CTOR for MinCircleDetector object (as singleton), that parses the model and detects anomalies in dataFile
+        /// </summary>
+        /// <param name="dataFile"></param>
         private MinCircleDetector(string dataFile)
         {
             this.flightData = new Timeseries(dataFile);
-            this.cf = new List<correlatedFeatures>();
+            this.cf = new List<CorrelatedFeatures>();
             this.anomalies = new List<AnomalyReport>();
 
             this.learnNormal();
@@ -163,6 +179,10 @@ namespace MinCircleDLL
             this.minMaxVals = this.flightData.CalcMinMax();
         }
 
+        /// <summary>
+        /// a static function that creates an instance of MinCircleDetector object (if it was not created before)
+        /// </summary>
+        /// <param name="csvFilePath"> a csv file where the flight's data is </param>
         public static void CreateMinCircleDetector(string csvFilePath)
         {
             if (instance != null)
@@ -171,6 +191,11 @@ namespace MinCircleDLL
             }
             instance = new MinCircleDetector(csvFilePath);
         }
+
+        /// <summary>
+        /// a static function that returns the single instance of MinCircleDetector object
+        /// </summary>
+        /// <returns></returns>
         public static MinCircleDetector GetInstance()
         {
             if (instance == null)
@@ -179,8 +204,13 @@ namespace MinCircleDLL
             }
             return instance;
         }
+
+        /// <summary>
+        /// Property that represents field minMaxVals
+        /// </summary>
         public Dictionary<string, List<double>> MinMaxVals
         {
+            // getter of minMaxVals
             get
             {
                 return this.minMaxVals;
@@ -188,12 +218,10 @@ namespace MinCircleDLL
         }
 
         /// <summary>
-        /// Parse resource csv file in order to set list of CorrelatedFeatures.
+        /// this function parses resource csv file in order to set list of CorrelatedFeatures.
         /// </summary>
         void learnNormal()
         {
-            Dictionary<string, List<double>> data = this.flightData.getData();
-
             // read correlatedFeatures from resource csv
             using (var stream = Assembly
             .GetExecutingAssembly()
@@ -218,7 +246,7 @@ namespace MinCircleDLL
                     }
 
                     // parse the row into a correlatedFeatures object
-                    correlatedFeatures corrFeature = new correlatedFeatures();
+                    CorrelatedFeatures corrFeature = new CorrelatedFeatures();
                     corrFeature.feature1 = lineData[0];
                     corrFeature.feature2 = lineData[1];
                     corrFeature.corrlation = double.Parse(lineData[2]);
@@ -231,14 +259,14 @@ namespace MinCircleDLL
         }
 
         /// <summary>
-        ///  detect anomalies from the given flightData as a result of the CorrelatedFeatures.
+        ///  this function detects anomalies from the given flight's data as a result of the CorrelatedFeatures.
         /// </summary>        
         void detect()
         {
             Dictionary<string, List<double>> data = this.flightData.getData();
             int dataSize = this.flightData.getSizeOfLines();
 
-            foreach (correlatedFeatures feature in this.cf)
+            foreach (CorrelatedFeatures feature in this.cf)
             {
                 // look for deviations between the values of the correlated features
                 for (int i = 0; i < dataSize; i++)
@@ -255,12 +283,12 @@ namespace MinCircleDLL
         }
 
         /// <summary>
-        ///  check if there is a significant deviation between the given point and the regression line of the correalted features.
+        ///  this function checks if there is a significant deviation between the given point and the regression line of the correalted features.
         /// </summary>
         /// <param name="corrFeature"> a correlated feature </param>
         /// <param name="p"> a point </param>
         /// <returns> true - if there is a significant deviation, false if not.  </returns>
-        bool detectedDev(correlatedFeatures corrFeature, Point p)
+        bool detectedDev(CorrelatedFeatures corrFeature, Point p)
         {
             return (corrFeature.minCircle.radius * 1.1 < distance(corrFeature.minCircle.center, p));
         }
@@ -280,7 +308,7 @@ namespace MinCircleDLL
         }
 
         /// <summary>
-        ///  get anomalies timesteps of the given correlated features.
+        ///  this function returns a list of anomalies' timesteps for the given correlated features.
         /// </summary>
         /// <param name="feature"> the first feature </param>
         /// <param name="corrFeature"> the second feature </param>
@@ -300,7 +328,7 @@ namespace MinCircleDLL
         }
 
         /// <summary>
-        ///  get the correlated feature of the given feature.
+        ///  this function returns the correlated feature of the given feature.
         /// </summary>
         /// <param name="feature"> a feature name </param>
         /// <returns> the name of the correalted feature </returns>
@@ -310,7 +338,7 @@ namespace MinCircleDLL
         }
 
         /// <summary>
-        ///  get the index of the feature in the cf list
+        ///  this function returns the index of the feature in the cf list
         /// </summary>
         /// <param name="feature"> a feature name </param>
         /// <returns> an index of the feature in the cf list </returns>
@@ -327,7 +355,7 @@ namespace MinCircleDLL
         }
 
         /// <summary>
-        ///  get the points which should be drawn for the given feature and it's correlated feature.
+        ///  this function returns a list of points which should be drawn for the given feature and it's correlated feature.
         /// </summary>
         /// <param name="feature"> a feature name </param>
         /// <returns> a list of points which should be drawn </returns>
@@ -346,6 +374,10 @@ namespace MinCircleDLL
             }
 
             return points;
+        }
+        public Circle GetCorrCircleByFeature(string feature)
+        {
+            return this.cf[getIndexByFeature(feature)].minCircle;
         }
     }
 }
