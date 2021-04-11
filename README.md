@@ -117,7 +117,8 @@ The main components of the product are:
 ...
 ## 📋 Installation Guide for Clean Environment
 1. Download & install FlightGear from https://www.flightgear.org/download/
-2. ...
+2. Install BlendWPFSDK_en.msi from Plugins folder
+3. ...
 ## 📚 Further Documentation
 For more info regarding the main classes of the project, information flow and UML diagrams, please refer to our [wiki site](https://github.com/MatanNoach/FlightInspectionDesktopApp/wiki).
 ## 🎥 Demo
