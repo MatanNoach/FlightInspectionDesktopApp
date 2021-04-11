@@ -31,6 +31,7 @@
         <control:Steering Grid.Column="3" Grid.Row="1"/>
         <control:Compass Grid.Column="0" Grid.Row="2" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
         <control:Yaw Grid.Column="0" Grid.Row="1" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+        <control:Roll Grid.Column="1" Grid.Row="0" HorizontalContentAlignment="Center" VerticalContentAlignment="center"/>
         <Button Name="LoadDLL" Margin="0,0,3,3" Content="Load DLL" Click="LoadDLL_Click" Grid.Column="3" Grid.Row="2" Height="20" Width="70">
             <Button.Effect>
                 <DropShadowEffect Opacity="0.5" BlurRadius="2" ShadowDepth="2"/>

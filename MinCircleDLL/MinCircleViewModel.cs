@@ -157,5 +157,9 @@ namespace MinCircleDLL
             this.currentLineIndex = newLine;
             LoadPointsByFeature(feature, height, width);
         }
+        public Circle GetCorrCircleByFeature(string feature)
+        {
+            return this.model.GetCorrCircleByFeature(feature);
+        }
     }
 }
