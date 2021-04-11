@@ -5,14 +5,22 @@ namespace FlightInspectionDesktopApp.Altimeter
 {
     class AltimeterModel : INotifyPropertyChanged
     {
-        public event PropertyChangedEventHandler PropertyChanged;
-        private static AltimeterModel altimeterModelIns;
+        // fields of AlimeterModel
         private double altimeter;
+        private static AltimeterModel altimeterModelIns;
+        public event PropertyChangedEventHandler PropertyChanged;
 
+        /// <summary>
+        /// private CTOR of AltimeterModel object
+        /// </summary>
         private AltimeterModel() { }
 
+        /// <summary>
+        /// a static property of field altimeterModelIns
+        /// </summary>
         public static AltimeterModel Instance
         {
+            // getter of altimeterModelIns.
             get
             {
                 if (altimeterModelIns == null)
@@ -24,7 +32,7 @@ namespace FlightInspectionDesktopApp.Altimeter
         }
 
         /// <summary>
-        /// Creates a AltimeterModel.
+        /// Creates an AltimeterModel object.
         /// </summary>
         public static void CreateModel()
         {
@@ -47,12 +55,18 @@ namespace FlightInspectionDesktopApp.Altimeter
             }
         }
 
+        /// <summary>
+        /// Property of field altimeter.
+        /// </summary>
         public double Altimeter
         {
+            // getter of altimeter.
             get
             {
                 return altimeter;
             }
+
+            // setter of altimeter.
             set
             {
                 altimeter = value;

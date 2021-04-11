@@ -20,8 +20,8 @@ namespace FlightInspectionDesktopApp
     class TelnetClient : ITelnetClient
     {
         // Vars of writing flight data to FG
-        StreamWriter writer;
         Socket socketData;
+        StreamWriter writer;
         NetworkStream netSocketWrite;
         // Vars of sending telnet requests and reading the response
         StreamReader reader;

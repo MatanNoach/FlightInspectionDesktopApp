@@ -5,6 +5,7 @@ namespace FlightInspectionDesktopApp.Altimeter
 {
     class AltimeterViewModel : INotifyPropertyChanged
     {
+        // fields of AltimeterViewModel
         private AltimeterModel model;
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -34,6 +35,9 @@ namespace FlightInspectionDesktopApp.Altimeter
             }
         }
 
+        /// <summary>
+        /// tis function returns the Altimeter value from the model to the view-model.
+        /// </summary>
         public double VMAltimeter { get { return model.Altimeter; } }
     }
 }

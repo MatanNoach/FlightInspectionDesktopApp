@@ -1,12 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Globalization;
 using System.Linq;
-using System.Runtime.InteropServices;
-using System.Windows.Controls;
 using System.Windows.Data;
+using System.Globalization;
 using System.Windows.Media;
 using System.Windows.Shapes;
+using System.Windows.Controls;
+using System.Collections.Generic;
+using System.Runtime.InteropServices;
 
 namespace LinearRegressionDLL
 {
@@ -30,18 +30,8 @@ namespace LinearRegressionDLL
             InitializeComponent();
             try
             {
-                // try use the LinearRegressionDetector instance in the vm constuctor
-                try
-                {
-                    vm = new LinearGraphViewModel(LinearRegressionDetector.GetInstance());
-                }
-                // in case of a failure, create the instance, and try to set it again
-                catch
-                {
-                    LinearRegressionDetector.CreateLinearRegressionDetector(csvFilePath);
-                    vm = new LinearGraphViewModel(LinearRegressionDetector.GetInstance());
-                }
-                this.DataContext = vm;
+                this.vm = new LinearGraphViewModel(LinearRegressionDetector.GetInstance(csvFilePath));
+                this.DataContext = this.vm;
                 // draw x and y axis on the canvas
                 Path xAxis = CreateAxis(new System.Windows.Point(margin, LinearGraph.Height / 2), new System.Windows.Point(LinearGraph.Width, LinearGraph.Height / 2));
                 LinearGraph.Children.Add(xAxis);
@@ -73,19 +63,31 @@ namespace LinearRegressionDLL
         {
             LinearGraph.Children.RemoveAt(4);
         }
+
+        /// <summary>
+        /// Property of field currentLineIndex.
+        /// </summary>
         public int CurrentLineIndex
         {
+            // setter of currentLineIndex.
             set
             {
                 vm.UpdateCurrentLineIndex(value, Feature, LinearGraph.Height, LinearGraph.Width);
             }
         }
+
+        /// <summary>
+        /// Property of field feature.
+        /// </summary>
         public string Feature
         {
+            // getter of feature.
             get
             {
                 return this.feature;
             }
+
+            // setter of feature.
             set
             {
                 string oldFeature = this.feature;
@@ -103,7 +105,7 @@ namespace LinearRegressionDLL
                 }
             }
         }
-        // The functio returns the user control
+        // This function returns the user control
         public UserControl GetUserControl(string csvFilePath)
         {
             LinearRegressionGraph graph = new LinearRegressionGraph(csvFilePath);

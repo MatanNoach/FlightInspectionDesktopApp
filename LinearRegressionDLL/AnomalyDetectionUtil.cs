@@ -5,16 +5,8 @@ namespace LinearRegressionDLL
 {
     class Line
     {
+        // field of Line object
         public double a, b;
-
-        /// <summary>
-        /// default CTOR of Line object
-        /// </summary>
-        public Line()
-        {
-            this.a = 0;
-            this.b = 0;
-        }
 
         /// <summary>
         /// CTOR of Line object
@@ -40,6 +32,7 @@ namespace LinearRegressionDLL
 
     class Point
     {
+        // field of Point object
         public double x, y;
 
         /// <summary>

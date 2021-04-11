@@ -5,6 +5,7 @@ namespace FlightInspectionDesktopApp.Speedometer
 {
     class SpeedometerViewModel : INotifyPropertyChanged
     {
+        // fields of SpeedometerViewModel object.
         private SpeedometerModel model;
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -34,8 +35,28 @@ namespace FlightInspectionDesktopApp.Speedometer
             }
         }
 
-        public double VMAirSpeed { get { return model.AirSpeed; } }
+        /// <summary>
+        /// Property of AirSpeed for the view-model.
+        /// </summary>
+        public double VMAirSpeed
+        {
+            // getter of AirSpeed.
+            get
+            {
+                return model.AirSpeed;
+            }
+        }
 
-        public double VMSpeedometerAngle { get { return model.SpeedometerAngle; } }
+        /// <summary>
+        /// Property of SpeedometerAngle for the view-model.
+        /// </summary>
+        public double VMSpeedometerAngle
+        {
+            // getter of SpeedometerAngle.
+            get
+            {
+                return model.SpeedometerAngle;
+            }
+        }
     }
 }

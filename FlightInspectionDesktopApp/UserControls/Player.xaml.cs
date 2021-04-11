@@ -1,5 +1,6 @@
-﻿using FlightInspectionDesktopApp.Player;
-using System.Windows.Controls;
+﻿using System.Windows.Controls;
+using FlightInspectionDesktopApp.Player;
+
 namespace FlightInspectionDesktopApp.UserControls
 {
     /// <summary>
@@ -7,7 +8,12 @@ namespace FlightInspectionDesktopApp.UserControls
     /// </summary>
     public partial class Player : UserControl
     {
+        // field of PlayerViewModel.
         PlayerViewModel viewModel;
+
+        /// <summary>
+        /// CTOR of Player.
+        /// </summary>
         public Player()
         {
             InitializeComponent();

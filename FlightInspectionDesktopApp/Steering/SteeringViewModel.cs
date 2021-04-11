@@ -5,8 +5,9 @@ namespace FlightInspectionDesktopApp.Steering
 {
     class SteeringViewModel : INotifyPropertyChanged
     {
-        public event PropertyChangedEventHandler PropertyChanged;
+        // fields of SteeringViewModel object.
         private SteeringModel model;
+        public event PropertyChangedEventHandler PropertyChanged;
 
         /// <summary>
         /// SteeringViewModel constructor.
@@ -34,10 +35,54 @@ namespace FlightInspectionDesktopApp.Steering
             }
         }
 
-        // properties
-        public double VMAileron { get { return model.Aileron; } }
-        public double VMElevator { get { return model.Elevator; } }
-        public double VMRudder { get { return model.Rudder; } }
-        public double VMThrottle { get { return model.Throttle; } }
+        // Properties:
+
+        /// <summary>
+        /// Property of Aileron for the view-model.
+        /// </summary>
+        public double VMAileron
+        {
+            // getter of Aileron.
+            get
+            {
+                return model.Aileron;
+            }
+        }
+
+        /// <summary>
+        /// Property of Elevator for the view-model.
+        /// </summary>
+        public double VMElevator
+        {
+            // getter of elevator.
+            get
+            {
+                return model.Elevator;
+            }
+        }
+
+        /// <summary>
+        /// Property of Rudder for the view-model.
+        /// </summary>
+        public double VMRudder
+        {
+            // getter of the rudder.
+            get
+            {
+                return model.Rudder;
+            }
+        }
+
+        /// <summary>
+        /// Property of Throttle for the view-model.
+        /// </summary>
+        public double VMThrottle
+        {
+            // getter of throttle.
+            get
+            {
+                return model.Throttle;
+            }
+        }
     }
 }

@@ -6,19 +6,26 @@ using System.Text;
 using System.Threading;
 
 namespace FlightInspectionDesktopApp
-{/// <summary>
-/// Implementation of the main model.
-/// </summary>
+{
+    /// <summary>
+    /// Implementation of the main model.
+    /// </summary>
     class FGModelImp : IFGModel
     {
-        public event PropertyChangedEventHandler PropertyChanged;
-        ITelnetClient telnetClient;
+        // fields of FGModelImp object
+        Process exeProcess;
         volatile bool shouldStop;
+        ITelnetClient telnetClient;
         private DataModel dataModel;
         private static FGModelImp fgModel;
-        Process exeProcess;
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        /// <summary>
+        /// a static property of field fgModel.
+        /// </summary>
         public static FGModelImp Instance
         {
+            // getter of fgModel.
             get
             {
                 if (fgModel == null)
@@ -28,6 +35,11 @@ namespace FlightInspectionDesktopApp
                 return fgModel;
             }
         }
+
+        /// <summary>
+        /// a statuc functoin that creates an object of FGModelImp
+        /// </summary>
+        /// <param name="telnetClient">telnet client to initialize</param>
         public static void CreateModel(ITelnetClient telnetClient)
         {
             if (fgModel != null)
@@ -218,92 +230,92 @@ namespace FlightInspectionDesktopApp
             }).Start();
         }
 
-        //? All from here and under should be handled in other components
-        /// <summary>
-        /// Evokes all subscribed methods of PropertyChanged.
-        /// </summary>
-        /// <param name="propName">name of the property that's been changed</param>
-        public void NotifyPropertyChanged(string propName)
-        {
-            if (this.PropertyChanged != null)
-            {
-                this.PropertyChanged(this, new PropertyChangedEventArgs(propName));
-            }
-        }
+        ////? All from here and under should be handled in other components
+        ///// <summary>
+        ///// Evokes all subscribed methods of PropertyChanged.
+        ///// </summary>
+        ///// <param name="propName">name of the property that's been changed</param>
+        //public void NotifyPropertyChanged(string propName)
+        //{
+        //    if (this.PropertyChanged != null)
+        //    {
+        //        this.PropertyChanged(this, new PropertyChangedEventArgs(propName));
+        //    }
+        //}
 
-        private double aileron;
-        private double elevator;
-        private double rudder;
-        private double throttle;
-        private double position;
+        //private double aileron;
+        //private double elevator;
+        //private double rudder;
+        //private double throttle;
+        //private double position;
 
-        public double Aileron
-        {
-            get
-            {
-                return aileron;
-            }
-            set
-            {
-                aileron = value;
-                NotifyPropertyChanged("Aileron");
-            }
-        }
-        public double Elevator
-        {
-            get
-            {
-                return elevator;
-            }
-            set
-            {
-                elevator = value;
-                NotifyPropertyChanged("Elevator");
-            }
-        }
-        public double Rudder
-        {
-            get
-            {
-                return rudder;
-            }
-            set
-            {
-                rudder = value;
-                NotifyPropertyChanged("Rudder");
-            }
-        }
-        public double Throttle
-        {
-            get
-            {
-                return throttle;
-            }
-            set
-            {
-                throttle = value;
-                NotifyPropertyChanged("Throttle");
-            }
-        }
-        public double Position
-        {
-            get
-            {
-                return position;
-            }
-            set
-            {
-                position = value;
-                NotifyPropertyChanged("Position");
-            }
-        }
-        public DataModel DataModel
-        {
-            get
-            {
-                return dataModel;
-            }
-        }
+        //public double Aileron
+        //{
+        //    get
+        //    {
+        //        return aileron;
+        //    }
+        //    set
+        //    {
+        //        aileron = value;
+        //        NotifyPropertyChanged("Aileron");
+        //    }
+        //}
+        //public double Elevator
+        //{
+        //    get
+        //    {
+        //        return elevator;
+        //    }
+        //    set
+        //    {
+        //        elevator = value;
+        //        NotifyPropertyChanged("Elevator");
+        //    }
+        //}
+        //public double Rudder
+        //{
+        //    get
+        //    {
+        //        return rudder;
+        //    }
+        //    set
+        //    {
+        //        rudder = value;
+        //        NotifyPropertyChanged("Rudder");
+        //    }
+        //}
+        //public double Throttle
+        //{
+        //    get
+        //    {
+        //        return throttle;
+        //    }
+        //    set
+        //    {
+        //        throttle = value;
+        //        NotifyPropertyChanged("Throttle");
+        //    }
+        //}
+        //public double Position
+        //{
+        //    get
+        //    {
+        //        return position;
+        //    }
+        //    set
+        //    {
+        //        position = value;
+        //        NotifyPropertyChanged("Position");
+        //    }
+        //}
+        //public DataModel DataModel
+        //{
+        //    get
+        //    {
+        //        return dataModel;
+        //    }
+        //}
 
     }
 }
