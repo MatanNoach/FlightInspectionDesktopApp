@@ -18,9 +18,9 @@
         <ed:Arc StartAngle="{Binding Source={x:Static properties:Settings.Default}, Path=speedometerStartAngle}" EndAngle="{Binding VMSpeedometerAngle, Mode=OneWay}" Stretch="None" Height="300" Width="300" StrokeThickness="20" StrokeDashArray=".25" Stroke="Turquoise"/>
         <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center"
                     Margin="0,0,0,100">
-            <TextBlock Text="Air-Speed" Foreground="Black" HorizontalAlignment="Center"
+            <TextBlock Text="Air-Speed" Foreground="White" HorizontalAlignment="Center"
                         FontSize="18"/>
-            <TextBlock Text="{Binding VMAirSpeed, Mode=OneWay, Converter={StaticResource FlooringConverter}}" Foreground="Black" HorizontalAlignment="Center" FontSize="40" FontWeight="Light"/>
+            <TextBlock Text="{Binding VMAirSpeed, Mode=OneWay, Converter={StaticResource FlooringConverter}}" Foreground="White" HorizontalAlignment="Center" FontSize="40" FontWeight="Light"/>
         </StackPanel>
     </Grid>
 </UserControl>

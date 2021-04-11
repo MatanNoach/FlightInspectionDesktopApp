@@ -5,24 +5,26 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:FlightInspectionDesktopApp.UserControls"
              mc:Ignorable="d" 
-             d:DesignHeight="120" d:DesignWidth="100" xmlns:metadata="clr-namespace:FlightInspectionDesktopApp.Metadata" d:DataContext="{d:DesignInstance Type=metadata:MetadataViewModel}">
+             d:DesignHeight="130" d:DesignWidth="120" xmlns:metadata="clr-namespace:FlightInspectionDesktopApp.Metadata" d:DataContext="{d:DesignInstance Type=metadata:MetadataViewModel}">
     <UserControl.Resources>
         <local:PitchDegToStartPointConverter x:Key="PitchDegToStartPointConverter"/>
         <local:PitchDegToEndPointConverter x:Key="PitchDegToEndPointConverter"/>
     </UserControl.Resources>
-    <Grid Width="100" Height="120">
-        <TextBlock Text="Pitch and Roll" FontSize="14" Foreground="White" HorizontalAlignment="Center"></TextBlock>
-        <Ellipse x:Name="PitchEllipse" Width="100" Height="100" VerticalAlignment="Bottom">
-            <Ellipse.Fill>
-                <LinearGradientBrush EndPoint="{Binding VMRoll, Mode=OneWay, Converter={StaticResource PitchDegToEndPointConverter}}" StartPoint="{Binding VMPitch, Mode=OneWay, Converter={StaticResource PitchDegToStartPointConverter}}">
-                    <GradientStop Color="DeepSkyBlue" Offset="0.5"/>
-                    <GradientStop Color="SaddleBrown" Offset="0.5"/>
-                </LinearGradientBrush>
-            </Ellipse.Fill>
-        </Ellipse>
-        <Ellipse x:Name="Target" Stroke="Black" Width="30" Height="30" StrokeThickness="2" VerticalAlignment="Center" Margin="0,20,0,0"></Ellipse>
-        <Ellipse x:Name="Target1" Stroke="Black" Width="20" Height="20" StrokeThickness="1" VerticalAlignment="Center" Margin="0,20,0,0"></Ellipse>
-        <Line X1="35" Y1="50" X2="65" Y2="50" Stroke="Black" StrokeThickness="1" Margin="0,20,0,0"></Line>
-        <Line X1="50" Y1="35" X2="50" Y2="65" Stroke="Black" StrokeThickness="1" Margin="0,20,0,0"></Line>
-    </Grid>
+    <StackPanel>
+        <TextBlock Text="Pitch and Roll" FontSize="18" Foreground="White" HorizontalAlignment="Center"></TextBlock>
+        <Grid Width="100" Height="100">
+            <Ellipse x:Name="PitchEllipse" Width="100" Height="100" VerticalAlignment="Bottom">
+                <Ellipse.Fill>
+                    <LinearGradientBrush EndPoint="{Binding VMRoll, Mode=OneWay, Converter={StaticResource PitchDegToEndPointConverter}}" StartPoint="{Binding VMPitch, Mode=OneWay, Converter={StaticResource PitchDegToStartPointConverter}}">
+                        <GradientStop Color="DeepSkyBlue" Offset="0.5"/>
+                        <GradientStop Color="SaddleBrown" Offset="0.5"/>
+                    </LinearGradientBrush>
+                </Ellipse.Fill>
+            </Ellipse>
+            <Ellipse x:Name="Target" Stroke="Black" Width="30" Height="30" StrokeThickness="2" VerticalAlignment="Center" ></Ellipse>
+            <Ellipse x:Name="Target1" Stroke="Black" Width="20" Height="20" StrokeThickness="1" VerticalAlignment="Center" ></Ellipse>
+            <Line X1="35" Y1="50" X2="65" Y2="50" Stroke="Black" StrokeThickness="1"></Line>
+            <Line X1="50" Y1="35" X2="50" Y2="65" Stroke="Black" StrokeThickness="1"></Line>
+        </Grid>
+    </StackPanel>
 </UserControl>

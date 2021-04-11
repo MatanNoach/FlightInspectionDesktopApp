@@ -5,26 +5,31 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:FlightInspectionDesktopApp.UserControls" xmlns:metadata="clr-namespace:FlightInspectionDesktopApp.Metadata" d:DataContext="{d:DesignInstance Type=metadata:MetadataViewModel}"
              mc:Ignorable="d" 
-             d:DesignHeight="200" Width="200">
+             d:DesignHeight="220" Width="200">
     <UserControl.Resources>
         <local:ImageSizeConverter x:Key="ImageSizeConverter"/>
         <local:YAxisConverter1 x:Key="YAxisConverter1"/>
         <local:YAxisConverter2 x:Key="YAxisConverter2"/>
     </UserControl.Resources>
-    <Grid>
-        <Image x:Name="Compass1" Source="../Metadata/Images/compasstrans.png" Width="200" Height="200"/>
-        <Line X1="{Binding ElementName=Compass1, Path=Width, Converter={StaticResource ImageSizeConverter}}" X2="{Binding ElementName=Compass1, Path=Width, Converter={StaticResource ImageSizeConverter}}" Y1="{Binding ElementName=Compass1, Path=Height, Converter={StaticResource YAxisConverter1}}" Y2="{Binding ElementName=Compass1, Path=Height, Converter={StaticResource YAxisConverter2}}" StrokeThickness="7" RenderTransformOrigin="0.5, 0.5" StrokeStartLineCap="Triangle">
-            <Line.Stroke>
-                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                    <GradientStop Color="Red" Offset="0.2"/>
-                    <GradientStop Color="Blue" Offset="1"/>
-                </LinearGradientBrush>
-            </Line.Stroke>
-            <Line.RenderTransform>
-                <TransformGroup>
-                    <RotateTransform Angle="{Binding VMHeading, Mode=OneWay}"/>
-                </TransformGroup>
-            </Line.RenderTransform>
-        </Line>
-    </Grid>
+    <StackPanel>
+        <TextBlock Text="Heading" FontSize="18" Foreground="White" TextAlignment="Center"></TextBlock>
+
+        <Grid>
+            <Image x:Name="Compass1" Source="../Metadata/Images/compasstrans.png" Width="200" Height="200"/>
+            <Line X1="{Binding ElementName=Compass1, Path=Width, Converter={StaticResource ImageSizeConverter}}" X2="{Binding ElementName=Compass1, Path=Width, Converter={StaticResource ImageSizeConverter}}" Y1="{Binding ElementName=Compass1, Path=Height, Converter={StaticResource YAxisConverter1}}" Y2="{Binding ElementName=Compass1, Path=Height, Converter={StaticResource YAxisConverter2}}" StrokeThickness="7" RenderTransformOrigin="0.5, 0.5" StrokeStartLineCap="Triangle">
+                <Line.Stroke>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                        <GradientStop Color="Red" Offset="0.2"/>
+                        <GradientStop Color="Blue" Offset="1"/>
+                    </LinearGradientBrush>
+                </Line.Stroke>
+                <Line.RenderTransform>
+                    <TransformGroup>
+                        <RotateTransform Angle="{Binding VMHeading, Mode=OneWay}"/>
+                    </TransformGroup>
+                </Line.RenderTransform>
+            </Line>
+        </Grid>
+
+    </StackPanel>
 </UserControl>

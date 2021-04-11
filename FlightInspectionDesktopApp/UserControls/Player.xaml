@@ -40,6 +40,6 @@
         <Slider x:Name="TimeSlider" Grid.Row="1" HorizontalAlignment="Center" 
             Width="{Binding ElementName=PlayerPanel, Path=ActualWidth}" Value="{Binding VMCurrentLineIndex,Mode=TwoWay}"
             Minimum="0" Maximum="{Binding VMMaxLine, Mode=OneWay}" Grid.ColumnSpan="2"/>
-        <TextBlock x:Name="TimeWatch" Text="{Binding VMCurrTime, Mode=TwoWay}" HorizontalAlignment="Right" FontSize="14" Margin="0,0,-42,0" Grid.Column="1"/>
+        <TextBlock x:Name="TimeWatch" Text="{Binding VMCurrTime, Mode=TwoWay}" HorizontalAlignment="Right" FontSize="18" Margin="0,0,-42,0" Grid.Column="1" Foreground="White"/>
     </Grid>
 </UserControl>
