@@ -4,9 +4,18 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:FlightInspectionDesktopApp.UserControls"
-             mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
+             mc:Ignorable="d"  xmlns:metadata="clr-namespace:FlightInspectionDesktopApp.Metadata" d:DataContext="{d:DesignInstance Type=metadata:MetadataViewModel}"
+             d:DesignHeight="150" d:DesignWidth="150">
+    <UserControl.Resources>
+        <local:LineHeightConverter x:Key="LineHeightConverter"/>
+    </UserControl.Resources>
     <Grid>
-            
+        <Image x:Name="RollImage" Source="../Metadata/Images/RollPlane.jpg" Width="150" Height="150" RenderTransformOrigin="0.5,0.5">
+            <Image.RenderTransform>
+                <RotateTransform Angle="{Binding VMRoll,Mode=OneWay}"/>
+            </Image.RenderTransform>
+        </Image>
+        <Ellipse Stroke="Black" StrokeThickness="2"/>
+        <Line X1="0" X2="{Binding ElementName=RollImage, Path=Width }" Y1="{Binding ElementName=RollImage, Path=Height, Converter={StaticResource LineHeightConverter}}" Y2="{Binding ElementName=RollImage, Path=Height, Converter={StaticResource LineHeightConverter}}" StrokeThickness="1" RenderTransformOrigin="0.5, 0.5" Stroke="Red"/>
     </Grid>
 </UserControl>

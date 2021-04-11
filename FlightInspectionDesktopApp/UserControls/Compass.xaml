@@ -13,7 +13,7 @@
     </UserControl.Resources>
     <Grid>
 
-        <Image x:Name="Compass1" Source="../Metadata/compass.jpg" Width="200" Height="200"/>
+        <Image x:Name="Compass1" Source="../Metadata/Images/compass.jpg" Width="200" Height="200"/>
 
         <!--<Line X1="225" X2="225" Y1="0" Y2="450" StrokeThickness="10" RenderTransformOrigin="0.5, 0.5">-->
         <Line X1="{Binding ElementName=Compass1, Path=Width, Converter={StaticResource ImageSizeConverter}}" X2="{Binding ElementName=Compass1, Path=Width, Converter={StaticResource ImageSizeConverter}}" Y1="{Binding ElementName=Compass1, Path=Height, Converter={StaticResource YAxisConverter1}}" Y2="{Binding ElementName=Compass1, Path=Height, Converter={StaticResource YAxisConverter2}}" StrokeThickness="7" RenderTransformOrigin="0.5, 0.5" StrokeStartLineCap="Triangle">

@@ -190,8 +190,8 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UserControls\Compass.xaml">
-      <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="UserControls\Graph.xaml">
       <SubType>Designer</SubType>
@@ -274,7 +274,10 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Metadata\compass.jpg" />
+    <Resource Include="Metadata\Images\compass.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Metadata\Images\RollPlane.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
