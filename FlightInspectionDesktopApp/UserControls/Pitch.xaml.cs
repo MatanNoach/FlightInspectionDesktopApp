@@ -1,31 +1,31 @@
 ﻿using FlightInspectionDesktopApp.Metadata;
 using System;
 using System.Globalization;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 
 namespace FlightInspectionDesktopApp.UserControls
 {
     /// <summary>
-    /// Interaction logic for Compass.xaml
+    /// Interaction logic for Pitch.xaml
     /// </summary>
-    public partial class Compass : UserControl
+    public partial class Pitch : UserControl
     {
         private MetadataViewModel vm;
-        public Compass()
+        public Pitch()
         {
             InitializeComponent();
-            MetadataModel.CreateModel();
             this.vm = new MetadataViewModel(MetadataModel.Instance);
             this.DataContext = this.vm;
         }
     }
 
 
-    class ImageSizeConverter : IValueConverter
+    class PitchDegToStartPointConverter : IValueConverter
     {
         /// <summary>
-        /// Converts the image's width and returns the half of it.
+        /// Converts Elevator [-1,1] values to Joystick values.
         /// </summary>
         /// <param name="value">value that we're binded to</param>
         /// <param name="targetType">none</param>
@@ -34,7 +34,8 @@ namespace FlightInspectionDesktopApp.UserControls
         /// <returns></returns>
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            return (double)value / 2;
+            double yVal = (double)value / 180.0;
+            return new Point(0.5, yVal);
         }
 
         /// <summary>
@@ -51,11 +52,10 @@ namespace FlightInspectionDesktopApp.UserControls
         }
     }
 
-
-    class YAxisConverter1 : IValueConverter
+    class PitchDegToEndPointConverter : IValueConverter
     {
         /// <summary>
-        /// Converts the image's height.
+        /// Converts Elevator [-1,1] values to Joystick values.
         /// </summary>
         /// <param name="value">value that we're binded to</param>
         /// <param name="targetType">none</param>
@@ -64,36 +64,8 @@ namespace FlightInspectionDesktopApp.UserControls
         /// <returns></returns>
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            return (double)value / 2 - (double)value / 4;
-        }
-
-        /// <summary>
-        /// Not implemented.
-        /// </summary>
-        /// <param name="value"></param>
-        /// <param name="targetType"></param>
-        /// <param name="parameter"></param>
-        /// <param name="culture"></param>
-        /// <returns></returns>
-        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
-        {
-            throw new NotImplementedException();
-        }
-    }
-
-    class YAxisConverter2 : IValueConverter
-    {
-        /// <summary>
-        /// Converts the image's height.
-        /// </summary>
-        /// <param name="value">value that we're binded to</param>
-        /// <param name="targetType">none</param>
-        /// <param name="parameter">JoystickBoundries Ellipse</param>
-        /// <param name="culture">none</param>
-        /// <returns></returns>
-        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
-        {
-            return (double)value / 2 + (double)value / 4;
+            double xVal = 0.5 - (double)value / 180.0;
+            return new Point(xVal, 1);
         }
 
         /// <summary>

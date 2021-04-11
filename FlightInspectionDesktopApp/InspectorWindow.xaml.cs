@@ -24,9 +24,9 @@ namespace FlightInspectionDesktopApp
             graphs = new UserControls.Graph(csvFilePath, this.dllPath)
             {
                 VerticalAlignment = VerticalAlignment.Center,
-                HorizontalAlignment = HorizontalAlignment.Center
+                HorizontalAlignment = HorizontalAlignment.Left
             };
-            Grid.SetColumn(graphs, 1);
+            Grid.SetColumn(graphs, 0);
             Grid.SetRow(graphs, 1);
             Grid.SetColumnSpan(graphs, 2);
             Grid.SetRowSpan(graphs, 2);
@@ -39,6 +39,7 @@ namespace FlightInspectionDesktopApp
         {
             vm.Disconnect();
         }
+
         private void LoadDLL_Click(object sender, RoutedEventArgs e)
         {
             // Asks the user to upload a CSV DLL file
@@ -63,6 +64,5 @@ namespace FlightInspectionDesktopApp
             Grid.SetRowSpan(graphs, 2);
             UserControls.Children.Add(graphs);
         }
-
     }
 }

@@ -10,7 +10,7 @@
         <local:LineHeightConverter x:Key="LineHeightConverter"/>
     </UserControl.Resources>
     <Grid>
-        <Image x:Name="RollImage" Source="../Metadata/Images/RollPlane.jpg" Width="150" Height="150" RenderTransformOrigin="0.5,0.5">
+        <Image x:Name="RollImage" Source="../Metadata/Images/rolltrans.png" Width="150" Height="150" RenderTransformOrigin="0.5,0.5">
             <Image.RenderTransform>
                 <RotateTransform Angle="{Binding VMRoll,Mode=OneWay}"/>
             </Image.RenderTransform>

@@ -147,8 +147,14 @@
     <Compile Include="UserControls\Metadata.xaml.cs">
       <DependentUpon>Metadata.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UserControls\Pitch.xaml.cs">
+      <DependentUpon>Pitch.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UserControls\Player.xaml.cs">
       <DependentUpon>Player.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\Roll.xaml.cs">
+      <DependentUpon>Roll.xaml</DependentUpon>
     </Compile>
     <Compile Include="UserControls\Speedometer.xaml.cs">
       <DependentUpon>Speedometer.xaml</DependentUpon>
@@ -201,9 +207,17 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="UserControls\Pitch.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="UserControls\Player.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\Roll.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="UserControls\Speedometer.xaml">
       <SubType>Designer</SubType>
@@ -214,8 +228,8 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UserControls\Yaw.xaml">
-      <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
   <ItemGroup>
@@ -267,7 +281,10 @@
     <Resource Include="Metadata\Images\compass.jpg" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Metadata\Images\RollPlane.jpg" />
+    <Resource Include="Metadata\Images\yaw.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Metadata\Images\yaw.jpg" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Metadata\Images\yawtrans.png" />
@@ -292,6 +309,15 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Player\ButtonPics\x2Back1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Player\ButtonPics\slower.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Metadata\Images\rolltrans.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="background.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
