@@ -255,7 +255,6 @@
     <Resource Include="Player\ButtonPics\x2Back.png" />
     <Resource Include="Player\ButtonPics\x2Forward.png" />
     <Resource Include="Player\ButtonPics\pause.png" />
-    <Resource Include="Player\ButtonPics\play.png" />
     <Resource Include="Player\ButtonPics\stop.png" />
   </ItemGroup>
   <ItemGroup>
@@ -281,6 +280,33 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Metadata\Images\yaw.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Metadata\Images\yawtrans.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Metadata\Images\compasstrans.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Metadata\Images\compasstrans.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Player\ButtonPics\play1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Player\ButtonPics\pause1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Player\ButtonPics\stop1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Player\ButtonPics\slower.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Player\ButtonPics\x2Forward1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Player\ButtonPics\x2Back1.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

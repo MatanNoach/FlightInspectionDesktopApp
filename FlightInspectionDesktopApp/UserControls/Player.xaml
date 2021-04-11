@@ -18,23 +18,23 @@
             <ColumnDefinition Width="140.6"/>
         </Grid.ColumnDefinitions>
         <StackPanel x:Name="PlayerPanel" VerticalAlignment="Bottom" HorizontalAlignment="Center" Orientation="Horizontal"  Height="50" Grid.Row="0" Grid.ColumnSpan="2">
-            <Button x:Name="MuchSlower" Click="MuchSlower_Click">
-                <Image Source="../Player/ButtonPics/x2Back.png"/>
+            <Button x:Name="MuchSlower" Click="MuchSlower_Click" Background="Transparent">
+                <Image Source="../Player/ButtonPics/x2Back1.png"/>
             </Button>
-            <Button x:Name="Slower" Click="Slower_Click">
-                <Image Source="../Player/ButtonPics/reverse.png"/>
+            <Button x:Name="Slower" Click="Slower_Click" Background="Transparent">
+                <Image Source="../Player/ButtonPics/slower.png"/>
             </Button>
-            <Button x:Name="Pause" Click="Pause_Click">
-                <Image Source="../Player/ButtonPics/pause.png"/>
+            <Button x:Name="Pause" Click="Pause_Click" Background="Transparent">
+                <Image Source="../Player/ButtonPics/pause1.png"/>
             </Button>
-            <Button x:Name="Stop" Click="Stop_Click">
-                <Image Source="../Player/ButtonPics/Stop.png"/>
+            <Button x:Name="Stop" Click="Stop_Click" Background="Transparent">
+                <Image Source="../Player/ButtonPics/Stop1.png"/>
             </Button>
-            <Button x:Name="Play" Click="Play_Click" >
-                <Image Source="../Player/ButtonPics/play.png"/>
+            <Button x:Name="Play" Click="Play_Click" Background="Transparent">
+                <Image Source="../Player/ButtonPics/play1.png"/>
             </Button>
-            <Button x:Name="FastForward" Click="FastForward_Click">
-                <Image Source="../Player/ButtonPics/x2Forward.png"/>
+            <Button x:Name="FastForward" Click="FastForward_Click" Background="Transparent">
+                <Image Source="../Player/ButtonPics/x2Forward1.png"/>
             </Button>
         </StackPanel>
         <Slider x:Name="TimeSlider" Grid.Row="1" HorizontalAlignment="Center" 
