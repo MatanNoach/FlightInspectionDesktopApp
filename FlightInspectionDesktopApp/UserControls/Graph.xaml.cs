@@ -1,14 +1,14 @@
-﻿using FlightInspectionDesktopApp.Graph;
-using System;
-using System.Collections.Generic;
-using System.Globalization;
+﻿using System;
 using System.Linq;
 using System.Windows;
-using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Media;
+using System.Globalization;
 using System.Windows.Shapes;
+using System.Windows.Controls;
 using System.Windows.Threading;
+using System.Collections.Generic;
+using FlightInspectionDesktopApp.Graph;
 
 namespace FlightInspectionDesktopApp.UserControls
 {

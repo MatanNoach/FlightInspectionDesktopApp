@@ -9,18 +9,22 @@ namespace FlightInspectionDesktopApp
 {
     class DataModel : INotifyPropertyChanged
     {
-        private Dictionary<string, List<double>> dictData;
-        private Dictionary<string, string> corrData;
-        private Dictionary<string, List<double>> linRegData;
+        // fields of DataModel object.
+        private int nextLine = 1;
         private List<string> rawData;
         private int currentLineIndex;
-        private static DataModel dataModelInstance;
-        private int nextLine = 1;
         private List<string> colNames;
+        private static DataModel dataModelInstance;
+        private Dictionary<string, string> corrData;
+        private Dictionary<string, List<double>> dictData;
+        private Dictionary<string, List<double>> linRegData;
         private Dictionary<string, List<double>> minMaxVals;
-
-
         public event PropertyChangedEventHandler PropertyChanged;
+
+        /// <summary>
+        /// Evokes all subscribed methods of PropertyChanged.
+        /// </summary>
+        /// <param name="propName">name of the property that's been changed</param>
         public void NotifyPropertyChanged(string propName)
         {
             if (this.PropertyChanged != null)
@@ -28,13 +32,19 @@ namespace FlightInspectionDesktopApp
                 this.PropertyChanged(this, new PropertyChangedEventArgs(propName));
             }
         }
+
+        /// <summary>
+        /// Property of field currentLineIndex.
+        /// </summary>
         public int CurrentLineIndex
         {
+            // getter of currentLineIndex.
             get
             {
                 return currentLineIndex;
             }
 
+            // setter of currentLineIndex.
             set
             {
                 currentLineIndex = value;
@@ -42,33 +52,51 @@ namespace FlightInspectionDesktopApp
             }
         }
 
+        /// <summary>
+        /// Property of field nextLine.
+        /// </summary>
         public int NextLine
         {
+            // getter of nextLine.
             get
             {
                 return nextLine;
             }
+
+            // setter of nextLine.
             set
             {
                 nextLine = value;
             }
         }
 
+        /// <summary>
+        /// Property of field colNames.
+        /// </summary>
         public List<string> ColNames
         {
+            // getter of colNames.
             get
             {
                 return colNames;
             }
         }
 
+        /// <summary>
+        /// Property of field minMaxVals.
+        /// </summary>
         public Dictionary<string, List<double>> MinMaxVals
         {
+            // getter of minMaxVals.
             get { return this.minMaxVals; }
         }
 
+        /// <summary>
+        /// Property of field dataModelInstance.
+        /// </summary>
         public static DataModel Instance
         {
+            // getter of dataModelInstance.
             get
             {
                 if (dataModelInstance == null)
@@ -78,7 +106,34 @@ namespace FlightInspectionDesktopApp
                 return dataModelInstance;
             }
         }
-        public Dictionary<string, string> CorrData { get { return this.corrData; } }
+
+        /// <summary>
+        /// Property of field corrData.
+        /// </summary>
+        public Dictionary<string, string> CorrData
+        {
+            // getter of corrData.
+            get
+            {
+                return this.corrData;
+            }
+        }
+
+        /// <summary>
+        /// Property of linRegData.
+        /// </summary>
+        public Dictionary<string, List<double>> LinRegData
+        {
+            // getter of linRegData.
+            get
+            {
+                return this.linRegData;
+            }
+        }
+
+        /// <summary>
+        /// creates a DataModel.
+        /// </summary>
         public static void CreateModel()
         {
 
@@ -89,8 +144,11 @@ namespace FlightInspectionDesktopApp
             dataModelInstance = new DataModel();
         }
 
-        public Dictionary<string, List<double>> LinRegData { get { return this.linRegData; } }
-
+        /// <summary>
+        /// this static function creates an instance of DataModel.
+        /// </summary>
+        /// <param name="csvPath"> a csv file to load into the model </param>
+        /// <param name="xmlPath"> an xml file with the columns' names </param>
         public static void CreateModel(string csvPath, string xmlPath)
         {
             if (dataModelInstance != null)
@@ -100,7 +158,16 @@ namespace FlightInspectionDesktopApp
             dataModelInstance = new DataModel(csvPath, xmlPath);
         }
 
+        /// <summary>
+        /// default CTOR of DataModel.
+        /// </summary>
         private DataModel() { }
+
+        /// <summary>
+        /// private CTOR of DataModel.
+        /// </summary>
+        /// <param name="csvPath"> a csv file to load into the model </param>
+        /// <param name="xmlPath"> an xml file with the columns' names </param>
         private DataModel(string csvPath, string xmlPath)
         {
             currentLineIndex = 0;
@@ -150,7 +217,7 @@ namespace FlightInspectionDesktopApp
         }
 
         /// <summary>
-        /// find the most correlative column for a given key.
+        /// this function finds the most correlative column for a given key.
         /// </summary>
         /// <param name="key"> the key which the function should find the most correlative column </param>
         /// <returns> the most correlative column name </returns>

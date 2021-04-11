@@ -1,4 +1,5 @@
-﻿using Microsoft.Win32;
+﻿using FlightInspectionDesktopApp.Metadata;
+using Microsoft.Win32;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -9,11 +10,18 @@ namespace FlightInspectionDesktopApp
     /// </summary>
     public partial class InspectorWindow : Window
     {
+        // fields of InspectorWindow.
         private FGViewModel vm;
         private string dllPath;
         private string csvFilePath;
         private UserControls.Graph graphs;
 
+        /// <summary>
+        /// CTOR of InspectorWindow
+        /// </summary>
+        /// <param name="vm"> model of FlightGear </param>
+        /// <param name="csvFilePath"> the csv file to load </param>
+        /// <param name="dllPath"> a .dll file which detects anomalies </param>
         public InspectorWindow(FGViewModel vm, string csvFilePath, string dllPath)
         {
             InitializeComponent();
@@ -35,11 +43,22 @@ namespace FlightInspectionDesktopApp
             Properties.Settings.Default.windowWidth = (int)(SystemParameters.PrimaryScreenWidth) / 2;
             Properties.Settings.Default.windowHeight = (int)(SystemParameters.PrimaryScreenHeight);
         }
+
+        /// <summary>
+        /// this function disconnects the view-model object when closing the window.
+        /// </summary>
+        /// <param name="sender"> the sender object </param>
+        /// <param name="e"> the event args </param>
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             vm.Disconnect();
         }
 
+        /// <summary>
+        /// this function loads the .dll after clicking the related button.
+        /// </summary>
+        /// <param name="sender"> the sender object </param>
+        /// <param name="e"> the event args </param>
         private void LoadDLL_Click(object sender, RoutedEventArgs e)
         {
             // Asks the user to upload a CSV DLL file

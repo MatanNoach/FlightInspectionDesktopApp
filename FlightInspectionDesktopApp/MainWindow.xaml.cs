@@ -1,9 +1,7 @@
-﻿using System;
-using System.IO;
+﻿using System.IO;
 using System.Windows;
 using Microsoft.Win32;
 using System.Windows.Controls;
-using System.Threading;
 
 namespace FlightInspectionDesktopApp
 {
@@ -14,10 +12,15 @@ namespace FlightInspectionDesktopApp
     {
         // The view model for the simulator
         FGViewModel vm;
+
+        /// <summary>
+        /// CTOR of MainWindow.
+        /// </summary>
         public MainWindow()
         {
             InitializeComponent();
         }
+
         /// <summary>
         /// The function opens the file explorer window for the FlightGear executable
         /// </summary>
@@ -34,11 +37,12 @@ namespace FlightInspectionDesktopApp
                 PathFG.Text = Path.GetFullPath(openFile.FileName);
             }
         }
+
         /// <summary>
         /// The function opens the file explorer window for the XML document
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
+        /// <param name="sender"> the sender object </param>
+        /// <param name="e"> the event args </param>
         private void LoadXML_Click(object sender, RoutedEventArgs e)
         {
             // Asks the user to upload an XML document
@@ -50,11 +54,12 @@ namespace FlightInspectionDesktopApp
                 PathXML.Text = System.IO.Path.GetFullPath(openFile.FileName);
             }
         }
+
         /// <summary>
         /// The function opens the file explorer window for the CSV file
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
+        /// <param name="sender"> the sender object </param>
+        /// <param name="e"> the event args </param>
         private void LoadCSV_Click(object sender, RoutedEventArgs e)
         {
             // Asks the user to upload a CSV file
@@ -66,6 +71,12 @@ namespace FlightInspectionDesktopApp
                 PathCSV.Text = System.IO.Path.GetFullPath(openFile.FileName);
             }
         }
+
+        /// <summary>
+        /// this function loads the .dll after clicking the related button.
+        /// </summary>
+        /// <param name="sender"> the sender object </param>
+        /// <param name="e"> the event args </param>
         private void LoadDLL_Click(object sender, RoutedEventArgs e)
         {
             // Asks the user to upload a CSV DLL file
@@ -78,10 +89,10 @@ namespace FlightInspectionDesktopApp
             }
         }
         /// <summary>
-        /// The function verifies the user input
+        /// The function verifies the user input.
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
+        /// <param name="sender"> the sender object </param>
+        /// <param name="e"> the event args </param>
         private void Submit_Click(object sender, RoutedEventArgs e)
         {
             if (validateTextboxes() && validateFiles())
@@ -181,10 +192,10 @@ namespace FlightInspectionDesktopApp
         }
 
         /// <summary>
-        /// The function checks if the user uploaded a FlightGear executable, and hides an error message if exists
+        /// The function checks if the user uploaded a FlightGear executable, and hides an error message if exists.
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
+        /// <param name="sender"> the sender object </param>
+        /// <param name="e"> the event args </param>
         private void PathFG_TextChanged(object sender, TextChangedEventArgs e)
         {
             // If the user uploaded an exe file, hide the error message
@@ -196,8 +207,8 @@ namespace FlightInspectionDesktopApp
         /// <summary>
         /// The function checks if the user uploaded an XML document, and hides an error message if exists
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
+        /// <param name="sender"> the sender object </param>
+        /// <param name="e"> the event args </param>
         private void PathXML_TextChanged(object sender, TextChangedEventArgs e)
         {
             // If the user uploaded an XML file, hide the error message
@@ -209,8 +220,8 @@ namespace FlightInspectionDesktopApp
         /// <summary>
         /// The function checks if the user uploaded a CSV file, and hides an error message if exists
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
+        /// <param name="sender"> the sender object </param>
+        /// <param name="e"> the event args </param>
         private void PathCSV_TextChanged(object sender, TextChangedEventArgs e)
         {
             // If the user uploaded an CSV file, hide the error message
@@ -220,6 +231,11 @@ namespace FlightInspectionDesktopApp
             }
         }
 
+        /// <summary>
+        /// this function hides the error message after a .dll file was loaded.
+        /// </summary>
+        /// <param name="sender"> the sender object </param>
+        /// <param name="e"> the event args </param>
         private void PathDLL_TextChanged(object sender, TextChangedEventArgs e)
         {
             // If the user uploaded an DLL file, hide the error message
