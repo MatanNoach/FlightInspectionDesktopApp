@@ -44,6 +44,7 @@ namespace MinCircleDLL
             CircleGraph.Children.Add(xAxis);
             Path yAxis = CreateAxis(new System.Windows.Point(CircleGraph.Width / 2, CircleGraph.Height), new System.Windows.Point(CircleGraph.Width / 2, 0));
             CircleGraph.Children.Add(yAxis);
+
         }
 
         public string Feature
@@ -57,8 +58,20 @@ namespace MinCircleDLL
                 this.feature = value;
             }
         }
-        public int CurrentLineIndex { set => throw new NotImplementedException(); }
+        public int CurrentLineIndex
+        {
 
+        }
+        public DrawLinesAndCircle()
+        {
+            Circle c = vm.GetCorrCircleByFeature();
+            Ellipse e = new Ellipse();
+            e.Stroke = System.Windows.Media.Brushes.Red;
+            e.Width = c.radius * 2;
+            e.Height = c.radius * 2;
+            CircleGraph.children.add(e);
+            vm.LoadPointsByFeature(Feature, CircleGraph.Height, CircleGraph.Width);
+        }
         // The function returns the user control
         public UserControl GetUserControl(string csvFilePath)
         {

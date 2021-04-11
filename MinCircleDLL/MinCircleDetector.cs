@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace MinCircleDLL
 {
-    class Circle
+    public class Circle
     {
         public Point center;
         public double radius;
@@ -456,17 +456,13 @@ namespace MinCircleDLL
             return 0;
         }
         /// <summary>
-        /// The function get a regression line's equation by feature name
+        /// The function returns a correlation circle by feature name
         /// </summary>
         /// <param name="feature">The feature to get it's line</param>
-        /// <returns>The line as a list of a and b when y=ax+b</returns>
-        public List<double> GetLineByFeature(string feature)
+        /// <returns>A circle object represnets the correlation between two features</returns>
+        public Circle GetCorrCircleByFeature(string feature)
         {
-            List<double> lineEquation = new List<double>();
-            Line line = this.cf[getIndexByFeature(feature)].regression_line;
-            lineEquation.Add(line.a);
-            lineEquation.Add(line.b);
-            return lineEquation;
+            return this.cf[getIndexByFeature(feature)].minCircle;
         }
         /// <summary>
         ///  get the points which should be drawn for the given feature and it's correlated feature.

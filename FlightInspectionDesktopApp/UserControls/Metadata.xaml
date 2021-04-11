@@ -15,9 +15,6 @@
                         <RowDefinition Height="*"/>
                         <RowDefinition Height="*"/>
                         <RowDefinition Height="*"/>
-                        <RowDefinition Height="*"/>
-                        <RowDefinition Height="*"/>
-                        <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"/>
@@ -33,14 +30,6 @@
                     <TextBox Name="Heading" BorderThickness="0" Text="Heading" Foreground="Red" Background="AliceBlue" HorizontalAlignment="Left" Grid.Row="2" Grid.Column="0"/>
                     <TextBox Name="dataHeading" BorderThickness="0" Text="{Binding VMHeading, Mode=OneWay}" Foreground="Black" Background="AliceBlue" HorizontalAlignment="Left" Grid.Row="2" Grid.Column="1"/>
 
-                    <TextBox Name="Pitch" BorderThickness="0" Text="Pitch" Foreground="Red" Background="AliceBlue" HorizontalAlignment="Left" Grid.Row="3" Grid.Column="0"/>
-                    <TextBox Name="dataPitch" BorderThickness="0" Text="{Binding VMPitch, Mode=OneWay}" Foreground="Black" Background="AliceBlue" HorizontalAlignment="Left" Grid.Row="3" Grid.Column="1"/>
-
-                    <TextBox Name="Roll" BorderThickness="0" Text="Roll" Foreground="Red" Background="AliceBlue" HorizontalAlignment="Left" Grid.Row="4" Grid.Column="0"/>
-                    <TextBox Name="dataRoll" BorderThickness="0" Text="{Binding VMRoll, Mode=OneWay}" Foreground="Black" Background="AliceBlue" HorizontalAlignment="Left" Grid.Row="4" Grid.Column="1"/>
-
-                    <TextBox Name="SideSlip" BorderThickness="0" Text="Yaw" Foreground="Red" Background="AliceBlue" HorizontalAlignment="Left" Grid.Row="5" Grid.Column="0"/>
-                    <TextBox Name="dataSideSlip" BorderThickness="0" Text="{Binding VMSideSlip, Mode=OneWay}" Foreground="Black" Background="AliceBlue" HorizontalAlignment="Left" Grid.Row="5" Grid.Column="1"/>
 
                 </Grid>
             </Border>

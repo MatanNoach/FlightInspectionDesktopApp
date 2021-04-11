@@ -38,7 +38,7 @@ namespace MinCircleDLL
         }
     }
 
-    class Point
+    public class Point
     {
         public double x, y;
 

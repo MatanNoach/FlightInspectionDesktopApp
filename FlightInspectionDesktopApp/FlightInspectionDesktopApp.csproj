@@ -150,6 +150,9 @@
     <Compile Include="UserControls\Player.xaml.cs">
       <DependentUpon>Player.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UserControls\Roll.xaml.cs">
+      <DependentUpon>Roll.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UserControls\Speedometer.xaml.cs">
       <DependentUpon>Speedometer.xaml</DependentUpon>
     </Compile>
@@ -199,6 +202,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UserControls\Player.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\Roll.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
