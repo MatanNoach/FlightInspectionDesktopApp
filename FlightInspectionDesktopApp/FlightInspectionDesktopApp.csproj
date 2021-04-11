@@ -214,8 +214,8 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UserControls\Yaw.xaml">
-      <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
   </ItemGroup>
   <ItemGroup>
@@ -267,10 +267,7 @@
     <Resource Include="Metadata\Images\compass.jpg" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Metadata\Images\yaw.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Metadata\Images\yaw.jpg" />
+    <Resource Include="Metadata\Images\RollPlane.jpg" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Metadata\Images\yawtrans.png" />
