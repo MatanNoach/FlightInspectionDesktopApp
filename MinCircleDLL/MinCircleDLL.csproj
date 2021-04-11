@@ -44,10 +44,21 @@
     <Compile Include="AnomalyDetectionUtil.cs" />
     <Compile Include="MinCircleDetector.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="regFlightCsvModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>regFlightCsvModel.resx</DependentUpon>
+    </Compile>
     <Compile Include="Timeseries.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Resources\" />
+    <EmbeddedResource Include="regFlightCsvModel.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>regFlightCsvModel.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\reg_flight_model.csv" />
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassDiagram1.cd" />
