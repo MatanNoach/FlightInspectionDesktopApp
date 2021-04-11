@@ -7,7 +7,7 @@
              mc:Ignorable="d" 
              d:DesignHeight="100" d:DesignWidth="100">
     <Grid>
-        <Image x:Name="Yaw1" Source="../Metadata/Images/yaw.jpg" Width="100" Height="100" RenderTransformOrigin="0.5, 0.5">
+        <Image x:Name="Yaw1" Source="../Metadata/Images/yawtrans.png" Width="100" Height="100" RenderTransformOrigin="0.5, 0.5">
             <Image.RenderTransform>
                 <TransformGroup>
                     <RotateTransform Angle="{Binding VMSideSlip, Mode=OneWay}">

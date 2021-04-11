@@ -10,7 +10,7 @@
         WindowStartupLocation="Manual"
         Left="{Binding Source={x:Static properties:Settings.Default}, Path=windowWidth}"
         Top="0"
-        Background="White" 
+        Background="#FFC1D3CF" 
         FontFamily="Microsoft JhengHei UI" Closing="Window_Closing" >
     <Grid x:Name="UserControls">
         <Grid.ColumnDefinitions>
