@@ -1,0 +1,20 @@
+﻿<UserControl x:Class="FlightInspectionDesktopApp.UserControls.Yaw"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:FlightInspectionDesktopApp.UserControls" xmlns:metadata="clr-namespace:FlightInspectionDesktopApp.Metadata" d:DataContext="{d:DesignInstance Type=metadata:MetadataViewModel}"
+             mc:Ignorable="d" 
+             d:DesignHeight="100" d:DesignWidth="100">
+    <Grid>
+        <Image x:Name="Yaw1" Source="../Metadata/Images/yaw.jpg" Width="100" Height="100" RenderTransformOrigin="0.5, 0.5">
+            <Image.RenderTransform>
+                <TransformGroup>
+                    <RotateTransform Angle="{Binding VMSideSlip, Mode=OneWay}">
+                    </RotateTransform>
+                </TransformGroup>
+            </Image.RenderTransform>
+        </Image>
+        <Ellipse Stroke="Black" StrokeThickness="2"></Ellipse>
+    </Grid>
+</UserControl>

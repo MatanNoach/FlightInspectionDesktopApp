@@ -161,6 +161,9 @@
     </Compile>
     <Compile Include="Steering\SteeringModel.cs" />
     <Compile Include="Steering\SteeringViewModel.cs" />
+    <Compile Include="UserControls\Yaw.xaml.cs">
+      <DependentUpon>Yaw.xaml</DependentUpon>
+    </Compile>
     <Page Include="InspectorWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -214,6 +217,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UserControls\Steering.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\Yaw.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -277,7 +284,10 @@
     <Resource Include="Metadata\Images\compass.jpg" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Metadata\Images\RollPlane.jpg" />
+    <Resource Include="Metadata\Images\yaw.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Metadata\Images\yaw.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

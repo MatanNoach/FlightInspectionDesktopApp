@@ -137,7 +137,7 @@ namespace LinearRegressionDLL
             this.anomalies = new List<AnomalyReport>();
 
             this.learnNormal();
-            this.anomalies = this.detect();
+            this.detect();
             this.minMaxVals = flightData.CalcMinMax();
         }
         public static void CreateLinearRegressionDetector(string csvFilePath)
@@ -267,34 +267,25 @@ namespace LinearRegressionDLL
         /// <summary>
         ///  detect anomalies from the given flightData as a result of the CorrelatedFeatures.
         /// </summary>
-        /// <returns> list of anomalies </returns>
-        List<AnomalyReport> detect()
+        void detect()
         {
-            List<AnomalyReport> report = new List<AnomalyReport>();
             Dictionary<string, List<double>> data = this.flightData.getData();
-            List<string> features = this.flightData.getFeatures();
             int dataSize = this.flightData.getSizeOfLines();
 
             foreach (correlatedFeatures feature in this.cf)
             {
-                // if there is a correlatedFeature to the current feature
-                if (feature.feature2 != null)
+                // look for deviations between the values of the correlated features
+                for (int i = 0; i < dataSize; i++)
                 {
-                    // look for deviations between the values of the correlated features
-                    for (int i = 0; i < dataSize; i++)
+                    Point colPoint = new Point(data[feature.feature1][i], data[feature.feature2][i]);
+                    // if a deviation was detected
+                    if (detectedDev(feature, colPoint))
                     {
-                        Point colPoint = new Point(data[feature.feature1][i], data[feature.feature2][i]);
-                        // if a deviation was detected
-                        if (detectedDev(feature, colPoint))
-                        {
-                            // add the current line as an AnomalyReport
-                            report.Add(new AnomalyReport(feature.feature1, feature.feature2, i + 1));
-                        }
+                        // add the current line as an AnomalyReport
+                        this.anomalies.Add(new AnomalyReport(feature.feature1, feature.feature2, i + 1));
                     }
                 }
             }
-
-            return report;
         }
 
         /// <summary>
