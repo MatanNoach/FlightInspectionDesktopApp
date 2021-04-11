@@ -1,12 +1,13 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Windows.Media;
+using System.ComponentModel;
+using System.Collections.Generic;
 
 namespace FlightInspectionDesktopApp.Graph
 {
     class GraphViewModel : INotifyPropertyChanged
     {
+        // fields of GraphViewModel object.
         GraphModel model;
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -62,18 +63,95 @@ namespace FlightInspectionDesktopApp.Graph
         public PointCollection GetCorrelatedRegPoints(string col1, string col2) { model.GetCorrelatedRegPoints(col1, col2); return VMCorrelatedPoints; }
 
         // properties:
-        public List<string> ColNames { get { return this.model.ColNames; } }
 
-        public Dictionary<string, List<double>> MinMaxVals { get { return this.model.MinMaxVals; } }
+        /// <summary>
+        /// Property of field ColNames.
+        /// </summary>
+        public List<string> ColNames
+        {
+            // getter of ColNames.
+            get
+            {
+                return this.model.ColNames;
+            }
+        }
 
-        public int VMCurrentLineIndex { get { return model.CurrentLineIndex; } }
+        /// <summary>
+        /// Property of field MinMaxVals.
+        /// </summary>
+        public Dictionary<string, List<double>> MinMaxVals
+        {
+            // getter of MinMaxVals.
+            get
+            {
+                return this.model.MinMaxVals;
+            }
+        }
 
-        public Dictionary<string, string> CorrData { get { return model.CorrData; } }
+        /// <summary>
+        /// Property of CurrentLineIndex.
+        /// </summary>
+        public int VMCurrentLineIndex
+        {
+            // getter of CurrentLineIndex.
+            get
+            {
+                return model.CurrentLineIndex;
+            }
+        }
 
-        public string VMCorrCol { get { return model.CorrCol; } set { model.CorrCol = value; } }
+        /// <summary>
+        /// Property of CorrData.
+        /// </summary>
+        public Dictionary<string, string> CorrData
+        {
+            // getter of CorrData.
+            get
+            {
+                return model.CorrData;
+            }
+        }
 
-        public Dictionary<string, List<double>> LinRegData { get { return model.LinRegData; } }
+        /// <summary>
+        /// Property of CorrCol.
+        /// </summary>
+        public string VMCorrCol
+        {
+            // getter of CorrCol.
+            get
+            {
+                return model.CorrCol;
+            }
 
-        public PointCollection VMCorrelatedPoints { get { return model.CorrelatedPoints; } }
+            // setter of CorrCol.
+            set
+            {
+                model.CorrCol = value;
+            }
+        }
+
+        /// <summary>
+        /// Property of LinRegData.
+        /// </summary>
+        public Dictionary<string, List<double>> LinRegData
+        {
+            // getter of LinRegData.
+            get
+            {
+                return model.LinRegData;
+            }
+        }
+
+        /// <summary>
+        /// Property of CorrelatedPoints.
+        /// </summary>
+        public PointCollection VMCorrelatedPoints
+        {
+            // getter of CorrelatedPoints.
+            get
+            {
+                return model.CorrelatedPoints;
+            }
+        }
     }
 }

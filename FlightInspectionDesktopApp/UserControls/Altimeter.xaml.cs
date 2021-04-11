@@ -11,7 +11,12 @@ namespace FlightInspectionDesktopApp.UserControls
     /// </summary>
     public partial class Altimeter : UserControl
     {
+        // field of Altimeter.
         AltimeterViewModel vm;
+
+        /// <summary>
+        /// CTOR of Altimeter object.
+        /// </summary>
         public Altimeter()
         {
             InitializeComponent();
@@ -25,6 +30,9 @@ namespace FlightInspectionDesktopApp.UserControls
         }
     }
 
+    /// <summary>
+    /// Conveter which floors values.
+    /// </summary>
     class FlooringConverter : IValueConverter
     {
         /// <summary>

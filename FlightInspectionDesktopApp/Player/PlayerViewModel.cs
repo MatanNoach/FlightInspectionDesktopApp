@@ -5,9 +5,8 @@ namespace FlightInspectionDesktopApp.Player
 {
     class PlayerViewModel : INotifyPropertyChanged
     {
-        //The player model
+        //fields of PlayerViewModel object
         PlayerModel playerModel;
-
         public event PropertyChangedEventHandler PropertyChanged;
 
         /// <summary>
@@ -22,39 +21,57 @@ namespace FlightInspectionDesktopApp.Player
                 NotifyPropertyChanged("VM" + e.PropertyName);
             };
         }
+
         /// <summary>
-        /// CurrentLineIndex proprety for the viewModel
+        /// CurrentLineIndex proprety for the viewModel.
         /// </summary>
         public int VMCurrentLineIndex
         {
+            // getter of CurrentLineIndex.
             get
             {
                 return playerModel.CurrentLineIndex;
             }
+
+            // setter of CurrentLineIndex.
             set
             {
                 playerModel.CurrentLineIndex = value;
             }
         }
+
         /// <summary>
         /// MaxLine property for the view model
         /// </summary>
         public int VMMaxLine
         {
+            // getter of MaxLine.
             get
             {
                 return playerModel.MaxLine;
             }
         }
 
+        /// <summary>
+        /// CurrTime Property for the view model.
+        /// </summary>
         public string VMCurrTime
         {
-            get { return playerModel.CurrTime; }
-            set { playerModel.CurrTime = value; }
+            // getter of CurrTime.
+            get
+            {
+                return playerModel.CurrTime;
+            }
+
+            // setter of CurrTime.
+            set
+            {
+                playerModel.CurrTime = value;
+            }
         }
 
         /// <summary>
-        /// The fucntion notify change in a property by it's name
+        /// This fucntion notifies change in a property by it's name.
         /// </summary>
         /// <param name="propName"></param>
         public void NotifyPropertyChanged(string propName)
@@ -64,43 +81,49 @@ namespace FlightInspectionDesktopApp.Player
                 this.PropertyChanged(this, new PropertyChangedEventArgs(propName));
             }
         }
+
         /// <summary>
-        /// The function playes the simulator regulary
+        /// This function playes the simulator regulary.
         /// </summary>
         public void Play()
         {
             playerModel.Play();
         }
+
         /// <summary>
-        /// The function playes the simulator in fast forward
+        /// This function playes the simulator in fast forward.
         /// </summary>
         public void FastForward()
         {
             playerModel.fastForward();
         }
+
         /// <summary>
-        /// The fucntion pauses the simulator
+        /// This fucntion pauses the simulator.
         /// </summary>
         public void Pause()
         {
             playerModel.Pause();
         }
+
         /// <summary>
-        /// The function stops the simualtor and restart it
+        /// This function stops the simualtor and restart it.
         /// </summary>
         public void Stop()
         {
             playerModel.Stop();
         }
+
         /// <summary>
-        /// The function playes the simualator in reverse
+        /// This function playes the simualator in reverse.
         /// </summary>
         public void Slower()
         {
             playerModel.Slower();
         }
+
         /// <summary>
-        /// The function playes the simulator in fast reverse
+        /// This function playes the simulator in fast reverse.
         /// </summary>
         public void MuchSlower()
         {

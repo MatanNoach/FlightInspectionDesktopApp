@@ -1,5 +1,5 @@
-﻿using FlightInspectionDesktopApp.Metadata;
-using System.Windows.Controls;
+﻿using System.Windows.Controls;
+using FlightInspectionDesktopApp.Metadata;
 
 namespace FlightInspectionDesktopApp.UserControls
 {
@@ -8,7 +8,12 @@ namespace FlightInspectionDesktopApp.UserControls
     /// </summary>
     public partial class Yaw : UserControl
     {
+        // field of Yaw.
         private MetadataViewModel vm;
+
+        /// <summary>
+        /// CTOR of Yaw.
+        /// </summary>
         public Yaw()
         {
             InitializeComponent();

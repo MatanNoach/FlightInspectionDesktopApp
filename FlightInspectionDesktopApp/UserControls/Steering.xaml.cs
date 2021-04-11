@@ -11,7 +11,12 @@ namespace FlightInspectionDesktopApp.UserControls
     /// </summary>
     public partial class Steering : UserControl
     {
+        // field of Steering.
         SteeringViewModel vm;
+
+        /// <summary>
+        /// CTOR of Steering.
+        /// </summary>
         public Steering()
         {
             InitializeComponent();

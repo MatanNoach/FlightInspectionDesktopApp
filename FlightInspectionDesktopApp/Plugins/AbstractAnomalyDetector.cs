@@ -1,18 +1,20 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.InteropServices;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Controls;
 using System.Reflection;
+using System.Windows.Controls;
 
 namespace FlightInspectionDesktopApp.Plugins
 {
     class AbstractAnomalyDetector
     {
-        UserControl detector;
+        // fields of AbstractAnomalyDetector object.
         Type type;
+        UserControl detector;
+
+        /// <summary>
+        /// CTOR of AbstractAnomalyDetector object.
+        /// </summary>
+        /// <param name="csvFilePath"> a csv file which will be sent to the .dll file </param>
+        /// <param name="dllPath"> a .dll file </param>
         public AbstractAnomalyDetector(string csvFilePath, string dllPath)
         {
             // load the dll file
@@ -39,22 +41,37 @@ namespace FlightInspectionDesktopApp.Plugins
                 }
             }
         }
+
+        /// <summary>
+        /// Property of field feature.
+        /// </summary>
         public string Feature
         {
+            // setter of feature.
             set
             {
                 type.GetProperty("Feature").SetValue(detector, value);
             }
         }
+
+        /// <summary>
+        /// Property of field currentLineIndex.
+        /// </summary>
         public int CurrentLineIndex
         {
+            // setter of currentLineIndex.
             set
             {
                 type.GetProperty("CurrentLineIndex").SetValue(detector, value);
             }
         }
+
+        /// <summary>
+        /// Property of detector.
+        /// </summary>
         public UserControl Detector
         {
+            // getter of detector.
             get
             {
                 return this.detector;

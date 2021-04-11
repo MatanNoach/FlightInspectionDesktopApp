@@ -1,8 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Windows.Media;
 using static System.Math;
+using System.Windows.Media;
+using System.ComponentModel;
+using System.Collections.Generic;
 
 namespace LinearRegressionDLL
 {
@@ -30,18 +30,32 @@ namespace LinearRegressionDLL
                 this.PropertyChanged(this, new PropertyChangedEventArgs(propName));
             }
         }
+
+        /// <summary>
+        /// Property of field correlatedPoints.
+        /// </summary>
         public List<DrawPoint> VMCorrelatedPoints
         {
+            // getter of correlatedPoints.
             get
             {
                 return this.correlatedPoints;
             }
+
+            // setter of correlatedPoints.
             set
             {
                 this.correlatedPoints = value;
                 NotifyPropertyChanged("VMCorrelatedPoints");
             }
         }
+
+        /// <summary>
+        /// this function loads all the points which should be drawn for the given feature and it's miost correlated feature.
+        /// </summary>
+        /// <param name="feature"> name of the feature </param>
+        /// <param name="height"> the height of the canvas </param>
+        /// <param name="width"> the width of the canvas </param>
         public void LoadPointsByFeature(string feature, double height, double width)
         {
             List<DrawPoint> allPoints = model.getPointsToDraw(feature);
@@ -54,19 +68,25 @@ namespace LinearRegressionDLL
             }
             VMCorrelatedPoints = pointsToShow;
         }
+
+        /// <summary>
+        /// Property of field MinMaxVals.
+        /// </summary>
         public Dictionary<string, List<double>> MinMaxVals
         {
+            // getter of MinMaxVals.
             get
             {
                 return model.MinMaxVals;
             }
         }
+
         /// <summary>
         /// Returns two-points defining the linear regression line.
         /// </summary>
         /// <param name="col">chosen column</param>
-        /// <param name="height">size of the canvas</param>
-        /// <param name="width">size of the canvas</param>
+        /// <param name="height">the height of the canvas</param>
+        /// <param name="width">the width of the canvas</param>
         /// <returns></returns>
         public PointCollection GetLineRegPoints(string col, double height, double width)
         {

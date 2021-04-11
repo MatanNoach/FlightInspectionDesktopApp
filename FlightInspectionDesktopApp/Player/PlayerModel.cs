@@ -6,11 +6,13 @@ namespace FlightInspectionDesktopApp.Player
 
     class PlayerModel : INotifyPropertyChanged
     {
+        // fields of PlayerModel object
+
+        private DataModel dataModel;
         private string currTime = "0:00";
         private static PlayerModel playerModelInst;
-        private DataModel dataModel;
-        // set the default playing speed to 10 Hz
         public event PropertyChangedEventHandler PropertyChanged;
+
         /// <summary>
         /// Constructor
         /// </summary>
@@ -24,14 +26,16 @@ namespace FlightInspectionDesktopApp.Player
             };
         }
         /// <summary>
-        /// Property of the simulator playing speed
+        /// Property of the simulator playing speed - set the default playing speed to 10 Hz.
         /// </summary>
         public int PlayingSpeed { get; set; } = 100;
+
         /// <summary>
         /// Property for the current line index in the csv file
         /// </summary>
         public int CurrentLineIndex
         {
+            // getter of currentLineIndex.
             get
             {
                 if (this != null)
@@ -49,6 +53,8 @@ namespace FlightInspectionDesktopApp.Player
                 }
                 return dataModel.CurrentLineIndex;
             }
+
+            // setter of currentLineIndex.
             set
             {
                 dataModel.CurrentLineIndex = value;
@@ -57,10 +63,18 @@ namespace FlightInspectionDesktopApp.Player
             }
         }
 
-
+        /// <summary>
+        /// Property of currTime.
+        /// </summary>
         public string CurrTime
         {
-            get { return currTime; }
+            // getter of currTime.
+            get
+            {
+                return currTime;
+            }
+
+            // setter of currTime.
             set
             {
                 currTime = value;
@@ -73,26 +87,31 @@ namespace FlightInspectionDesktopApp.Player
         /// </summary>
         public int MaxLine
         {
+            // getter of MaxLine.
             get
             {
                 return dataModel.getDataSize() - 1;
             }
         }
+
         /// <summary>
-        /// Property for the data model
+        /// Property for the data model.
         /// </summary>
         public DataModel DataModel
         {
+            // getter of dataModel.
             get
             {
                 return dataModel;
             }
         }
+
         /// <summary>
-        /// The function returns an instance of PlayerModel
+        /// This static property returns an instance of PlayerModel object.
         /// </summary>
         public static PlayerModel Instance
         {
+            // getter of playerModelInst.
             get
             {
                 if (playerModelInst == null)
@@ -102,8 +121,9 @@ namespace FlightInspectionDesktopApp.Player
                 return playerModelInst;
             }
         }
+
         /// <summary>
-        /// The function creates an instance of PlayerModel
+        /// This static function creates an instance of PlayerModel object.
         /// </summary>
         /// <param name="model"></param>
         public static void CreateModel(DataModel model)
@@ -114,8 +134,9 @@ namespace FlightInspectionDesktopApp.Player
             }
             playerModelInst = new PlayerModel(model);
         }
+
         /// <summary>
-        /// The function notifes a certain property change by it's name
+        /// This function notifes a certain property change by it's name.
         /// </summary>
         /// <param name="propName">The properite's name</param>
         public void NotifyPropertyChanged(string propName)
@@ -125,47 +146,53 @@ namespace FlightInspectionDesktopApp.Player
                 this.PropertyChanged(this, new PropertyChangedEventArgs(propName));
             }
         }
+
         /// <summary>
-        /// The function playes the simulator in regular speed
+        /// This function playes the simulator in regular speed
         /// </summary>
         public void Play()
         {
             PlayingSpeed = 100;
             dataModel.NextLine = 1;
         }
+
         /// <summary>
-        /// The function playes the simulator double it's regular speed
+        /// This function playes the simulator double it's regular speed.
         /// </summary>
         public void fastForward()
         {
             PlayingSpeed /= 2;
             dataModel.NextLine = 1;
         }
+
         /// <summary>
-        /// The function pauses the simulator
+        /// Thus function pauses the simulator.
         /// </summary>
         public void Pause()
         {
             dataModel.NextLine = 0;
         }
+
         /// <summary>
-        /// The function stops the simualtor and rewind's it to the start
+        /// This function stops the simualtor and rewind's it to the start.
         /// </summary>
         public void Stop()
         {
             dataModel.CurrentLineIndex = 0;
             dataModel.NextLine = 0;
         }
+
         /// <summary>
-        /// The function playes the simulator in a slow speed
+        /// This function playes the simulator in a slow speed.
         /// </summary>
         public void Slower()
         {
             PlayingSpeed = (int)(PlayingSpeed * 1.25);
             dataModel.NextLine = 1;
         }
+
         /// <summary>
-        /// The function playes the simulator in extra slow speed
+        /// This function playes the simulator in extra slow speed.
         /// </summary>
         public void MuchSlower()
         {

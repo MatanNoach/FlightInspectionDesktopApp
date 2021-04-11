@@ -5,20 +5,25 @@ namespace FlightInspectionDesktopApp.Steering
 {
     class SteeringModel : INotifyPropertyChanged
     {
-        public event PropertyChangedEventHandler PropertyChanged;
-        private static SteeringModel steeringModelIns;
+        // fields of SteeringModel object.
+        private double rudder;
         private double aileron;
         private double elevator;
         private double throttle;
-        private double rudder;
+        private static SteeringModel steeringModelIns;
+        public event PropertyChangedEventHandler PropertyChanged;
 
         /// <summary>
         /// Private CTOR for singleton implementation.
         /// </summary>
         private SteeringModel() { }
 
+        /// <summary>
+        /// a static property of steeringModelIns.
+        /// </summary>
         public static SteeringModel Instance
         {
+            // getter of steeringModeIns.
             get
             {
                 if (steeringModelIns == null)
@@ -53,13 +58,20 @@ namespace FlightInspectionDesktopApp.Steering
             }
         }
 
-        // properties
+        // Properties
+
+        /// <summary>
+        /// Property of field aileron.
+        /// </summary>
         public double Aileron
         {
+            // getter of aileron.
             get
             {
                 return aileron;
             }
+
+            // setter of aileron.
             set
             {
                 aileron = value;
@@ -67,12 +79,18 @@ namespace FlightInspectionDesktopApp.Steering
             }
         }
 
+        /// <summary>
+        /// Property of field elevator.
+        /// </summary>
         public double Elevator
         {
+            // getter of elevator.
             get
             {
                 return elevator;
             }
+
+            // setter of elevator.
             set
             {
                 elevator = value;
@@ -80,12 +98,18 @@ namespace FlightInspectionDesktopApp.Steering
             }
         }
 
+        /// <summary>
+        /// Property of field throttle.
+        /// </summary>
         public double Throttle
         {
+            // getter of throttle.
             get
             {
                 return throttle;
             }
+
+            // setter of throttle.
             set
             {
                 throttle = value;
@@ -93,12 +117,18 @@ namespace FlightInspectionDesktopApp.Steering
             }
         }
 
+        /// <summary>
+        /// Property of field rudder.
+        /// </summary>
         public double Rudder
         {
+            // getter of rudder.
             get
             {
                 return rudder;
             }
+
+            // setter of rudder.
             set
             {
                 rudder = value;

@@ -1,14 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.IO;
+﻿using System.IO;
 using System.Linq;
 using System.Reflection;
+using System.Collections.Generic;
 
 namespace LinearRegressionDLL
 {
-    class correlatedFeatures
+    class CorrelatedFeatures
     {
+        // fields of CorrelatedFeatures object
         public string feature1;
         public string feature2;
         public Line regression_line;
@@ -16,13 +15,14 @@ namespace LinearRegressionDLL
         public double threshold;
 
         /// <summary>
-        /// CTOR of correlatedFeatures
+        /// CTOR of CorrelatedFeatures
         /// </summary>
-        public correlatedFeatures() { }
+        public CorrelatedFeatures() { }
     }
 
     class AnomalyReport
     {
+        // fields of AnomalyReport object
         string feature1;
         string feature2;
         long timestep;
@@ -70,6 +70,7 @@ namespace LinearRegressionDLL
 
     public class DrawPoint
     {
+        // field of DrawPoint object
         double x;
         double y;
         bool isDeviated;
@@ -86,28 +87,46 @@ namespace LinearRegressionDLL
             this.y = y;
             this.isDeviated = status;
         }
+
+        /// <summary>
+        /// Property that represenets field x
+        /// </summary>
         public double X
         {
+            // getter of x
             get
             {
                 return this.x;
             }
+
+            // setter of x
             set
             {
                 this.x = value;
             }
         }
+
+        /// <summary>
+        /// Property that represents field y
+        /// </summary>
         public double Y
         {
+            // getter of y
             get
             {
                 return this.y;
             }
+
+            // setter of y
             set
             {
                 this.y = value;
             }
         }
+
+        /// <summary>
+        /// Property that represents field isDeviated
+        /// </summary>
         public bool IsDeviated
         {
             get
@@ -119,43 +138,46 @@ namespace LinearRegressionDLL
 
     public class LinearRegressionDetector
     {
+        // fields of LinearRegressionDetector object
         Timeseries flightData;
-        List<correlatedFeatures> cf;
+        List<CorrelatedFeatures> cf;
         List<AnomalyReport> anomalies;
-        private const double significantCorrelation = 0.9;
         static LinearRegressionDetector instance;
         Dictionary<string, List<double>> minMaxVals;
+        private const double significantCorrelation = 0.9;
 
         /// <summary>
-        /// CTOR of LinearRegressionDetector
+        /// private CTOR of LinearRegressionDetector object (as singleton), that parses the model and detects anomalies in dataFile
         /// </summary>
         /// <param name="dataFile"> a csv file with the data of the current flight </param>
         private LinearRegressionDetector(string dataFile)
         {
             this.flightData = new Timeseries(dataFile);
-            this.cf = new List<correlatedFeatures>();
+            this.cf = new List<CorrelatedFeatures>();
             this.anomalies = new List<AnomalyReport>();
 
             this.learnNormal();
             this.detect();
             this.minMaxVals = flightData.CalcMinMax();
         }
-        public static void CreateLinearRegressionDetector(string csvFilePath)
-        {
-            if (instance != null)
-            {
-                throw new System.Exception("Instance already created");
-            }
-            instance = new LinearRegressionDetector(csvFilePath);
-        }
-        public static LinearRegressionDetector GetInstance()
+
+        /// <summary>
+        /// a static function that returns the single instance of MinCircleDetector object
+        /// </summary>
+        /// <param name="csvFilePath"> a csv file where the flight's data is </param>
+        /// <returns> instance of LinearRegressionDetector </returns>
+        public static LinearRegressionDetector GetInstance(string csvFilePath)
         {
             if (instance == null)
             {
-                throw new System.Exception("Instance was not created");
+                instance = new LinearRegressionDetector(csvFilePath);
             }
             return instance;
         }
+
+        /// <summary>
+        /// Property that represents field minMaxVals
+        /// </summary>
         public Dictionary<string, List<double>> MinMaxVals
         {
             get
@@ -165,70 +187,11 @@ namespace LinearRegressionDLL
         }
 
         /// <summary>
-        /// learn the model in order to write the csv
-        /// </summary>
-        void learnNormalToCsv()
-        {
-            Dictionary<string, List<double>> data = this.flightData.getData();
-            List<string> features = this.flightData.getFeatures();
-            int dataSize = this.flightData.getSizeOfLines();
-
-            foreach (string feature in features)
-            {
-                string feature2 = string.Empty;
-                double correlation = 0;
-                double threashold = 0;
-                Line reg_line;
-
-                foreach (string corrFeature in features)
-                {
-                    if (feature != corrFeature)
-                    {
-                        double featuresCorr = AnomalyDetectionUtil.pearson(data[feature], data[corrFeature]);
-
-                        if (Math.Abs(featuresCorr) > Math.Abs(correlation) && Math.Abs(featuresCorr) > significantCorrelation)
-                        {
-                            feature2 = corrFeature;
-                            correlation = featuresCorr;
-                        }
-
-                        else if (correlation == 0)
-                        {
-                            feature2 = corrFeature;
-                        }
-                    }
-                }
-
-                double maxDev = 0, currDev = 0;
-                reg_line = AnomalyDetectionUtil.linear_reg(data[feature], data[feature2]);
-
-                for (int i = 0; i < dataSize; i++)
-                {
-                    currDev = AnomalyDetectionUtil.dev(new Point(data[feature][i], data[feature2][i]), reg_line);
-                    if (currDev > maxDev)
-                    {
-                        maxDev = currDev;
-                    }
-                }
-
-                threashold = maxDev;
-
-                Console.WriteLine(feature);
-                Console.WriteLine(feature2);
-                Console.WriteLine(correlation);
-                Console.WriteLine(threashold);
-                Console.WriteLine(reg_line.a);
-                Console.WriteLine(reg_line.b);
-                Console.WriteLine("-----------------");
-            }
-        }
-
-        /// <summary>
-        /// Parse resource csv file in order to set list of CorrelatedFeatures.
+        /// this function parses resource csv file in order to set list of CorrelatedFeatures.
         /// </summary>
         void learnNormal()
         {
-            // read correlatedFeatures from resource csv
+            // read CorrelatedFeatures from resource csv
             using (var stream = Assembly
             .GetExecutingAssembly()
             .GetManifestResourceStream("LinearRegressionDLL.regFlightModelCsv.resources"))
@@ -246,13 +209,13 @@ namespace LinearRegressionDLL
                     lineData = currLine.Split(colSeparator).Select(x => x.ToString()).ToList();
 
                     // if the new line is empty
-                    if (lineData[0] == "")
+                    if (lineData[0] == "" || lineData.Count != 6)
                     {
                         break;
                     }
 
-                    // parse the row into a correlatedFeatures object
-                    correlatedFeatures corrFeature = new correlatedFeatures();
+                    // parse the row into a CorrelatedFeatures object
+                    CorrelatedFeatures corrFeature = new CorrelatedFeatures();
                     corrFeature.feature1 = lineData[0];
                     corrFeature.feature2 = lineData[1];
                     corrFeature.corrlation = double.Parse(lineData[2]);
@@ -265,14 +228,14 @@ namespace LinearRegressionDLL
         }
 
         /// <summary>
-        ///  detect anomalies from the given flightData as a result of the CorrelatedFeatures.
+        ///  this function detects anomalies from the given flightData as a result of the CorrelatedFeatures list (this.cf).
         /// </summary>
         void detect()
         {
             Dictionary<string, List<double>> data = this.flightData.getData();
             int dataSize = this.flightData.getSizeOfLines();
 
-            foreach (correlatedFeatures feature in this.cf)
+            foreach (CorrelatedFeatures feature in this.cf)
             {
                 // look for deviations between the values of the correlated features
                 for (int i = 0; i < dataSize; i++)
@@ -289,19 +252,19 @@ namespace LinearRegressionDLL
         }
 
         /// <summary>
-        ///  check if there is a significant deviation between the given point and the regression line of the correalted features.
+        ///  this function checks if there is a significant deviation between the given point and the regression line of the correalted feature.
         /// </summary>
         /// <param name="corrFeature"> a correlated feature </param>
         /// <param name="p"> a point </param>
         /// <returns> true - if there is a significant deviation, false if not.  </returns>
-        bool detectedDev(correlatedFeatures corrFeature, Point p)
+        bool detectedDev(CorrelatedFeatures corrFeature, Point p)
         {
             double detected_dev = AnomalyDetectionUtil.dev(p, corrFeature.regression_line);
             return (detected_dev > corrFeature.threshold);
         }
 
         /// <summary>
-        ///  get the points which should be drawn for the given feature and it's correlated feature.
+        ///  this function returns a list of points which should be drawn for the given feature and it's correlated feature.
         /// </summary>
         /// <param name="feature"> a feature name </param>
         /// <returns> a list of points which should be drawn </returns>
@@ -323,7 +286,7 @@ namespace LinearRegressionDLL
         }
 
         /// <summary>
-        ///  get anomalies timesteps of the given correlated features.
+        ///  this function returns anomalies' timesteps of the given correlated features.
         /// </summary>
         /// <param name="feature"> the first feature </param>
         /// <param name="corrFeature"> the second feature </param>
@@ -343,7 +306,7 @@ namespace LinearRegressionDLL
         }
 
         /// <summary>
-        ///  get the correlated feature of the given feature.
+        ///  this function returns the correlated feature of the given feature.
         /// </summary>
         /// <param name="feature"> a feature name </param>
         /// <returns> the name of the correalted feature </returns>
@@ -353,7 +316,7 @@ namespace LinearRegressionDLL
         }
 
         /// <summary>
-        ///  get the index of the feature in the cf list
+        ///  this function returns the index of the feature in the cf list
         /// </summary>
         /// <param name="feature"> a feature name </param>
         /// <returns> an index of the feature in the cf list </returns>
@@ -368,8 +331,9 @@ namespace LinearRegressionDLL
             }
             return 0;
         }
+
         /// <summary>
-        /// The function get a regression line's equation by feature name
+        /// this function returns a regression line's equation by feature name
         /// </summary>
         /// <param name="feature">The feature to get it's line</param>
         /// <returns>The line as a list of a and b when y=ax+b</returns>

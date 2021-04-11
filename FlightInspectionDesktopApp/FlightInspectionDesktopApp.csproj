@@ -144,9 +144,6 @@
     <Compile Include="UserControls\Altimeter.xaml.cs">
       <DependentUpon>Altimeter.xaml</DependentUpon>
     </Compile>
-    <Compile Include="UserControls\Metadata.xaml.cs">
-      <DependentUpon>Metadata.xaml</DependentUpon>
-    </Compile>
     <Compile Include="UserControls\Pitch.xaml.cs">
       <DependentUpon>Pitch.xaml</DependentUpon>
     </Compile>
@@ -200,10 +197,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UserControls\Graph.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="UserControls\Metadata.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

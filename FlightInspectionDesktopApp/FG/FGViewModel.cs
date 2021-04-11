@@ -6,6 +6,7 @@ namespace FlightInspectionDesktopApp
 {
     public class FGViewModel : INotifyPropertyChanged
     {
+        // fields of FGViewModel
         private IFGModel model;
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -44,9 +45,9 @@ namespace FlightInspectionDesktopApp
         /// <param name="PathCSV">path of CSV file</param>
         public void Run(string binFolder, string PathFG, string XMLFileName, string PathCSV)
         {
-            //model.RunFG(binFolder, PathFG, XMLFileName);
+            model.RunFG(binFolder, PathFG, XMLFileName);
             // wait 10 seconds before trying to connect to FG
-            //Thread.Sleep(10000);
+            Thread.Sleep(10000);
             model.Connect();
 
             model.Start(PathCSV);

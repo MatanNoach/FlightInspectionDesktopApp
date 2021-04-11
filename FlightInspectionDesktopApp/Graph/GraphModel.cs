@@ -1,22 +1,25 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Windows;
-using System.Windows.Media;
 using static System.Math;
+using System.Windows.Media;
+using System.ComponentModel;
+using System.Collections.Generic;
 
 namespace FlightInspectionDesktopApp.Graph
 {
     class GraphModel : INotifyPropertyChanged
     {
+        // fields of GraphModel object
         DataModel dm = DataModel.Instance;
-        double height;
-        double width;
         double stepX;
         double stepY;
+        double width;
+        double height;
         double margin;
         double xRegRatio;
         double yRegRatio;
+        private string corrCol;
+        private PointCollection correlatedPoints;
         public event PropertyChangedEventHandler PropertyChanged;
 
         /// <summary>
@@ -178,20 +181,65 @@ namespace FlightInspectionDesktopApp.Graph
             }
         }
 
+        /// <summary>
+        /// this function returns ColNames from dm object.
+        /// </summary>
         public List<string> ColNames { get { return this.dm.ColNames; } }
 
+        /// <summary>
+        /// this function returns MinMaxVals of dm object.
+        /// </summary>
         public Dictionary<string, List<double>> MinMaxVals { get { return dm.MinMaxVals; } }
 
+        /// <summary>
+        /// this function returns the currentLineIndex of dm object.
+        /// </summary>
         public int CurrentLineIndex { get { return dm.CurrentLineIndex; } }
 
+        /// <summary>
+        /// this function returns the CorrData of dm object.
+        /// </summary>
         public Dictionary<string, string> CorrData { get { return dm.CorrData; } }
 
-        private string corrCol;
-        public string CorrCol { get { return corrCol; } set { corrCol = value; NotifyPropertyChanged("CorrCol"); } }
 
+        /// <summary>
+        /// Property of field corrCol.
+        /// </summary>
+        public string CorrCol
+        {
+            // getter of corrCol.
+            get
+            {
+                return corrCol;
+            }
+            // setter of corrCol.
+            set
+            {
+                corrCol = value;
+                NotifyPropertyChanged("CorrCol");
+            }
+        }
+
+        /// <summary>
+        /// this function returns LinRegData of dm object.
+        /// </summary>
         public Dictionary<string, List<double>> LinRegData { get { return dm.LinRegData; } }
 
-        private PointCollection correlatedPoints;
-        public PointCollection CorrelatedPoints { get { return correlatedPoints; } set { correlatedPoints = value; NotifyPropertyChanged("CorrelatedPoints"); } }
+        // Property of field correlatedPoints.
+        public PointCollection CorrelatedPoints
+        {
+            // getter of correlatedPoints.
+            get
+            {
+                return correlatedPoints;
+            }
+
+            // setter of correlatedPoints.
+            set
+            {
+                correlatedPoints = value;
+                NotifyPropertyChanged("CorrelatedPoints");
+            }
+        }
     }
 }

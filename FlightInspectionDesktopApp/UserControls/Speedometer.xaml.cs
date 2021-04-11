@@ -8,7 +8,12 @@ namespace FlightInspectionDesktopApp.UserControls
     /// </summary>
     public partial class Speedometer : UserControl
     {
+        // field of Speedometer.
         SpeedometerViewModel vm;
+
+        /// <summary>
+        /// CTOR of Speedometer.
+        /// </summary>
         public Speedometer()
         {
             InitializeComponent();

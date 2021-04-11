@@ -180,27 +180,15 @@ namespace MinCircleDLL
         }
 
         /// <summary>
-        /// a static function that creates an instance of MinCircleDetector object (if it was not created before)
-        /// </summary>
-        /// <param name="csvFilePath"> a csv file where the flight's data is </param>
-        public static void CreateMinCircleDetector(string csvFilePath)
-        {
-            if (instance != null)
-            {
-                throw new Exception("instance already created");
-            }
-            instance = new MinCircleDetector(csvFilePath);
-        }
-
-        /// <summary>
         /// a static function that returns the single instance of MinCircleDetector object
         /// </summary>
-        /// <returns></returns>
-        public static MinCircleDetector GetInstance()
+        /// /// <param name="csvFilePath"> a csv file where the flight's data is </param>
+        /// <returns> an insance of MinCircleDetector </returns>
+        public static MinCircleDetector GetInstance(string csvFilePath)
         {
             if (instance == null)
             {
-                throw new Exception("instance not created");
+                instance = new MinCircleDetector(csvFilePath);
             }
             return instance;
         }

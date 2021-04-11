@@ -11,7 +11,12 @@ namespace FlightInspectionDesktopApp.UserControls
     /// </summary>
     public partial class Compass : UserControl
     {
+        // fields of Compass
         private MetadataViewModel vm;
+
+        /// <summary>
+        /// CTOR of Compass.
+        /// </summary>
         public Compass()
         {
             InitializeComponent();
@@ -21,7 +26,9 @@ namespace FlightInspectionDesktopApp.UserControls
         }
     }
 
-
+    /// <summary>
+    /// Converter for size of an image.
+    /// </summary>
     class ImageSizeConverter : IValueConverter
     {
         /// <summary>
@@ -50,7 +57,6 @@ namespace FlightInspectionDesktopApp.UserControls
             throw new NotImplementedException();
         }
     }
-
 
     class YAxisConverter1 : IValueConverter
     {
