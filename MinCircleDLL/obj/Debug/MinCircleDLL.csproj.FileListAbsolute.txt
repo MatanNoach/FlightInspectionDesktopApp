@@ -18,3 +18,9 @@ D:\Users\Matan\Documents\source\repos\FlightInspectionDesktopApp\MinCircleDLL\ob
 D:\Users\Matan\Documents\source\repos\FlightInspectionDesktopApp\MinCircleDLL\obj\Debug\MinCircleDLL.csproj.CoreCompileInputs.cache
 D:\Users\Matan\Documents\source\repos\FlightInspectionDesktopApp\MinCircleDLL\obj\Debug\MinCircleDLL.dll
 D:\Users\Matan\Documents\source\repos\FlightInspectionDesktopApp\MinCircleDLL\obj\Debug\MinCircleDLL.pdb
+D:\Noam\AP2\MS1\MinCircleDLL\obj\Debug\MinCircleDLL.csprojAssemblyReference.cache
+D:\Noam\AP2\MS1\MinCircleDLL\obj\Debug\MinCircleDLL.pdb
+D:\Noam\AP2\MS1\MinCircleDLL\obj\Debug\MinCircleGraph.g.cs
+D:\Noam\AP2\MS1\MinCircleDLL\obj\Debug\GeneratedInternalTypeHelper.g.cs
+D:\Noam\AP2\MS1\MinCircleDLL\obj\Debug\MinCircleDLL_MarkupCompile.cache
+D:\Noam\AP2\MS1\MinCircleDLL\obj\Debug\MinCircleDLL_MarkupCompile.lref

@@ -61,14 +61,15 @@ namespace MinCircleDLL {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to feature1,feature2,corrlation,threashold,circle_x,circle_y,circle_radius
-        ///throttle_0,engine_rpm,0.9522346,1158.968289,,,
-        ///roll-deg,attitude-indicator_internal-roll-deg,0.999997174,0.174042472,,,
-        ///pitch-deg,attitude-indicator_internal-pitch-deg,0.979763173,5.490417541,,,
-        ///heading-deg,indicated-heading-deg,0.952349103,315.9327632,,,
-        ///airspeed-kt,airspeed-indicator_indicated-speed-kt,0.999135975,4.993560639,,,
-        ///glideslope,vertical-speed-fps,0.8010936,78.1294629,,,
-        ///vertical-speed-fps,gps_indicated-vertical-spee [rest of string was truncated]&quot;;.
+        ///   Looks up a localized string similar to feature1,feature2,corrlation,threashold,circle_x,circle_y,radius
+        ///aileron,engine_rpm,0,1839.329718,-0.003914,1331.06165,1331.06165
+        ///elevator,engine_rpm,0,1872.667975,0.003914,1331.06165,1331.06165
+        ///rudder,engine_rpm,0,0,0,1331.06165,1331.06165
+        ///flaps,engine_rpm,0,0,0,1331.06165,1331.06165
+        ///slats,engine_rpm,0,0,0,1331.06165,1331.06165
+        ///speedbrake,engine_rpm,0,0,0,1331.06165,1331.06165
+        ///throttle_0,engine_rpm,0.9522346,1053.607535,0.449218005,1331.06165,1331.06177
+        ///throttle_1,engine_rpm,0,0,0,1331.06165,1331.0 [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string reg_flight_model {
             get {

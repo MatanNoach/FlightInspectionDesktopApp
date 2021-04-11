@@ -150,9 +150,6 @@
     <Compile Include="UserControls\Player.xaml.cs">
       <DependentUpon>Player.xaml</DependentUpon>
     </Compile>
-    <Compile Include="UserControls\Roll.xaml.cs">
-      <DependentUpon>Roll.xaml</DependentUpon>
-    </Compile>
     <Compile Include="UserControls\Speedometer.xaml.cs">
       <DependentUpon>Speedometer.xaml</DependentUpon>
     </Compile>
@@ -193,8 +190,8 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UserControls\Compass.xaml">
-      <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UserControls\Graph.xaml">
       <SubType>Designer</SubType>
@@ -205,10 +202,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UserControls\Player.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="UserControls\Roll.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -256,15 +249,6 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Player\ButtonPics\reverse.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Player\ButtonPics\x2Back.png" />
-    <Resource Include="Player\ButtonPics\x2Forward.png" />
-    <Resource Include="Player\ButtonPics\pause.png" />
-    <Resource Include="Player\ButtonPics\stop.png" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="FlightInspection.ico" />
   </ItemGroup>
   <ItemGroup>
@@ -305,9 +289,6 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Player\ButtonPics\stop1.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Player\ButtonPics\slower.png" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Player\ButtonPics\x2Forward1.png" />

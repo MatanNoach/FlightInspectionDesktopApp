@@ -18,22 +18,22 @@
             <ColumnDefinition Width="140.6"/>
         </Grid.ColumnDefinitions>
         <StackPanel x:Name="PlayerPanel" VerticalAlignment="Bottom" HorizontalAlignment="Center" Orientation="Horizontal"  Height="50" Grid.Row="0" Grid.ColumnSpan="2">
-            <Button x:Name="MuchSlower" Click="MuchSlower_Click" Background="Transparent">
+            <Button x:Name="MuchSlower" Click="MuchSlower_Click" Background="Transparent" ToolTip="Play Much Slower">
                 <Image Source="../Player/ButtonPics/x2Back1.png"/>
             </Button>
-            <Button x:Name="Slower" Click="Slower_Click" Background="Transparent">
+            <Button x:Name="Slower" Click="Slower_Click" Background="Transparent" ToolTip="Play Slower">
                 <Image Source="../Player/ButtonPics/slower.png"/>
             </Button>
-            <Button x:Name="Pause" Click="Pause_Click" Background="Transparent">
+            <Button x:Name="Pause" Click="Pause_Click" Background="Transparent" ToolTip="Pause">
                 <Image Source="../Player/ButtonPics/pause1.png"/>
             </Button>
-            <Button x:Name="Stop" Click="Stop_Click" Background="Transparent">
+            <Button x:Name="Stop" Click="Stop_Click" Background="Transparent" ToolTip="Stop">
                 <Image Source="../Player/ButtonPics/Stop1.png"/>
             </Button>
-            <Button x:Name="Play" Click="Play_Click" Background="Transparent">
+            <Button x:Name="Play" Click="Play_Click" Background="Transparent" ToolTip="Play">
                 <Image Source="../Player/ButtonPics/play1.png"/>
             </Button>
-            <Button x:Name="FastForward" Click="FastForward_Click" Background="Transparent">
+            <Button x:Name="FastForward" Click="FastForward_Click" Background="Transparent" ToolTip="Play Faster">
                 <Image Source="../Player/ButtonPics/x2Forward1.png"/>
             </Button>
         </StackPanel>
