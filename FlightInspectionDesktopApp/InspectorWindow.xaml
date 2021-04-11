@@ -10,8 +10,8 @@
         WindowStartupLocation="Manual"
         Left="{Binding Source={x:Static properties:Settings.Default}, Path=windowWidth}"
         Top="0"
-        Background="#FFC1D3CF" 
-        FontFamily="Microsoft JhengHei UI" Closing="Window_Closing">
+        Background="White" 
+        FontFamily="Microsoft JhengHei UI" Closing="Window_Closing" >
     <Grid x:Name="UserControls">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
@@ -29,7 +29,8 @@
         <control:Altimeter Grid.Column="0" Grid.Row="0"/>
         <control:Player Grid.Row="2" Grid.ColumnSpan="4" Margin="0,0,0,-2" Grid.RowSpan="4"/>
         <control:Steering Grid.Column="3" Grid.Row="1"/>
-        <control:Compass Grid.Column="0" Grid.Row="2"/>
+        <control:Compass Grid.Column="0" Grid.Row="2" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+        <control:Yaw Grid.Column="0" Grid.Row="1" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
         <Button Name="LoadDLL" Margin="0,0,3,3" Content="Load DLL" Click="LoadDLL_Click" Grid.Column="3" Grid.Row="2" Height="20" Width="70">
             <Button.Effect>
                 <DropShadowEffect Opacity="0.5" BlurRadius="2" ShadowDepth="2"/>
