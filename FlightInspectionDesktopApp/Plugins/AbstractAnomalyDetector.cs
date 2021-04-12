@@ -29,8 +29,7 @@ namespace FlightInspectionDesktopApp.Plugins
                     {
                         // try to create an instance of the type object, and send csvFilePath to the constructor
                         var c = Activator.CreateInstance(type, new Object[] { csvFilePath });
-                        //try to run GetUserControl function on object c, and send csvFilePath as argument
-                        detector = (UserControl)type.InvokeMember("GetUserControl", BindingFlags.InvokeMethod, null, c, new object[] { csvFilePath });
+                        detector = (UserControl)c;
                         // set the type
                         this.type = type;
                         // if everything succedded, break the loop

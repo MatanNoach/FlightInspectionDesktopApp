@@ -62,14 +62,14 @@ namespace MinCircleDLL {
         
         /// <summary>
         ///   Looks up a localized string similar to feature1,feature2,corrlation,threashold,circle_x,circle_y,radius
-        ///aileron,engine_rpm,0,1839.329718,-0.003914,1331.06165,1331.06165
+        ///aileron_0,engine_rpm,0,1839.329718,-0.003914,1331.06165,1331.06165
         ///elevator,engine_rpm,0,1872.667975,0.003914,1331.06165,1331.06165
         ///rudder,engine_rpm,0,0,0,1331.06165,1331.06165
         ///flaps,engine_rpm,0,0,0,1331.06165,1331.06165
         ///slats,engine_rpm,0,0,0,1331.06165,1331.06165
         ///speedbrake,engine_rpm,0,0,0,1331.06165,1331.06165
         ///throttle_0,engine_rpm,0.9522346,1053.607535,0.449218005,1331.06165,1331.06177
-        ///throttle_1,engine_rpm,0,0,0,1331.06165,1331.0 [rest of string was truncated]&quot;;.
+        ///throttle_1,engine_rpm,0,0,0,1331.06165,1331 [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string reg_flight_model {
             get {
