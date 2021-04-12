@@ -9,7 +9,7 @@ It detects anomalies based on dynamically-loaded anomaly-detection algorithms an
 - `add about loading`
 - Closing the Inspector window **closes FlightGear automatically**.
 - FlightGear window and the program's Inspector open automatically side by side, matching the user's screen size.
-- 
+- Flight data is displayed in a cool, graphic way.
 ## 👪 Project Hierarchy
 To view the detailed hierarchy, expand the sections below:
 <details>
@@ -116,11 +116,12 @@ The main components of the product are:
 - **Plugins** for the anomaly-detection algorithms DLLs.
 
 ## 🔧 Technical Requirements
-...
+1. Download Visual Studio 2019 with .NET framework v4.7.2
+2. Download Nuget package XamlAnimatedGif v1.2.3.0
 ## 📋 Installation Guide for Clean Environment
 1. Download & install FlightGear from https://www.flightgear.org/download/
-2. Install BlendWPFSDK_en.msi from PreInstall folder
-3. ...
+2. Install BlendWPFSDK_en.msi from the PreInstall folder.
+3. Run using the DLLs provided in PlugIns folder.
 ## 📚 Further Documentation
 For more info regarding the main classes of the project, information flow and UML diagrams, please refer to our [Wiki site](https://github.com/MatanNoach/FlightInspectionDesktopApp/wiki).
 ## 🎥 Demo
