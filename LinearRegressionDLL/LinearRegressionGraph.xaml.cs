@@ -61,7 +61,7 @@ namespace LinearRegressionDLL
         /// </summary>
         public void DeleteLine()
         {
-            LinearGraph.Children.RemoveAt(4);
+            LinearGraph.Children.RemoveRange(4, LinearGraph.Children.Count - 4);
         }
 
         /// <summary>
@@ -105,14 +105,6 @@ namespace LinearRegressionDLL
                 }
             }
         }
-        // This function returns the user control
-        public UserControl GetUserControl(string csvFilePath)
-        {
-            LinearRegressionGraph graph = new LinearRegressionGraph(csvFilePath);
-
-            return graph;
-        }
-
 
         /// <summary>
         /// Draws x & y axis for all graphs.

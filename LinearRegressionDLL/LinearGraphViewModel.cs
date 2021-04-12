@@ -1,8 +1,8 @@
 ﻿using System;
-using static System.Math;
-using System.Windows.Media;
-using System.ComponentModel;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.Windows.Media;
+using static System.Math;
 
 namespace LinearRegressionDLL
 {
