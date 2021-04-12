@@ -214,5 +214,53 @@ namespace FlightInspectionDesktopApp.Properties {
                 return ((string)(this["airspeed"]));
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public int flightGearWindowHeight {
+            get {
+                return ((int)(this["flightGearWindowHeight"]));
+            }
+            set {
+                this["flightGearWindowHeight"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public int flightGearWindowWidth {
+            get {
+                return ((int)(this["flightGearWindowWidth"]));
+            }
+            set {
+                this["flightGearWindowWidth"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public int InspectorWindowHeight {
+            get {
+                return ((int)(this["InspectorWindowHeight"]));
+            }
+            set {
+                this["InspectorWindowHeight"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public int InspectorWindowWidth {
+            get {
+                return ((int)(this["InspectorWindowWidth"]));
+            }
+            set {
+                this["InspectorWindowWidth"] = value;
+            }
+        }
     }
 }

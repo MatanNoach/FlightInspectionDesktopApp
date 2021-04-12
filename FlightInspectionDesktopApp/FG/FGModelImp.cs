@@ -134,7 +134,7 @@ namespace FlightInspectionDesktopApp
 
                 if (handle != IntPtr.Zero)
                 {
-                    SetWindowPos(handle, 0, 0, 0, (int)(Properties.Settings.Default.windowWidth / 4), (int)(Properties.Settings.Default.windowHeight / 4), SWP_NOZORDER | SWP_SHOWWINDOW);
+                    SetWindowPos(handle, 0, 0, 0, Properties.Settings.Default.flightGearWindowWidth, Properties.Settings.Default.flightGearWindowHeight, SWP_NOZORDER | SWP_SHOWWINDOW);
                 }
             }
             catch (Exception e)
