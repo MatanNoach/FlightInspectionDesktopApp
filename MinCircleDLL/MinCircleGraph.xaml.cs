@@ -56,20 +56,27 @@ namespace MinCircleDLL
             set
             {
                 this.feature = value;
+                DrawLinesAndCircle();
             }
         }
         public int CurrentLineIndex
         {
-
+            set
+            {
+                vm.UpdateCurrentLineIndex(value, feature, CircleGraph.Height, CircleGraph.Width);
+            }
         }
-        public DrawLinesAndCircle()
+        public void DrawLinesAndCircle()
         {
-            Circle c = vm.GetCorrCircleByFeature();
+            Circle c = vm.GetCorrCircle(feature, CircleGraph.Height, CircleGraph.Width);
             Ellipse e = new Ellipse();
-            e.Stroke = System.Windows.Media.Brushes.Red;
+            e.Stroke = Brushes.Red;
             e.Width = c.radius * 2;
             e.Height = c.radius * 2;
-            CircleGraph.children.add(e);
+            double left = c.center.x + (CircleGraph.Width / 2) - c.radius;
+            double top = c.center.y - c.radius;
+            e.Margin = new Thickness(left, top, 0, 0);
+            CircleGraph.Children.Add(e);
             vm.LoadPointsByFeature(Feature, CircleGraph.Height, CircleGraph.Width);
         }
         // The function returns the user control

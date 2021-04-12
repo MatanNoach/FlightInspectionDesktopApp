@@ -48,10 +48,11 @@ namespace MinCircleDLL
         {
             List<DrawPoint> allPoints = model.getPointsToDraw(feature);
             List<DrawPoint> pointsToShow = new List<DrawPoint>();
+            double bestRatio = Min(xRegRatio, yRegRatio);
             for (int i = 0; i <= this.currentLineIndex; i++)
             {
-                allPoints[i].X = (width / 2) + allPoints[i].X * xRegRatio;
-                allPoints[i].Y = (height / 2) - allPoints[i].Y * yRegRatio;
+                allPoints[i].X = (width / 2) + allPoints[i].X * bestRatio;
+                allPoints[i].Y = (height / 2) - allPoints[i].Y * bestRatio;
                 pointsToShow.Add(allPoints[i]);
             }
             VMCorrelatedPoints = pointsToShow;
@@ -70,7 +71,7 @@ namespace MinCircleDLL
         /// <param name="height">size of the canvas</param>
         /// <param name="width">size of the canvas</param>
         /// <returns></returns>
-        public PointCollection GetLineRegPoints(string col, double height, double width)
+        public Circle GetCorrCircle(string col, double height, double width)
         {
             // calculate min & max values of correlated features
             double minXVal = MinMaxVals[col][0];
@@ -80,9 +81,28 @@ namespace MinCircleDLL
             double maxYVal = MinMaxVals[model.getCorrelatedFeatureByFeature(col)][1];
             double absMaxYVal = Max(Abs(maxYVal), Abs(minYVal));
             Circle minCircle = model.GetCorrCircleByFeature(col);
-            PointCollection points = new PointCollection();
-            minCircle.center.x *= xRegRatio;
-            minCircle.center.y *= yRegRatio;
+            // calculate the desirable ratios of x & y axes
+            if (absMaxXVal == 0)
+            {
+                xRegRatio = 0;
+            }
+            else
+            {
+                xRegRatio = (width / 2) / absMaxXVal;
+            }
+            if (absMaxYVal == 0)
+            {
+                yRegRatio = 0;
+            }
+            else
+            {
+                yRegRatio = (height / 2) / absMaxYVal;
+            }
+            double bestRatio = Min(xRegRatio, yRegRatio);
+            minCircle.center.x *= bestRatio;
+            minCircle.center.y *= bestRatio;
+            minCircle.radius *= bestRatio;
+            return minCircle;
         }
         /// <summary>
         /// The function updates the line index and the correlated points
