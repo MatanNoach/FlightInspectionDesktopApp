@@ -39,7 +39,7 @@
 
         <control:Player Grid.Row="2" Grid.ColumnSpan="4" Margin="0,0,0,-2" Grid.RowSpan="4"/>
         <control:Steering HorizontalAlignment="Right" Grid.Row="2"/>
-        <Button Name="LoadDLL" Margin="0,0,3,3" Content="Load DLL" Click="LoadDLL_Click" Grid.Column="0" Grid.Row="2" Height="20" Width="70" VerticalAlignment="Bottom" HorizontalAlignment="Left">
+        <Button Name="LoadDLL" FontSize="18" Margin="0,0,3,3" Content="Load DLL" Click="LoadDLL_Click" Grid.Column="0" Grid.Row="2" Height="30" Width="80" VerticalAlignment="Bottom" HorizontalAlignment="Left">
             <Button.Effect>
                 <DropShadowEffect Opacity="0.5" BlurRadius="2" ShadowDepth="2"/>
             </Button.Effect>
