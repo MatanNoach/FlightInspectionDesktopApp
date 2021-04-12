@@ -2,16 +2,10 @@
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace MinCircleDLL
@@ -28,16 +22,7 @@ namespace MinCircleDLL
         {
             InitializeComponent();
             // try use the MinCircleDetector instance in the vm constuctor
-            try
-            {
-                vm = new MinCircleViewModel(MinCircleDetector.GetInstance());
-            }
-            // in case of a failure, create the instance, and try to set it again
-            catch
-            {
-                MinCircleDetector.CreateMinCircleDetector(csvFilePath);
-                vm = new MinCircleViewModel(MinCircleDetector.GetInstance());
-            }
+            vm = new MinCircleViewModel(MinCircleDetector.GetInstance(csvFilePath));
             this.DataContext = vm;
             // draw x and y axis on the canvas
             Path xAxis = CreateAxis(new System.Windows.Point(margin, CircleGraph.Height / 2), new System.Windows.Point(CircleGraph.Width, CircleGraph.Height / 2));
@@ -55,29 +40,52 @@ namespace MinCircleDLL
             }
             set
             {
+                string oldFeature = this.feature;
                 this.feature = value;
+                if (oldFeature != this.feature)
+                {
+                    // if it is not the startup page, delete the old lines
+                    if (oldFeature != null)
+                    {
+                        DeleteLinesAndCircle();
+                    }
+                    // draw the Circle and data
+                    DrawLinesAndCircle();
+                }
             }
         }
         public int CurrentLineIndex
         {
-
+            set
+            {
+                vm.UpdateCurrentLineIndex(value, feature, CircleGraph.Height, CircleGraph.Width);
+            }
         }
-        public DrawLinesAndCircle()
+        /// <summary>
+        /// The function deletes the line and circle from the canvas
+        /// </summary>
+        public void DeleteLinesAndCircle()
         {
-            Circle c = vm.GetCorrCircleByFeature();
+            CircleGraph.Children.RemoveRange(4, CircleGraph.Children.Count - 4);
+        }
+        /// <summary>
+        /// The function draws the correlated circle and the points
+        /// </summary>
+        public void DrawLinesAndCircle()
+        {
+            // get the circle
+            Circle c = vm.GetCorrCircle(feature, CircleGraph.Height, CircleGraph.Width);
+            // draw the a circle in the right place
             Ellipse e = new Ellipse();
-            e.Stroke = System.Windows.Media.Brushes.Red;
+            e.Stroke = Brushes.Red;
             e.Width = c.radius * 2;
             e.Height = c.radius * 2;
-            CircleGraph.children.add(e);
+            double left = c.center.x + (CircleGraph.Width / 2) - c.radius;
+            double top = (CircleGraph.Height / 2) - c.center.y - c.radius;
+            e.Margin = new Thickness(left, top, 0, 0);
+            CircleGraph.Children.Add(e);
+            // load new points by the feature
             vm.LoadPointsByFeature(Feature, CircleGraph.Height, CircleGraph.Width);
-        }
-        // The function returns the user control
-        public UserControl GetUserControl(string csvFilePath)
-        {
-            MinCircleGraph graph = new MinCircleGraph(csvFilePath);
-
-            return graph;
         }
         /// <summary>
         /// Draws x & y axis for all graphs.

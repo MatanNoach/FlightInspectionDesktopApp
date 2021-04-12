@@ -1,8 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
-using System.Collections.Generic;
 
 namespace MinCircleDLL
 {
@@ -264,7 +264,7 @@ namespace MinCircleDLL
                     if (detectedDev(feature, colPoint))
                     {
                         // add the current line as an AnomalyReport
-                        this.anomalies.Add(new AnomalyReport(feature.feature1, feature.feature2, i + 1));
+                        this.anomalies.Add(new AnomalyReport(feature.feature1, feature.feature2, i));
                     }
                 }
             }
@@ -363,6 +363,11 @@ namespace MinCircleDLL
 
             return points;
         }
+        /// <summary>
+        /// The function return the correlated circle by a certain feature
+        /// </summary>
+        /// <param name="feature"></param>
+        /// <returns></returns>
         public Circle GetCorrCircleByFeature(string feature)
         {
             return this.cf[getIndexByFeature(feature)].minCircle;

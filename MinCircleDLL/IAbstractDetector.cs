@@ -1,15 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Controls;
-
-namespace MinCircleDLL
+﻿namespace MinCircleDLL
 {
+    /// <summary>
+    /// this interface should be implemented in this .DLL in order to load it properly in FlightInspectionDesktopApp application
+    /// </summary>
     interface IAbstractDetector
     {
-        UserControl GetUserControl(string csvFileName);
         string Feature { get; set; }
         int CurrentLineIndex { set; }
     }
