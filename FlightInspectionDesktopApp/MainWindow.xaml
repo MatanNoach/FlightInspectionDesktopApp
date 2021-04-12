@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:FlightInspectionDesktopApp"        
+        xmlns:gif="https://github.com/XamlAnimatedGif/XamlAnimatedGif"                
         mc:Ignorable="d"
         Title="Flight Inspection Start Wizard"
         Height="450"
@@ -61,7 +62,8 @@
             <TextBox Name ="ErrorDLL" BorderThickness="0" Visibility="Hidden" Text="Required Field!" Foreground="Red" Grid.Row="3" Grid.Column="2"/>
 
         </Grid>
-        <Button Name="Submit" Content="Start Inspection!" VerticalAlignment="Bottom" Margin="0,25,0,0" HorizontalAlignment="Center" Click="Submit_Click" Foreground="Black" BorderBrush="Black" FontFamily="Microsoft YaHei UI" >
+        <TextBox Name ="ErrorOpenFG" BorderThickness="0" Text="Please close all FlightGear windows!" Foreground="Red" HorizontalAlignment="Center" Margin="0,15,0,0" Visibility="Hidden"/>
+        <Button Name="Submit" Content="Start Inspection!" VerticalAlignment="Bottom" Margin="0,5,0,0" HorizontalAlignment="Center" Click="Submit_Click" Foreground="Black" BorderBrush="Black" FontFamily="Microsoft YaHei UI" >
             <Button.Effect>
                 <DropShadowEffect BlurRadius="2" Opacity="0.5" ShadowDepth="2"/>
             </Button.Effect>

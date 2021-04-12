@@ -4,7 +4,9 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:FlightInspectionDesktopApp.UserControls"
-             xmlns:properties="clr-namespace:FlightInspectionDesktopApp.Properties" xmlns:altimeter="clr-namespace:FlightInspectionDesktopApp.Altimeter" d:DataContext="{d:DesignInstance Type=altimeter:AltimeterViewModel}"
+             xmlns:properties="clr-namespace:FlightInspectionDesktopApp.Properties" 
+             xmlns:altimeter="clr-namespace:FlightInspectionDesktopApp.Altimeter" 
+             d:DataContext="{d:DesignInstance Type=altimeter:AltimeterViewModel}"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="150">
     <UserControl.Resources>

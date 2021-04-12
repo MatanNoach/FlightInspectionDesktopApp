@@ -2,6 +2,9 @@
 using System.Windows;
 using Microsoft.Win32;
 using System.Windows.Controls;
+using System.Threading;
+using System.ComponentModel;
+using System.Diagnostics;
 
 namespace FlightInspectionDesktopApp
 {
@@ -10,8 +13,11 @@ namespace FlightInspectionDesktopApp
     /// </summary>
     public partial class MainWindow : Window
     {
-        // The view model for the simulator
+        // fields of MainWindow
         FGViewModel vm;
+        BackgroundWorker bg;
+        LoadingWindow loadingWindow;
+        private static string fileFG, fileXML, fileCSV, fileDLL;
 
         /// <summary>
         /// CTOR of MainWindow.
@@ -19,7 +25,60 @@ namespace FlightInspectionDesktopApp
         public MainWindow()
         {
             InitializeComponent();
+
+            //set the user's main screen size, in order to use it while displaying FG and InspectorWindow            
+            Properties.Settings.Default.windowWidth = (int)(SystemParameters.PrimaryScreenWidth);
+            Properties.Settings.Default.windowHeight = (int)(SystemParameters.PrimaryScreenHeight);
+
+            Properties.Settings.Default.flightGearWindowWidth = Properties.Settings.Default.windowWidth / 4;
+            Properties.Settings.Default.flightGearWindowHeight = Properties.Settings.Default.windowHeight / 2;
+
+            Properties.Settings.Default.InspectorWindowWidth = Properties.Settings.Default.windowWidth * 3 / 4;
+            Properties.Settings.Default.InspectorWindowHeight = Properties.Settings.Default.windowHeight / 2;
+
+            // init backgroundWorker object in order to show loading window
+            bg = new BackgroundWorker();
+            bg.DoWork += new DoWorkEventHandler(bg_DoWork);
+            bg.RunWorkerCompleted += new RunWorkerCompletedEventHandler(bg_RunWorkerCompleted);
         }
+
+        /// <summary>
+        /// this function starts flight gear, while the loading window is shown.
+        /// </summary>
+        /// <param name="sender"> the sender object </param>
+        /// <param name="e"> the event args </param>
+        void bg_DoWork(object sender, DoWorkEventArgs e)
+        {
+            // run the view model
+            string binFolder = Directory.GetParent(fileFG).ToString();
+            string XMLFileName = System.IO.Path.GetFileNameWithoutExtension(fileXML);
+
+            DataModel.CreateModel(fileCSV, fileXML);
+            FGModelImp.CreateModel(new TelnetClient());
+            FGModelImp model = FGModelImp.Instance;
+
+            model.RunFG(binFolder, fileFG, XMLFileName);
+            // wait 10 seconds before trying to connect to FG
+            Thread.Sleep(10000);
+            model.Connect();
+        }
+
+        /// <summary>
+        /// this function starts InspectorWindow and closes loadingWindow, after flight gear fully started.
+        /// </summary>
+        /// <param name="sender"> the sender object </param>
+        /// <param name="e"> the event args </param>
+        void bg_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+            // create a new view model, with flight gear model and telnet client
+            FGModelImp model = FGModelImp.Instance;
+            vm = new FGViewModel(model);
+            InspectorWindow inspector = new InspectorWindow(vm, fileCSV, fileDLL);
+            inspector.Show();
+            loadingWindow.Close();
+            model.Start(fileCSV);
+        }
+
 
         /// <summary>
         /// The function opens the file explorer window for the FlightGear executable
@@ -35,6 +94,7 @@ namespace FlightInspectionDesktopApp
             if (openFile.ShowDialog() == true)
             {
                 PathFG.Text = Path.GetFullPath(openFile.FileName);
+                fileFG = PathFG.Text;
             }
         }
 
@@ -52,6 +112,7 @@ namespace FlightInspectionDesktopApp
             if (openFile.ShowDialog() == true)
             {
                 PathXML.Text = System.IO.Path.GetFullPath(openFile.FileName);
+                fileXML = PathXML.Text;
             }
         }
 
@@ -69,6 +130,7 @@ namespace FlightInspectionDesktopApp
             if (openFile.ShowDialog() == true)
             {
                 PathCSV.Text = System.IO.Path.GetFullPath(openFile.FileName);
+                fileCSV = PathCSV.Text;
             }
         }
 
@@ -86,29 +148,7 @@ namespace FlightInspectionDesktopApp
             if (openFile.ShowDialog() == true)
             {
                 PathDLL.Text = System.IO.Path.GetFullPath(openFile.FileName);
-            }
-        }
-        /// <summary>
-        /// The function verifies the user input.
-        /// </summary>
-        /// <param name="sender"> the sender object </param>
-        /// <param name="e"> the event args </param>
-        private void Submit_Click(object sender, RoutedEventArgs e)
-        {
-            if (validateTextboxes() && validateFiles())
-            {
-                // run the view model
-                string binFolder = Directory.GetParent(PathFG.Text).ToString();
-                string XMLFileName = Path.GetFileNameWithoutExtension(PathXML.Text);
-
-                DataModel.CreateModel(PathCSV.Text, PathXML.Text);
-                FGModelImp.CreateModel(new TelnetClient());
-                // create a new view model, with flight gear model and telnet client
-                vm = new FGViewModel(FGModelImp.Instance);
-                InspectorWindow inspector = new InspectorWindow(vm, PathCSV.Text, PathDLL.Text);
-                inspector.Show();
-                Close();
-                vm.Run(binFolder, PathFG.Text, XMLFileName, PathCSV.Text);
+                fileDLL = PathDLL.Text;
             }
         }
 
@@ -188,6 +228,19 @@ namespace FlightInspectionDesktopApp
                 ErrorCSV.Visibility = Visibility.Visible;
                 isValid = false;
             }
+
+            // check that flight gear is not open
+            string fgExeName = Path.GetFileNameWithoutExtension(PathFG.Text);
+            if (Process.GetProcessesByName(fgExeName).Length > 0)
+            {
+                ErrorOpenFG.Visibility = Visibility.Visible;
+                isValid = false;
+            }
+            else
+            {
+                ErrorOpenFG.Visibility = Visibility.Hidden;
+            }
+
             return isValid;
         }
 
@@ -242,6 +295,27 @@ namespace FlightInspectionDesktopApp
             if (PathDLL.Text.Length > 0)
             {
                 ErrorDLL.Visibility = Visibility.Hidden;
+            }
+        }
+
+        /// <summary>
+        /// The function verifies the user input, and starts the loading window.
+        /// </summary>
+        /// <param name="sender"> the sender object </param>
+        /// <param name="e"> the event args </param>
+        private void Submit_Click(object sender, RoutedEventArgs e)
+        {
+            if (validateTextboxes() && validateFiles())
+            {
+                string fgPathFile = PathFG.Text;
+                string xmlPathFile = PathXML.Text;
+                string csvPathFile = PathCSV.Text;
+                string dllPathFile = PathDLL.Text;
+
+                this.loadingWindow = new LoadingWindow(fgPathFile, xmlPathFile, csvPathFile, dllPathFile);
+                this.loadingWindow.Show();
+                bg.RunWorkerAsync();
+                Close();
             }
         }
     }

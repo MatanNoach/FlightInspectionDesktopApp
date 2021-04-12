@@ -1,5 +1,7 @@
 ﻿using FlightInspectionDesktopApp.Metadata;
 using Microsoft.Win32;
+using System;
+using System.Threading;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -39,16 +41,6 @@ namespace FlightInspectionDesktopApp
             Grid.SetColumnSpan(graphs, 2);
             Grid.SetRowSpan(graphs, 2);
             UserControls.Children.Add(graphs);
-            // set the user's main screen size, in order to use it while displaying FG and InspectorWindow
-            Properties.Settings.Default.windowWidth = (int)(SystemParameters.PrimaryScreenWidth);
-            Properties.Settings.Default.windowHeight = (int)(SystemParameters.PrimaryScreenHeight);
-
-            Properties.Settings.Default.flightGearWindowWidth = Properties.Settings.Default.windowWidth / 4;
-            Properties.Settings.Default.flightGearWindowHeight = Properties.Settings.Default.windowHeight / 2;
-
-            Properties.Settings.Default.InspectorWindowWidth = Properties.Settings.Default.windowWidth * 3 / 4;
-            Properties.Settings.Default.InspectorWindowHeight = Properties.Settings.Default.windowHeight;
-
         }
 
         /// <summary>

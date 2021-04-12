@@ -120,6 +120,9 @@
     <Reference Include="WindowsBase" />
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
+    <Reference Include="XamlAnimatedGif, Version=1.2.3.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\XamlAnimatedGif.1.2.3\lib\net45\XamlAnimatedGif.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="App.xaml">
@@ -130,6 +133,9 @@
     <Compile Include="Graph\GraphViewModel.cs" />
     <Compile Include="Altimeter\AltimeterModel.cs" />
     <Compile Include="Altimeter\AltimeterViewModel.cs" />
+    <Compile Include="LoadingWindow.xaml.cs">
+      <DependentUpon>LoadingWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Metadata\MetadataModel.cs" />
     <Compile Include="Metadata\MetadataViewModel.cs" />
     <Compile Include="Plugins\AbstractAnomalyDetector.cs" />
@@ -165,6 +171,10 @@
       <DependentUpon>Yaw.xaml</DependentUpon>
     </Compile>
     <Page Include="InspectorWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="LoadingWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -245,6 +255,7 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="packages.config" />
     <None Include="PreInstall\BlendWPFSDK_en.msi" />
     <None Include="ClassDiagram.cd" />
     <None Include="Properties\Settings.settings">
@@ -311,6 +322,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="background.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\loading.gif" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
