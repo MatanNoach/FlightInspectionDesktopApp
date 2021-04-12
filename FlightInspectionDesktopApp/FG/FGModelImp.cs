@@ -153,6 +153,7 @@ namespace FlightInspectionDesktopApp
             this.telnetClient.Connect();
             string response;
             int first, last;
+
             do
             {
                 // Sent a get request to determine whether the simulator is ready

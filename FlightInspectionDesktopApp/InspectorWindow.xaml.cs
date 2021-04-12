@@ -39,10 +39,14 @@ namespace FlightInspectionDesktopApp
         {
             vm.Disconnect();
         }
-
+        /// <summary>
+        /// Allows the user to load a different DLL during runtime.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void LoadDLL_Click(object sender, RoutedEventArgs e)
         {
-            // Asks the user to upload a CSV DLL file
+            // Asks the user to upload a DLL file
             OpenFileDialog openFile = new OpenFileDialog
             {
                 Filter = "Dynamic Linking Library File (*.dll)|*.dll"
@@ -58,7 +62,7 @@ namespace FlightInspectionDesktopApp
                 VerticalAlignment = VerticalAlignment.Center,
                 HorizontalAlignment = HorizontalAlignment.Center
             };
-            Grid.SetColumn(graphs, 1);
+            Grid.SetColumn(graphs, 0);
             Grid.SetRow(graphs, 1);
             Grid.SetColumnSpan(graphs, 2);
             Grid.SetRowSpan(graphs, 2);
