@@ -11,7 +11,7 @@
         <local:AnLinePointsConverter x:Key="AnLinePointsConverter"/>
     </UserControl.Resources>
     <Grid>
-        <Canvas Name="LinearGraph" Background="White" Width="200" Height="200" VerticalAlignment="Center" HorizontalAlignment="Center">
+        <Canvas Name="LinearGraph" Background="White" Width="180" Height="180" VerticalAlignment="Center" HorizontalAlignment="Left">
 
             <Path Data="{Binding VMCorrelatedPoints, Converter={StaticResource RegLinePointsConverter}, Mode=OneWay}"
             Stroke="Blue" StrokeThickness="3.5"

@@ -12,8 +12,8 @@
     </UserControl.Resources>
     <Grid>
         <TextBlock Text="Altimeter" Foreground="White" HorizontalAlignment="Center" FontSize="18"/>
-        <TextBlock Text="{Binding VMAltimeter, Mode=OneWay, Converter={StaticResource FlooringConverter}}" Foreground="White" HorizontalAlignment="Center" FontSize="40" FontWeight="Light" Margin="0, 20, 0, 0"/>
-        <Slider x:Name="altimeterSlider" Orientation="Vertical" Width="40" Height="150" 
+        <TextBlock Text="{Binding VMAltimeter, Mode=OneWay, Converter={StaticResource FlooringConverter}}" Foreground="White" HorizontalAlignment="Center" FontSize="25" FontWeight="Light" Margin="0, 20, 0, 0"/>
+        <Slider x:Name="altimeterSlider" Orientation="Vertical" Width="35" Height="120" 
                 Background="#FF5C6066" 
                 BorderBrush="Black" 
                 BorderThickness="2" 
@@ -22,7 +22,7 @@
                 TickFrequency="5" 
                 TickPlacement="Both" 
                 Value="{Binding VMAltimeter, Mode=OneWay}"
-                Margin="0, 70, 0, 0"/>
+                Margin="0, 30, 0, 0"/>
 
     </Grid>
 </UserControl>

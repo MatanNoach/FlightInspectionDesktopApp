@@ -106,7 +106,7 @@ namespace FlightInspectionDesktopApp.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("250")]
+        [global::System.Configuration.DefaultSettingValueAttribute("200")]
         public int bigCircle {
             get {
                 return ((int)(this["bigCircle"]));
@@ -115,7 +115,7 @@ namespace FlightInspectionDesktopApp.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("100")]
+        [global::System.Configuration.DefaultSettingValueAttribute("80")]
         public int smallCircle {
             get {
                 return ((int)(this["smallCircle"]));

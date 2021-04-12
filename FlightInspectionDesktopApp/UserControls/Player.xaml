@@ -8,8 +8,12 @@
              d:DataContext="{d:DesignInstance Type=player:PlayerViewModel}"
              mc:Ignorable="d" 
              d:DesignHeight="100" d:DesignWidth="400">
+    <UserControl.Resources>
+        <local:PlaySpeedToPercentageConverter x:Key="PlaySpeedToPercentageConverter"/>
+    </UserControl.Resources>
     <Grid VerticalAlignment="Bottom" HorizontalAlignment="Center" Margin="50,0,10,0" Width="340">
         <Grid.RowDefinitions>
+            <RowDefinition Height="{Binding ElementName=TimeWatch, Path=Height}"/>
             <RowDefinition Height="{Binding ElementName=PlayerPanel, Path=Height}"/>
             <RowDefinition Height="{Binding ElementName=TimeSlider, Path=Height}"/>
         </Grid.RowDefinitions>
@@ -17,7 +21,7 @@
             <ColumnDefinition Width="159.4"/>
             <ColumnDefinition Width="140.6"/>
         </Grid.ColumnDefinitions>
-        <StackPanel x:Name="PlayerPanel" VerticalAlignment="Bottom" HorizontalAlignment="Center" Orientation="Horizontal"  Height="50" Grid.Row="0" Grid.ColumnSpan="2">
+        <StackPanel x:Name="PlayerPanel" VerticalAlignment="Bottom" HorizontalAlignment="Center" Orientation="Horizontal"  Height="50" Grid.Row="1" Grid.ColumnSpan="2">
             <Button x:Name="MuchSlower" Click="MuchSlower_Click" Background="Transparent" ToolTip="Play Much Slower">
                 <Image Source="../Player/ButtonPics/x2Back1.png"/>
             </Button>
@@ -37,9 +41,10 @@
                 <Image Source="../Player/ButtonPics/x2Forward1.png"/>
             </Button>
         </StackPanel>
-        <Slider x:Name="TimeSlider" Grid.Row="1" HorizontalAlignment="Center" 
+        <Slider x:Name="TimeSlider" Grid.Row="2" HorizontalAlignment="Center" 
             Width="{Binding ElementName=PlayerPanel, Path=ActualWidth}" Value="{Binding VMCurrentLineIndex,Mode=TwoWay}"
             Minimum="0" Maximum="{Binding VMMaxLine, Mode=OneWay}" Grid.ColumnSpan="2"/>
-        <TextBlock x:Name="TimeWatch" Text="{Binding VMCurrTime, Mode=TwoWay}" HorizontalAlignment="Right" FontSize="18" Margin="0,0,-42,0" Grid.Column="1" Foreground="White"/>
+        <TextBlock x:Name="TimeWatch" Text="{Binding VMCurrTime, Mode=TwoWay}" FontSize="14" Grid.Row="0" Foreground="White"/>
+        <TextBlock x:Name="PlayingSpeed" Text="{Binding VMPlayingSpeed, Mode=TwoWay, Converter={StaticResource PlaySpeedToPercentageConverter}}" Grid.Column="1" Grid.Row="0" FontSize="14" Foreground="White"/>
     </Grid>
 </UserControl>

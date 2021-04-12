@@ -30,10 +30,10 @@
       <Value Profile="(Default)">,</Value>
     </Setting>
     <Setting Name="bigCircle" Type="System.Int32" Scope="Application">
-      <Value Profile="(Default)">250</Value>
+      <Value Profile="(Default)">200</Value>
     </Setting>
     <Setting Name="smallCircle" Type="System.Int32" Scope="Application">
-      <Value Profile="(Default)">100</Value>
+      <Value Profile="(Default)">80</Value>
     </Setting>
     <Setting Name="httpd" Type="System.String" Scope="Application">
       <Value Profile="(Default)">--httpd=8080</Value>

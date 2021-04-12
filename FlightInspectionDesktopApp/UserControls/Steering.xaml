@@ -6,14 +6,14 @@
              xmlns:local="clr-namespace:FlightInspectionDesktopApp.UserControls" xmlns:steering="clr-namespace:FlightInspectionDesktopApp.Steering" d:DataContext="{d:DesignInstance Type=steering:SteeringViewModel}"
              xmlns:properties="clr-namespace:FlightInspectionDesktopApp.Properties"
              mc:Ignorable="d" 
-             d:DesignHeight="320" d:DesignWidth="400">
+             d:DesignHeight="270" d:DesignWidth="270">
     <UserControl.Resources>
         <local:AileronValueToJoystickConverter x:Key="AileronValueToJoystickConverter"/>
         <local:ElevatorValueToJoystickConverter x:Key="ElevatorValueToJoystickConverter"/>
     </UserControl.Resources>
 
-    <Canvas HorizontalAlignment="Left" Height="300" VerticalAlignment="Top" Width="400">
-        <Ellipse x:Name="JoystickBoundries" Height="{Binding Source={x:Static properties:Settings.Default}, Path=bigCircle}" Width="{Binding Source={x:Static properties:Settings.Default}, Path=bigCircle}" Stroke="Black" Margin="100,0,0,0">
+    <Canvas HorizontalAlignment="Left" Height="250" VerticalAlignment="Top" Width="270">
+        <Ellipse x:Name="JoystickBoundries" Height="{Binding Source={x:Static properties:Settings.Default}, Path=bigCircle}" Width="{Binding Source={x:Static properties:Settings.Default}, Path=bigCircle}" Stroke="Black" Margin="54,0,0,0">
             <Ellipse.Fill>
                 <RadialGradientBrush>
                     <GradientStop Color="Black" Offset="1"/>
@@ -21,7 +21,7 @@
                 </RadialGradientBrush>
             </Ellipse.Fill>
         </Ellipse>
-        <Ellipse x:Name="Joystick" Height="{Binding Source={x:Static properties:Settings.Default}, Path=smallCircle}" Width="{Binding Source={x:Static properties:Settings.Default}, Path=smallCircle}" Canvas.Left="{Binding VMAileron, Mode=OneWay, Converter={StaticResource AileronValueToJoystickConverter}}" Canvas.Top="{Binding VMElevator, Mode=OneWay, Converter={StaticResource ElevatorValueToJoystickConverter}}" Margin="100,0,0,0">
+        <Ellipse x:Name="Joystick" Height="{Binding Source={x:Static properties:Settings.Default}, Path=smallCircle}" Width="{Binding Source={x:Static properties:Settings.Default}, Path=smallCircle}" Canvas.Left="{Binding VMAileron, Mode=OneWay, Converter={StaticResource AileronValueToJoystickConverter}}" Canvas.Top="{Binding VMElevator, Mode=OneWay, Converter={StaticResource ElevatorValueToJoystickConverter}}" Margin="54,0,0,0">
             <Ellipse.Fill>
                 <RadialGradientBrush>
                     <GradientStop Color="#FF706969" Offset="0.45"/>
@@ -29,8 +29,8 @@
                 </RadialGradientBrush>
             </Ellipse.Fill>
         </Ellipse>
-        <StackPanel Canvas.Left="100" Canvas.Top="255">
-            <Slider x:Name="rudderSlider" Background="#FF6696F9" BorderBrush="Black" BorderThickness="2"  Width="250" Height="40" TickPlacement="Both" Minimum="-1" Maximum="1" TickFrequency="0.2" Value="{Binding VMRudder, Mode=OneWay}"/>
+        <StackPanel Canvas.Left="50" Canvas.Top="205">
+            <Slider x:Name="rudderSlider" Background="#FF6696F9" BorderBrush="Black" BorderThickness="2"  Width="200" Height="30" TickPlacement="Both" Minimum="-1" Maximum="1" TickFrequency="0.2" Value="{Binding VMRudder, Mode=OneWay}"/>
             <TextBlock Text="Rudder" FontSize="18" Foreground="White" TextAlignment="Center"></TextBlock>
         </StackPanel>
         <StackPanel Orientation="Horizontal">
@@ -40,7 +40,7 @@
                     </RotateTransform>
                 </TextBlock.LayoutTransform>
             </TextBlock>
-            <Slider x:Name="throttleSlider" Orientation="Vertical" Canvas.Left="54" Width="40" Height="250" Background="#FF5C6066" BorderBrush="Black" BorderThickness="2" Maximum="1" TickFrequency="0.1" TickPlacement="Both" Value="{Binding VMThrottle, Mode=OneWay}"/>
+            <Slider x:Name="throttleSlider" Orientation="Vertical" Canvas.Left="4" Width="30" Height="200" Background="#FF5C6066" BorderBrush="Black" BorderThickness="2" Maximum="1" TickFrequency="0.1" TickPlacement="Both" Value="{Binding VMThrottle, Mode=OneWay}"/>
         </StackPanel>
     </Canvas>
 </UserControl>

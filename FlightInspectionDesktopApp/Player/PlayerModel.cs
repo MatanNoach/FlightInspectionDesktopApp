@@ -12,6 +12,7 @@ namespace FlightInspectionDesktopApp.Player
         private string currTime = "0:00";
         private static PlayerModel playerModelInst;
         public event PropertyChangedEventHandler PropertyChanged;
+        int playingSpeed = 100;
 
         /// <summary>
         /// Constructor
@@ -28,7 +29,18 @@ namespace FlightInspectionDesktopApp.Player
         /// <summary>
         /// Property of the simulator playing speed - set the default playing speed to 10 Hz.
         /// </summary>
-        public int PlayingSpeed { get; set; } = 100;
+        public int PlayingSpeed
+        {
+            get
+            {
+                return this.playingSpeed;
+            }
+            set
+            {
+                this.playingSpeed = value;
+                NotifyPropertyChanged("PlayingSpeed");
+            }
+        }
 
         /// <summary>
         /// Property for the current line index in the csv file

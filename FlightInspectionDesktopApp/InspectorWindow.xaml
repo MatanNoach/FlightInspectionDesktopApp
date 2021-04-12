@@ -19,6 +19,7 @@
         </Grid.Background>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
@@ -26,19 +27,19 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <StackPanel Grid.Row="0" Orientation="Horizontal" FlowDirection="RightToLeft">
+        <StackPanel Grid.Row="0" Grid.Column="1" Orientation="Horizontal" FlowDirection="RightToLeft">
             <control:Compass HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="0,0,10,0"/>
             <control:Yaw HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="0,0,10,0"/>
             <control:Pitch  HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="0,0,10,0"/>
             <control:Roll HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="0,0,10,0"/>
         </StackPanel>
-        <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Right">
+        <StackPanel Grid.Row="1" Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right">
+            <control:Steering/>
             <control:Speedometer/>
             <control:Altimeter/>
         </StackPanel>
 
-        <control:Player Grid.Row="2" Grid.ColumnSpan="4" Margin="0,0,0,-2" Grid.RowSpan="4"/>
-        <control:Steering HorizontalAlignment="Right" Grid.Row="2"/>
+        <control:Player Grid.Row="2" Grid.Column="1" Margin="0,0,0,-2" Grid.RowSpan="4"/>
         <Button Name="LoadDLL" FontSize="18" Margin="0,0,3,3" Content="Load DLL" Click="LoadDLL_Click" Grid.Column="0" Grid.Row="2" Height="30" Width="80" VerticalAlignment="Bottom" HorizontalAlignment="Left">
             <Button.Effect>
                 <DropShadowEffect Opacity="0.5" BlurRadius="2" ShadowDepth="2"/>

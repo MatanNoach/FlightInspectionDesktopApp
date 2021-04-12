@@ -1,4 +1,7 @@
-﻿using System.Windows.Controls;
+﻿using System;
+using System.Globalization;
+using System.Windows.Controls;
+using System.Windows.Data;
 using FlightInspectionDesktopApp.Player;
 
 namespace FlightInspectionDesktopApp.UserControls
@@ -79,4 +82,35 @@ namespace FlightInspectionDesktopApp.UserControls
             viewModel.Stop();
         }
     }
+
+    class PlaySpeedToPercentageConverter : IValueConverter
+    {
+        /// <summary>
+        /// Converts Aileron [-1,1] values to Joystick values.
+        /// </summary>
+        /// <param name="value">value that we're binded to</param>
+        /// <param name="targetType">none</param>
+        /// <param name="parameter">JoystickBoundries Ellipse</param>
+        /// <param name="culture">none</param>
+        /// <returns></returns>
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            double playSpeed = 100.0 / (int)value;
+            return String.Concat("x", String.Format("{0:0.00}", playSpeed));
+        }
+
+        /// <summary>
+        /// Not implemented.
+        /// </summary>
+        /// <param name="value"></param>
+        /// <param name="targetType"></param>
+        /// <param name="parameter"></param>
+        /// <param name="culture"></param>
+        /// <returns></returns>
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            throw new NotImplementedException();
+        }
+    }
+
 }

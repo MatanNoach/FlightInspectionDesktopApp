@@ -40,6 +40,21 @@ namespace FlightInspectionDesktopApp.Player
             }
         }
 
+        public int VMPlayingSpeed
+        {
+            // getter of CurrentLineIndex.
+            get
+            {
+                return playerModel.PlayingSpeed;
+            }
+
+            // setter of CurrentLineIndex.
+            set
+            {
+                playerModel.PlayingSpeed = value;
+            }
+        }
+
         /// <summary>
         /// MaxLine property for the view model
         /// </summary>
