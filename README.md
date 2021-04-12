@@ -5,9 +5,11 @@ FlightInspectionDesktopApp connects to FlightGear and displays given flight data
 It detects anomalies based on dynamically-loaded anomaly-detection algorithms and displays them.
 ### Special Features
 - The program **validates the user's input files** and ensures that only files of the correct extentions were inserted and that all paths were provided, verifies that the XML file is in the correct path, and alerts if the user has the provided CSV file open already.
-- **FlightGear starts up on its own** and start flying, without the user having to configure any settings. Closing the Inspector window closes FlightGear automatically.
+- **FlightGear starts up on its own** and start flying, without the user having to configure any settings. 
+- `add about loading`
+- Closing the Inspector window **closes FlightGear automatically**.
 - FlightGear window and the program's Inspector open automatically side by side, matching the user's screen size.
-- ...
+- 
 ## 👪 Project Hierarchy
 To view the detailed hierarchy, expand the sections below:
 <details>
@@ -117,9 +119,9 @@ The main components of the product are:
 ...
 ## 📋 Installation Guide for Clean Environment
 1. Download & install FlightGear from https://www.flightgear.org/download/
-2. Install BlendWPFSDK_en.msi from Plugins folder
+2. Install BlendWPFSDK_en.msi from PreInstall folder
 3. ...
 ## 📚 Further Documentation
-For more info regarding the main classes of the project, information flow and UML diagrams, please refer to our [wiki site](https://github.com/MatanNoach/FlightInspectionDesktopApp/wiki).
+For more info regarding the main classes of the project, information flow and UML diagrams, please refer to our [Wiki site](https://github.com/MatanNoach/FlightInspectionDesktopApp/wiki).
 ## 🎥 Demo
 ...
