@@ -7,7 +7,11 @@
              mc:Ignorable="d" 
              d:DesignHeight="125" d:DesignWidth="100">
     <StackPanel>
-        <TextBlock Text="Yaw" FontSize="18" Foreground="White" TextAlignment="Center"></TextBlock>
+        <TextBlock Text="Yaw" FontSize="18" Foreground="White" TextAlignment="Center">
+            <TextBlock.Effect>
+                <DropShadowEffect BlurRadius="2" Opacity="0.5" ShadowDepth="2"/>
+            </TextBlock.Effect>
+        </TextBlock>
         <Grid>
             <Image x:Name="Yaw1" Source="../Metadata/Images/yawtrans.png" Width="100" Height="100" RenderTransformOrigin="0.5, 0.5">
                 <Image.RenderTransform>

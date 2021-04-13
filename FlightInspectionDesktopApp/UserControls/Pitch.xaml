@@ -11,7 +11,11 @@
         <local:PitchDegToEndPointConverter x:Key="PitchDegToEndPointConverter"/>
     </UserControl.Resources>
     <StackPanel>
-        <TextBlock Text="Pitch and Roll" FontSize="18" Foreground="White" HorizontalAlignment="Center"></TextBlock>
+        <TextBlock Text="Pitch and Roll" FontSize="18" Foreground="White" HorizontalAlignment="Center">
+            <TextBlock.Effect>
+                <DropShadowEffect BlurRadius="2" Opacity="0.5" ShadowDepth="2"/>
+            </TextBlock.Effect>
+        </TextBlock>
         <Grid Width="100" Height="100">
             <Ellipse x:Name="PitchEllipse" Width="100" Height="100" VerticalAlignment="Bottom">
                 <Ellipse.Fill>

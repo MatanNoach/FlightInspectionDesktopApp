@@ -19,8 +19,16 @@
         <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center"
                     Margin="0,18,0,100">
             <TextBlock Text="Air-Speed" Foreground="White" HorizontalAlignment="Center"
-                        FontSize="18"/>
-            <TextBlock Text="{Binding VMAirSpeed, Mode=OneWay, Converter={StaticResource FlooringConverter}}" Foreground="White" HorizontalAlignment="Center" FontSize="25" FontWeight="Light"/>
+                        FontSize="18">
+                <TextBlock.Effect>
+                    <DropShadowEffect BlurRadius="2" Opacity="0.5" ShadowDepth="2"/>
+                </TextBlock.Effect>
+            </TextBlock>
+            <TextBlock Text="{Binding VMAirSpeed, Mode=OneWay, Converter={StaticResource FlooringConverter}}" Foreground="White" HorizontalAlignment="Center" FontSize="25" FontWeight="Light">
+                <TextBlock.Effect>
+                    <DropShadowEffect BlurRadius="2" Opacity="0.5" ShadowDepth="2"/>
+                </TextBlock.Effect>
+            </TextBlock>
         </StackPanel>
     </Grid>
 </UserControl>

@@ -21,19 +21,31 @@
             <ColumnDefinition Width="210"/>
         </Grid.ColumnDefinitions>
         <StackPanel Grid.Row="0" Grid.Column="1" >
-            <TextBlock x:Name="CurrFeature" Text="{Binding ElementName=ColNames, Path=SelectedItem}" FontSize="11" HorizontalAlignment="Left" Foreground="White"></TextBlock>
+            <TextBlock x:Name="CurrFeature" Text="{Binding ElementName=ColNames, Path=SelectedItem}" FontSize="11" HorizontalAlignment="Left" Foreground="White">
+                <TextBlock.Effect>
+                    <DropShadowEffect BlurRadius="2" Opacity="0.5" ShadowDepth="2"/>
+                </TextBlock.Effect>
+            </TextBlock>
             <Canvas Name="canGraph" Background="White" Width="180" Height="180" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="0">
             </Canvas>
         </StackPanel>
         <StackPanel Grid.Row="0" Grid.Column="2">
-            <TextBlock x:Name="CorrFeature" Text="{Binding VMCorrCol, Mode=OneWay}" FontSize="11" HorizontalAlignment="Left" Foreground="White"></TextBlock>
+            <TextBlock x:Name="CorrFeature" Text="{Binding VMCorrCol, Mode=OneWay}" FontSize="11" HorizontalAlignment="Left" Foreground="White">
+                <TextBlock.Effect>
+                    <DropShadowEffect BlurRadius="2" Opacity="0.5" ShadowDepth="2"/>
+                </TextBlock.Effect>
+            </TextBlock>
             <Canvas Name="corrGraph" Background="White" Width="180" Height="180" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="0">
             </Canvas>
         </StackPanel>
         <ListView x:Name="ColNames" Grid.Row="0" Grid.Column="0" HorizontalAlignment="Left" Height="250" Margin="10,10,0,0" VerticalAlignment="Top" Width="150" ItemsSource="{Binding ColNames, Mode=OneWay}" SelectedIndex="0" SelectionChanged="ColNames_SelectionChanged">
         </ListView>
         <StackPanel Grid.Row="1" Grid.Column="2">
-            <TextBlock Text="Linear Regression of Correlated-Features" FontSize="11" Foreground="White" HorizontalAlignment="Left"></TextBlock>
+            <TextBlock Text="Linear Regression of Correlated-Features" FontSize="11" Foreground="White" HorizontalAlignment="Left">
+                <TextBlock.Effect>
+                    <DropShadowEffect BlurRadius="2" Opacity="0.5" ShadowDepth="2"/>
+                </TextBlock.Effect>
+            </TextBlock>
             <Canvas Name="LinReg" Background="White" Width="180" Height="180" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="0">
                 <Path Data="{Binding VMCorrelatedPoints, Converter={StaticResource LinePointsConverter}, Mode=OneWay}"
             Stroke="CadetBlue" StrokeThickness="3.5" 
@@ -41,7 +53,11 @@
             </Canvas>
         </StackPanel>
         <StackPanel Grid.Row="1" Grid.Column="1">
-            <TextBlock Text="Anomaly Detector Graph" FontSize="11" Foreground="White" HorizontalAlignment="Left"></TextBlock>
+            <TextBlock Text="Anomaly Detector Graph" FontSize="11" Foreground="White" HorizontalAlignment="Left">
+                <TextBlock.Effect>
+                    <DropShadowEffect BlurRadius="2" Opacity="0.5" ShadowDepth="2"/>
+                </TextBlock.Effect>
+            </TextBlock>
         </StackPanel>
     </Grid>
 </UserControl>
