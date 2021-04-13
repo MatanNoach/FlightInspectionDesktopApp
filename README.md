@@ -121,11 +121,12 @@ The main components of the product are:
 
 ## 🔧 Technical Requirements
 1. Download Visual Studio 2019 with .NET framework v4.7.2
-2. Download Nuget package XamlAnimatedGif v1.2.3.0
+2. Download Nuget package [XamlAnimatedGif v1.2.3.0](https://www.nuget.org/packages/XamlAnimatedGif/1.2.3)
 ## 📋 Installation Guide for Clean Environment
-1. Download & install FlightGear from https://www.flightgear.org/download/
+1. Download & install [FlightGear v2020.3.6](https://sourceforge.net/projects/flightgear/files/release-2020.3/FlightGear-2020.3.6.exe/download)
 2. Install BlendWPFSDK_en.msi from the PreInstall folder.
-3. Run using the DLLs provided in PlugIns folder.
+3. Download Nuget package [XamlAnimatedGif v1.2.3.0](https://www.nuget.org/packages/XamlAnimatedGif/1.2.3)
+4. Run using the DLLs provided in Plugins folder.
 ## 📚 Further Documentation
 For more info regarding the main classes of the project, information flow and UML diagrams, please refer to our [Wiki site](https://github.com/MatanNoach/FlightInspectionDesktopApp/wiki).
 ## 🎥 Demo
