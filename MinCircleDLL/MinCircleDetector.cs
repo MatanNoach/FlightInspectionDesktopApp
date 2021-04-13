@@ -1,8 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using System.Collections.Generic;
 
 namespace MinCircleDLL
 {
@@ -167,10 +167,11 @@ namespace MinCircleDLL
         /// <summary>
         /// private CTOR for MinCircleDetector object (as singleton), that parses the model and detects anomalies in dataFile
         /// </summary>
-        /// <param name="dataFile"></param>
-        private MinCircleDetector(string dataFile)
+        /// <param name="dataFile"> a csv file which should be converted into Timeseries object </param>
+        /// /// <param name="colNames"> the names of the csv's columns </param>
+        private MinCircleDetector(string dataFile, List<string> colNames)
         {
-            this.flightData = new Timeseries(dataFile);
+            this.flightData = new Timeseries(dataFile, colNames);
             this.cf = new List<CorrelatedFeatures>();
             this.anomalies = new List<AnomalyReport>();
 
@@ -183,12 +184,13 @@ namespace MinCircleDLL
         /// a static function that returns the single instance of MinCircleDetector object
         /// </summary>
         /// /// <param name="csvFilePath"> a csv file where the flight's data is </param>
+        /// <param name="colNames"> the names of the csv's columns </param>
         /// <returns> an insance of MinCircleDetector </returns>
-        public static MinCircleDetector GetInstance(string csvFilePath)
+        public static MinCircleDetector GetInstance(string csvFilePath, List<string> colNames)
         {
             if (instance == null)
             {
-                instance = new MinCircleDetector(csvFilePath);
+                instance = new MinCircleDetector(csvFilePath, colNames);
             }
             return instance;
         }

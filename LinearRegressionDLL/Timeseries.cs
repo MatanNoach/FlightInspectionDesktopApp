@@ -1,6 +1,6 @@
-﻿using System.Collections.Generic;
-using System.IO;
+﻿using System.IO;
 using System.Linq;
+using System.Collections.Generic;
 
 namespace LinearRegressionDLL
 {
@@ -16,10 +16,11 @@ namespace LinearRegressionDLL
         /// CTOR of Timeseries
         /// </summary>
         /// <param name="file"> a csv file which should be converted into Timeseries object </param>
-        public Timeseries(string file)
+        /// /// /// <param name="colNames"> the names of the csv's columns </param>
+        public Timeseries(string file, List<string> colNames)
         {
             this.csvFile = file;
-            this.features = new List<string>();
+            this.features = colNames;
             this.lines = new List<List<double>>();
             this.data = new Dictionary<string, List<double>>();
 
@@ -33,23 +34,16 @@ namespace LinearRegressionDLL
         {
             using (StreamReader csvReader = new StreamReader(this.csvFile))
             {
-                string currLine = csvReader.ReadLine();
-                string[] columns = { };
+                string currLine = string.Empty;
+                //string[] columns = { };
                 List<double> lineData = new List<double>();
                 char colSeparator = ',';
                 int index = 0;
 
-                // if the first line is not null and there are no previous features
-                if (currLine != null && this.features.Count == 0)
+                // add features as keys in data
+                foreach (string feature in this.features)
                 {
-                    // parse the columns of the first row and insert them into the features' list
-                    columns = currLine.Split(colSeparator);
-                    foreach (string col in columns)
-                    {
-                        this.features.Add(col);
-                    }
-
-                    this.createDataDict();
+                    this.data.Add(feature, new List<double>());
                 }
 
                 // while there are more lines to read from the csv file
@@ -68,65 +62,6 @@ namespace LinearRegressionDLL
                     // insert raw data into a list of the rows
                     this.lines.Add(lineData);
                     lineData = new List<double>();
-                }
-            }
-        }
-
-        /// <summary>
-        ///  this function sets the dictionary's keys as a result of the parsed features (columns' names)
-        ///  if there are duplicated names - this function fix it by adding digits
-        /// </summary>
-        void createDataDict()
-        {
-            Dictionary<string, int> dupKeys = new Dictionary<string, int>();
-            Dictionary<string, int> updateKeys = new Dictionary<string, int>();
-
-            foreach (string key in this.features)
-            {
-                // if the key is new
-                if (!dupKeys.ContainsKey(key))
-                {
-                    dupKeys.Add(key, 1);
-                    this.data.Add(key, new List<double>());
-                }
-                else
-                {
-                    dupKeys[key]++;
-                }
-            }
-
-            List<string> keys = dupKeys.Keys.ToList();
-
-            foreach (string key in keys)
-            {
-                // if the key is unique
-                if (dupKeys[key] == 1)
-                {
-                    dupKeys.Remove(key);
-                }
-                else
-                {
-                    updateKeys.Add(key, 0);
-                }
-            }
-
-            // foreach feature in the list
-            for (int i = 0; i < this.features.Count; i++)
-            {
-                // if the currnet feature is duplicated
-                if (dupKeys.ContainsKey(this.features[i]))
-                {
-                    // edit it's name properly
-                    string oldName = this.features[i];
-                    this.features[i] = oldName + "_" + updateKeys[oldName];
-
-                    if (this.data.ContainsKey(oldName))
-                    {
-                        this.data.Remove(oldName);
-                    }
-
-                    this.data.Add(this.features[i], new List<double>());
-                    updateKeys[oldName]++;
                 }
             }
         }

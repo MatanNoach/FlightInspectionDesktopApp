@@ -6,10 +6,8 @@
         xmlns:local="clr-namespace:FlightInspectionDesktopApp" xmlns:control="clr-namespace:FlightInspectionDesktopApp.UserControls"
         xmlns:properties="clr-namespace:FlightInspectionDesktopApp.Properties"
         mc:Ignorable="d"
-        Title="Flight Inspector"        
-        WindowStartupLocation="Manual"
-        Left="{Binding Source={x:Static properties:Settings.Default}, Path=flightGearWindowWidth}"
-        Top="0"
+        Title="Flight Inspector"
+        WindowStartupLocation="CenterScreen"
         Width="{Binding Source={x:Static properties:Settings.Default}, Path=InspectorWindowWidth}"
         Height="{Binding Source={x:Static properties:Settings.Default}, Path=InspectorWindowHeight}"
         FontFamily="Microsoft JhengHei UI" Closing="Window_Closing" >

@@ -26,14 +26,14 @@ namespace FlightInspectionDesktopApp.UserControls
         /// <summary>
         /// Graph CTOR.
         /// </summary>
-        public Graph(string csvFilePath, string dllPath)
+        public Graph(string csvFilePath, List<string> features, string dllPath)
         {
             InitializeComponent();
             vm = new GraphViewModel(new GraphModel(canGraph.Height, canGraph.Width, margin, DataModel.Instance));
             this.DataContext = vm;
             this.nextLine = vm.VMCurrentLineIndex;
             // create an new abstract detector by dll path
-            abstractDetector = new Plugins.AbstractAnomalyDetector(csvFilePath, dllPath);
+            abstractDetector = new Plugins.AbstractAnomalyDetector(csvFilePath, features, dllPath);
             // set the anomaly graph as the one gain by the detector
             anomalyGraph = abstractDetector.Detector;
             // add the anomaly graph to the graphsGrid

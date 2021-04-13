@@ -62,7 +62,7 @@
             <TextBox Name ="ErrorDLL" BorderThickness="0" Visibility="Hidden" Text="Required Field!" Foreground="Red" Grid.Row="3" Grid.Column="2"/>
 
         </Grid>
-        <TextBox Name ="ErrorOpenFG" BorderThickness="0" Text="Please close all FlightGear windows!" Foreground="Red" HorizontalAlignment="Center" Margin="0,15,0,0" Visibility="Hidden"/>
+        <TextBox Name ="ErrorOpenFG" BorderThickness="0" Text="Please close all FlightGear windows!" Foreground="Red" Background="#FFC1D3CF" HorizontalAlignment="Center" Margin="0,15,0,0" Visibility="Hidden"/>
         <Button Name="Submit" Content="Start Inspection!" VerticalAlignment="Bottom" Margin="0,5,0,0" HorizontalAlignment="Center" Click="Submit_Click" Foreground="Black" BorderBrush="Black" FontFamily="Microsoft YaHei UI" >
             <Button.Effect>
                 <DropShadowEffect BlurRadius="2" Opacity="0.5" ShadowDepth="2"/>

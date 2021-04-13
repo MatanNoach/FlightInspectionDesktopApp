@@ -1,10 +1,9 @@
 ﻿using System.IO;
 using System.Windows;
 using Microsoft.Win32;
-using System.Windows.Controls;
-using System.Threading;
-using System.ComponentModel;
 using System.Diagnostics;
+using System.ComponentModel;
+using System.Windows.Controls;
 
 namespace FlightInspectionDesktopApp
 {
@@ -33,8 +32,8 @@ namespace FlightInspectionDesktopApp
             Properties.Settings.Default.flightGearWindowWidth = Properties.Settings.Default.windowWidth / 4;
             Properties.Settings.Default.flightGearWindowHeight = Properties.Settings.Default.windowHeight / 2;
 
-            Properties.Settings.Default.InspectorWindowWidth = Properties.Settings.Default.windowWidth * 3 / 4;
-            Properties.Settings.Default.InspectorWindowHeight = Properties.Settings.Default.windowHeight / 2;
+            Properties.Settings.Default.InspectorWindowWidth = Properties.Settings.Default.windowWidth * 4 / 5;
+            Properties.Settings.Default.InspectorWindowHeight = Properties.Settings.Default.windowHeight - 30;
 
             // init backgroundWorker object in order to show loading window
             bg = new BackgroundWorker();
@@ -57,10 +56,8 @@ namespace FlightInspectionDesktopApp
             FGModelImp.CreateModel(new TelnetClient());
             FGModelImp model = FGModelImp.Instance;
 
-            model.RunFG(binFolder, fileFG, XMLFileName);
-            // wait 10 seconds before trying to connect to FG
-            Thread.Sleep(10000);
-            model.Connect();
+            vm = new FGViewModel(model);
+            vm.Run(binFolder, fileFG, XMLFileName);
         }
 
         /// <summary>
@@ -72,11 +69,11 @@ namespace FlightInspectionDesktopApp
         {
             // create a new view model, with flight gear model and telnet client
             FGModelImp model = FGModelImp.Instance;
-            vm = new FGViewModel(model);
+
             InspectorWindow inspector = new InspectorWindow(vm, fileCSV, fileDLL);
             inspector.Show();
             loadingWindow.Close();
-            model.Start(fileCSV);
+            vm.Start(fileCSV);
         }
 
 
@@ -190,6 +187,7 @@ namespace FlightInspectionDesktopApp
         /// validate that:
         ///     1. the xml file is in the right directory.
         ///     2. the csv file is not open.
+        ///     3. there is no open window of FlightGear.
         /// </summary>
         /// <returns> True if does, False if not </returns>
         private bool validateFiles()
@@ -307,12 +305,7 @@ namespace FlightInspectionDesktopApp
         {
             if (validateTextboxes() && validateFiles())
             {
-                string fgPathFile = PathFG.Text;
-                string xmlPathFile = PathXML.Text;
-                string csvPathFile = PathCSV.Text;
-                string dllPathFile = PathDLL.Text;
-
-                this.loadingWindow = new LoadingWindow(fgPathFile, xmlPathFile, csvPathFile, dllPathFile);
+                this.loadingWindow = new LoadingWindow();
                 this.loadingWindow.Show();
                 bg.RunWorkerAsync();
                 Close();

@@ -1,7 +1,7 @@
-﻿using System.Collections.Generic;
-using System.IO;
+﻿using System.IO;
 using System.Linq;
 using System.Reflection;
+using System.Collections.Generic;
 
 namespace LinearRegressionDLL
 {
@@ -150,9 +150,10 @@ namespace LinearRegressionDLL
         /// private CTOR of LinearRegressionDetector object (as singleton), that parses the model and detects anomalies in dataFile
         /// </summary>
         /// <param name="dataFile"> a csv file with the data of the current flight </param>
-        private LinearRegressionDetector(string dataFile)
+        /// <param name="colNames"> the names of the csv's columns </param>
+        private LinearRegressionDetector(string dataFile, List<string> colNames)
         {
-            this.flightData = new Timeseries(dataFile);
+            this.flightData = new Timeseries(dataFile, colNames);
             this.cf = new List<CorrelatedFeatures>();
             this.anomalies = new List<AnomalyReport>();
 
@@ -165,12 +166,13 @@ namespace LinearRegressionDLL
         /// a static function that returns the single instance of MinCircleDetector object
         /// </summary>
         /// <param name="csvFilePath"> a csv file where the flight's data is </param>
+        /// /// <param name="colNames"> the names of the csv's columns </param>
         /// <returns> instance of LinearRegressionDetector </returns>
-        public static LinearRegressionDetector GetInstance(string csvFilePath)
+        public static LinearRegressionDetector GetInstance(string csvFilePath, List<string> colNames)
         {
             if (instance == null)
             {
-                instance = new LinearRegressionDetector(csvFilePath);
+                instance = new LinearRegressionDetector(csvFilePath, colNames);
             }
             return instance;
         }

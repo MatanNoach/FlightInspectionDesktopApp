@@ -1,12 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Globalization;
 using System.Linq;
 using System.Windows;
-using System.Windows.Controls;
 using System.Windows.Data;
+using System.Globalization;
 using System.Windows.Media;
 using System.Windows.Shapes;
+using System.Windows.Controls;
+using System.Collections.Generic;
 
 namespace MinCircleDLL
 {
@@ -15,29 +15,41 @@ namespace MinCircleDLL
     /// </summary>
     public partial class MinCircleGraph : UserControl, IAbstractDetector
     {
+        // fields of MinCircleGraph
         string feature;
         MinCircleViewModel vm;
         double margin = 5;
-        public MinCircleGraph(string csvFilePath)
+
+        /// <summary>
+        /// CTOR of MinCircleGraph.
+        /// </summary>        
+        /// <param name="csvFilePath"> a csv file which should be converted into Timeseries object </param>
+        /// <param name="colNames"> the names of the csv's columns  </param>
+        public MinCircleGraph(string csvFilePath, List<string> colNames)
         {
             InitializeComponent();
             // try use the MinCircleDetector instance in the vm constuctor
-            vm = new MinCircleViewModel(MinCircleDetector.GetInstance(csvFilePath));
+            vm = new MinCircleViewModel(MinCircleDetector.GetInstance(csvFilePath, colNames));
             this.DataContext = vm;
             // draw x and y axis on the canvas
             Path xAxis = CreateAxis(new System.Windows.Point(margin, CircleGraph.Height / 2), new System.Windows.Point(CircleGraph.Width, CircleGraph.Height / 2));
             CircleGraph.Children.Add(xAxis);
             Path yAxis = CreateAxis(new System.Windows.Point(CircleGraph.Width / 2, CircleGraph.Height), new System.Windows.Point(CircleGraph.Width / 2, 0));
             CircleGraph.Children.Add(yAxis);
-
         }
 
+        /// <summary>
+        /// Property of field feature.
+        /// </summary>
         public string Feature
         {
+            // getter of feature.
             get
             {
                 return this.feature;
             }
+
+            // setter of feature.
             set
             {
                 string oldFeature = this.feature;
@@ -54,13 +66,19 @@ namespace MinCircleDLL
                 }
             }
         }
+
+        /// <summary>
+        /// Property of field currentLineIndex.
+        /// </summary>
         public int CurrentLineIndex
         {
+            // setter of currentLineIndex.
             set
             {
                 vm.UpdateCurrentLineIndex(value, feature, CircleGraph.Height, CircleGraph.Width);
             }
         }
+
         /// <summary>
         /// The function deletes the line and circle from the canvas
         /// </summary>
@@ -68,6 +86,7 @@ namespace MinCircleDLL
         {
             CircleGraph.Children.RemoveRange(4, CircleGraph.Children.Count - 4);
         }
+
         /// <summary>
         /// The function draws the correlated circle and the points
         /// </summary>
@@ -87,6 +106,7 @@ namespace MinCircleDLL
             // load new points by the feature
             vm.LoadPointsByFeature(Feature, CircleGraph.Height, CircleGraph.Width);
         }
+
         /// <summary>
         /// Draws x & y axis for all graphs.
         /// </summary>

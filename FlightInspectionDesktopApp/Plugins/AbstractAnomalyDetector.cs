@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Reflection;
 using System.Windows.Controls;
 
@@ -15,7 +16,8 @@ namespace FlightInspectionDesktopApp.Plugins
         /// </summary>
         /// <param name="csvFilePath"> a csv file which will be sent to the .dll file </param>
         /// <param name="dllPath"> a .dll file </param>
-        public AbstractAnomalyDetector(string csvFilePath, string dllPath)
+        /// /// <param name="colNames"> the names of the csv's columns </param>
+        public AbstractAnomalyDetector(string csvFilePath, List<string> colNames, string dllPath)
         {
             // load the dll file
             var DLL = Assembly.LoadFile(@dllPath);
@@ -28,7 +30,7 @@ namespace FlightInspectionDesktopApp.Plugins
                     try
                     {
                         // try to create an instance of the type object, and send csvFilePath to the constructor
-                        var c = Activator.CreateInstance(type, new Object[] { csvFilePath });
+                        var c = Activator.CreateInstance(type, new Object[] { csvFilePath, colNames });
                         detector = (UserControl)c;
                         // set the type
                         this.type = type;

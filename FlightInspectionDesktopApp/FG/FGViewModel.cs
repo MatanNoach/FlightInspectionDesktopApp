@@ -37,19 +37,25 @@ namespace FlightInspectionDesktopApp
         }
 
         /// <summary>
-        /// Runs the program autonomously by opening FG with specific configurations, connecting to it via sockets, and starting our application.
+        /// Runs the program autonomously by opening FG with specific configurations, connecting to it via sockets, 
         /// </summary>
         /// <param name="binFolder">location of fgfs.exe</param>
         /// <param name="PathFG">full path of fgfs.exe</param>
-        /// <param name="XMLFileName">settings file's name</param>
-        /// <param name="PathCSV">path of CSV file</param>
-        public void Run(string binFolder, string PathFG, string XMLFileName, string PathCSV)
+        /// <param name="XMLFileName">settings file's name</param>        
+        public void Run(string binFolder, string PathFG, string XMLFileName)
         {
             //model.RunFG(binFolder, PathFG, XMLFileName);
             // wait 10 seconds before trying to connect to FG
             //Thread.Sleep(10000);
             model.Connect();
+        }
 
+        /// <summary>
+        /// this function starts our application.
+        /// </summary>
+        /// <param name="PathCSV">path of CSV file</param>
+        public void Start(string PathCSV)
+        {
             model.Start(PathCSV);
         }
 

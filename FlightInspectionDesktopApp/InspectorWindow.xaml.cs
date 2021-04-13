@@ -31,7 +31,7 @@ namespace FlightInspectionDesktopApp
             this.dllPath = dllPath;
             this.csvFilePath = csvFilePath;
             // add a new graphs user control
-            graphs = new UserControls.Graph(csvFilePath, this.dllPath)
+            graphs = new UserControls.Graph(csvFilePath, DataModel.Instance.ColNames, this.dllPath)
             {
                 VerticalAlignment = VerticalAlignment.Center,
                 HorizontalAlignment = HorizontalAlignment.Left
@@ -71,7 +71,7 @@ namespace FlightInspectionDesktopApp
                 this.dllPath = System.IO.Path.GetFullPath(openFile.FileName);
             }
             UserControls.Children.Remove(graphs);
-            graphs = new UserControls.Graph(csvFilePath, this.dllPath)
+            graphs = new UserControls.Graph(csvFilePath, DataModel.Instance.ColNames, this.dllPath)
             {
                 VerticalAlignment = VerticalAlignment.Center,
                 HorizontalAlignment = HorizontalAlignment.Center

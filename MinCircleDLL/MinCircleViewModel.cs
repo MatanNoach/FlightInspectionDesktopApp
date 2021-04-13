@@ -1,15 +1,21 @@
-﻿using System.Collections.Generic;
+﻿using static System.Math;
 using System.ComponentModel;
-using static System.Math;
+using System.Collections.Generic;
 
 namespace MinCircleDLL
 {
     class MinCircleViewModel : INotifyPropertyChanged
     {
-        MinCircleDetector model;
-        List<DrawPoint> correlatedPoints;
-        double xRegRatio, yRegRatio;
         int currentLineIndex;
+        MinCircleDetector model;
+        double xRegRatio, yRegRatio;
+        List<DrawPoint> correlatedPoints;
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        /// <summary>
+        /// CTOR of MinCircleVIewModel.
+        /// </summary>
+        /// <param name="model"> an object of MinCircleDetector </param>
         public MinCircleViewModel(MinCircleDetector model)
         {
             this.model = model;
@@ -26,19 +32,26 @@ namespace MinCircleDLL
                 this.PropertyChanged(this, new PropertyChangedEventArgs(propName));
             }
         }
-        public event PropertyChangedEventHandler PropertyChanged;
+
+        /// <summary>
+        /// Property of field correlatedPoints.
+        /// </summary>
         public List<DrawPoint> VMCorrelatedPoints
         {
+            // getter of correlatedPoints.
             get
             {
                 return this.correlatedPoints;
             }
+
+            // setter of correlatedPoints.
             set
             {
                 this.correlatedPoints = value;
                 NotifyPropertyChanged("VMCorrelatedPoints");
             }
         }
+
         /// <summary>
         /// The funcion loads a new set of points by a feature
         /// </summary>
@@ -59,13 +72,19 @@ namespace MinCircleDLL
             }
             VMCorrelatedPoints = pointsToShow;
         }
+
+        /// <summary>
+        /// Property of field minMaxVals.
+        /// </summary>
         public Dictionary<string, List<double>> MinMaxVals
         {
+            // getter of minMaxVals.
             get
             {
                 return model.MinMaxVals;
             }
         }
+
         /// <summary>
         /// Returns two-points defining the correlation circle.
         /// </summary>
@@ -110,6 +129,7 @@ namespace MinCircleDLL
             testCircle.radius *= bestRatio;
             return testCircle;
         }
+
         /// <summary>
         /// The function updates the current line index and loads more points to present 
         /// </summary>

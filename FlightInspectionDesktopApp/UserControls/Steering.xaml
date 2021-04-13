@@ -37,7 +37,10 @@
                 </TextBlock.Effect></TextBlock>
         </StackPanel>
         <StackPanel Orientation="Horizontal">
-            <TextBlock Text="Throttle" FontSize="18" Foreground="White" TextAlignment="Center" HorizontalAlignment="Center">
+            <TextBlock Text="Throttle" FontSize="18" Foreground="White" TextAlignment="Center" HorizontalAlignment="Center" >
+                <TextBlock.Effect>
+                    <DropShadowEffect BlurRadius="2" Opacity="0.5" ShadowDepth="2"/>
+                </TextBlock.Effect>
                 <TextBlock.LayoutTransform>
                     <RotateTransform Angle="90">
                     </RotateTransform>

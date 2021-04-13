@@ -24,13 +24,13 @@ namespace LinearRegressionDLL
         /// A constructor for the user control
         /// </summary>
         /// <param name="csvFilePath">The csv file path to detect anomalies</param>
-        /// <param name="feature">The feature to start presenting it's correlation and anomalies</param>
-        public LinearRegressionGraph(string csvFilePath)
+        /// <param name="colNames"> the names of the csv's columns </param>        
+        public LinearRegressionGraph(string csvFilePath, List<string> colNames)
         {
             InitializeComponent();
             try
             {
-                this.vm = new LinearGraphViewModel(LinearRegressionDetector.GetInstance(csvFilePath));
+                this.vm = new LinearGraphViewModel(LinearRegressionDetector.GetInstance(csvFilePath, colNames));
                 this.DataContext = this.vm;
                 // draw x and y axis on the canvas
                 Path xAxis = CreateAxis(new System.Windows.Point(margin, LinearGraph.Height / 2), new System.Windows.Point(LinearGraph.Width, LinearGraph.Height / 2));
