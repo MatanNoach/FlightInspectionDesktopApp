@@ -10,7 +10,11 @@
         <local:LineHeightConverter x:Key="LineHeightConverter"/>
     </UserControl.Resources>
     <StackPanel>
-        <TextBlock Text="Roll" Foreground="White" HorizontalAlignment="Center" FontSize="18"/>
+        <TextBlock Text="Roll" Foreground="White" HorizontalAlignment="Center" FontSize="18">
+            <TextBlock.Effect>
+                <DropShadowEffect BlurRadius="2" Opacity="0.5" ShadowDepth="2"/>
+            </TextBlock.Effect>
+        </TextBlock>
         <Grid>
             <Image x:Name="RollImage" Source="../Metadata/Images/rolltrans.png" Width="150" Height="150" RenderTransformOrigin="0.5,0.5">
                 <Image.RenderTransform>

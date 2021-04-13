@@ -12,7 +12,11 @@
         <local:YAxisConverter2 x:Key="YAxisConverter2"/>
     </UserControl.Resources>
     <StackPanel>
-        <TextBlock Text="Heading" FontSize="18" Foreground="White" TextAlignment="Center"></TextBlock>
+        <TextBlock Text="Heading" FontSize="18" Foreground="White" TextAlignment="Center">
+            <TextBlock.Effect>
+                <DropShadowEffect BlurRadius="2" Opacity="0.5" ShadowDepth="2"/>
+            </TextBlock.Effect>
+        </TextBlock>
 
         <Grid>
             <Image x:Name="Compass1" Source="../Metadata/Images/compasstrans.png" Width="200" Height="200"/>

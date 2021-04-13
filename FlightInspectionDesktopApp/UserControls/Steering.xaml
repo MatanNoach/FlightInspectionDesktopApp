@@ -31,7 +31,10 @@
         </Ellipse>
         <StackPanel Canvas.Left="50" Canvas.Top="205">
             <Slider x:Name="rudderSlider" Background="#FF6696F9" BorderBrush="Black" BorderThickness="2"  Width="200" Height="30" TickPlacement="Both" Minimum="-1" Maximum="1" TickFrequency="0.2" Value="{Binding VMRudder, Mode=OneWay}"/>
-            <TextBlock Text="Rudder" FontSize="18" Foreground="White" TextAlignment="Center"></TextBlock>
+            <TextBlock Text="Rudder" FontSize="18" Foreground="White" TextAlignment="Center">
+                <TextBlock.Effect>
+                    <DropShadowEffect BlurRadius="2" Opacity="0.5" ShadowDepth="2"/>
+                </TextBlock.Effect></TextBlock>
         </StackPanel>
         <StackPanel Orientation="Horizontal">
             <TextBlock Text="Throttle" FontSize="18" Foreground="White" TextAlignment="Center" HorizontalAlignment="Center">

@@ -11,8 +11,16 @@
         <local:FlooringConverter x:Key="FlooringConverter"/>
     </UserControl.Resources>
     <Grid>
-        <TextBlock Text="Altimeter" Foreground="White" HorizontalAlignment="Center" FontSize="18"/>
-        <TextBlock Text="{Binding VMAltimeter, Mode=OneWay, Converter={StaticResource FlooringConverter}}" Foreground="White" HorizontalAlignment="Center" FontSize="25" FontWeight="Light" Margin="0, 20, 0, 0"/>
+        <TextBlock Text="Altimeter" Foreground="White" HorizontalAlignment="Center" FontSize="18">
+            <TextBlock.Effect>
+                <DropShadowEffect BlurRadius="2" Opacity="0.5" ShadowDepth="2"/>
+            </TextBlock.Effect>
+        </TextBlock>
+        <TextBlock Text="{Binding VMAltimeter, Mode=OneWay, Converter={StaticResource FlooringConverter}}" Foreground="White" HorizontalAlignment="Center" FontSize="25" FontWeight="Light" Margin="0, 20, 0, 0">
+            <TextBlock.Effect>
+                <DropShadowEffect BlurRadius="2" Opacity="0.5" ShadowDepth="2"/>
+            </TextBlock.Effect>
+        </TextBlock>
         <Slider x:Name="altimeterSlider" Orientation="Vertical" Width="35" Height="120" 
                 Background="#FF5C6066" 
                 BorderBrush="Black" 
