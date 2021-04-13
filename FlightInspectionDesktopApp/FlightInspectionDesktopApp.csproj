@@ -326,5 +326,9 @@
   <ItemGroup>
     <Resource Include="Resources\loading.gif" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="Plugins\LinearRegressionDLL.dll" />
+    <Content Include="Plugins\MinCircleDLL.dll" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
