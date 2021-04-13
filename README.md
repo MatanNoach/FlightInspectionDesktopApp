@@ -35,6 +35,8 @@ To view the detailed hierarchy, expand the sections below:
 │   └── GraphViewModel.cs
 ├── InspectorWindow.xaml
 ├── InspectorWindow.xaml.cs
+├── LoadingWindow.xaml
+├── LoadingWindow.xaml.cs
 ├── MainWindow.xaml
 ├── MainWindow.xaml.cs
 ├── Metadata
