@@ -74,7 +74,7 @@ namespace FlightInspectionDesktopApp
             graphs = new UserControls.Graph(csvFilePath, DataModel.Instance.ColNames, this.dllPath)
             {
                 VerticalAlignment = VerticalAlignment.Center,
-                HorizontalAlignment = HorizontalAlignment.Center
+                HorizontalAlignment = HorizontalAlignment.Left
             };
             Grid.SetColumn(graphs, 0);
             Grid.SetRow(graphs, 1);
