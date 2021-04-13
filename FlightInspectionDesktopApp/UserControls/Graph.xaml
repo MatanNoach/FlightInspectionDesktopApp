@@ -38,7 +38,7 @@
             <Canvas Name="corrGraph" Background="White" Width="180" Height="180" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="0">
             </Canvas>
         </StackPanel>
-        <ListView x:Name="ColNames" Grid.Row="0" Grid.Column="0" HorizontalAlignment="Left" Height="250" Margin="10,10,0,0" VerticalAlignment="Top" Width="150" ItemsSource="{Binding ColNames, Mode=OneWay}" SelectedIndex="0" SelectionChanged="ColNames_SelectionChanged">
+        <ListView x:Name="ColNames" Grid.Row="0" Grid.Column="0" Grid.RowSpan="2" HorizontalAlignment="Left" Height="250" Margin="10,10,0,0" VerticalAlignment="Top" Width="150" ItemsSource="{Binding ColNames, Mode=OneWay}" SelectedIndex="0" SelectionChanged="ColNames_SelectionChanged">
         </ListView>
         <StackPanel Grid.Row="1" Grid.Column="2">
             <TextBlock Text="Linear Regression of Correlated-Features" FontSize="11" Foreground="White" HorizontalAlignment="Left">

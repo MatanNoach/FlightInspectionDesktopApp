@@ -117,8 +117,8 @@ namespace FlightInspectionDesktopApp.UserControls
                 // delete the already-drawn graphs if user goes backwards
                 if (nextLine > vm.VMCurrentLineIndex)
                 {
-                    canGraph.Children.RemoveRange(3, canGraph.Children.Count - 3);
-                    corrGraph.Children.RemoveRange(3, corrGraph.Children.Count - 3);
+                    canGraph.Children.RemoveRange(2, canGraph.Children.Count - 2);
+                    corrGraph.Children.RemoveRange(2, corrGraph.Children.Count - 2);
                 }
                 // update the next line in the detector and in the vm
                 abstractDetector.CurrentLineIndex = vm.VMCurrentLineIndex;
@@ -137,8 +137,8 @@ namespace FlightInspectionDesktopApp.UserControls
             if (!start)
             {
                 // delete everything from the graphs except for the axises
-                canGraph.Children.RemoveRange(3, canGraph.Children.Count - 3);
-                corrGraph.Children.RemoveRange(3, corrGraph.Children.Count - 3);
+                canGraph.Children.RemoveRange(2, canGraph.Children.Count - 2);
+                corrGraph.Children.RemoveRange(2, corrGraph.Children.Count - 2);
                 LinReg.Children.RemoveRange(3, LinReg.Children.Count - 3);
                 // update the correlated feature
                 vm.VMCorrCol = vm.CorrData[(string)ColNames.SelectedItem];

@@ -44,9 +44,9 @@ namespace FlightInspectionDesktopApp
         /// <param name="XMLFileName">settings file's name</param>        
         public void Run(string binFolder, string PathFG, string XMLFileName)
         {
-            model.RunFG(binFolder, PathFG, XMLFileName);
+            //model.RunFG(binFolder, PathFG, XMLFileName);
             // wait 10 seconds before trying to connect to FG
-            Thread.Sleep(10000);
+            //Thread.Sleep(10000);
             model.Connect();
         }
 
