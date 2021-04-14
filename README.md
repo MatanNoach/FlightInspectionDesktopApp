@@ -132,4 +132,4 @@ The main components of the product are:
 ## 📚 Further Documentation
 For more info regarding the main classes of the project, information flow and UML diagrams, please refer to our [Wiki site](https://github.com/MatanNoach/FlightInspectionDesktopApp/wiki).
 ## 🎥 Demo
-...
+[Our demo video](https://www.youtube.com/watch?v=t0LXzyDouXU)
