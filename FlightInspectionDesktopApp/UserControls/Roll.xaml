@@ -8,6 +8,7 @@
              d:DesignHeight="175" d:DesignWidth="150">
     <UserControl.Resources>
         <local:LineHeightConverter x:Key="LineHeightConverter"/>
+        <local:RollConverter x:Key="RollConverter"/>
     </UserControl.Resources>
     <StackPanel>
         <TextBlock Text="Roll" Foreground="White" HorizontalAlignment="Center" FontSize="18">
@@ -18,7 +19,7 @@
         <Grid>
             <Image x:Name="RollImage" Source="../Metadata/Images/rolltrans.png" Width="150" Height="150" RenderTransformOrigin="0.5,0.5">
                 <Image.RenderTransform>
-                    <RotateTransform Angle="{Binding VMRoll,Mode=OneWay}"/>
+                    <RotateTransform Angle="{Binding VMRoll,Mode=OneWay, Converter={StaticResource RollConverter}}"/>
                 </Image.RenderTransform>
             </Image>
             <Ellipse Stroke="Black" StrokeThickness="2"/>

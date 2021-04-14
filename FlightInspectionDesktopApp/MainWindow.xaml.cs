@@ -228,16 +228,16 @@ namespace FlightInspectionDesktopApp
             }
 
             // check that flight gear is not open
-            //string fgExeName = Path.GetFileNameWithoutExtension(PathFG.Text);
-            //if (Process.GetProcessesByName(fgExeName).Length > 0)
-            //{
-            //    ErrorOpenFG.Visibility = Visibility.Visible;
-            //    isValid = false;
-            //}
-            //else
-            //{
-            //    ErrorOpenFG.Visibility = Visibility.Hidden;
-            //}
+            string fgExeName = Path.GetFileNameWithoutExtension(PathFG.Text);
+            if (Process.GetProcessesByName(fgExeName).Length > 0)
+            {
+                ErrorOpenFG.Visibility = Visibility.Visible;
+                isValid = false;
+            }
+            else
+            {
+                ErrorOpenFG.Visibility = Visibility.Hidden;
+            }
 
             return isValid;
         }

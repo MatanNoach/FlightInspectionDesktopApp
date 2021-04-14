@@ -115,4 +115,32 @@ namespace FlightInspectionDesktopApp.UserControls
             throw new NotImplementedException();
         }
     }
+    class HeadingToCompassConverter : IValueConverter
+    {
+        /// <summary>
+        /// Converts Heading values for compass user control.
+        /// </summary>
+        /// <param name="value">value that we're bound to</param>
+        /// <param name="targetType">none</param>
+        /// <param name="parameter">none</param>
+        /// <param name="culture">none</param>
+        /// <returns></returns>
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            return (double)value * (-1);
+        }
+
+        /// <summary>
+        /// Not implemented.
+        /// </summary>
+        /// <param name="value"></param>
+        /// <param name="targetType"></param>
+        /// <param name="parameter"></param>
+        /// <param name="culture"></param>
+        /// <returns></returns>
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            throw new NotImplementedException();
+        }
+    }
 }

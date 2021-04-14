@@ -10,6 +10,8 @@
         <local:ImageSizeConverter x:Key="ImageSizeConverter"/>
         <local:YAxisConverter1 x:Key="YAxisConverter1"/>
         <local:YAxisConverter2 x:Key="YAxisConverter2"/>
+        <local:HeadingToCompassConverter x:Key="HeadingToCompassConverter"/>
+
     </UserControl.Resources>
     <StackPanel>
         <TextBlock Text="Heading" FontSize="18" Foreground="White" TextAlignment="Center">
@@ -29,7 +31,7 @@
                 </Line.Stroke>
                 <Line.RenderTransform>
                     <TransformGroup>
-                        <RotateTransform Angle="{Binding VMHeading, Mode=OneWay}"/>
+                        <RotateTransform Angle="{Binding VMHeading, Mode=OneWay, Converter={StaticResource HeadingToCompassConverter}}"/>
                     </TransformGroup>
                 </Line.RenderTransform>
             </Line>

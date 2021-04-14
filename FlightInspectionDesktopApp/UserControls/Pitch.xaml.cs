@@ -25,11 +25,11 @@ namespace FlightInspectionDesktopApp.UserControls
     class PitchDegToStartPointConverter : IValueConverter
     {
         /// <summary>
-        /// Converts Elevator [-1,1] values to Joystick values.
+        /// Converts Pitch values for the UserControl.
         /// </summary>
-        /// <param name="value">value that we're binded to</param>
+        /// <param name="value">value that we're bound to</param>
         /// <param name="targetType">none</param>
-        /// <param name="parameter">JoystickBoundries Ellipse</param>
+        /// <param name="parameter">none</param>
         /// <param name="culture">none</param>
         /// <returns></returns>
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
@@ -55,16 +55,16 @@ namespace FlightInspectionDesktopApp.UserControls
     class PitchDegToEndPointConverter : IValueConverter
     {
         /// <summary>
-        /// Converts Elevator [-1,1] values to Joystick values.
+        /// Converts Roll values for Pitch user control.
         /// </summary>
-        /// <param name="value">value that we're binded to</param>
+        /// <param name="value">value that we're bound to</param>
         /// <param name="targetType">none</param>
-        /// <param name="parameter">JoystickBoundries Ellipse</param>
+        /// <param name="parameter">none</param>
         /// <param name="culture">none</param>
         /// <returns></returns>
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            double xVal = 0.5 - (double)value / 180.0;
+            double xVal = 0.5 + (double)value / 180.0;
             return new Point(xVal, 1);
         }
 

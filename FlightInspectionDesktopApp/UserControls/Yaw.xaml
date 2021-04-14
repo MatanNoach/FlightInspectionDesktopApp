@@ -6,6 +6,9 @@
              xmlns:local="clr-namespace:FlightInspectionDesktopApp.UserControls" xmlns:metadata="clr-namespace:FlightInspectionDesktopApp.Metadata" d:DataContext="{d:DesignInstance Type=metadata:MetadataViewModel}"
              mc:Ignorable="d" 
              d:DesignHeight="125" d:DesignWidth="100">
+    <UserControl.Resources>
+        <local:YawConverter x:Key="YawConverter"/>
+    </UserControl.Resources>
     <StackPanel>
         <TextBlock Text="Yaw" FontSize="18" Foreground="White" TextAlignment="Center">
             <TextBlock.Effect>
@@ -16,7 +19,7 @@
             <Image x:Name="Yaw1" Source="../Metadata/Images/yawtrans.png" Width="100" Height="100" RenderTransformOrigin="0.5, 0.5">
                 <Image.RenderTransform>
                     <TransformGroup>
-                        <RotateTransform Angle="{Binding VMSideSlip, Mode=OneWay}">
+                        <RotateTransform Angle="{Binding VMSideSlip, Mode=OneWay, Converter={StaticResource YawConverter}}">
                         </RotateTransform>
                     </TransformGroup>
                 </Image.RenderTransform>
