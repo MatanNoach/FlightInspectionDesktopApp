@@ -1,8 +1,8 @@
-﻿using FlightInspectionDesktopApp.Metadata;
-using System;
+﻿using System;
+using System.Windows.Data;
 using System.Globalization;
 using System.Windows.Controls;
-using System.Windows.Data;
+using FlightInspectionDesktopApp.Metadata;
 
 namespace FlightInspectionDesktopApp.UserControls
 {
