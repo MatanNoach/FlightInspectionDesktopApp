@@ -129,6 +129,7 @@ The main components of the product are:
 2. Install BlendWPFSDK_en.msi from the PreInstall folder.
 3. Download Nuget package [XamlAnimatedGif v1.2.3.0](https://www.nuget.org/packages/XamlAnimatedGif/1.2.3)
 4. Run using the DLLs provided in Plugins folder.
+* Notice: In case XamlAnimatedGif already exists in References after cloning, please uninstall and reinstall it again.
 ## 📚 Further Documentation
 For more info regarding the main classes of the project, information flow and UML diagrams, please refer to our [Wiki site](https://github.com/MatanNoach/FlightInspectionDesktopApp/wiki).
 ## 🎥 Demo
